@@ -1,5 +1,7 @@
 #include "Window.h"
-Window* window = nullptr;
+#include <iostream>
+
+//Window* window = nullptr;
 Window::Window()
 {
 }
@@ -8,23 +10,26 @@ LRESULT CALLBACK wndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
 	switch (msg)
 	{
-	case WM_CREATE:
-	{
-		window->onCreate();
-		break;
-	}
+		case WM_CREATE:
+		{
+				Window* window = (Window*)((LPCREATESTRUCT)lparam)->lpCreateParams;
+				SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)window);
+				window->setHWND(hwnd);
 
-	case WM_DESTROY:
-	{
-		window->onDestroy();
-		::PostQuitMessage(0);
-		break;
-	}
-
-	default:
-	{
-		return ::DefWindowProc(hwnd, msg, wparam, lparam);
-	}
+				window->onCreate();
+				break;
+		}
+		case WM_DESTROY:
+		{
+			Window* window = (Window*) GetWindowLongPtr(hwnd, GWLP_USERDATA);
+			window->onDestroy();
+			::PostQuitMessage(0);
+			break;
+		}
+		default:
+		{
+			return ::DefWindowProc(hwnd, msg, wparam, lparam);
+		}
 
 	}
 
@@ -53,21 +58,19 @@ bool Window::init()
 		return false;
 	}
 
-	if (!window)
-	{
-		window = this;
-	}
+	
 
-	m_hwnd = ::CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, L"GDENG - 2 Project", L"DirectX Application", WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 1024, 768, NULL, NULL, NULL, NULL);
+	this->m_hwnd = ::CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, L"GDENG - 2 Project", L"DirectX Application", WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT, CW_USEDEFAULT, 1024, 768, NULL, NULL, NULL, this);
 
-	if (!m_hwnd)
+	if (!this->m_hwnd)
 	{
+		std::cout << "Not working";
 		return false;
 	}
 
-	::ShowWindow(m_hwnd, SW_SHOW);
-	::UpdateWindow(m_hwnd);
+	::ShowWindow(this->m_hwnd, SW_SHOW);
+	::UpdateWindow(this->m_hwnd);
 
 
 	m_isRunning = true;
@@ -80,22 +83,24 @@ bool Window::broadcast()
 
 	MSG msg;
 
+	this->onUpdate();
+
 	while (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE) > 0)
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
 
-	window->onUpdate();
+	
 
-	Sleep(0);
+	Sleep(1);
 
 	return true;
 }
 
 bool Window::release()
 {
-	if (!::DestroyWindow(m_hwnd))
+	if (!::DestroyWindow(this->m_hwnd))
 	{
 		return false;
 	}
@@ -111,6 +116,19 @@ bool Window::isRun()
 HWND Window::gethwnd()
 {
 	return m_hwnd;
+}
+
+RECT Window::getClientWindowRect()
+{
+	RECT rc;
+	::GetClientRect(this->m_hwnd, &rc);
+
+	return rc;
+}
+
+void Window::setHWND(HWND hwnd)
+{
+	this->m_hwnd = hwnd;
 }
 
 Window::~Window()
