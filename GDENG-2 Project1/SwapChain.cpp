@@ -33,7 +33,32 @@ bool SwapChain::init(HWND hwnd, UINT width, UINT height)
         return false;
     }
 
+    ID3D11Texture2D* buffer = NULL;
+    hr = m_swap_chain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&buffer);
+
+    if(FAILED(hr))
+    {
+        std::cout << "Failed to get buffer";
+        return false;
+    }
+
+    hr = device->CreateRenderTargetView(buffer, NULL, &this->RenderTargetView);
+    buffer->Release();
+
+    if (FAILED(hr))
+    {
+        std::cout << "Failed to create render target view";
+        return false;
+    }
+
 	return true;
+}
+
+bool SwapChain::present(bool vsync)
+{
+    this->m_swap_chain->Present(vsync, NULL);
+
+    return true;
 }
 
 bool SwapChain::release()
