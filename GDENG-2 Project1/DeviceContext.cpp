@@ -13,11 +13,38 @@ bool DeviceContext::release()
 	return true;
 }
 
-bool DeviceContext::clearRenderTargetColor(SwapChain* swapchain, float red, float green, float blue, float alpha)
+void DeviceContext::clearRenderTargetColor(SwapChain* swapchain, float red, float green, float blue, float alpha)
 {
 	FLOAT clear_color[] = { red,green,blue,alpha };
 	this->Devicecontext->ClearRenderTargetView(swapchain->RenderTargetView, clear_color);
-	return true;
+	this->Devicecontext->OMSetRenderTargets(1, &swapchain->RenderTargetView, NULL);
+}
+
+void DeviceContext::setVertexBuffer(VertexBuffer* vertex_buffer)
+{
+	UINT stride = vertex_buffer->getSizeVertexBuffer();
+	UINT offset = 0;
+
+	this->Devicecontext->IASetVertexBuffers(0, 1, &vertex_buffer->Buffer, &stride, &offset);
+	this->Devicecontext->IASetInputLayout(vertex_buffer->Layout);
+}
+
+void DeviceContext::setViewportSize(UINT width, UINT height)
+{
+	D3D11_VIEWPORT viewport = {};
+	viewport.Width = (FLOAT)width;
+	viewport.Height = (FLOAT)height;
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
+	this->Devicecontext->RSSetViewports(1, &viewport);
+}
+
+
+
+void DeviceContext::drawTriangleList(UINT vertex_count, UINT startVertexIndex)
+{
+	this->Devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	this->Devicecontext->Draw(vertex_count, startVertexIndex);
 }
 
 DeviceContext::~DeviceContext()
