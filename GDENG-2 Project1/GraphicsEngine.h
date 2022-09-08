@@ -1,7 +1,10 @@
 #pragma once
 #include <d3d11.h>
+#include <d3dcompiler.h>
+#include <iostream>
 #include "DeviceContext.h"
 #include "VertexBuffer.h"
+#include "VertexShader.h"
 
 class SwapChain;
 class DeviceContext;
@@ -22,11 +25,16 @@ public:
 	SwapChain* createSwapChain();
 	DeviceContext* getImmediateDeviceContext();
 	VertexBuffer* createVertexBuffer();
+	VertexShader* createVertexShader(const void* shader_byte_code, size_t byte_code_size);
+
+public:
+	bool compileVertexShader(const wchar_t* Filename, const char* EntryPointName, void** shader_byte_code, size_t* byte_code_size);
+	void releaseCompiledShader();
 
 public:
 	bool createShaders();
 	bool setShaders();
-	void getShaderBufferAndSize(void** bytecode, UINT* size);
+	
 
 public:
 	static GraphicsEngine* getInstance();
@@ -46,6 +54,7 @@ private:
 	ID3D11DeviceContext* m_imm_context;
 
 private:
+	ID3DBlob* m_blob = nullptr;
 	ID3DBlob* VertexShaderBlob = nullptr;
 	ID3DBlob* PixelShaderBlob = nullptr;
 	ID3D11VertexShader* VertexShader = nullptr;

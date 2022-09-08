@@ -29,6 +29,12 @@ void DeviceContext::setVertexBuffer(VertexBuffer* vertex_buffer)
 	this->Devicecontext->IASetInputLayout(vertex_buffer->Layout);
 }
 
+void DeviceContext::setVertexShader(VertexShader* vertex_shader)
+{
+	this->Devicecontext->VSSetShader(vertex_shader->vertexShader, nullptr, 0);
+}
+
+
 void DeviceContext::setViewportSize(UINT width, UINT height)
 {
 	D3D11_VIEWPORT viewport = {};
@@ -47,6 +53,13 @@ void DeviceContext::drawTriangleList(UINT vertex_count, UINT startVertexIndex)
 	this->Devicecontext->Draw(vertex_count, startVertexIndex);
 }
 
+void DeviceContext::drawTriangleStrip(UINT vertex_count, UINT startVertexIndex)
+{
+	this->Devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+	this->Devicecontext->Draw(vertex_count, startVertexIndex);
+}
+
 DeviceContext::~DeviceContext()
 {
 }
+

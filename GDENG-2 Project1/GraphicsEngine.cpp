@@ -107,6 +107,46 @@ VertexBuffer* GraphicsEngine::createVertexBuffer()
 	return new VertexBuffer;
 }
 
+VertexShader* GraphicsEngine::createVertexShader(const void* shader_byte_code, size_t byte_code_size)
+{
+	class VertexShader* vs = new class VertexShader();
+
+	if(!vs->init(shader_byte_code, byte_code_size))
+	{
+		vs->release();
+		return nullptr;
+	}
+
+	return vs;
+}
+
+bool GraphicsEngine::compileVertexShader(const wchar_t* Filename, const char* EntryPointName, void** shader_byte_code, size_t* byte_code_size)
+{
+	ID3DBlob* errorBlob = nullptr;
+	if(!SUCCEEDED(D3DCompileFromFile(Filename, nullptr, nullptr, EntryPointName, "vs_5_0", 0, 0, &this->m_blob, &errorBlob)))
+	{
+		if(errorBlob)
+		{
+			std::cout<<"Faied to compile vertex shader";
+			errorBlob->Release();
+			return false;
+		}
+	}
+
+	*shader_byte_code = this->m_blob->GetBufferPointer();
+	*byte_code_size = this->m_blob->GetBufferSize();
+
+	return true;
+}
+
+void GraphicsEngine::releaseCompiledShader()
+{
+	if(this->m_blob)
+	{
+		this->m_blob->Release();
+	}
+}
+
 GraphicsEngine::~GraphicsEngine()
 {
 }
@@ -119,25 +159,18 @@ SwapChain* GraphicsEngine::createSwapChain()
 bool GraphicsEngine::createShaders()
 {
 	ID3DBlob* errorBlob = nullptr;
-	D3DCompileFromFile(L"shader.fx", nullptr, nullptr, "vsmain", "vs_5_0", NULL, NULL, &this->VertexShaderBlob, &errorBlob);
 	D3DCompileFromFile(L"shader.fx", nullptr, nullptr, "psmain", "ps_5_0", NULL, NULL, &this->PixelShaderBlob, &errorBlob);
-	this->m_d3d_device->CreateVertexShader(this->VertexShaderBlob->GetBufferPointer(), this->VertexShaderBlob->GetBufferSize(), nullptr, &this->VertexShader);
 	this->m_d3d_device->CreatePixelShader(this->PixelShaderBlob->GetBufferPointer(), this->PixelShaderBlob->GetBufferSize(), nullptr, &this->PixelShader);
 	return true;
 }
 
 bool GraphicsEngine::setShaders()
 {
-	this->m_imm_context->VSSetShader(this->VertexShader, nullptr, 0);
 	this->m_imm_context->PSSetShader(this->PixelShader, nullptr, 0);
 	return true;
 }
 
-void GraphicsEngine::getShaderBufferAndSize(void** bytecode, UINT* size)
-{
-	*bytecode = this->VertexShaderBlob->GetBufferPointer();
-	*size = (UINT)this->VertexShaderBlob->GetBufferSize();
-}
+
 
 GraphicsEngine* GraphicsEngine::getInstance()
 {
