@@ -62,9 +62,9 @@ bool GraphicsEngine::release()
 		this->VertexShader->Release();
 	}
 
-	if (this->PixelShader)
+	if (this->pixelshader)
 	{
-		this->PixelShader->Release();
+		this->pixelshader->Release();
 	}
 
 	if(this->VertexShaderBlob)
@@ -120,6 +120,18 @@ VertexShader* GraphicsEngine::createVertexShader(const void* shader_byte_code, s
 	return vs;
 }
 
+PixelShader* GraphicsEngine::createPixelShader(const void* shader_byte_code, size_t byte_code_size)
+{
+	PixelShader* ps = new PixelShader();
+
+	if (!ps->init(shader_byte_code, byte_code_size)) {
+		ps->release();
+		return nullptr;
+	}
+
+	return ps;
+}
+
 bool GraphicsEngine::compileVertexShader(const wchar_t* Filename, const char* EntryPointName, void** shader_byte_code, size_t* byte_code_size)
 {
 	ID3DBlob* errorBlob = nullptr;
@@ -128,6 +140,25 @@ bool GraphicsEngine::compileVertexShader(const wchar_t* Filename, const char* En
 		if(errorBlob)
 		{
 			std::cout<<"Faied to compile vertex shader";
+			errorBlob->Release();
+			return false;
+		}
+	}
+
+	*shader_byte_code = this->m_blob->GetBufferPointer();
+	*byte_code_size = this->m_blob->GetBufferSize();
+
+	return true;
+}
+
+bool GraphicsEngine::compilePixelShader(const wchar_t* Filename, const char* EntryPointName, void** shader_byte_code, size_t* byte_code_size)
+{
+	ID3DBlob* errorBlob = nullptr;
+	if (!SUCCEEDED(D3DCompileFromFile(Filename, nullptr, nullptr, EntryPointName, "ps_5_0", 0, 0, &this->m_blob, &errorBlob)))
+	{
+		if (errorBlob)
+		{
+			std::cout << "Faied to compile pixel shader";
 			errorBlob->Release();
 			return false;
 		}
@@ -154,20 +185,6 @@ GraphicsEngine::~GraphicsEngine()
 SwapChain* GraphicsEngine::createSwapChain()
 {
 	return new SwapChain();
-}
-
-bool GraphicsEngine::createShaders()
-{
-	ID3DBlob* errorBlob = nullptr;
-	D3DCompileFromFile(L"shader.fx", nullptr, nullptr, "psmain", "ps_5_0", NULL, NULL, &this->PixelShaderBlob, &errorBlob);
-	this->m_d3d_device->CreatePixelShader(this->PixelShaderBlob->GetBufferPointer(), this->PixelShaderBlob->GetBufferSize(), nullptr, &this->PixelShader);
-	return true;
-}
-
-bool GraphicsEngine::setShaders()
-{
-	this->m_imm_context->PSSetShader(this->PixelShader, nullptr, 0);
-	return true;
 }
 
 

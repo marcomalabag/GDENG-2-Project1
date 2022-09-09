@@ -34,6 +34,11 @@ void DeviceContext::setVertexShader(VertexShader* vertex_shader)
 	this->Devicecontext->VSSetShader(vertex_shader->vertexShader, nullptr, 0);
 }
 
+void DeviceContext::setPixelShader(PixelShader* pixel_shader)
+{
+	this->Devicecontext->PSSetShader(pixel_shader->pixelshader, nullptr, 0);
+}
+
 
 void DeviceContext::setViewportSize(UINT width, UINT height)
 {

@@ -5,6 +5,7 @@
 #include "DeviceContext.h"
 #include "VertexBuffer.h"
 #include "VertexShader.h"
+#include "PixelShader.h"
 
 class SwapChain;
 class DeviceContext;
@@ -26,14 +27,14 @@ public:
 	DeviceContext* getImmediateDeviceContext();
 	VertexBuffer* createVertexBuffer();
 	VertexShader* createVertexShader(const void* shader_byte_code, size_t byte_code_size);
+	PixelShader* createPixelShader(const void* shader_byte_code, size_t byte_code_size);
 
 public:
 	bool compileVertexShader(const wchar_t* Filename, const char* EntryPointName, void** shader_byte_code, size_t* byte_code_size);
+	bool compilePixelShader(const wchar_t* Filename, const char* EntryPointName, void** shader_byte_code, size_t* byte_code_size);
 	void releaseCompiledShader();
 
-public:
-	bool createShaders();
-	bool setShaders();
+
 	
 
 public:
@@ -58,7 +59,7 @@ private:
 	ID3DBlob* VertexShaderBlob = nullptr;
 	ID3DBlob* PixelShaderBlob = nullptr;
 	ID3D11VertexShader* VertexShader = nullptr;
-	ID3D11PixelShader* PixelShader = nullptr;
+	ID3D11PixelShader* pixelshader = nullptr;
 
 
 private:

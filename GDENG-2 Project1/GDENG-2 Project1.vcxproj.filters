@@ -25,6 +25,12 @@
     <Filter Include="GameEngine\GraphicsEngine\VertexShader">
       <UniqueIdentifier>{effc5522-9938-49c9-be8d-ddcebca55ef8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="File Shaders">
+      <UniqueIdentifier>{6affe650-ba28-4922-8f63-9a4b582de830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicsEngine\PixelShader">
+      <UniqueIdentifier>{b3249377-d8ee-4087-bccf-73c166f15051}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -51,6 +57,9 @@
     <ClCompile Include="VertexShader.cpp">
       <Filter>GameEngine\GraphicsEngine\VertexShader</Filter>
     </ClCompile>
+    <ClCompile Include="PixelShader.cpp">
+      <Filter>GameEngine\GraphicsEngine\PixelShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -74,9 +83,19 @@
     <ClInclude Include="VertexShader.h">
       <Filter>GameEngine\GraphicsEngine\VertexShader</Filter>
     </ClInclude>
+    <ClInclude Include="PixelShader.h">
+      <Filter>GameEngine\GraphicsEngine\PixelShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="shader.fx" />
-    <FxCompile Include="VertexShader.hlsl" />
+    <FxCompile Include="VertexShader.hlsl">
+      <Filter>File Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="shader.fx">
+      <Filter>File Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="PixelShader.hlsl">
+      <Filter>File Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

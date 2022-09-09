@@ -2,10 +2,12 @@
 #include <d3d11.h>
 #include "VertexBuffer.h"
 #include "VertexShader.h"
+#include "PixelShader.h"
 
 class SwapChain;
 class VertexBuffer;
 class VertexShader;
+class PixelShader;
 
 class DeviceContext
 {
@@ -21,6 +23,7 @@ public:
 
 public:
 	void setVertexShader(VertexShader* vertex_shader);
+	void setPixelShader(PixelShader* pixel_shader);
 
 private:
 	ID3D11DeviceContext* Devicecontext;

@@ -70,6 +70,15 @@ bool VertexBuffer::load(void* list_vertices, UINT size_vertex, UINT size_list, v
 			0,
 			D3D11_INPUT_PER_VERTEX_DATA,
 			0
+		},
+		{
+			"COLOR",
+			0,
+			DXGI_FORMAT_R32G32B32_FLOAT,
+			0,
+			12,
+			D3D11_INPUT_PER_VERTEX_DATA,
+			0
 		}
 	};
 
