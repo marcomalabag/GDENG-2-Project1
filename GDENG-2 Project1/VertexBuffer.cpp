@@ -27,7 +27,7 @@ UINT VertexBuffer::getSizeVertexList()
 	return this->sizeVertexList;
 }
 
-bool VertexBuffer::load(void* list_vertices, UINT size_vertex, UINT size_list, void* shader_byte_code, UINT size_byte_shader)
+bool VertexBuffer::load(void* list_vertices, UINT size_vertex, UINT size_list, void* shader_byte_code, size_t size_byte_shader)
 {
 
 	if(this->Buffer)
@@ -57,7 +57,7 @@ bool VertexBuffer::load(void* list_vertices, UINT size_vertex, UINT size_list, v
 
 	if(FAILED(GraphicsEngine::getInstance()->getD3Ddevice()->CreateBuffer(&buff_desc, &init_data, &this->Buffer)))
 	{
-		std::cout<<"Failed to create buffer";
+		std::cout<<"Failed to create vertex buffer";
 		return false;
 	}
 
@@ -72,12 +72,29 @@ bool VertexBuffer::load(void* list_vertices, UINT size_vertex, UINT size_list, v
 			0
 		},
 		{
-			"COLOR",
-			0,
+			"POSITION",
+			1,
 			DXGI_FORMAT_R32G32B32_FLOAT,
 			0,
 			12,
 			D3D11_INPUT_PER_VERTEX_DATA,
+			0
+		},
+		{
+			"COLOR",
+			0,
+			DXGI_FORMAT_R32G32B32_FLOAT,
+			0,
+			24,
+			D3D11_INPUT_PER_VERTEX_DATA,
+			0
+		},
+		{ "COLOR",
+			1,
+			DXGI_FORMAT_R32G32B32_FLOAT,
+			0,
+			36,
+			D3D11_INPUT_PER_VERTEX_DATA ,
 			0
 		}
 	};

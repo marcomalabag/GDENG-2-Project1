@@ -34,9 +34,19 @@ void DeviceContext::setVertexShader(VertexShader* vertex_shader)
 	this->Devicecontext->VSSetShader(vertex_shader->vertexShader, nullptr, 0);
 }
 
+void DeviceContext::setConstantBuffer(VertexShader* vertex_shader, ConstantBuffer* constant_buffer)
+{
+	this->Devicecontext->VSSetConstantBuffers(0, 1, &constant_buffer->Buffer);
+}
+
 void DeviceContext::setPixelShader(PixelShader* pixel_shader)
 {
 	this->Devicecontext->PSSetShader(pixel_shader->pixelshader, nullptr, 0);
+}
+
+void DeviceContext::setConstantBuffer(PixelShader* pixel_shader, ConstantBuffer* constant_buffer)
+{
+	this->Devicecontext->PSSetConstantBuffers(0, 1, &constant_buffer->Buffer);
 }
 
 

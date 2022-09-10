@@ -8,7 +8,15 @@ struct vec3
 struct vertex
 {
 	vec3 position;
+	vec3 position1;
 	vec3 color;
+	vec3 color1;
+};
+
+__declspec(align(16))
+struct constant
+{
+	float m_angle;
 };
 
 AppWindow::AppWindow()
@@ -42,15 +50,15 @@ void AppWindow::onCreate()
 	vertex list[] =
 	{
 		//X - Y - Z
-		{-0.5f,-0.5f,0.0f, 0,1,0},
-		{-0.5f,0.5f,0.0f,  0,1,0},
-		{ 0.5f,-0.5f,0.0f, 0,1,0},
-		{ 0.5f,0.5f,0.0f,  0,1,0}
+		{-0.5f,-0.5f,0.0f,    -0.5f,-0.5f,0.0f,   0,0,0,  0,1,0 }, // POS1
+		{-0.5f,0.5f,0.0f,     -0.5f,0.5f,0.0f,    1,1,0,  0,1,1 }, // POS2
+		{ 0.5f,-0.5f,0.0f,     0.5f,-0.5f,0.0f,   0,0,1,  1,0,0 },// POS2
+		{ 0.5f,0.5f,0.0f,      0.5f,0.5f,0.0f,    1,1,1,  0,0,1 }
 	};
 	
 
 
-	this->VertexBuffer = GraphicsEngine::getInstance()->createVertexBuffer();
+	this->vertexbuffer = GraphicsEngine::getInstance()->createVertexBuffer();
 	UINT size_list = ARRAYSIZE(list);
 
 	void* shader_byte_code = nullptr;
@@ -60,7 +68,7 @@ void AppWindow::onCreate()
 	GraphicsEngine::getInstance()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
 
 	this->vertexshader = GraphicsEngine::getInstance()->createVertexShader(shader_byte_code, size_shader);
-	this->VertexBuffer->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
+	this->vertexbuffer->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
 
 	GraphicsEngine::getInstance()->releaseCompiledShader();
 
@@ -68,6 +76,12 @@ void AppWindow::onCreate()
 
 	this->pixelshader = GraphicsEngine::getInstance()->createPixelShader(shader_byte_code, size_shader);
 	GraphicsEngine::getInstance()->releaseCompiledShader();
+
+	constant cc;
+	cc.m_angle = 0;
+
+	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
+	this->constantbuffer->load(&cc, sizeof(constant));
 }
 
 void AppWindow::onUpdate()
@@ -77,22 +91,42 @@ void AppWindow::onUpdate()
 		0, 0, 0.5, 0.5);
 	RECT rc = this->getClientWindowRect();
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
+
+	unsigned long newtime = 0;
+	if(this->oldTime)
+	{
+		newtime = GetTickCount() - this->oldTime;
+	}
+
+	this->deltaTime = newtime / 1000.0f;
+	this->oldTime = ::GetTickCount();
+
+	this->angle += 1.57f * this->deltaTime;
+	constant cc;
+	cc.m_angle = this->angle;
+
+	this->constantbuffer->update(GraphicsEngine::getInstance()->getImmediateDeviceContext(), &cc);
+
+	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(this->vertexshader, this->constantbuffer);
+	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(this->pixelshader, this->constantbuffer);
+
+
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexShader(this->vertexshader);
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setPixelShader(this->pixelshader);
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexBuffer(this->VertexBuffer);
+	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexBuffer(this->vertexbuffer);
 
 	//Triangle render
 	//GraphicsEngine::getInstance()->getImmediateDeviceContext()->drawTriangleList(this->VertexBuffer->getSizeVertexList(), 0);
 
 	//Quadrilateral render
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->drawTriangleStrip(this->VertexBuffer->getSizeVertexList(), 0);
+	GraphicsEngine::getInstance()->getImmediateDeviceContext()->drawTriangleStrip(this->vertexbuffer->getSizeVertexList(), 0);
 	this->m_swap_chain->present(false);
 }
 
 void AppWindow::onDestroy()
 {
 	Window::onDestroy();
-	this->VertexBuffer->release();
+	this->vertexbuffer->release();
 	m_swap_chain->release();
 	this->vertexshader->release();
 	this->pixelshader->release();

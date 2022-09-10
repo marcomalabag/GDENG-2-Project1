@@ -4,6 +4,7 @@
 #include "SwapChain.h"
 #include "DeviceContext.h"
 #include "VertexBuffer.h"
+#include "ConstantBuffer.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
 
@@ -20,8 +21,13 @@ public:
 
 private:
 	SwapChain* m_swap_chain;
-	VertexBuffer* VertexBuffer;
+	VertexBuffer* vertexbuffer;
 	VertexShader* vertexshader;
 	PixelShader* pixelshader;
+	ConstantBuffer* constantbuffer;
+
+	unsigned long oldTime = 0;
+	float deltaTime = 0;
+	float angle = 0;
 };
 
