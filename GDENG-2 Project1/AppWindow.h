@@ -7,6 +7,8 @@
 #include "ConstantBuffer.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
+#include "Triangle.h"
+#include "Rectangle.h"
 
 
 class AppWindow : public Window
@@ -29,5 +31,8 @@ private:
 	unsigned long oldTime = 0;
 	float deltaTime = 0;
 	float angle = 0;
+
+	Triangle* triangle;
+	class Rectangle* rectangle;
 };
 

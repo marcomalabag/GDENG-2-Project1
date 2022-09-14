@@ -150,7 +150,9 @@
     <ClInclude Include="DeviceContext.h" />
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="PixelShader.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="SwapChain.h" />
+    <ClInclude Include="Triangle.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="VertexShader.h" />
     <ClInclude Include="Window.h" />
@@ -162,7 +164,9 @@
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PixelShader.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="SwapChain.cpp" />
+    <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="VertexShader.cpp" />
     <ClCompile Include="Window.cpp" />
