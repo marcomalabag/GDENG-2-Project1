@@ -40,6 +40,12 @@
     <Filter Include="Primitives\2D">
       <UniqueIdentifier>{795a25ef-b4f5-4cd5-9581-7e304b71af66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Primitives\2D\Rectangle">
+      <UniqueIdentifier>{70372f9c-020e-4bfe-9543-be875d9ed796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Primitives\2D\Triangle">
+      <UniqueIdentifier>{41f1d430-d07d-4c92-9fd9-5fae327c2adc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -72,11 +78,11 @@
     <ClCompile Include="ConstantBuffer.cpp">
       <Filter>GameEngine\GraphicsEngine\ConstantBuffer</Filter>
     </ClCompile>
-    <ClCompile Include="Triangle.cpp">
-      <Filter>Primitives\2D</Filter>
-    </ClCompile>
     <ClCompile Include="Rectangle.cpp">
-      <Filter>Primitives\2D</Filter>
+      <Filter>Primitives\2D\Rectangle</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Primitives\2D\Triangle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,11 +113,11 @@
     <ClInclude Include="ConstantBuffer.h">
       <Filter>GameEngine\GraphicsEngine\ConstantBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="Triangle.h">
-      <Filter>Primitives\2D</Filter>
-    </ClInclude>
     <ClInclude Include="Rectangle.h">
-      <Filter>Primitives\2D</Filter>
+      <Filter>Primitives\2D\Rectangle</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Primitives\2D\Triangle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

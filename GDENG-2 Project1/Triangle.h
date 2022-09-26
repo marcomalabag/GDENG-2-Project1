@@ -8,7 +8,7 @@
 class Triangle
 {
 public:
-	Triangle(void* shader_byte_code, size_t size_shader, VertexShader* vertexShader);
+	Triangle();
 	void draw();
 	~Triangle();
 

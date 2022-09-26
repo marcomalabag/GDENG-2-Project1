@@ -14,12 +14,27 @@
 class AppWindow : public Window
 {
 public:
+
+	void onCreate() override;
+	void onUpdate() override;
+	void onDestroy() override;
+
+	void initializeEngine();
+
+public:
+	static void initialize();
+	static AppWindow* getInstance();
+	
+
+private:
 	AppWindow();
 	~AppWindow();
+	AppWindow(AppWindow const&){};
+	AppWindow&operator=(AppWindow const&){};
 
-	virtual void onCreate() override;
-	virtual void onUpdate() override;
-	virtual void onDestroy() override;
+private:
+	static AppWindow* sharedInstance;
+
 
 private:
 	SwapChain* m_swap_chain;
@@ -34,5 +49,6 @@ private:
 
 	Triangle* triangle;
 	class Rectangle* rectangle;
+	
 };
 

@@ -9,7 +9,7 @@
 class Rectangle
 {
 public:
-	Rectangle(void* shader_byte_code, size_t size_shader, VertexShader* vertexShader);
+	Rectangle();
 	void draw();
 	~Rectangle();
 

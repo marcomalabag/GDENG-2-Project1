@@ -16,13 +16,14 @@ class ConstantBuffer;
 class GraphicsEngine
 {
 public:
-	GraphicsEngine();
+	
 	bool init();
 	bool release();
 	ID3D11Device* getD3Ddevice();
 	D3D_FEATURE_LEVEL getFeatureLevel();
+	IDXGIFactory* getFactory();
 	
-	~GraphicsEngine();
+	
 
 public:
 	SwapChain* createSwapChain();
@@ -42,6 +43,17 @@ public:
 
 public:
 	static GraphicsEngine* getInstance();
+	static void initialize();
+	static void destroy();
+
+private:
+	GraphicsEngine();
+	~GraphicsEngine();
+	GraphicsEngine(GraphicsEngine const&){};
+	GraphicsEngine&operator=(GraphicsEngine const&){};
+
+private:
+	static GraphicsEngine* sharedInstance;
 
 private:
 	DeviceContext* m_imm_device_context;

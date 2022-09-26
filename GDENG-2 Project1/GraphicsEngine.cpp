@@ -2,7 +2,7 @@
 #include "SwapChain.h"
 #include <d3dcompiler.h>
 
-
+GraphicsEngine* GraphicsEngine::sharedInstance = NULL;
 GraphicsEngine::GraphicsEngine()
 {
 }
@@ -97,6 +97,11 @@ D3D_FEATURE_LEVEL GraphicsEngine::getFeatureLevel()
 	return this->m_feature_level;
 }
 
+IDXGIFactory* GraphicsEngine::getFactory()
+{
+	return this->m_dxgi_factory;
+}
+
 DeviceContext* GraphicsEngine::getImmediateDeviceContext()
 {
 	return this->m_imm_device_context;
@@ -187,6 +192,8 @@ GraphicsEngine::~GraphicsEngine()
 {
 }
 
+
+
 SwapChain* GraphicsEngine::createSwapChain()
 {
 	return new SwapChain();
@@ -196,6 +203,24 @@ SwapChain* GraphicsEngine::createSwapChain()
 
 GraphicsEngine* GraphicsEngine::getInstance()
 {
-	static GraphicsEngine engine;
-	return &engine;
+	if(sharedInstance != NULL)
+	{
+		return sharedInstance;
+	}
+
+
+}
+
+void GraphicsEngine::initialize()
+{
+	sharedInstance = new GraphicsEngine();
+	sharedInstance->init();
+}
+
+void GraphicsEngine::destroy()
+{
+	if(sharedInstance != NULL)
+	{
+		sharedInstance->release();
+	}
 }

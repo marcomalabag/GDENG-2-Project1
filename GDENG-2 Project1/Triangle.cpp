@@ -20,33 +20,41 @@ struct constant
 };
 
 
-Triangle::Triangle(void* shader_byte_code, size_t size_shader, VertexShader* vertexShader)
+Triangle::Triangle()
 {
+	GraphicsEngine* graphEngine = GraphicsEngine::getInstance();
+
 	vertex list[] = {
 		{-0.5f,-0.5f,0.0f, -0.5f,-0.5f,0.0f, 1,1,0, 1,1,0},
 		{0.0f,0.5f,0.0f, 0.0f,0.5f,0.0f, 1,1,0, 1,1,0},
 		{ 0.5f,-0.5f,0.0f,  0.5f,-0.5f,0.0f, 1,1,0, 1,1,0}
 	};
 
-	this->vertexbuffer = GraphicsEngine::getInstance()->createVertexBuffer();
+	void* shader_byte_code = nullptr;
+	size_t size_shader = 0;
+
+	graphEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
+
+	this->vertexshader = graphEngine->createVertexShader(shader_byte_code, size_shader);
+
+	this->vertexbuffer = graphEngine->createVertexBuffer();
 
 	UINT size_list = ARRAYSIZE(list);
 
-	this->vertexshader = vertexShader;
 	this->vertexbuffer->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
 
-	GraphicsEngine::getInstance()->releaseCompiledShader();
+	graphEngine->releaseCompiledShader();
 
-	GraphicsEngine::getInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
-	this->pixelshader = GraphicsEngine::getInstance()->createPixelShader(shader_byte_code, size_shader);
+	graphEngine->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
+	this->pixelshader = graphEngine->createPixelShader(shader_byte_code, size_shader);
 
-	GraphicsEngine::getInstance()->releaseCompiledShader();
-	
+	graphEngine->releaseCompiledShader();
+
 
 	constant cc;
 	cc.m_angle = 0;
 
-	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
+	this->constantbuffer = graphEngine->createConstantBuffer();
 	this->constantbuffer->load(&cc, sizeof(constant));
 
 
