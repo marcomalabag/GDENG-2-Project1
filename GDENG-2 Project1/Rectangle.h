@@ -4,6 +4,7 @@
 #include "PixelShader.h"
 #include "ConstantBuffer.h"
 #include "GraphicsEngine.h"
+#include "Matrix4x4.h"
 
 
 class Rectangle
@@ -11,6 +12,9 @@ class Rectangle
 public:
 	Rectangle();
 	void draw();
+	void setWindowSizeLength(float windowsizelength);
+	void setWindowSizeHeight(float windowsizeheight);
+	void setPosition(Vector3D Position);
 	~Rectangle();
 
 private:
@@ -23,6 +27,12 @@ private:
 	unsigned long oldTime = 0;
 	float deltaTime = 0;
 	float angle = 0;
+
+	float windowSizeHeight;
+	float windowSizeLength;
+
+	Vector3D position;
+	Vector3D scale;
 
 };
 

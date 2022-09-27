@@ -9,6 +9,8 @@
 #include "PixelShader.h"
 #include "Triangle.h"
 #include "Rectangle.h"
+#include "Vector3D.h"
+#include <vector>
 
 
 class AppWindow : public Window
@@ -48,7 +50,8 @@ private:
 	float angle = 0;
 
 	Triangle* triangle;
-	class Rectangle* rectangle;
-	
+	std::vector<class Rectangle*> rectangle;
+
+	Vector3D positions[3];
 };
 

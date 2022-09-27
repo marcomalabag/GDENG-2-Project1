@@ -46,6 +46,15 @@
     <Filter Include="Primitives\2D\Triangle">
       <UniqueIdentifier>{41f1d430-d07d-4c92-9fd9-5fae327c2adc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Math">
+      <UniqueIdentifier>{2af31e7d-2fc7-4b0f-b9fc-a77b4f810f8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Math\Vector3D">
+      <UniqueIdentifier>{9bdcfbe8-09c3-475a-9cae-dfd9b7391227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Math\Matrix4x4">
+      <UniqueIdentifier>{36f908b5-0164-4453-96d9-03288bbf79ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -84,6 +93,12 @@
     <ClCompile Include="Triangle.cpp">
       <Filter>Primitives\2D\Triangle</Filter>
     </ClCompile>
+    <ClCompile Include="Vector3D.cpp">
+      <Filter>GameEngine\Math\Vector3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix4x4.cpp">
+      <Filter>GameEngine\Math\Matrix4x4</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -118,6 +133,12 @@
     </ClInclude>
     <ClInclude Include="Triangle.h">
       <Filter>Primitives\2D\Triangle</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3D.h">
+      <Filter>GameEngine\Math\Vector3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4x4.h">
+      <Filter>GameEngine\Math\Matrix4x4</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
