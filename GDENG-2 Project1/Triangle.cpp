@@ -1,21 +1,20 @@
 #include "Triangle.h"
 
-struct vec3
-{
-	float x, y, z;
-};
 
 struct vertex
 {
-	vec3 position;
-	vec3 position1;
-	vec3 color;
-	vec3 color1;
+	Vector3D position;
+	Vector3D position1;
+	Vector3D color;
+	Vector3D color1;
 };
 
 __declspec(align(16))
 struct constant
 {
+	Matrix4x4 world;
+	Matrix4x4 view;
+	Matrix4x4 projection;
 	float m_angle;
 };
 
@@ -25,9 +24,9 @@ Triangle::Triangle()
 	GraphicsEngine* graphEngine = GraphicsEngine::getInstance();
 
 	vertex list[] = {
-		{-0.5f,-0.5f,0.0f, -0.5f,-0.5f,0.0f, 1,1,0, 1,1,0},
-		{0.0f,0.5f,0.0f, 0.0f,0.5f,0.0f, 1,1,0, 1,1,0},
-		{ 0.5f,-0.5f,0.0f,  0.5f,-0.5f,0.0f, 1,1,0, 1,1,0}
+		{Vector3D(-0.5f,-0.5f,0.0f), Vector3D( - 0.5f,-0.5f,0.0f), Vector3D(1,1,0), Vector3D(1,1,0)},
+		{Vector3D(0.0f,0.5f,0.0f), Vector3D(0.0f,0.5f,0.0f), Vector3D(1,1,0), Vector3D(1,1,0)},
+		{ Vector3D(0.5f,-0.5f,0.0f),  Vector3D(.5f,-0.5f,0.0f), Vector3D(1,1,0), Vector3D(1,1,0)}
 	};
 
 	void* shader_byte_code = nullptr;
@@ -75,6 +74,20 @@ void Triangle::draw()
 	constant cc;
 	cc.m_angle = this->angle;
 
+	Matrix4x4 temp;
+
+
+	temp.setTranslation(position);
+	cc.world.setScale(Vector3D(.5, .25, 0.0));
+	cc.world *= temp;
+
+	cc.view.setIdentity();
+	cc.projection.setOrthoLH(
+		windowSizeLength,
+		windowSizeHeight,
+		-4.0f,
+		4.0f);
+
 	this->constantbuffer->update(GraphicsEngine::getInstance()->getImmediateDeviceContext(), &cc);
 
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(this->vertexshader, this->constantbuffer);
@@ -88,6 +101,21 @@ void Triangle::draw()
 	//Triangle render
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->drawTriangleList(this->vertexbuffer->getSizeVertexList(), 0);
 
+}
+
+void Triangle::setWindowSizeLength(float windowsizelength)
+{
+	this->windowSizeLength = windowsizelength;
+}
+
+void Triangle::setWindowSizeHeight(float windowsizeheight)
+{
+	this->windowSizeHeight = windowsizeheight;
+}
+
+void Triangle::setPosition(Vector3D Position)
+{
+	this->position = Position;
 }
 
 Triangle::~Triangle()

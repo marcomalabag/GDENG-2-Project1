@@ -59,14 +59,25 @@ void AppWindow::initializeEngine()
 	positions[1] = Vector3D(.5, .25, 0.0);
 	positions[2] = Vector3D(0, -.25, 0.0);
 
+	//For instantiating triangles
+	/*
 	for(int i = 0; i < 3; i++)
+	{
+		this->triangle.push_back(new Triangle());
+		this->triangle.at(i)->setPosition(positions[i]);
+		this->triangle.at(i)->setWindowSizeHeight((rc.bottom - rc.top) / 400.f);
+		this->triangle.at(i)->setWindowSizeLength((rc.right - rc.left) / 400.f);
+	}
+	*/
+
+	//For instantiating rectangles
+	for (int i = 0; i < 3; i++)
 	{
 		this->rectangle.push_back(new class Rectangle());
 		this->rectangle.at(i)->setPosition(positions[i]);
-		this->rectangle.at(i)->setWindowSizeHeight((rc.bottom - rc.top) / 400.f);
-		this->rectangle.at(i)->setWindowSizeLength((rc.right - rc.left) / 400.f);
+		this->rectangle.at(i)->setWindowSizeHeight(height / 400.f);
+		this->rectangle.at(i)->setWindowSizeLength(width / 400.f);
 	}
-	
 	
 }
 
@@ -78,11 +89,18 @@ void AppWindow::onUpdate()
 	RECT rc = this->getClientWindowRect();
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
-	for(int i = 0; i < this->rectangle.size(); i++)
+	//For instantiating triangles
+	/*
+	for(int i = 0; i < this->triangle.size(); i++)
+	{
+		this->triangle.at(i)->draw();
+	}
+	*/
+
+	for (int i = 0; i < this->rectangle.size(); i++)
 	{
 		this->rectangle.at(i)->draw();
 	}
-	
 
 	this->m_swap_chain->present(false);
 

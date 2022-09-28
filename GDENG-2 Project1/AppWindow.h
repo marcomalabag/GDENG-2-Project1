@@ -49,7 +49,7 @@ private:
 	float deltaTime = 0;
 	float angle = 0;
 
-	Triangle* triangle;
+	std::vector <class Triangle*> triangle;
 	std::vector<class Rectangle*> rectangle;
 
 	Vector3D positions[3];

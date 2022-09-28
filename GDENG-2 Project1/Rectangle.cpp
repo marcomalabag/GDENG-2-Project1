@@ -1,12 +1,7 @@
 #include "Rectangle.h"
 #include "Vector3D.h"
 
-/*
-struct vec3
-{
-	float x, y, z;
-};
-*/
+
 
 struct vertex
 {
