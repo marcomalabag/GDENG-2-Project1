@@ -24,9 +24,9 @@ Triangle::Triangle()
 	GraphicsEngine* graphEngine = GraphicsEngine::getInstance();
 
 	vertex list[] = {
-		{Vector3D(-0.5f,-0.5f,0.0f), Vector3D( - 0.5f,-0.5f,0.0f), Vector3D(1,1,0), Vector3D(1,1,0)},
-		{Vector3D(0.0f,0.5f,0.0f), Vector3D(0.0f,0.5f,0.0f), Vector3D(1,1,0), Vector3D(1,1,0)},
-		{ Vector3D(0.5f,-0.5f,0.0f),  Vector3D(.5f,-0.5f,0.0f), Vector3D(1,1,0), Vector3D(1,1,0)}
+		{Vector3D(-0.5f,-0.5f,0.0f), Vector3D( - 0.5f,-0.5f,0.0f), Vector3D(0,1,0), Vector3D(0,0,0)},
+		{Vector3D(0.0f,0.5f,0.0f), Vector3D(0.0f,0.5f,0.0f), Vector3D(0,1,1), Vector3D(1,1,0)},
+		{ Vector3D(0.5f,-0.5f,0.0f),  Vector3D(.5f,-0.5f,0.0f), Vector3D(1,0,0),  Vector3D(0,0,1)}
 	};
 
 	void* shader_byte_code = nullptr;

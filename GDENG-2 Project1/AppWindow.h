@@ -53,5 +53,6 @@ private:
 	std::vector<class Rectangle*> rectangle;
 
 	Vector3D positions[3];
+	Vector3D TrianglePositions[3];
 };
 
