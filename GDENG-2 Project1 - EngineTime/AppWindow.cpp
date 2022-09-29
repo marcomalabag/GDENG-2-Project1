@@ -59,14 +59,14 @@ void AppWindow::initializeEngine()
 	positions[1] = Vector3D(.5, .25, 0.0);
 	positions[2] = Vector3D(0, -.25, 0.0);
 
-	
+	/*
 	TrianglePositions[0] = Vector3D(-.5, .5, 0.0);
 	TrianglePositions[1] = Vector3D(.5, .5, 0.0);
 	TrianglePositions[2] = Vector3D(0, .001, 0.0);
-	
+	*/
 
 	//For instantiating triangles
-	
+	/*
 	for(int i = 0; i < 3; i++)
 	{
 		this->triangle.push_back(new Triangle());
@@ -74,7 +74,7 @@ void AppWindow::initializeEngine()
 		this->triangle.at(i)->setWindowSizeHeight((rc.bottom - rc.top) / 400.f);
 		this->triangle.at(i)->setWindowSizeLength((rc.right - rc.left) / 400.f);
 	}
-	
+	*/
 	
 
 	//For instantiating rectangles
@@ -97,12 +97,12 @@ void AppWindow::onUpdate()
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
 	//For instantiating triangles
-	
+	/*
 	for(int i = 0; i < this->triangle.size(); i++)
 	{
 		this->triangle.at(i)->draw();
 	}
-	
+	*/
 
 	for (int i = 0; i < this->rectangle.size(); i++)
 	{
