@@ -27,7 +27,7 @@ VS_OUTPUT vsmain(VS_INPUT input)
 	output.position = mul(output.position, view);
 	output.position = mul(output.position, projection);
 
-	//output.position = lerp(input.position, input.position1, (sin(m_angle) + 1.0f) / 2.0f);
+	output.position = lerp(input.position, input.position1, (sin(m_angle) + 1.0f) / 2.0f);
 	output.color = input.color;
 	output.color1 = input.color1;
 	return output;

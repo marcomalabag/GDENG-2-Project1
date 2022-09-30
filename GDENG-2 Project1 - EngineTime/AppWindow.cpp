@@ -78,7 +78,7 @@ void AppWindow::initializeEngine()
 	
 
 	//For instantiating rectangles
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		this->rectangle.push_back(new class Rectangle());
 		this->rectangle.at(i)->setPosition(positions[i]);
