@@ -55,6 +55,9 @@
     <Filter Include="GameEngine\Math\Matrix4x4">
       <UniqueIdentifier>{36f908b5-0164-4453-96d9-03288bbf79ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EngineTime">
+      <UniqueIdentifier>{4a9ea4cc-4cbb-4fc0-87b0-05a4cb2658b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
