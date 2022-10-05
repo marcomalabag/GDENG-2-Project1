@@ -50,14 +50,35 @@ void DeviceContext::setConstantBuffer(PixelShader* pixel_shader, ConstantBuffer*
 }
 
 
-void DeviceContext::setViewportSize(UINT width, UINT height)
+void DeviceContext::setViewportSize(UINT width, UINT height, int viewportnum)
 {
 	D3D11_VIEWPORT viewport = {};
-	viewport.Width = (FLOAT)width;
-	viewport.Height = (FLOAT)height;
+	viewport.Width = (FLOAT)width / 2.0f;
+	viewport.Height = (FLOAT)height / 2.0f;
 	viewport.MinDepth = 0.0f;
 	viewport.MaxDepth = 1.0f;
-	this->Devicecontext->RSSetViewports(1, &viewport);
+	viewport.TopLeftX = 0.0f;
+	viewport.TopLeftY = 0.0f;
+
+	D3D11_VIEWPORT viewport2 = {};
+	viewport2.Width = (FLOAT)width / 2.0f;
+	viewport2.Height = (FLOAT)height / 2.0f;
+	viewport2.MinDepth = 0.0f;
+	viewport2.MaxDepth = 1.0f;
+	viewport2.TopLeftX = (FLOAT)width / 2.0f;
+	viewport2.TopLeftY = (FLOAT)width / 2.0f;
+
+	if(viewportnum == 1)
+	{
+		this->Devicecontext->RSSetViewports(1, &viewport);
+	}
+	
+	else if(viewportnum == 2)
+	{
+		this->Devicecontext->RSSetViewports(1, &viewport2);
+	}
+	
+	
 }
 
 

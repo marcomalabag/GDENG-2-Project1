@@ -64,9 +64,8 @@ bool Window::initializeWC()
 bool Window::initializeAppWindow()
 {
 
-
 	this->m_hwnd = ::CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, L"GDENG - 2 Project", L"DirectX Application", WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 1024, 768, NULL, NULL, NULL, this);
+		CW_USEDEFAULT, CW_USEDEFAULT, 540, 960, NULL, NULL, NULL, this);
 
 	if (!this->m_hwnd)
 	{
@@ -88,16 +87,18 @@ bool Window::initiazeGameWindow()
 	
 
 	this->m_gamewindow = ::CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, L"GDENG - 2 Project", L"Game Window", WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 1024, 768, NULL, NULL, NULL, this);
+		CW_USEDEFAULT, CW_USEDEFAULT, 540, 960, NULL, NULL, NULL, this);
 
 	if (!this->m_gamewindow)
 	{
-		std::cout << "Not working";
+		std::cout << "Game window not working";
 		return false;
 	}
 
 	::ShowWindow(this->m_gamewindow, SW_SHOW);
 	::UpdateWindow(this->m_gamewindow);
+
+	GameWindowRunning = true;
 
 	return true;
 }
@@ -111,7 +112,7 @@ bool Window::broadcast()
 
 	this->onUpdate();
 
-	while (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE) > 0)
+	while (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE) > 0 )
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
@@ -131,12 +132,21 @@ bool Window::release()
 		return false;
 	}
 
+	if (!::DestroyWindow(this->m_gamewindow)) {
+		return false;
+	}
+
 	return true;
 }
 
 bool Window::isRun()
 {
 	return m_isRunning;
+}
+
+bool Window::isGameRun()
+{
+	return GameWindowRunning;
 }
 
 HWND Window::gethwnd()
@@ -148,6 +158,14 @@ RECT Window::getClientWindowRect()
 {
 	RECT rc;
 	::GetClientRect(this->m_hwnd, &rc);
+
+	return rc;
+}
+
+RECT Window::getGameWindowRect()
+{
+	RECT rc;
+	::GetClientRect(this->m_gamewindow, &rc);
 
 	return rc;
 }
@@ -167,9 +185,11 @@ void Window::onCreate()
 
 void Window::onUpdate()
 {
+	
 }
 
 void Window::onDestroy()
 {
 	m_isRunning = false;
+	GameWindowRunning = false;
 }

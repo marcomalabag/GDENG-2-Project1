@@ -11,9 +11,11 @@ public:
 	bool broadcast();
 	bool release();
 	bool isRun();
+	bool isGameRun();
 
 	HWND gethwnd();
 	RECT getClientWindowRect();
+	RECT getGameWindowRect();
 	void setHWND(HWND hwnd);
 
 	
@@ -29,6 +31,7 @@ protected:
 	HWND m_hwnd;
 	HWND m_gamewindow;
 	bool m_isRunning;
+	bool GameWindowRunning;
 
 };
 

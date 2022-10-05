@@ -12,34 +12,31 @@
 #include "Vector3D.h"
 #include <vector>
 
-
-class AppWindow : public Window
+class GameWindow: public Window
 {
 public:
-
 	void onCreate() override;
 	void onUpdate() override;
 	void onDestroy() override;
 
-	void initializeEngine();
+	void CreateGameWindow();
 
 public:
 	static void initialize();
-	static AppWindow* getInstance();
-	
+	static GameWindow* getInstance();
 
 private:
-	AppWindow();
-	~AppWindow();
-	AppWindow(AppWindow const&){};
-	AppWindow&operator=(AppWindow const&){};
+	GameWindow();
+	~GameWindow();
+	GameWindow(GameWindow const&) {};
+	GameWindow& operator=(GameWindow const&) {};
 
 private:
-	static AppWindow* sharedInstance;
+	static GameWindow* sharedInstance;
 
 
 private:
-	SwapChain* m_swap_chain;
+	SwapChain* m_swap_chain_game;
 	VertexBuffer* vertexbuffer;
 	VertexShader* vertexshader;
 	PixelShader* pixelshader;
