@@ -44,6 +44,7 @@ void AppWindow::onCreate()
 void AppWindow::initializeEngine()
 {
 	GraphicsEngine::initialize();
+	EngineTime::initialize();
 	GraphicsEngine* graphEngine = GraphicsEngine::getInstance();
 
 

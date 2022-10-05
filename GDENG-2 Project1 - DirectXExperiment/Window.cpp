@@ -65,7 +65,7 @@ bool Window::initializeAppWindow()
 {
 
 	this->m_hwnd = ::CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, L"GDENG - 2 Project", L"DirectX Application", WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 540, 960, NULL, NULL, NULL, this);
+		CW_USEDEFAULT, CW_USEDEFAULT, 1024, 768, NULL, NULL, NULL, this);
 
 	if (!this->m_hwnd)
 	{
@@ -85,7 +85,7 @@ bool Window::initializeAppWindow()
 bool Window::initiazeGameWindow()
 {
 	
-
+	/*
 	this->m_gamewindow = ::CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, L"GDENG - 2 Project", L"Game Window", WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, CW_USEDEFAULT, 540, 960, NULL, NULL, NULL, this);
 
@@ -99,8 +99,9 @@ bool Window::initiazeGameWindow()
 	::UpdateWindow(this->m_gamewindow);
 
 	GameWindowRunning = true;
-
+	*/
 	return true;
+	
 }
 
 
@@ -132,11 +133,13 @@ bool Window::release()
 		return false;
 	}
 
+	/*
 	if (!::DestroyWindow(this->m_gamewindow)) {
 		return false;
 	}
-
+	*/
 	return true;
+	
 }
 
 bool Window::isRun()
@@ -146,7 +149,8 @@ bool Window::isRun()
 
 bool Window::isGameRun()
 {
-	return GameWindowRunning;
+	//return GameWindowRunning;
+	return false;
 }
 
 HWND Window::gethwnd()
@@ -162,13 +166,6 @@ RECT Window::getClientWindowRect()
 	return rc;
 }
 
-RECT Window::getGameWindowRect()
-{
-	RECT rc;
-	::GetClientRect(this->m_gamewindow, &rc);
-
-	return rc;
-}
 
 void Window::setHWND(HWND hwnd)
 {
@@ -191,5 +188,5 @@ void Window::onUpdate()
 void Window::onDestroy()
 {
 	m_isRunning = false;
-	GameWindowRunning = false;
+	//GameWindowRunning = false;
 }

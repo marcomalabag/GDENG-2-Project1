@@ -65,6 +65,9 @@ Rectangle::Rectangle()
 
 void Rectangle::draw()
 {
+	this->ticks = EngineTime::getDeltaTime() * 1.0f;
+
+	
 	unsigned long newtime = 0;
 	if (this->oldTime)
 	{
@@ -75,6 +78,7 @@ void Rectangle::draw()
 	this->oldTime = ::GetTickCount();
 
 	this->angle += 1.57f * this->deltaTime;
+	
 	constant cc;
 	cc.m_angle = this->angle;
 
@@ -91,6 +95,8 @@ void Rectangle::draw()
 		windowSizeHeight,
 		-4.0f,
 		4.0f);
+
+
 
 
 	this->constantbuffer->update(GraphicsEngine::getInstance()->getImmediateDeviceContext(), &cc);

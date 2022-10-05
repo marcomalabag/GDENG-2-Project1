@@ -5,6 +5,7 @@
 #include "ConstantBuffer.h"
 #include "GraphicsEngine.h"
 #include "Matrix4x4.h"
+#include "EngineTime.h"
 
 
 class Rectangle
@@ -33,6 +34,7 @@ private:
 
 	Vector3D position;
 	Vector3D scale;
+	int ticks = 0;
 
 };
 

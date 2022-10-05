@@ -19,7 +19,7 @@ public:
 	void clearRenderTargetColor(SwapChain* swapchain, float red, float green, float blue, float alpha);
 	void setVertexBuffer(VertexBuffer* vertex_buffer);
 	
-	void setViewportSize(UINT width, UINT height, int viewportnum);
+	void setViewportSize(D3D11_VIEWPORT viewport);
 	void drawTriangleList(UINT vertex_count, UINT startVertexIndex);
 	void drawTriangleStrip(UINT vertex_count, UINT startVertexIndex);
 	~DeviceContext();

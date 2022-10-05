@@ -48,6 +48,7 @@ void AppWindow::initializeEngine()
 	GraphicsEngine::initialize();
 	GraphicsEngine* graphEngine = GraphicsEngine::getInstance();
 
+	Viewport::initialize();
 
 	m_swap_chain = graphEngine->createSwapChain();
 
@@ -57,6 +58,11 @@ void AppWindow::initializeEngine()
 
 	m_swap_chain->init(this->m_hwnd, width, height);
 
+	Viewport::getInstance()->add((FLOAT)width / 2.0f, (FLOAT)height / 2.0f, 0.0f,
+		1.0f, 0.0f, 0.0f);
+
+	Viewport::getInstance()->add((FLOAT)width / 2.0f, (FLOAT)height / 3.0f, 0.0f,
+		1.0f, (FLOAT)width / 2.0f, (FLOAT)width / 2.0f);
 
 	positions[0] = Vector3D(-.5, .25, 0.0);
 	positions[1] = Vector3D(.5, .25, 0.0);
@@ -97,8 +103,7 @@ void AppWindow::onUpdate()
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->clearRenderTargetColor(this->m_swap_chain,
 		0, 0, 0.5, 0.5);
 	RECT rc = this->getClientWindowRect();
-	RECT rcg = this->getGameWindowRect();
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top, 1);
+	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(Viewport::getInstance()->getViewport(0));
 
 	//For instantiating triangles
 	/*
@@ -113,7 +118,7 @@ void AppWindow::onUpdate()
 		this->rectangle.at(i)->draw();
 	}
 	
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top, 2);
+	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(Viewport::getInstance()->getViewport(1));
 	for (int i = 0; i < this->rectangle.size(); i++)
 	{
 		this->rectangle.at(i)->draw();

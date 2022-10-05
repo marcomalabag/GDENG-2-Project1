@@ -38,7 +38,7 @@ void GameWindow::CreateGameWindow()
 	int height = rc.bottom - rc.top;
 
 	
-	m_swap_chain_game->init(this->m_gamewindow, width, height);
+	//m_swap_chain_game->init(this->m_gamewindow, width, height);
 
 	positions[0] = Vector3D(-.5, .25, 0.0);
 	positions[1] = Vector3D(.5, .25, 0.0);
@@ -77,8 +77,6 @@ void GameWindow::onUpdate()
 	Window::onUpdate();
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->clearRenderTargetColor(this->m_swap_chain_game,
 		0, 0, 0.5, 0.5);
-	RECT rc = this->getGameWindowRect();
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top , 1);
 
 	for (int i = 0; i < this->triangle.size(); i++)
 	{

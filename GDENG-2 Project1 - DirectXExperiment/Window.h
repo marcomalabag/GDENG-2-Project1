@@ -15,7 +15,7 @@ public:
 
 	HWND gethwnd();
 	RECT getClientWindowRect();
-	RECT getGameWindowRect();
+	
 	void setHWND(HWND hwnd);
 
 	
@@ -29,9 +29,9 @@ public:
 
 protected:
 	HWND m_hwnd;
-	HWND m_gamewindow;
+	//HWND m_gamewindow;
 	bool m_isRunning;
-	bool GameWindowRunning;
+	//bool GameWindowRunning;
 
 };
 

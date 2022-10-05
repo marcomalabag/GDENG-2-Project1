@@ -5,15 +5,15 @@ int main() {
 
 	
 	AppWindow::initialize();
-	GameWindow::initialize();
+	//GameWindow::initialize();
 	AppWindow* runningApp = (AppWindow*)AppWindow::getInstance();
-	GameWindow* runningGame = (GameWindow*)GameWindow::getInstance();
+	//GameWindow* runningGame = (GameWindow*)GameWindow::getInstance();
 	runningApp->initializeEngine();
-	runningGame->CreateGameWindow();
-	while(runningApp->isRun() && runningGame->isGameRun())
+	//runningGame->CreateGameWindow();
+	while(runningApp->isRun())
 	{
 		runningApp->broadcast();
-		runningGame->broadcast();
+		//runningGame->broadcast();
 	}
 
 	return 0;
