@@ -25,14 +25,28 @@ Rectangle::Rectangle()
 {
 	GraphicsEngine* graphEngine = GraphicsEngine::getInstance();
 
+	//slide 13 vertex list
+	/*
 	vertex list[] =
 	{
 		//X - Y - Z
-		{Vector3D(-0.75f,-0.5f,0.0f),    Vector3D(-0.32f,-0.11f,0.0f),   Vector3D(0,0,0), Vector3D(0,1,0)}, // POS1
-		{Vector3D(-0.75f,0.5f,0.0f),     Vector3D(-0.11f,0.78f,0.0f),    Vector3D(1,1,0), Vector3D(0,1,1)}, // POS2
-		{Vector3D(0.5f,-0.5f,0.0f),     Vector3D(0.75f,-0.73f,0.0f),   Vector3D(0,0,1),  Vector3D(1,0,0)},// POS2
-		{Vector3D(0.5f,0.5f,0.0f),      Vector3D(0.88f,0.77f,0.0f),    Vector3D(1,1,1),  Vector3D(0,0,1)}
+		{Vector3D(-0.8f,-0.9f,0.0f),    Vector3D(-0.32f,-0.11f,0.0f),   Vector3D(0,0,0), Vector3D(0,1,0)}, // POS1
+		{Vector3D(-0.91f,0.3f,0.0f),     Vector3D(-0.11f,0.78f,0.0f),    Vector3D(1,1,0), Vector3D(0,1,1)}, // POS2
+		{Vector3D(0.25f,-0.2f,0.0f),     Vector3D(0.75f,-0.73f,0.0f),   Vector3D(0,0,1),  Vector3D(1,0,0)},// POS2
+		{Vector3D(0.18f,0.1f,0.0f),      Vector3D(0.88f,0.77f,0.0f),    Vector3D(1,1,1),  Vector3D(0,0,1)}
 	};
+	*/
+	//slide 14 vertex list
+	
+	vertex list[] =
+	{
+		//X - Y - Z
+		{Vector3D(-0.65f,-0.83f,0.0f),    Vector3D(-0.21f,-0.1f,0.0f),   Vector3D(0,0,0), Vector3D(0,1,0)}, // POS1
+		{Vector3D(-0.82f,0.2f,0.0f),     Vector3D(-0.11f,0.81f,0.0f),    Vector3D(1,1,0), Vector3D(0,1,1)}, // POS2
+		{Vector3D(0.93f,-0.2f,0.0f),     Vector3D(0.11f,-0.73f,0.0f),   Vector3D(0,0,1),  Vector3D(1,0,0)},// POS2
+		{Vector3D(0.61f,-0.83f,0.0f),      Vector3D(0.88f,0.88f,0.0f),    Vector3D(1,1,1),  Vector3D(0,0,1)}
+	};
+	
 
 	void* shader_byte_code = nullptr;
 	size_t size_shader = 0;
