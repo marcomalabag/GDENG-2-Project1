@@ -28,8 +28,8 @@ Rectangle::Rectangle()
 	vertex list[] =
 	{
 		//X - Y - Z
-		{Vector3D(-0.5f,-0.5f,0.0f),    Vector3D(-0.32f,-0.11f,0.0f),   Vector3D(0,0,0), Vector3D(0,1,0)}, // POS1
-		{Vector3D(-0.5f,0.5f,0.0f),     Vector3D(-0.11f,0.78f,0.0f),    Vector3D(1,1,0), Vector3D(0,1,1)}, // POS2
+		{Vector3D(-0.75f,-0.5f,0.0f),    Vector3D(-0.32f,-0.11f,0.0f),   Vector3D(0,0,0), Vector3D(0,1,0)}, // POS1
+		{Vector3D(-0.75f,0.5f,0.0f),     Vector3D(-0.11f,0.78f,0.0f),    Vector3D(1,1,0), Vector3D(0,1,1)}, // POS2
 		{Vector3D(0.5f,-0.5f,0.0f),     Vector3D(0.75f,-0.73f,0.0f),   Vector3D(0,0,1),  Vector3D(1,0,0)},// POS2
 		{Vector3D(0.5f,0.5f,0.0f),      Vector3D(0.88f,0.77f,0.0f),    Vector3D(1,1,1),  Vector3D(0,0,1)}
 	};
@@ -65,11 +65,12 @@ Rectangle::Rectangle()
 
 void Rectangle::draw()
 {
-	this->ticks = EngineTime::getDeltaTime() * 1.0f;
-
 	
+	//std::cout << "Tick count" << this->ticks << "\n";
+
+	/*
 	unsigned long newtime = 0;
-	if (this->oldTime)
+	if (this->oldTime )
 	{
 		newtime = GetTickCount() - this->oldTime;
 	}
@@ -78,9 +79,36 @@ void Rectangle::draw()
 	this->oldTime = ::GetTickCount();
 
 	this->angle += 1.57f * this->deltaTime;
+	*/
+
 	
+
+	if (this->speed < this->cooldownrate && state)
+	{
+		this->speed += EngineTime::getDeltaTime();
+		
+		this->ticks += (EngineTime::getDeltaTime() * 1.0f);
+	}
+	else
+	{
+		state = false;
+		
+		this->speed -= EngineTime::getDeltaTime();
+		this->ticks -= (EngineTime::getDeltaTime() * 1.0f);
+		if(this->speed < -0.1f)
+		{
+			state = true;
+			this->ticks = 0;
+			this->speed = 0;
+		}
+	}
+	
+
+
+	std::cout << "Animation Speed: " << this->speed << "\n";
 	constant cc;
-	cc.m_angle = this->angle;
+	cc.m_angle = this->speed * this->ticks;
+	
 
 	Matrix4x4 temp;
 	

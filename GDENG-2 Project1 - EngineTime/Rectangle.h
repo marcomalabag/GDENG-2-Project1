@@ -34,7 +34,10 @@ private:
 
 	Vector3D position;
 	Vector3D scale;
-	int ticks = 0;
-
+	float ticks = 0.0f;
+	float cooldownrate = 10.0f;
+	float rate = 0.0f;
+	float speed = 0.0f;
+	bool state = true;
 };
 
