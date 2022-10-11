@@ -103,10 +103,10 @@ void AppWindow::onUpdate()
 		this->triangle.at(i)->draw();
 	}
 	
-
-	for (int i = 0; i < this->rectangle.size(); i++)
+	//GraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize((rc.right - rc.left) / 2.0f, (rc.bottom - rc.top) - 3);
+	for (int i = 0; i < this->triangle.size(); i++)
 	{
-		this->rectangle.at(i)->draw();
+		this->triangle.at(i)->draw();
 	}
 
 	this->m_swap_chain->present(false);
