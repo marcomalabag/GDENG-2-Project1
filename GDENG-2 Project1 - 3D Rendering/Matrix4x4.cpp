@@ -71,6 +71,26 @@ void Matrix4x4::setMatrix(const Matrix4x4& matrix)
 	::memcpy(Matrix, matrix.Matrix, sizeof(float) * 16);
 }
 
+Matrix4x4 Matrix4x4::getScalar(int constant)
+{
+	Matrix4x4 Scalar;
+	Scalar.setIdentity();
+	Scalar.Matrix[0][0] *= constant;
+	Scalar.Matrix[1][1] *= constant;
+	Scalar.Matrix[2][2] *= constant;
+	Scalar.Matrix[3][3] *= constant;
+	
+	return Scalar;
+}
+
+Matrix4x4 Matrix4x4::mulMatrix(Matrix4x4 a, Matrix4x4 b)
+{
+	a.operator*=(b);
+
+	return a;
+}
+
+
 void Matrix4x4::setOrthoLH(float width, float height, float near_plane, float far_plane)
 {
 	setIdentity();

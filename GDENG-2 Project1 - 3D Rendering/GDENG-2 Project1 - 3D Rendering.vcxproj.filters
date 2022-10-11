@@ -61,6 +61,12 @@
     <Filter Include="GameEngine\GraphicsEngine\IndexBuffer">
       <UniqueIdentifier>{1c8eb838-d6d1-4ddc-8bef-bc9869c5cfb8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Primitives\3D">
+      <UniqueIdentifier>{69b97442-0ead-43e9-9c08-f21d98c67680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Primitives\3D\AGameObject">
+      <UniqueIdentifier>{01c287ec-aa73-4caa-bda4-da1c7c4c3357}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -111,6 +117,9 @@
     <ClCompile Include="IndexBuffer.cpp">
       <Filter>GameEngine\GraphicsEngine\IndexBuffer</Filter>
     </ClCompile>
+    <ClCompile Include="AGameObject.cpp">
+      <Filter>Primitives\3D\AGameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -157,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="IndexBuffer.h">
       <Filter>GameEngine\GraphicsEngine\IndexBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="AGameObject.h">
+      <Filter>Primitives\3D\AGameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

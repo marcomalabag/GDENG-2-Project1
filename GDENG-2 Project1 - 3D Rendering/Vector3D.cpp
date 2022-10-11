@@ -2,9 +2,9 @@
 
 Vector3D::Vector3D()
 {
-	this->x = 0.0;
-	this->y = 0.0;
-	this->z = 0.0;
+	this->x = 0.0f;
+	this->y = 0.0f;
+	this->z = 0.0f;
 }
 
 Vector3D::Vector3D(float x, float y, float z)
@@ -20,6 +20,18 @@ Vector3D::Vector3D(const Vector3D& vector)
 	this->y = vector.y;
 	this->z = vector.z;
 }
+
+Vector3D Vector3D::zeros()
+{
+	return Vector3D(0, 0, 0);
+}
+
+Vector3D Vector3D::ones()
+{
+	return Vector3D(1, 1, 1);
+}
+
+
 
 Vector3D Vector3D::lerp(const Vector3D& start, const Vector3D& end, float delta)
 {
