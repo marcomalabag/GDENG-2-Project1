@@ -48,20 +48,22 @@ void AppWindow::initializeEngine()
 	this->vertexshader = graphEngine->createVertexShader(shader_byte_code, size_shader);
 	
 	//Cube Initialization
-	int max = 1.0f;
-	int min = 0.5f;
+	int max = 1.5f;
+	int min = -2.0f;
 	Math math;
 
 	for(int i = 0; i < 100; i++)
 	{
 		float x = math.getRandom(min, max);
-		float y = math.getRandom(0, 0.5f);
+		float y = math.getRandom(-2.0, 1.0f);
 		float z = math.getRandom(min, max);
-		std::cout << "X: " << x << "\n";
+		float speed = math.getRandom(5.0f, 25.0f);
+
+		std::cout << "Speed: " << speed << "\n";
 		this->Cubes.push_back(new Cube("Cube", shader_byte_code, size_shader));
 		this->Cubes.at(i)->setScale(.25, .25, .25);
 		this->Cubes.at(i)->setPosition(x, y, z);
-		this->Cubes.at(i)->setAnimSpeed(5.0f);
+		this->Cubes.at(i)->setAnimSpeed(speed);
 	}
 	
 
