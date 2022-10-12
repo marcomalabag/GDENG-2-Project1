@@ -7,6 +7,8 @@ public:
 	Plane(string name, void* shaderByteCode, size_t sizeShader);
 	~Plane();
 
+	void draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader) override;
+
 private:
 	VertexBuffer* verterbuffer;
 	IndexBuffer* indexbuffer;

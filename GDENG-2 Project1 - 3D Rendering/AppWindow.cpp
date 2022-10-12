@@ -68,9 +68,19 @@ void AppWindow::initializeEngine()
 	for (int i = 0; i < 1; i++)
 	{
 		this->Planes.push_back(new Plane("Plane", shader_byte_code, size_shader));
-		this->Planes.at(i)->setScale(3.0, 0.1, 0.1);
+		this->Planes.at(i)->setScale(3.0, 0.01, 1.1);
 		this->Planes.at(i)->setPosition(0.0f, 0.0f, 0.0f);
-		this->Planes.at(i)->setAnimSpeed(0.0f);
+		
+		this->Planes.at(i)->setAnimSpeed(00.0f);
+	}
+
+	for (int i = 0; i < 1; i++)
+	{
+		
+		this->Cubes.push_back(new Cube("Cube", shader_byte_code, size_shader));
+		this->Cubes.at(i)->setScale(.25, .25, .25);
+		this->Cubes.at(i)->setPosition(0.0f, 0.0f, 0.0f);
+		this->Cubes.at(i)->setAnimSpeed(0.0f);
 	}
 
 	graphEngine->releaseCompiledShader();
@@ -109,6 +119,11 @@ void AppWindow::onUpdate()
 	for (int i = 0; i < Planes.size(); i++)
 	{
 		Planes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
+	}
+
+	for (int i = 0; i < Cubes.size(); i++)
+	{
+		Cubes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	}
 	m_swap_chain->present(true);
 
