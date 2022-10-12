@@ -16,8 +16,11 @@ bool DeviceContext::release()
 void DeviceContext::clearRenderTargetColor(SwapChain* swapchain, float red, float green, float blue, float alpha)
 {
 	FLOAT clear_color[] = { red,green,blue,alpha };
-	this->Devicecontext->ClearRenderTargetView(swapchain->RenderTargetView, clear_color);
-	this->Devicecontext->OMSetRenderTargets(1, &swapchain->RenderTargetView, NULL);
+	ID3D11RenderTargetView* renderview = swapchain->getRenderTargetView();
+	ID3D11DepthStencilView* depthview = swapchain->getDepthStencilView();
+	this->Devicecontext->ClearRenderTargetView(renderview, clear_color);
+	this->Devicecontext->ClearDepthStencilView(depthview, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1, 0);
+	this->Devicecontext->OMSetRenderTargets(1, &renderview, depthview);
 }
 
 void DeviceContext::setVertexBuffer(VertexBuffer* vertex_buffer)

@@ -56,13 +56,11 @@ void AppWindow::initializeEngine()
 	{
 		float x = math.getRandom(min, max);
 		float y = math.getRandom(-2.0, 1.0f);
-		float z = math.getRandom(min, max);
+		
 		float speed = math.getRandom(1.0f, 25.0f);
-
-		std::cout << "Speed: " << speed << "\n";
 		this->Cubes.push_back(new Cube("Cube", shader_byte_code, size_shader));
 		this->Cubes.at(i)->setScale(.25, .25, .25);
-		this->Cubes.at(i)->setPosition(x, y, z);
+		this->Cubes.at(i)->setPosition(x, y, 0.0f);
 		this->Cubes.at(i)->setAnimSpeed(speed);
 	}
 	
