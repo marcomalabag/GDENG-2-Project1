@@ -49,7 +49,7 @@ void AppWindow::initializeEngine()
 	
 	//Cube Initialization
 	int max = 1.5f;
-	int min = -2.0f;
+	int min = -2.5f;
 	Math math;
 
 	for(int i = 0; i < 100; i++)
@@ -57,7 +57,7 @@ void AppWindow::initializeEngine()
 		float x = math.getRandom(min, max);
 		float y = math.getRandom(-2.0, 1.0f);
 		float z = math.getRandom(min, max);
-		float speed = math.getRandom(5.0f, 25.0f);
+		float speed = math.getRandom(1.0f, 25.0f);
 
 		std::cout << "Speed: " << speed << "\n";
 		this->Cubes.push_back(new Cube("Cube", shader_byte_code, size_shader));
