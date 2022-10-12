@@ -65,13 +65,16 @@ void AppWindow::initializeEngine()
 		this->Cubes.at(i)->setAnimSpeed(speed);
 	}
 	*/
+
+	//Cube and plane initialization
+	
 	for (int i = 0; i < 1; i++)
 	{
 		this->Planes.push_back(new Plane("Plane", shader_byte_code, size_shader));
 		this->Planes.at(i)->setScale(3.0, 0.01, 1.1);
-		this->Planes.at(i)->setPosition(0.0f, 0.0f, 0.0f);
+		this->Planes.at(i)->setPosition(0.0f, -123.0f, 0.0f);
 		
-		this->Planes.at(i)->setAnimSpeed(00.0f);
+		this->Planes.at(i)->setAnimSpeed(0.0f);
 	}
 
 	for (int i = 0; i < 1; i++)
@@ -82,6 +85,7 @@ void AppWindow::initializeEngine()
 		this->Cubes.at(i)->setPosition(0.0f, 0.0f, 0.0f);
 		this->Cubes.at(i)->setAnimSpeed(0.0f);
 	}
+	
 
 	graphEngine->releaseCompiledShader();
 
@@ -116,6 +120,9 @@ void AppWindow::onUpdate()
 		Cubes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	}
 	*/
+
+	//Cube and plane initialization
+	
 	for (int i = 0; i < Planes.size(); i++)
 	{
 		Planes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
@@ -125,6 +132,7 @@ void AppWindow::onUpdate()
 	{
 		Cubes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	}
+	
 	m_swap_chain->present(true);
 
 	

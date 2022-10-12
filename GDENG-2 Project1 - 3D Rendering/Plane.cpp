@@ -4,8 +4,6 @@ Plane::Plane(string name, void* shaderByteCode, size_t sizeShader): Cube(name, s
 {
 	vertex vertex_list[] =
 	{
-		//X - Y - Z
-		//FRONT FACE
 		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,1,1),  Vector3D(1,1,1) },
 		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,1), Vector3D(1,1,1) },
 		{ Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,1),  Vector3D(1,1,1) },
@@ -66,7 +64,7 @@ void Plane::draw(int width, int height, VertexShader* vertexshader, PixelShader*
 	cc.projection.setOrthoLH
 	(
 		(width) / 300.0f,
-		(height) / 300.0f,
+		(height) ,
 		-4.0f,
 		4.0f
 	);
