@@ -70,6 +70,12 @@
     <Filter Include="Primitives\3D\Cube">
       <UniqueIdentifier>{424ddca1-f78f-4c9e-aea1-d1c62eb4aee1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Primitives\3D\Cube\NormalCube">
+      <UniqueIdentifier>{e6434f80-af97-4292-91fb-6138d912579b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Primitives\3D\Plane">
+      <UniqueIdentifier>{ff95557b-3c01-4df4-b608-97cdd661f3b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -123,11 +129,14 @@
     <ClCompile Include="AGameObject.cpp">
       <Filter>Primitives\3D\AGameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>Primitives\3D\Cube</Filter>
-    </ClCompile>
     <ClCompile Include="Math.cpp">
       <Filter>GameEngine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Primitives\3D\Cube\NormalCube</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>Primitives\3D\Plane</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,11 +188,14 @@
     <ClInclude Include="AGameObject.h">
       <Filter>Primitives\3D\AGameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Primitives\3D\Cube</Filter>
-    </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>GameEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Primitives\3D\Cube\NormalCube</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Primitives\3D\Plane</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

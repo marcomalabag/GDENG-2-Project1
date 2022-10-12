@@ -15,6 +15,7 @@
 #include "IndexBuffer.h"
 #include "Cube.h"
 #include "Math.h"
+#include "Plane.h"
 
 
 class AppWindow : public Window
@@ -65,6 +66,7 @@ private:
 	std::vector <class Triangle*> triangle;
 	std::vector<class Rectangle*> rectangle;
 	std::vector <class Cube*> Cubes;
+	std::vector <class Plane*> Planes;
 
 	Vector3D positions[3];
 	Vector3D TrianglePositions[3];
