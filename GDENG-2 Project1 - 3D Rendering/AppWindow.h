@@ -13,6 +13,8 @@
 #include <vector>
 #include "EngineTime.h"
 #include "IndexBuffer.h"
+#include "Cube.h"
+#include "Math.h"
 
 
 class AppWindow : public Window
@@ -24,7 +26,7 @@ public:
 	void onDestroy() override;
 
 	void initializeEngine();
-	void updateQuadPosition();
+	
 
 public:
 	static void initialize();
@@ -62,6 +64,7 @@ private:
 
 	std::vector <class Triangle*> triangle;
 	std::vector<class Rectangle*> rectangle;
+	std::vector <class Cube*> Cubes;
 
 	Vector3D positions[3];
 	Vector3D TrianglePositions[3];

@@ -67,6 +67,9 @@
     <Filter Include="Primitives\3D\AGameObject">
       <UniqueIdentifier>{01c287ec-aa73-4caa-bda4-da1c7c4c3357}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Primitives\3D\Cube">
+      <UniqueIdentifier>{424ddca1-f78f-4c9e-aea1-d1c62eb4aee1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -120,6 +123,12 @@
     <ClCompile Include="AGameObject.cpp">
       <Filter>Primitives\3D\AGameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Primitives\3D\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>GameEngine\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -169,6 +178,12 @@
     </ClInclude>
     <ClInclude Include="AGameObject.h">
       <Filter>Primitives\3D\AGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Primitives\3D\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>GameEngine\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

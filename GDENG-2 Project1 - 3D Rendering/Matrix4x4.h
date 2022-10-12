@@ -15,7 +15,7 @@ public:
 	void operator*=(const Matrix4x4& matrix);
 	void setMatrix(const Matrix4x4& matrix);
 	Matrix4x4 getScalar(int constant);
-	Matrix4x4 mulMatrix(Matrix4x4 a, Matrix4x4 b);
+	Matrix4x4 mulMatrix(Matrix4x4 in);
 	void setOrthoLH(float width, float height, float near_plane, float far_plane);
 	~Matrix4x4();
 

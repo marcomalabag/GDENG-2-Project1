@@ -7,6 +7,23 @@
 
 using namespace std;
 
+struct vertex
+{
+	Vector3D position;
+	Vector3D color;
+	Vector3D color1;
+};
+
+__declspec(align(16))
+struct constant
+{
+	Matrix4x4 world;
+	Matrix4x4 view;
+	Matrix4x4 projection;
+	unsigned int time;
+};
+
+
 class VertexShader;
 class PixelShader;
 class AGameObject

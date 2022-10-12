@@ -83,11 +83,20 @@ Matrix4x4 Matrix4x4::getScalar(int constant)
 	return Scalar;
 }
 
-Matrix4x4 Matrix4x4::mulMatrix(Matrix4x4 a, Matrix4x4 b)
+Matrix4x4 Matrix4x4::mulMatrix(Matrix4x4 in)
 {
-	a.operator*=(b);
+	Matrix4x4 result;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			result.Matrix[i][j] =
+				Matrix[i][0] * in.Matrix[0][j] + Matrix[i][1] * in.Matrix[1][j] +
+				Matrix[i][2] * in.Matrix[2][j] + Matrix[i][3] * in.Matrix[3][j];
+		}
+	}
 
-	return a;
+	return result;
 }
 
 
