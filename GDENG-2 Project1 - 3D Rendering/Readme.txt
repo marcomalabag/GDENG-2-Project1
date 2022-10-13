@@ -1,6 +1,8 @@
-Github link:
-https://github.com/marcomalabag/GDENG-2-Project1/tree/main/GDENG-2%20Project1%20-%20EngineTime
-
-Where to find solution:
-Solution to how the increase and decrease of animation speed is done is coded in the draw method of the rectangle class.
-The rectangle class is in a filter called 2D, which is in another filter called primitives.
+Marco Malabag
+Instructions on how to run:
+What I'm sending is the project for the rendering system and not the whole solution because 
+that solution is tied to other versions of the rendering system. Therefore, just create a new 
+solution in visual studio 2022 or 2019 then add the project to that solution. In the solution, 
+ensure that GDENG-2 Project1 - 3D Rendering is set as the startup project. Then press Run/Debug 
+and the project should be able to run. 
+ 
