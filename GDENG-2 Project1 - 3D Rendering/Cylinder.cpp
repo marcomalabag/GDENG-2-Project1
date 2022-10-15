@@ -3,12 +3,11 @@
 Cylinder::Cylinder(string name, void* ShaderByteCode, size_t SizeShader): AGameObject(name)
 {
 	float radius = 1.5f;
-	int stackCount = 12;
 	int sectorCount = 12;
 	float height = 1.5f;
 	
 
-	float pi = atan(1) * 4.0f;
+	float pi = 3.1415926f;
 	float sectorStep = 2 * pi / (float)sectorCount;
 	float sectorAngle;
 

@@ -30,49 +30,11 @@ Sphere::Sphere(string name, void* shaderByteCode, size_t sizeShader):AGameObject
 	}
 
 
-	vertex vertex_list[] =
-	{
-		//X - Y - Z
-		//FRONT FACE
-		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,0,0),  Vector3D(0.2f,0,0) },
-		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,0), Vector3D(0.2f,0.2f,0) },
-		{ Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,0),  Vector3D(0.2f,0.2f,0) },
-		{ Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,0,0), Vector3D(0.2f,0,0) },
-
-		//BACK FACE
-		{ Vector3D(0.5f,-0.5f,0.5f),    Vector3D(0,1,0), Vector3D(0,0.2f,0) },
-		{ Vector3D(0.5f,0.5f,0.5f),    Vector3D(0,1,1), Vector3D(0,0.2f,0.2f) },
-		{ Vector3D(-0.5f,0.5f,0.5f),   Vector3D(0,1,1),  Vector3D(0,0.2f,0.2f) },
-		{ Vector3D(-0.5f,-0.5f,0.5f),     Vector3D(0,1,0), Vector3D(0,0.2f,0) }
-
-	};
 
 	this->verterbuffer = GraphicsEngine::getInstance()->createVertexBuffer();
 	this->verterbuffer->load(&(this->vertices[0]), sizeof(vertex), this->vertices.size(), shaderByteCode, sizeShader);
 
-	UINT size_list = ARRAYSIZE(vertex_list);
-
-	unsigned int index_list[] =
-	{
-		//FRONT SIDE
-		0,1,2,  //FIRST TRIANGLE
-		2,3,0,  //SECOND TRIANGLE
-		//BACK SIDE
-		4,5,6,
-		6,7,4,
-		//TOP SIDE
-		1,6,5,
-		5,2,1,
-		//BOTTOM SIDE
-		7,0,3,
-		3,4,7,
-		//RIGHT SIDE
-		3,2,5,
-		5,4,3,
-		//LEFT SIDE
-		7,6,1,
-		1,0,7
-	};
+	
 
 	int k1, k2;
 
@@ -103,7 +65,6 @@ Sphere::Sphere(string name, void* shaderByteCode, size_t sizeShader):AGameObject
 	}
 
 	this->indexbuffer = GraphicsEngine::getInstance()->createIndexBuffer();
-	UINT size_index_list = ARRAYSIZE(index_list);
 
 	this->indexbuffer->load(&(this->indices[0]), this->indices.size());
 	constant cc;
