@@ -1,34 +1,32 @@
-
+#pragma once
+#include <iostream>
 #include "Matrix4x4.h"
 #include "Vector3D.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
-#include <iostream>
 
 using namespace std;
 
-struct vertex
-{
-	Vector3D position;
-	Vector3D color;
-	Vector3D color1;
-};
-
-__declspec(align(16))
-struct constant
-{
-	Matrix4x4 world;
-	Matrix4x4 view;
-	Matrix4x4 projection;
-	unsigned int time;
-};
-
-
-class VertexShader;
-class PixelShader;
 class AGameObject
 {
 public:
+	
+	struct vertex
+	{
+		Vector3D position;
+		Vector3D color;
+		Vector3D color1;
+	};
+
+	_declspec(align(16))
+		struct constant
+	{
+		Matrix4x4 world;
+		Matrix4x4 view;
+		Matrix4x4 projection;
+		unsigned int time;
+	};
+
 	AGameObject(string name);
 	~AGameObject();
 
@@ -47,7 +45,9 @@ public:
 	void setRotation(Vector3D rot);
 	Vector3D getLocalRotation();
 
-private:
+
+
+protected:
 	VertexShader* vertex_shader;
 	PixelShader* pixel_shader;
 	Vector3D Position;
@@ -55,4 +55,5 @@ private:
 	Vector3D Rotation;
 	string name;
 };
+
 

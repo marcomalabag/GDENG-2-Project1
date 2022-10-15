@@ -76,6 +76,9 @@
     <Filter Include="Primitives\3D\Plane">
       <UniqueIdentifier>{ff95557b-3c01-4df4-b608-97cdd661f3b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Primitives\3D\Sphere">
+      <UniqueIdentifier>{f20cf03c-10b3-434e-89db-3010b2fe3d85}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -138,6 +141,9 @@
     <ClCompile Include="Plane.cpp">
       <Filter>Primitives\3D\Plane</Filter>
     </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Primitives\3D\Sphere</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -196,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="Plane.h">
       <Filter>Primitives\3D\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Primitives\3D\Sphere</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

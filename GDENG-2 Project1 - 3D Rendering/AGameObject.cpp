@@ -1,5 +1,6 @@
 #include "AGameObject.h"
 
+
 AGameObject::AGameObject(string name)
 {
 	Vector3D temp;

@@ -46,14 +46,16 @@ void AppWindow::initializeEngine()
 	graphEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
 
 	this->vertexshader = graphEngine->createVertexShader(shader_byte_code, size_shader);
+
+	
 	
 	//Cube Initialization
-	/*
+	
 	int max = 1.5f;
 	int min = -2.5f;
 	Math math;
 
-	for(int i = 0; i < 100; i++)
+	for(int i = 0; i < 1; i++)
 	{
 		float x = math.getRandom(min, max);
 		float y = math.getRandom(-2.0, 1.0f);
@@ -63,11 +65,16 @@ void AppWindow::initializeEngine()
 		this->Cubes.at(i)->setScale(.25, .25, .25);
 		this->Cubes.at(i)->setPosition(x, y, 0.0f);
 		this->Cubes.at(i)->setAnimSpeed(speed);
+		
 	}
-	*/
+	
+	sphere = new Sphere("Sphere", shader_byte_code, size_shader);
+	sphere->setPosition(0, 0, 0);
+	sphere->setScale(.25, .25, .25);
+
 
 	//Cube and plane initialization
-	
+	/*
 	for (int i = 0; i < 1; i++)
 	{
 		this->Planes.push_back(new Plane("Plane", shader_byte_code, size_shader));
@@ -85,7 +92,7 @@ void AppWindow::initializeEngine()
 		this->Cubes.at(i)->setPosition(0.0f, 0.0f, 0.0f);
 		this->Cubes.at(i)->setAnimSpeed(0.0f);
 	}
-	
+	*/
 
 	graphEngine->releaseCompiledShader();
 
@@ -96,11 +103,7 @@ void AppWindow::initializeEngine()
 
 	graphEngine->releaseCompiledShader();
 
-	constant cc;
-	cc.time = 0;
-
-	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
-	this->constantbuffer->load(&cc, sizeof(constant));
+	
 
 }
 
@@ -113,16 +116,16 @@ void AppWindow::onUpdate()
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
 	//Cube drawing
-	/*
+	
 	for (int i = 0; i < Cubes.size(); i++)
 	{
 		Cubes.at(i)->update(EngineTime::getDeltaTime() * 1.0f);
 		Cubes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	}
-	*/
-
-	//Cube and plane initialization
+	sphere->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	
+	//Cube and plane initialization
+	/*
 	for (int i = 0; i < Planes.size(); i++)
 	{
 		Planes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
@@ -132,7 +135,7 @@ void AppWindow::onUpdate()
 	{
 		Cubes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	}
-	
+	*/
 	m_swap_chain->present(true);
 
 	

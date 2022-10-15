@@ -1,9 +1,35 @@
-#include "Cube.h"
+#include "Sphere.h"
 
-
-Cube::Cube(string name, void* shaderByteCode, size_t sizeShader):AGameObject(name)
+Sphere::Sphere(string name, void* shaderByteCode, size_t sizeShader):AGameObject(name)
 {
-	
+	float radius = 1.5f;
+	int stackCount = 12;
+	int sectorCount = 12;
+
+	float x, y, z, xy;
+	float pi = atan(1) * 4.0f;
+	float sectorStep = 2 * pi / (float)sectorCount;
+	float stackStep = pi / (float)stackCount;
+	float sectorAngle, stackAngle;
+
+	for(int i = 0; i <= stackCount; i++)
+	{
+		stackAngle = pi / 2.0f - i * stackStep;
+		xy = radius * cosf(stackAngle);
+		y = radius * sinf(stackAngle);
+
+		for(int j = 0; j <= sectorCount; j++)
+		{
+			sectorAngle = j * sectorStep;
+			z = xy * cosf(sectorAngle);
+			x = xy * sinf(sectorAngle);
+			
+			vertex vertexsector = { Vector3D(x, y, z), Vector3D(1,0,0),  Vector3D(0.2f,0,0) };
+			this->vertices.push_back(vertexsector);
+		}
+	}
+
+
 	vertex vertex_list[] =
 	{
 		//X - Y - Z
@@ -22,7 +48,7 @@ Cube::Cube(string name, void* shaderByteCode, size_t sizeShader):AGameObject(nam
 	};
 
 	this->verterbuffer = GraphicsEngine::getInstance()->createVertexBuffer();
-	this->verterbuffer->load(vertex_list, sizeof(vertex), ARRAYSIZE(vertex_list), shaderByteCode, sizeShader);
+	this->verterbuffer->load(&(this->vertices[0]), sizeof(vertex), this->vertices.size(), shaderByteCode, sizeShader);
 
 	UINT size_list = ARRAYSIZE(vertex_list);
 
@@ -48,29 +74,45 @@ Cube::Cube(string name, void* shaderByteCode, size_t sizeShader):AGameObject(nam
 		1,0,7
 	};
 
+	int k1, k2;
+
+	for(int i = 0; i < stackCount; i++)
+	{
+		k1 = i * (sectorCount + 1);
+		k2 = k1 + sectorCount + 1;
+
+		for(int j = 0; j < sectorCount; j++)
+		{
+			if (i != 0)
+			{
+				this->indices.push_back(k1);
+				this->indices.push_back(k1 + 1);
+				this->indices.push_back(k2);
+			}
+
+			if (i != (stackCount - 1))
+			{
+				this->indices.push_back(k1 + 1);
+				this->indices.push_back(k2 + 1);
+				this->indices.push_back(k2);
+			}
+
+			k1++;
+			k2++;
+		}
+	}
+
 	this->indexbuffer = GraphicsEngine::getInstance()->createIndexBuffer();
 	UINT size_index_list = ARRAYSIZE(index_list);
 
-	this->indexbuffer->load(index_list, size_index_list);
+	this->indexbuffer->load(&(this->indices[0]), this->indices.size());
 	constant cc;
 	cc.time = 0;
 	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
 	this->constantbuffer->load(&cc, sizeof(constant));
-	
 }
 
-void Cube::update(float deltaTime)
-{
-	this->ticks += deltaTime;
-
-	deltaPos += (this->deltaTime / 10.0f) * this->speed;
-
-	
-
-	this->setRotation(deltaPos, deltaPos, deltaPos);
-}
-
-void Cube::draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader)
+void Sphere::draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader)
 {
 	constant cc;
 	Matrix4x4 temp;
@@ -104,7 +146,7 @@ void Cube::draw(int width, int height, VertexShader* vertexshader, PixelShader* 
 		(width) / 300.0f,
 		(height) / 300.0f,
 		-4.0f,
-		4.0f
+		6.0f
 	);
 
 	this->constantbuffer->update(GraphicsEngine::getInstance()->getImmediateDeviceContext(), &cc);
@@ -123,18 +165,22 @@ void Cube::draw(int width, int height, VertexShader* vertexshader, PixelShader* 
 	this->oldDelta = this->newDelta;
 	this->newDelta += this->ticks;
 
-	this->deltaTime = (oldDelta) ? ((newDelta - oldDelta) / 1000.0f) : 0;
+	this->deltaTime = (oldDelta) ? ((newDelta - oldDelta) / 100.0f) : 0;
 }
 
-void Cube::setAnimSpeed(float speed)
+void Sphere::update(float deltaTime)
 {
-	this->speed = speed;
+	this->deltaTime = deltaTime;
 }
 
-Cube::~Cube()
+Sphere::~Sphere()
 {
 	this->constantbuffer->release();
 	this->indexbuffer->release();
 	this->verterbuffer->release();
 	AGameObject::~AGameObject();
 }
+
+
+
+

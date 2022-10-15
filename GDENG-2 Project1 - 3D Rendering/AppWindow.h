@@ -16,6 +16,10 @@
 #include "Cube.h"
 #include "Math.h"
 #include "Plane.h"
+#include "Sphere.h"
+
+
+
 
 
 class AppWindow : public Window
@@ -67,7 +71,8 @@ private:
 	std::vector<class Rectangle*> rectangle;
 	std::vector <class Cube*> Cubes;
 	std::vector <class Plane*> Planes;
-
+	
+	class Sphere* sphere;
 	Vector3D positions[3];
 	Vector3D TrianglePositions[3];
 };

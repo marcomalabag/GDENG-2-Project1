@@ -1,21 +1,18 @@
 #pragma once
 #include "AGameObject.h"
 #include "VertexBuffer.h"
-#include "ConstantBuffer.h"
 #include "IndexBuffer.h"
-#include "EngineTime.h"
+#include "ConstantBuffer.h"
+#include <vector>
 
-
-class Cube: public AGameObject
+class Sphere: public AGameObject
 {
 public:
-	Cube(string name, void* shaderByteCode, size_t sizeShader);
-	~Cube();
+	Sphere(string name, void* shaderByteCode, size_t sizeShader);
+	~Sphere();
 
-	void update(float deltaTime) override;
 	void draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader) override;
-	void setAnimSpeed(float speed);
-
+	void update(float deltaTime) override;
 
 private:
 	VertexBuffer* verterbuffer;
@@ -40,5 +37,7 @@ private:
 	Matrix4x4 Rotation;
 
 	Matrix4x4 RotationTotal;
+	std::vector<vertex> vertices;
+	std::vector<unsigned int> indices;
 };
 
