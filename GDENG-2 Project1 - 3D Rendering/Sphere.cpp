@@ -7,7 +7,7 @@ Sphere::Sphere(string name, void* shaderByteCode, size_t sizeShader):AGameObject
 	int sectorCount = 12;
 
 	float x, y, z, xy;
-	float pi = atan(1) * 4.0f;
+	float pi = 3.1415926;
 	float sectorStep = 2 * pi / (float)sectorCount;
 	float stackStep = pi / (float)stackCount;
 	float sectorAngle, stackAngle;
