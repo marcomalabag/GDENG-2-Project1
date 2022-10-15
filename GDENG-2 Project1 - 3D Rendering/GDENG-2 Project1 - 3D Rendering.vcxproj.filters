@@ -79,6 +79,9 @@
     <Filter Include="Primitives\3D\Sphere">
       <UniqueIdentifier>{f20cf03c-10b3-434e-89db-3010b2fe3d85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Primitives\3D\Cylinder">
+      <UniqueIdentifier>{2f73deaf-12c8-434a-9330-161c7aac5c01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -144,6 +147,9 @@
     <ClCompile Include="Sphere.cpp">
       <Filter>Primitives\3D\Sphere</Filter>
     </ClCompile>
+    <ClCompile Include="Cylinder.cpp">
+      <Filter>Primitives\3D\Cylinder</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -205,6 +211,9 @@
     </ClInclude>
     <ClInclude Include="Sphere.h">
       <Filter>Primitives\3D\Sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="Cylinder.h">
+      <Filter>Primitives\3D\Cylinder</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

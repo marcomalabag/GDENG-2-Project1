@@ -1,23 +1,22 @@
 #pragma once
 #include "AGameObject.h"
 #include "VertexBuffer.h"
-#include "IndexBuffer.h"
 #include "ConstantBuffer.h"
+#include "IndexBuffer.h"
 
-
-class Sphere: public AGameObject
+class Cylinder: public AGameObject
 {
 public:
-	Sphere(string name, void* shaderByteCode, size_t sizeShader);
-	~Sphere();
-
+	Cylinder(string name, void* ShaderByteCode, size_t SizeShader);
 	void draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader) override;
 	void update(float deltaTime) override;
+	~Cylinder();
 
 private:
 	VertexBuffer* verterbuffer;
 	IndexBuffer* indexbuffer;
 	ConstantBuffer* constantbuffer;
+
 	float ticks = 0.0f;
 	float deltaPos = 0.0f;
 	float deltaTime = 0.0f;
@@ -37,7 +36,11 @@ private:
 	Matrix4x4 Rotation;
 
 	Matrix4x4 RotationTotal;
-	std::vector<vertex> vertices;
-	std::vector<unsigned int> indices;
+
+	std::vector<vertex> Vertices;
+	std::vector<unsigned int> Indices;
+	std::vector<Vector3D> CircleVertices;
+	int BaseCenterIndex;
+	int TopCenterIndex;
 };
 

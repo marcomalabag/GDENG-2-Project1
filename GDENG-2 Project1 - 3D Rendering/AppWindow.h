@@ -17,7 +17,7 @@
 #include "Math.h"
 #include "Plane.h"
 #include "Sphere.h"
-
+#include "Cylinder.h"
 
 
 
@@ -73,6 +73,8 @@ private:
 	std::vector <class Plane*> Planes;
 	
 	class Sphere* sphere;
+	class Cylinder* cylinder;
+
 	Vector3D positions[3];
 	Vector3D TrianglePositions[3];
 };

@@ -4,6 +4,7 @@
 #include "Vector3D.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
+#include <vector>
 
 using namespace std;
 

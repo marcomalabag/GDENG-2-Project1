@@ -72,6 +72,11 @@ void AppWindow::initializeEngine()
 	sphere->setPosition(0, 0, 0);
 	sphere->setScale(.25, .25, .25);
 
+	this->cylinder = new Cylinder("Cylinder", shader_byte_code, size_shader);
+	this->cylinder->setPosition(1.25, .25, 0);
+	this->cylinder->setScale(.25, .25, .25);
+	this->cylinder->setRotation(45, 90, 45);
+
 
 	//Cube and plane initialization
 	/*
@@ -123,6 +128,7 @@ void AppWindow::onUpdate()
 		Cubes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	}
 	sphere->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
+	cylinder->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	
 	//Cube and plane initialization
 	/*
