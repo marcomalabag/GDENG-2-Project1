@@ -67,11 +67,12 @@ void AppWindow::initializeEngine()
 		this->Cubes.at(i)->setAnimSpeed(speed);
 		
 	}
-	
+	//Sphere initialization
 	sphere = new Sphere("Sphere", shader_byte_code, size_shader);
 	sphere->setPosition(0, 0, 0);
 	sphere->setScale(.25, .25, .25);
 
+	//Cylinder initialization
 	this->cylinder = new Cylinder("Cylinder", shader_byte_code, size_shader);
 	this->cylinder->setPosition(1.25, .25, 0);
 	this->cylinder->setScale(.25, .25, .25);
