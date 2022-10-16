@@ -3,11 +3,10 @@
 
 AGameObject::AGameObject(string name)
 {
-	Vector3D temp;
 	this->name = name;
-	this->Position = temp.zeros();
-	this->Rotation = temp.zeros();
-	this->Scale = temp.ones();
+	this->Position = Vector3D::zeros();
+	this->Rotation = Vector3D::zeros();
+	this->Scale = Vector3D::ones();
 }
 
 void AGameObject::setPosition(float x, float y, float z)

@@ -23,12 +23,12 @@ Vector3D::Vector3D(const Vector3D& vector)
 
 Vector3D Vector3D::zeros()
 {
-	return Vector3D(0, 0, 0);
+	return Vector3D(0.0f, 0.0f, 0.0f);
 }
 
 Vector3D Vector3D::ones()
 {
-	return Vector3D(1, 1, 1);
+	return Vector3D(1.0f, 1.0f, 1.0f);
 }
 
 
