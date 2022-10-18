@@ -20,6 +20,11 @@ public:
 
 	virtual void onKeyDown(int key) override;
 	virtual void onKeyUp(int key) override;
+	virtual void onMouseMove(const Point& deltaMousePos) override;
+	virtual void onLeftMouseDown(const Point& mousePosition) override;
+	virtual void onLeftMouseUp(const Point& mousePosition) override;
+	virtual void onRightMouseDown(const Point& mousePosition) override;
+	virtual void onRightMouseUp(const Point& mousePosition) override;
 
 
 private:

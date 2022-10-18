@@ -3,7 +3,7 @@
 
 Cube::Cube(string name, void* shaderByteCode, size_t sizeShader):AGameObject(name)
 {
-	InputSystem::getInstance()->addListener(this);
+	
 	vertex vertex_list[] =
 	{
 		//X - Y - Z
@@ -62,7 +62,7 @@ Cube::Cube(string name, void* shaderByteCode, size_t sizeShader):AGameObject(nam
 void Cube::update(float deltaTime)
 {
 	
-	InputSystem::getInstance()->update();
+	
 }
 
 void Cube::onKeyDown(int key)
@@ -96,6 +96,38 @@ void Cube::onKeyUp(int key)
 {
 }
 
+void Cube::onMouseMove(const Point& deltaMousePos)
+{
+	
+	this->rotation.x -= (deltaMousePos.y * EngineTime::getDeltaTime());
+	this->setRotationX(this->rotation.x);
+	
+
+	this->rotation.y -= (deltaMousePos.x * EngineTime::getDeltaTime());
+	this->setRotationY(this->rotation.y);
+}
+
+void Cube::onLeftMouseDown(const Point& mousePosition)
+{
+	
+	this->setScale(0.5f, 0.5f, 0.5f);
+}
+
+void Cube::onLeftMouseUp(const Point& mousePosition)
+{
+	this->setScale(1.0f, 1.0f, 1.0f);
+}
+
+void Cube::onRightMouseDown(const Point& mousePosition)
+{
+	this->setScale(2.0f, 2.0f, 2.0f);
+}
+
+void Cube::onRightMouseUp(const Point& mousePosition)
+{
+	this->setScale(1.0f, 1.0f, 1.0f);
+}
+
 void Cube::draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader)
 {
 	constant cc;
@@ -107,7 +139,7 @@ void Cube::draw(int width, int height, VertexShader* vertexshader, PixelShader* 
 
 	translate.setTranslation(this->getLocalPosition());
 	Scale.setScale(this->getLocalScale());
-	rotation = Vector3D(this->getLocalRotation());
+	this->rotation = Vector3D(this->getLocalRotation());
 
 	this->RotationZ.setIdentity();
 	this->RotationZ.setRotationZ(rotation.z);

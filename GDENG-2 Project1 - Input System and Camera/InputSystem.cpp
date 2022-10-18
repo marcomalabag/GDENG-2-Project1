@@ -49,17 +49,60 @@ void InputSystem::removeListener(InputListener* listener)
 
 void InputSystem::update()
 {
+	POINT currentMousePosition = {};
+	::GetCursorPos(&currentMousePosition);
+
+	if(this->firstTime)
+	{
+		this->firstTime = false;
+		this->oldMousePosition = Point(currentMousePosition.x, currentMousePosition.y);
+	}
+
+	if (currentMousePosition.x != oldMousePosition.x || currentMousePosition.y != oldMousePosition.y)
+	{
+		Point deltaPosition = Point(currentMousePosition.x - oldMousePosition.x, currentMousePosition.y - oldMousePosition.y);
+		this->callOnMouseMove(deltaPosition);
+	}
+
+	this->oldMousePosition = Point(currentMousePosition.x, currentMousePosition.y);
+
 	if(::GetKeyboardState(m_keys_state))
 	{
 		for(unsigned int i = 0; i < 256; i++)
 		{
-			if(m_keys_state[i] & 0x80)
+			if(m_keys_state[i] & 0x80 && m_keys_state[i] != m_old_keys_state[i])
 			{
-				this->callOnKeyDown(i);
+				if(i == VK_LBUTTON && m_keys_state[i] != m_old_keys_state[i])
+				{
+					Point deltaPosition = Point(currentMousePosition.x - oldMousePosition.x, currentMousePosition.y - oldMousePosition.y);
+					this->callOnLeftMouseDown(deltaPosition);
+				}
+				else if (i == VK_RBUTTON && m_keys_state[i] != m_old_keys_state[i])
+				{
+					Point deltaPosition = Point(currentMousePosition.x - oldMousePosition.x, currentMousePosition.y - oldMousePosition.y);
+					this->callOnRightMouseDown(deltaPosition);
+				}
+				else
+				{
+					this->callOnKeyDown(i);
+				}
 			}
-			else
+			else if(m_keys_state[i] != m_old_keys_state[i])
 			{
-				this->callOnKeyUp(i);
+				if (i == VK_LBUTTON && m_keys_state[i] != m_old_keys_state[i])
+				{
+					Point deltaPosition = Point(currentMousePosition.x - oldMousePosition.x, currentMousePosition.y - oldMousePosition.y);
+					this->callOnLeftMouseUp(deltaPosition);
+				}
+				else if (i == VK_RBUTTON && m_keys_state[i] != m_old_keys_state[i])
+				{
+					Point deltaPosition = Point(currentMousePosition.x - oldMousePosition.x, currentMousePosition.y - oldMousePosition.y);
+					this->callOnRightMouseUp(deltaPosition);
+				}
+				else
+				{
+					this->callOnKeyUp(i);
+				}
 			}
 
 		}
@@ -110,6 +153,46 @@ void InputSystem::callOnKeyUp(int key)
 	for (int i = 0; i < InputListeners.size(); i++)
 	{
 		InputListeners[i]->onKeyUp(key);
+	}
+}
+
+void InputSystem::callOnMouseMove(Point delta)
+{
+	for(int i = 0; i < InputListeners.size(); i++)
+	{
+		InputListeners[i]->onMouseMove(delta);
+	}
+}
+
+void InputSystem::callOnLeftMouseDown(Point delta)
+{
+	for (int i = 0; i < InputListeners.size(); i++)
+	{
+		InputListeners[i]->onLeftMouseDown(delta);
+	}
+}
+
+void InputSystem::callOnRightMouseDown(Point delta)
+{
+	for (int i = 0; i < InputListeners.size(); i++)
+	{
+		InputListeners[i]->onRightMouseDown(delta);
+	}
+}
+
+void InputSystem::callOnLeftMouseUp(Point delta)
+{
+	for (int i = 0; i < InputListeners.size(); i++)
+	{
+		InputListeners[i]->onLeftMouseUp(delta);
+	}
+}
+
+void InputSystem::callOnRightMouseUp(Point delta)
+{
+	for (int i = 0; i < InputListeners.size(); i++)
+	{
+		InputListeners[i]->onRightMouseUp(delta);
 	}
 }
 

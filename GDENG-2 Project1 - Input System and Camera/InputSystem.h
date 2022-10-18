@@ -24,13 +24,21 @@ public:
 	void callOnKeyDown(int key);
 	void callOnKeyUp(int key);
 
-	
+	void callOnMouseMove(Point delta);
+
+	void callOnLeftMouseDown(Point delta);
+	void callOnRightMouseDown(Point delta);
+
+	void callOnLeftMouseUp(Point delta);
+	void callOnRightMouseUp(Point delta);
 
 private:
 	static InputSystem* sharedInstance;
 	List InputListeners;
 	unsigned char m_keys_state[256] = {};
 	unsigned char m_old_keys_state[256] = {};
+	Point oldMousePosition;
+	bool firstTime = true;
 
 private:
 	InputSystem();

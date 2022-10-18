@@ -85,6 +85,9 @@
     <Filter Include="GameEngine\InputSystem">
       <UniqueIdentifier>{748d7c9f-f651-44b6-ad82-4be6d0c4100c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Math\Point">
+      <UniqueIdentifier>{5740c362-8232-40e9-96bc-ec1da95a43e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -156,6 +159,9 @@
     <ClCompile Include="InputSystem.cpp">
       <Filter>GameEngine\InputSystem</Filter>
     </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>GameEngine\Math\Point</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -226,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="InputListener.h">
       <Filter>GameEngine\InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>GameEngine\Math\Point</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

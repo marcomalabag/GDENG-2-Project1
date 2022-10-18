@@ -31,11 +31,20 @@ public:
 	void onUpdate() override;
 	void onDestroy() override;
 
-	void initializeEngine();
+	void onFocus() override;
+	void onKillFocus() override;
 
 	virtual void onKeyDown(int key) override;
 	virtual void onKeyUp(int key) override;
-	
+	virtual void onMouseMove(const Point& deltaMousePos) override;
+	virtual void onLeftMouseDown(const Point& mousePosition) override;
+	virtual void onLeftMouseUp(const Point& mousePosition) override;
+	virtual void onRightMouseDown(const Point& mousePosition) override;
+	virtual void onRightMouseUp(const Point& mousePosition) override;
+
+	void initializeEngine();
+
+
 
 public:
 	static void initialize();

@@ -20,14 +20,14 @@ void AppWindow::initialize()
 void AppWindow::onCreate()
 {
 	Window::onCreate();
-	
+	InputSystem::initialize();
 }
 
 void AppWindow::initializeEngine()
 {
 	GraphicsEngine::initialize();
 	EngineTime::initialize();
-	InputSystem::initialize();
+	
 
 	
 
@@ -117,30 +117,20 @@ void AppWindow::initializeEngine()
 
 }
 
-void AppWindow::onKeyDown(int key)
-{
-	
-
-}
-
-void AppWindow::onKeyUp(int key)
-{
-}
-
 void AppWindow::onUpdate()
 {
 	Window::onUpdate();
-
+	this->ticks += EngineTime::getDeltaTime() * 1.0f;
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->clearRenderTargetColor(this->m_swap_chain,
 		0, 0, 0.5, 0.5);
 	RECT rc = this->getClientWindowRect();
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
-
+	InputSystem::getInstance()->update();
 	//Cube drawing
 	
 	for (int i = 0; i < Cubes.size(); i++)
 	{
-		Cubes.at(i)->update(EngineTime::getDeltaTime());
+		Cubes[i]->update(ticks);
 		Cubes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	}
 	sphere->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
@@ -169,18 +159,66 @@ void AppWindow::onDestroy()
 	//this->vertexbuffer->release();
 	//this->indexbuffer->release();
 	//this->constantbuffer->release();
-	for(int i = 0; i < Cubes.size(); i++)
-	{
-		InputSystem::getInstance()->removeListener(Cubes[i]);
-	}
-
 	InputSystem::destroy();
-
 	m_swap_chain->release();
 	//this->vertexshader->release();
 	//this->pixelshader->release();
 	GraphicsEngine::getInstance()->release();
 	
+	
+}
+
+void AppWindow::onFocus()
+{
+	InputSystem::getInstance()->addListener(this);
+	for(int i = 0; i < this->Cubes.size(); i++)
+	{
+		InputSystem::getInstance()->addListener(Cubes[i]);
+	}
+}
+
+void AppWindow::onKillFocus()
+{
+	InputSystem::getInstance()->removeListener(this);
+	for (int i = 0; i < this->Cubes.size(); i++)
+	{
+		InputSystem::getInstance()->removeListener(Cubes[i]);
+	}
+}
+
+void AppWindow::onKeyDown(int key)
+{
+	
+
+}
+
+void AppWindow::onKeyUp(int key)
+{
+	
+}
+
+void AppWindow::onMouseMove(const Point& deltaMousePos)
+{
+	
+}
+
+void AppWindow::onLeftMouseDown(const Point& mousePosition)
+{
+	
+}
+
+void AppWindow::onLeftMouseUp(const Point& mousePosition)
+{
+	
+}
+
+void AppWindow::onRightMouseDown(const Point& mousePosition)
+{
+	
+}
+
+void AppWindow::onRightMouseUp(const Point& mousePosition)
+{
 	
 }
 
