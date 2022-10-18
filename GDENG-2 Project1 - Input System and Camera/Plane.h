@@ -8,6 +8,8 @@ public:
 	~Plane();
 
 	void draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader) override;
+	
+
 
 private:
 	VertexBuffer* verterbuffer;

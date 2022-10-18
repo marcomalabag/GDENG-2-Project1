@@ -3,7 +3,7 @@
 
 Cube::Cube(string name, void* shaderByteCode, size_t sizeShader):AGameObject(name)
 {
-	
+	InputSystem::getInstance()->addListener(this);
 	vertex vertex_list[] =
 	{
 		//X - Y - Z
@@ -61,19 +61,46 @@ Cube::Cube(string name, void* shaderByteCode, size_t sizeShader):AGameObject(nam
 
 void Cube::update(float deltaTime)
 {
-	this->ticks += deltaTime;
-
-	deltaPos += (this->deltaTime / 10.0f) * this->speed;
-
 	
+	InputSystem::getInstance()->update();
+}
 
-	this->setRotation(deltaPos, deltaPos, deltaPos);
+void Cube::onKeyDown(int key)
+{
+	if (key == 'W')
+	{
+		this->ticks += (EngineTime::getDeltaTime() * 3.14f);
+		this->setRotationX(this->ticks);
+	}
+	else if (key == 'S')
+	{
+		this->ticks -= (EngineTime::getDeltaTime() * 3.14f);
+		this->setRotationX(this->ticks);
+	}
+	else if (key == 'A')
+	{
+		this->ticks += (EngineTime::getDeltaTime() * 3.14f);
+		this->setRotationY(this->ticks);
+		
+	}
+	else if (key == 'D')
+	{
+		this->ticks -= (EngineTime::getDeltaTime() * 3.14f);
+		this->setRotationY(this->ticks);
+		
+	}
+	
+}
+
+void Cube::onKeyUp(int key)
+{
 }
 
 void Cube::draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader)
 {
 	constant cc;
 	Matrix4x4 temp;
+	
 
 	this->Summation.setIdentity();
 	this->Scale.setIdentity();
@@ -136,5 +163,6 @@ Cube::~Cube()
 	this->constantbuffer->release();
 	this->indexbuffer->release();
 	this->verterbuffer->release();
+	
 	AGameObject::~AGameObject();
 }

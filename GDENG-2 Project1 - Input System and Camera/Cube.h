@@ -4,9 +4,11 @@
 #include "ConstantBuffer.h"
 #include "IndexBuffer.h"
 #include "EngineTime.h"
+#include "InputListener.h"
+#include "InputSystem.h"
 
 
-class Cube: public AGameObject
+class Cube: public AGameObject, public InputListener
 {
 public:
 	Cube(string name, void* shaderByteCode, size_t sizeShader);
@@ -15,6 +17,9 @@ public:
 	void update(float deltaTime) override;
 	void draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader) override;
 	void setAnimSpeed(float speed);
+
+	virtual void onKeyDown(int key) override;
+	virtual void onKeyUp(int key) override;
 
 
 private:
@@ -27,6 +32,7 @@ private:
 	float oldDelta = 0.0f;
 	float newDelta = 0.0f;
 	float speed = 10.0f;
+	float rate = 3.14;
 
 	Vector3D rotation;
 
