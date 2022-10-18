@@ -27,6 +27,10 @@ void AppWindow::initializeEngine()
 {
 	GraphicsEngine::initialize();
 	EngineTime::initialize();
+	InputSystem::initialize();
+
+	InputSystem::getInstance()->addListener(this);
+
 	GraphicsEngine* graphEngine = GraphicsEngine::getInstance();
 
 
@@ -113,9 +117,44 @@ void AppWindow::initializeEngine()
 
 }
 
+void AppWindow::onKeyDown(int key)
+{
+	for (int i = 0; i < this->Cubes.size(); i++)
+	{
+		if (key == 'W')
+		{
+			this->ticks += (EngineTime::getDeltaTime() * 3.14f);
+			this->Cubes.at(i)->setRotation(this->ticks, 0.0f, 0.0f);
+		}
+		else if (key == 'S')
+		{
+			this->ticks -= (EngineTime::getDeltaTime() * 3.14f);
+			this->Cubes.at(i)->setRotation(this->ticks, 0.0f, 0.0f);
+		}
+		else if (key == 'A')
+		{
+			this->ticks += (EngineTime::getDeltaTime() * 3.14f);
+			this->Cubes.at(i)->setRotation(0.0f, this->ticks, 0.0f);
+		}
+		else if (key == 'D')
+		{
+			this->ticks -= (EngineTime::getDeltaTime() * 3.14f);
+			this->Cubes.at(i)->setRotation(0.0f, this->ticks, 0.0f);
+		}
+	}
+
+}
+
+void AppWindow::onKeyUp(int key)
+{
+}
+
 void AppWindow::onUpdate()
 {
 	Window::onUpdate();
+
+	InputSystem::getInstance()->update();
+
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->clearRenderTargetColor(this->m_swap_chain,
 		0, 0, 0.5, 0.5);
 	RECT rc = this->getClientWindowRect();
@@ -125,7 +164,7 @@ void AppWindow::onUpdate()
 	
 	for (int i = 0; i < Cubes.size(); i++)
 	{
-		Cubes.at(i)->update(EngineTime::getDeltaTime() * 1.0f);
+		//Cubes.at(i)->update(EngineTime::getDeltaTime() * 1.0f);
 		Cubes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	}
 	sphere->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);

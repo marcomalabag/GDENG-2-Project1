@@ -82,6 +82,9 @@
     <Filter Include="Primitives\3D\Cylinder">
       <UniqueIdentifier>{2f73deaf-12c8-434a-9330-161c7aac5c01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\InputSystem">
+      <UniqueIdentifier>{748d7c9f-f651-44b6-ad82-4be6d0c4100c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -150,6 +153,9 @@
     <ClCompile Include="Cylinder.cpp">
       <Filter>Primitives\3D\Cylinder</Filter>
     </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>GameEngine\InputSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -214,6 +220,12 @@
     </ClInclude>
     <ClInclude Include="Cylinder.h">
       <Filter>Primitives\3D\Cylinder</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>GameEngine\InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="InputListener.h">
+      <Filter>GameEngine\InputSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

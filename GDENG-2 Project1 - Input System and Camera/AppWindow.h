@@ -18,11 +18,12 @@
 #include "Plane.h"
 #include "Sphere.h"
 #include "Cylinder.h"
+#include "InputListener.h"
+#include "InputSystem.h"
 
 
 
-
-class AppWindow : public Window
+class AppWindow : public Window, public InputListener
 {
 public:
 
@@ -31,6 +32,9 @@ public:
 	void onDestroy() override;
 
 	void initializeEngine();
+
+	virtual void onKeyDown(int key) override;
+	virtual void onKeyUp(int key) override;
 	
 
 public:
