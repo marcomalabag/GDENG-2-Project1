@@ -29,7 +29,7 @@ void AppWindow::initializeEngine()
 	EngineTime::initialize();
 	
 
-	
+	InputSystem::getInstance()->showCursor(false);
 
 	GraphicsEngine* graphEngine = GraphicsEngine::getInstance();
 

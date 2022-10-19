@@ -88,6 +88,9 @@
     <Filter Include="GameEngine\Math\Point">
       <UniqueIdentifier>{5740c362-8232-40e9-96bc-ec1da95a43e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Math\Vector4D">
+      <UniqueIdentifier>{b9ec29d2-99bf-49f6-8edf-b20ba7cebd73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -162,6 +165,9 @@
     <ClCompile Include="Point.cpp">
       <Filter>GameEngine\Math\Point</Filter>
     </ClCompile>
+    <ClCompile Include="Vector4D.cpp">
+      <Filter>GameEngine\Math\Vector4D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -235,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="Point.h">
       <Filter>GameEngine\Math\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4D.h">
+      <Filter>GameEngine\Math\Vector4D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

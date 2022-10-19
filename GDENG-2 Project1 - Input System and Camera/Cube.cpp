@@ -3,7 +3,8 @@
 
 Cube::Cube(string name, void* shaderByteCode, size_t sizeShader):AGameObject(name)
 {
-	
+
+	this->m_world_cam.setTranslation(Vector3D(0, 0, -2));
 	vertex vertex_list[] =
 	{
 		//X - Y - Z
@@ -67,44 +68,54 @@ void Cube::update(float deltaTime)
 
 void Cube::onKeyDown(int key)
 {
+
 	if (key == 'W')
 	{
-		this->ticks += (EngineTime::getDeltaTime() * 3.14f);
-		this->setRotationX(this->ticks);
+		//this->ticks += (EngineTime::getDeltaTime() * 3.14f);
+		//this->setRotationX(this->ticks);
+		m_forward = 10.0f * EngineTime::getDeltaTime();
 	}
 	else if (key == 'S')
 	{
-		this->ticks -= (EngineTime::getDeltaTime() * 3.14f);
-		this->setRotationX(this->ticks);
+		//this->ticks -= (EngineTime::getDeltaTime() * 3.14f);
+		//this->setRotationX(this->ticks);
+		m_forward = -10.0f * EngineTime::getDeltaTime();
 	}
 	else if (key == 'A')
 	{
-		this->ticks += (EngineTime::getDeltaTime() * 3.14f);
-		this->setRotationY(this->ticks);
+		//this->ticks += (EngineTime::getDeltaTime() * 3.14f);
+		//this->setRotationY(this->ticks);
+		m_rightward = -10.0f * EngineTime::getDeltaTime();
 		
 	}
 	else if (key == 'D')
 	{
-		this->ticks -= (EngineTime::getDeltaTime() * 3.14f);
-		this->setRotationY(this->ticks);
-		
+		//this->ticks -= (EngineTime::getDeltaTime() * 3.14f);
+		//this->setRotationY(this->ticks);
+		m_rightward = 10.0f * EngineTime::getDeltaTime();
 	}
 	
 }
 
 void Cube::onKeyUp(int key)
 {
+	m_forward = 0.0f;
+	m_rightward = 0.0f;
 }
 
 void Cube::onMouseMove(const Point& deltaMousePos)
 {
 	
-	this->rotation.x -= (deltaMousePos.y * EngineTime::getDeltaTime());
+
+
+	this->rotation.x += (deltaMousePos.y - (this->h / 2.0f)) * EngineTime::getDeltaTime() * 0.1f;
 	this->setRotationX(this->rotation.x);
 	
 
-	this->rotation.y -= (deltaMousePos.x * EngineTime::getDeltaTime());
+	this->rotation.y += (deltaMousePos.x - (this->w / 2.0f)) * EngineTime::getDeltaTime() * 0.1f;
 	this->setRotationY(this->rotation.y);
+
+	InputSystem::getInstance()->setCursorPosition(Point((int)(this->w / 2.0f), (int)(this->h / 2.0f)));
 }
 
 void Cube::onLeftMouseDown(const Point& mousePosition)
@@ -132,8 +143,11 @@ void Cube::draw(int width, int height, VertexShader* vertexshader, PixelShader* 
 {
 	constant cc;
 	Matrix4x4 temp;
-	
 
+	this->w = width;
+	this->h = height;
+
+	/*
 	this->Summation.setIdentity();
 	this->Scale.setIdentity();
 
@@ -156,7 +170,32 @@ void Cube::draw(int width, int height, VertexShader* vertexshader, PixelShader* 
 	this->Summation = this->Summation.mulMatrix(this->translate);
 	cc.world = this->Summation;
 
-	cc.view.setIdentity();
+	*/
+
+	cc.world.setIdentity();
+
+	Matrix4x4 world_cam;
+	world_cam.setIdentity();
+
+
+	temp.setIdentity();
+	temp.setRotationX(this->getLocalRotation().x);
+	world_cam *= temp;
+
+	temp.setIdentity();
+	temp.setRotationY(this->getLocalRotation().y);
+	world_cam *= temp;
+
+	Vector3D new_pos = m_world_cam.getTranslation() + world_cam.getZDirection() * (m_forward * 0.1f);
+	new_pos = new_pos + world_cam.getXDirection() * (m_rightward * 0.1f);
+
+	world_cam.setTranslation(new_pos);
+
+	m_world_cam = world_cam;
+
+	world_cam.getInverse();
+
+	cc.view = world_cam;
 
 	cc.projection.setOrthoLH
 	(
@@ -165,6 +204,11 @@ void Cube::draw(int width, int height, VertexShader* vertexshader, PixelShader* 
 		-4.0f,
 		4.0f
 	);
+
+	cc.projection.setPerspectiveFovLH(1.57f,
+		(float)(width / (float)height),
+		0.1f,
+		100.0f);
 
 	this->constantbuffer->update(GraphicsEngine::getInstance()->getImmediateDeviceContext(), &cc);
 

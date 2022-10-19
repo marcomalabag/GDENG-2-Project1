@@ -18,6 +18,9 @@ public:
 	void removeListener(InputListener* listener);
 	void update();
 
+	void setCursorPosition(const Point& position);
+	void showCursor(bool show);
+
 	bool isKeyDown(int key);
 	bool isKeyUp(int key);
 

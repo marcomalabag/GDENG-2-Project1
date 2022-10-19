@@ -60,7 +60,7 @@ void InputSystem::update()
 
 	if (currentMousePosition.x != oldMousePosition.x || currentMousePosition.y != oldMousePosition.y)
 	{
-		Point deltaPosition = Point(currentMousePosition.x - oldMousePosition.x, currentMousePosition.y - oldMousePosition.y);
+		Point deltaPosition = Point(currentMousePosition.x, currentMousePosition.y);
 		this->callOnMouseMove(deltaPosition);
 	}
 
@@ -108,6 +108,16 @@ void InputSystem::update()
 		}
 		::memcpy(m_old_keys_state, m_keys_state, sizeof(unsigned char) * 256);
 	}
+}
+
+void InputSystem::setCursorPosition(const Point& position)
+{
+	::SetCursorPos(position.x, position.y);
+}
+
+void InputSystem::showCursor(bool show)
+{
+	::ShowCursor(show);
 }
 
 bool InputSystem::isKeyDown(int key)

@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include "Vector3D.h"
+#include "Vector4D.h"
 
 class Matrix4x4
 {
@@ -12,6 +13,12 @@ public:
 	void setRotationX(float x);
 	void setRotationY(float y);
 	void setRotationZ(float z);
+	void setPerspectiveFovLH(float fov, float aspect, float znear, float zfar);
+	Vector3D getXDirection();
+	Vector3D getZDirection();
+	Vector3D getTranslation();
+	float getDeterminant();
+	void getInverse();
 	void operator*=(const Matrix4x4& matrix);
 	void setMatrix(const Matrix4x4& matrix);
 	Matrix4x4 getScalar(int constant);

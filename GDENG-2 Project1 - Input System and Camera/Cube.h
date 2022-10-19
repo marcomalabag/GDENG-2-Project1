@@ -6,6 +6,7 @@
 #include "EngineTime.h"
 #include "InputListener.h"
 #include "InputSystem.h"
+#include "Matrix4x4.h"
 
 
 class Cube: public AGameObject, public InputListener
@@ -51,5 +52,11 @@ private:
 	Matrix4x4 Rotation;
 
 	Matrix4x4 RotationTotal;
+
+	float m_forward = 0.0f;
+	float m_rightward = 0.0f;
+	Matrix4x4 m_world_cam;
+	int w, h;
+	
 };
 

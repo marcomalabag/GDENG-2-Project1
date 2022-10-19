@@ -15,7 +15,7 @@ void Matrix4x4::setIdentity()
 
 void Matrix4x4::setTranslation(const Vector3D& translation)
 {
-	setIdentity();
+	
 	Matrix[3][0] = translation.x;
 	Matrix[3][1] = translation.y;
 	Matrix[3][2] = translation.z;
@@ -23,7 +23,7 @@ void Matrix4x4::setTranslation(const Vector3D& translation)
 
 void Matrix4x4::setScale(const Vector3D& scale)
 {
-	setIdentity();
+	
 	Matrix[0][0] = scale.x;
 	Matrix[1][1] = scale.y;
 	Matrix[2][2] = scale.z;
@@ -53,6 +53,56 @@ void Matrix4x4::setRotationZ(float z)
 	Matrix[1][1] = cos(z);
 }
 
+float Matrix4x4::getDeterminant()
+{
+	Vector4D minor, v1, v2, v3;
+	float det;
+
+	v1 = Vector4D(this->Matrix[0][0], this->Matrix[1][0], this->Matrix[2][0], this->Matrix[3][0]);
+	v2 = Vector4D(this->Matrix[0][1], this->Matrix[1][1], this->Matrix[2][1], this->Matrix[3][1]);
+	v3 = Vector4D(this->Matrix[0][2], this->Matrix[1][2], this->Matrix[2][2], this->Matrix[3][2]);
+
+
+	minor.cross(v1, v2, v3);
+	det = -(this->Matrix[0][3] * minor.m_x + this->Matrix[1][3] * minor.m_y + this->Matrix[2][3] * minor.m_z +
+		this->Matrix[3][3] * minor.m_w);
+	return det;
+}
+
+void Matrix4x4::getInverse()
+{
+	int a, i, j;
+	Matrix4x4 out;
+	Vector4D v, vec[3];
+	float det = 0.0f;
+
+	det = this->getDeterminant();
+	if (!det) return;
+	for (i = 0; i < 4; i++)
+	{
+		for (j = 0; j < 4; j++)
+		{
+			if (j != i)
+			{
+				a = j;
+				if (j > i) a = a - 1;
+				vec[a].m_x = (this->Matrix[j][0]);
+				vec[a].m_y = (this->Matrix[j][1]);
+				vec[a].m_z = (this->Matrix[j][2]);
+				vec[a].m_w = (this->Matrix[j][3]);
+			}
+		}
+		v.cross(vec[0], vec[1], vec[2]);
+
+		out.Matrix[0][i] = pow(-1.0f, i) * v.m_x / det;
+		out.Matrix[1][i] = pow(-1.0f, i) * v.m_y / det;
+		out.Matrix[2][i] = pow(-1.0f, i) * v.m_z / det;
+		out.Matrix[3][i] = pow(-1.0f, i) * v.m_w / det;
+	}
+
+	this->setMatrix(out);
+}
+
 void Matrix4x4::operator*=(const Matrix4x4& matrix)
 {
 	Matrix4x4 out;
@@ -70,6 +120,34 @@ void Matrix4x4::setMatrix(const Matrix4x4& matrix)
 {
 	::memcpy(Matrix, matrix.Matrix, sizeof(float) * 16);
 }
+
+
+Vector3D Matrix4x4::getXDirection()
+{
+	return Vector3D(Matrix[0][0], Matrix[0][1], Matrix[0][2]);
+}
+
+Vector3D Matrix4x4::getZDirection()
+{
+	return Vector3D(Matrix[2][0], Matrix[2][1], Matrix[2][2]);
+}
+
+Vector3D Matrix4x4::getTranslation()
+{
+	return Vector3D(Matrix[3][0], Matrix[3][1], Matrix[3][2]);
+}
+
+void Matrix4x4::setPerspectiveFovLH(float fov, float aspect, float znear, float zfar)
+{
+	float yscale = 1.0f / tan(fov / 2.0f);
+	float xscale = yscale / aspect;
+	Matrix[0][0] = xscale;
+	Matrix[1][1] = yscale;
+	Matrix[2][2] = zfar / (zfar - znear);
+	Matrix[2][3] = 1.0f;
+	Matrix[3][2] = (-znear * zfar) / (zfar - znear);
+}
+
 
 Matrix4x4 Matrix4x4::getScalar(int constant)
 {
