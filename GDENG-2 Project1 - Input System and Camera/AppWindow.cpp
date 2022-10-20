@@ -27,7 +27,7 @@ void AppWindow::initializeEngine()
 {
 	GraphicsEngine::initialize();
 	EngineTime::initialize();
-	
+	SceneCameraHandler::initialize();
 
 	InputSystem::getInstance()->showCursor(false);
 
@@ -59,7 +59,7 @@ void AppWindow::initializeEngine()
 	int min = -2.5f;
 	Math math;
 
-	for(int i = 0; i < 1; i++)
+	for(int i = 0; i < 10; i++)
 	{
 		float x = math.getRandom(min, max);
 		float y = math.getRandom(-2.0, 1.0f);
@@ -67,20 +67,20 @@ void AppWindow::initializeEngine()
 		float speed = math.getRandom(1.0f, 25.0f);
 		this->Cubes.push_back(new Cube("Cube", shader_byte_code, size_shader));
 		this->Cubes.at(i)->setScale(.25, .25, .25);
-		this->Cubes.at(i)->setPosition(x, y, 0.0f);
+		this->Cubes.at(i)->setPosition(x, y, 1.0f);
 		this->Cubes.at(i)->setAnimSpeed(speed);
 		
 	}
 	//Sphere initialization
-	sphere = new Sphere("Sphere", shader_byte_code, size_shader);
-	sphere->setPosition(0, 0, 0);
-	sphere->setScale(.25, .25, .25);
+	//sphere = new Sphere("Sphere", shader_byte_code, size_shader);
+	//sphere->setPosition(0, 0, 0);
+	//sphere->setScale(.25, .25, .25);
 
 	//Cylinder initialization
-	this->cylinder = new Cylinder("Cylinder", shader_byte_code, size_shader);
-	this->cylinder->setPosition(1.25, .25, 0);
-	this->cylinder->setScale(.25, .25, .25);
-	this->cylinder->setRotation(45, 90, 45);
+	//this->cylinder = new Cylinder("Cylinder", shader_byte_code, size_shader);
+	//this->cylinder->setPosition(1.25, .25, 0);
+	//this->cylinder->setScale(.25, .25, .25);
+	//this->cylinder->setRotation(45, 90, 45);
 
 
 	//Cube and plane initialization
@@ -125,16 +125,20 @@ void AppWindow::onUpdate()
 		0, 0, 0.5, 0.5);
 	RECT rc = this->getClientWindowRect();
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
+
 	InputSystem::getInstance()->update();
-	//Cube drawing
 	
+	//Cube drawing
+
+
 	for (int i = 0; i < Cubes.size(); i++)
 	{
-		Cubes[i]->update(ticks);
+		
+		//Cubes[i]->update(ticks);
 		Cubes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	}
-	sphere->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
-	cylinder->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
+	//sphere->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
+	//cylinder->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	
 	//Cube and plane initialization
 	/*
@@ -148,6 +152,8 @@ void AppWindow::onUpdate()
 		Cubes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	}
 	*/
+
+	SceneCameraHandler::getInstance()->update();
 	m_swap_chain->present(true);
 
 	
@@ -171,19 +177,11 @@ void AppWindow::onDestroy()
 void AppWindow::onFocus()
 {
 	InputSystem::getInstance()->addListener(this);
-	for(int i = 0; i < this->Cubes.size(); i++)
-	{
-		InputSystem::getInstance()->addListener(Cubes[i]);
-	}
 }
 
 void AppWindow::onKillFocus()
 {
 	InputSystem::getInstance()->removeListener(this);
-	for (int i = 0; i < this->Cubes.size(); i++)
-	{
-		InputSystem::getInstance()->removeListener(Cubes[i]);
-	}
 }
 
 void AppWindow::onKeyDown(int key)

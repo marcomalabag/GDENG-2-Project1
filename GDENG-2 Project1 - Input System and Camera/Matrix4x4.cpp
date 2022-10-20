@@ -139,6 +139,7 @@ Vector3D Matrix4x4::getTranslation()
 
 void Matrix4x4::setPerspectiveFovLH(float fov, float aspect, float znear, float zfar)
 {
+	setIdentity();
 	float yscale = 1.0f / tan(fov / 2.0f);
 	float xscale = yscale / aspect;
 	Matrix[0][0] = xscale;

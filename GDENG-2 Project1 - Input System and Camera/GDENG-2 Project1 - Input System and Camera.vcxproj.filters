@@ -91,6 +91,15 @@
     <Filter Include="GameEngine\Math\Vector4D">
       <UniqueIdentifier>{b9ec29d2-99bf-49f6-8edf-b20ba7cebd73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CameraSystem">
+      <UniqueIdentifier>{780a2e21-b153-46ef-93a3-5b76aeffdaad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CameraSystem\Camera">
+      <UniqueIdentifier>{f5aafc50-0e35-490a-8c29-0c6758a2a86c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CameraSystem\SceneCameraHandler">
+      <UniqueIdentifier>{9031bc94-d2b8-49f8-a457-00eebced1e99}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -168,6 +177,12 @@
     <ClCompile Include="Vector4D.cpp">
       <Filter>GameEngine\Math\Vector4D</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>CameraSystem\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneCameraHandler.cpp">
+      <Filter>CameraSystem\SceneCameraHandler</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -244,6 +259,12 @@
     </ClInclude>
     <ClInclude Include="Vector4D.h">
       <Filter>GameEngine\Math\Vector4D</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>CameraSystem\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneCameraHandler.h">
+      <Filter>CameraSystem\SceneCameraHandler</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

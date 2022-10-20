@@ -20,7 +20,7 @@
 #include "Cylinder.h"
 #include "InputListener.h"
 #include "InputSystem.h"
-
+#include "SceneCameraHandler.h"
 
 
 class AppWindow : public Window, public InputListener

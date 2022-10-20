@@ -7,9 +7,10 @@
 #include "InputListener.h"
 #include "InputSystem.h"
 #include "Matrix4x4.h"
+#include "SceneCameraHandler.h"
 
 
-class Cube: public AGameObject, public InputListener
+class Cube: public AGameObject
 {
 public:
 	Cube(string name, void* shaderByteCode, size_t sizeShader);
@@ -18,14 +19,6 @@ public:
 	void update(float deltaTime) override;
 	void draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader) override;
 	void setAnimSpeed(float speed);
-
-	virtual void onKeyDown(int key) override;
-	virtual void onKeyUp(int key) override;
-	virtual void onMouseMove(const Point& deltaMousePos) override;
-	virtual void onLeftMouseDown(const Point& mousePosition) override;
-	virtual void onLeftMouseUp(const Point& mousePosition) override;
-	virtual void onRightMouseDown(const Point& mousePosition) override;
-	virtual void onRightMouseUp(const Point& mousePosition) override;
 
 
 private:
