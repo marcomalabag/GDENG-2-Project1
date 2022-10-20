@@ -60,7 +60,7 @@ void InputSystem::update()
 
 	if (currentMousePosition.x != oldMousePosition.x || currentMousePosition.y != oldMousePosition.y)
 	{
-		Point deltaPosition = Point(currentMousePosition.x, currentMousePosition.y);
+		Point deltaPosition = Point(currentMousePosition.x - oldMousePosition.x, currentMousePosition.y - oldMousePosition.y);
 		this->callOnMouseMove(deltaPosition);
 	}
 

@@ -3,6 +3,7 @@
 #include "VertexBuffer.h"
 #include "ConstantBuffer.h"
 #include "IndexBuffer.h"
+#include "SceneCameraHandler.h"
 
 class Cylinder: public AGameObject
 {

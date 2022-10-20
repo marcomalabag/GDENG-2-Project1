@@ -3,6 +3,7 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "ConstantBuffer.h"
+#include "SceneCameraHandler.h"
 
 
 class Sphere: public AGameObject

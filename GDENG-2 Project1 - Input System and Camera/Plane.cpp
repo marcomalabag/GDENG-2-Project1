@@ -4,10 +4,17 @@ Plane::Plane(string name, void* shaderByteCode, size_t sizeShader): Cube(name, s
 {
 	vertex vertex_list[] =
 	{
-		{Vector3D(-0.5f,-0.5f,-0.5f),    Vector3D(1,1,1),  Vector3D(1,1,1) },
-		{Vector3D(-0.5f,0.5f,-0.5f),    Vector3D(1,1,1), Vector3D(1,1,1) },
-		{ Vector3D(0.5f,0.5f,-0.5f),   Vector3D(1,1,1),  Vector3D(1,1,1) },
-		{ Vector3D(0.5f,-0.5f,-0.5f),     Vector3D(1,1,1), Vector3D(1,1,1) },
+		//X - Y - Z
+		//FRONT FACE
+		{Vector3D(-0.5f,-0.01f,-0.5f),    Vector3D(1,1,1)},
+		{Vector3D(-0.5f,0.01f,-0.5f),    Vector3D(1,1,1)},
+		{ Vector3D(0.5f,0.01f,-0.5f),   Vector3D(1,1,1)},
+		{ Vector3D(0.5f,-0.01f,-0.5f),     Vector3D(1,1,1)},
+		//BACK FACE
+		{ Vector3D(0.5f,-0.01f,0.5f),    Vector3D(1,1,1)},
+		{ Vector3D(0.5f,0.01f,0.5f),    Vector3D(1,1,1)},
+		{ Vector3D(-0.5f,0.01f,0.5f),   Vector3D(1,1,1)},
+		{ Vector3D(-0.5f,-0.01f,0.5f),     Vector3D(1,1,1)}
 	};
 
 	this->verterbuffer = GraphicsEngine::getInstance()->createVertexBuffer();
@@ -19,7 +26,22 @@ Plane::Plane(string name, void* shaderByteCode, size_t sizeShader): Cube(name, s
 	{
 		//FRONT SIDE
 		0,1,2,  //FIRST TRIANGLE
-		2,3,0  //SECOND TRIANGLE
+		2,3,0,  //SECOND TRIANGLE
+		//BACK SIDE
+		4,5,6,
+		6,7,4,
+		//TOP SIDE
+		1,6,5,
+		5,2,1,
+		//BOTTOM SIDE
+		7,0,3,
+		3,4,7,
+		//RIGHT SIDE
+		3,2,5,
+		5,4,3,
+		//LEFT SIDE
+		7,6,1,
+		1,0,7
 	};
 
 	this->indexbuffer = GraphicsEngine::getInstance()->createIndexBuffer();
@@ -38,6 +60,7 @@ void Plane::draw(int width, int height, VertexShader* vertexshader, PixelShader*
 	Matrix4x4 temp;
 
 	this->Summation.setIdentity();
+	this->translate.setIdentity();
 	this->Scale.setIdentity();
 
 	translate.setTranslation(this->getLocalPosition());
@@ -59,15 +82,21 @@ void Plane::draw(int width, int height, VertexShader* vertexshader, PixelShader*
 	this->Summation = this->Summation.mulMatrix(this->translate);
 	cc.world = this->Summation;
 
-	cc.view.setIdentity();
+	Matrix4x4 cameraMatrix = SceneCameraHandler::getInstance()->getSceneCameraViewMatrix();
+	cc.view = cameraMatrix;
 
+	/*
 	cc.projection.setOrthoLH
 	(
-		(width) / 300.0f,
-		(height) ,
+		width / 300.0f,
+		height / 300.0f,
 		-4.0f,
 		4.0f
 	);
+	*/
+	float aspectRatio = (float)width / (float)height;
+
+	cc.projection.setPerspectiveFovLH(aspectRatio, aspectRatio, 0.1f, 1000.0f);
 
 	this->constantbuffer->update(GraphicsEngine::getInstance()->getImmediateDeviceContext(), &cc);
 

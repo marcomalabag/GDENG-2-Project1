@@ -127,6 +127,7 @@ void Cylinder::draw(int width, int height, VertexShader* vertexshader, PixelShad
 	Matrix4x4 temp;
 
 	this->Summation.setIdentity();
+	this->translate.setIdentity();
 	this->Scale.setIdentity();
 
 	translate.setTranslation(this->getLocalPosition());
@@ -148,15 +149,21 @@ void Cylinder::draw(int width, int height, VertexShader* vertexshader, PixelShad
 	this->Summation = this->Summation.mulMatrix(this->translate);
 	cc.world = this->Summation;
 
-	cc.view.setIdentity();
+	Matrix4x4 cameraMatrix = SceneCameraHandler::getInstance()->getSceneCameraViewMatrix();
+	cc.view = cameraMatrix;
 
+	/*
 	cc.projection.setOrthoLH
 	(
-		(width) / 300.0f,
-		(height) / 300.0f,
+		width / 300.0f,
+		height / 300.0f,
 		-4.0f,
-		6.0f
+		4.0f
 	);
+	*/
+	float aspectRatio = (float)width / (float)height;
+
+	cc.projection.setPerspectiveFovLH(aspectRatio, aspectRatio, 0.1f, 1000.0f);
 
 	this->constantbuffer->update(GraphicsEngine::getInstance()->getImmediateDeviceContext(), &cc);
 

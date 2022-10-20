@@ -72,37 +72,29 @@ void AppWindow::initializeEngine()
 		
 	}
 	//Sphere initialization
-	//sphere = new Sphere("Sphere", shader_byte_code, size_shader);
-	//sphere->setPosition(0, 0, 0);
-	//sphere->setScale(.25, .25, .25);
+	sphere = new Sphere("Sphere", shader_byte_code, size_shader);
+	sphere->setPosition(0, 0, 1.0f);
+	sphere->setScale(.25, .25, .25);
 
 	//Cylinder initialization
-	//this->cylinder = new Cylinder("Cylinder", shader_byte_code, size_shader);
-	//this->cylinder->setPosition(1.25, .25, 0);
-	//this->cylinder->setScale(.25, .25, .25);
-	//this->cylinder->setRotation(45, 90, 45);
+	this->cylinder = new Cylinder("Cylinder", shader_byte_code, size_shader);
+	this->cylinder->setPosition(1.25, .25, 1.0f);
+	this->cylinder->setScale(.25, .25, .25);
+	this->cylinder->setRotation(45, 90, 45);
 
 
-	//Cube and plane initialization
-	/*
+	//plane initialization
+	
 	for (int i = 0; i < 1; i++)
 	{
 		this->Planes.push_back(new Plane("Plane", shader_byte_code, size_shader));
 		this->Planes.at(i)->setScale(3.0, 0.01, 1.1);
-		this->Planes.at(i)->setPosition(0.0f, 0.0f, 0.0f);
+		this->Planes.at(i)->setPosition(0.0f, 0.0f, 1.0f);
 		
 		this->Planes.at(i)->setAnimSpeed(0.0f);
 	}
 
-	for (int i = 0; i < 1; i++)
-	{
-		
-		this->Cubes.push_back(new Cube("Cube", shader_byte_code, size_shader));
-		this->Cubes.at(i)->setScale(.25, .25, .25);
-		this->Cubes.at(i)->setPosition(0.0f, 0.0f, 0.0f);
-		this->Cubes.at(i)->setAnimSpeed(0.0f);
-	}
-	*/
+	
 
 	graphEngine->releaseCompiledShader();
 
@@ -134,24 +126,21 @@ void AppWindow::onUpdate()
 	for (int i = 0; i < Cubes.size(); i++)
 	{
 		
-		//Cubes[i]->update(ticks);
+		Cubes[i]->update(ticks);
 		Cubes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	}
-	//sphere->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
-	//cylinder->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
+	sphere->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
+	cylinder->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	
 	//Cube and plane initialization
-	/*
+	
 	for (int i = 0; i < Planes.size(); i++)
 	{
 		Planes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	}
 
-	for (int i = 0; i < Cubes.size(); i++)
-	{
-		Cubes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
-	}
-	*/
+	
+	
 
 	SceneCameraHandler::getInstance()->update();
 	m_swap_chain->present(true);
