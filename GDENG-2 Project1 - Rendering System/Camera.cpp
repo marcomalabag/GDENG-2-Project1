@@ -10,6 +10,7 @@ Camera::Camera(string name):AGameObject(name)
 
 void Camera::updateViewMatrix()
 {
+
 	Matrix4x4 worldCam;
 	worldCam.setIdentity();
 
@@ -28,40 +29,110 @@ void Camera::updateViewMatrix()
 	worldCam = worldCam.mulMatrix(temp);
 
 	worldCam.getInverse();
+	
 	this->LocalMatrix = worldCam;
+}
+
+void Camera::defaultmode(float rate, float x, float y, float z)
+{
+	if (InputSystem::getInstance()->isKeyDown('W')) {
+		z += rate;
+		this->setPosition(x, y, z);
+		this->updateViewMatrix();
+	}
+	else if (InputSystem::getInstance()->isKeyDown('S')) {
+		z -= rate;
+		this->setPosition(x, y, z);
+		this->updateViewMatrix();
+	}
+	else if (InputSystem::getInstance()->isKeyDown('A')) {
+		x -= rate;
+		this->setPosition(x, y, z);
+		this->updateViewMatrix();
+	}
+	else if (InputSystem::getInstance()->isKeyDown('D')) {
+		x += rate;
+		this->setPosition(x, y, z);
+		this->updateViewMatrix();
+	}
+}
+
+void Camera::AerialMode(float rate, float x, float y, float z)
+{
+	if (InputSystem::getInstance()->isKeyDown('W')) {
+		y += rate;
+		this->setPosition(x, y, z);
+		this->updateViewMatrix();
+	}
+	else if (InputSystem::getInstance()->isKeyDown('S')) {
+		y -= rate;
+		this->setPosition(x, y, z);
+		this->updateViewMatrix();
+	}
+	else if (InputSystem::getInstance()->isKeyDown('A')) {
+		x -= rate;
+		this->setPosition(x, y, z);
+		this->updateViewMatrix();
+	}
+	else if (InputSystem::getInstance()->isKeyDown('D')) {
+		x += rate;
+		this->setPosition(x, y, z);
+		this->updateViewMatrix();
+	}
+}
+
+void Camera::RightViewMode(float rate, float x, float y, float z)
+{
+	if (InputSystem::getInstance()->isKeyDown('W')) {
+		x += rate;
+		this->setPosition(x, y, z);
+		this->updateViewMatrix();
+	}
+	else if (InputSystem::getInstance()->isKeyDown('S')) {
+		x -= rate;
+		this->setPosition(x, y, z);
+		this->updateViewMatrix();
+	}
+	else if (InputSystem::getInstance()->isKeyDown('A')) {
+		z += rate;
+		this->setPosition(x, y, z);
+		this->updateViewMatrix();
+	}
+	else if (InputSystem::getInstance()->isKeyDown('D')) {
+		z -= rate;
+		this->setPosition(x, y, z);
+		this->updateViewMatrix();
+	}
 }
 
 void Camera::update(float deltaTime)
 {
-	Vector3D localPosition = this->getLocalPosition();
-	float x = localPosition.x;
-	float y = localPosition.y;
-	float z = localPosition.z;
+	Vector3D localPos = this->getLocalPosition();
+	float x = localPos.x;
+	float y = localPos.y;
+	float z = localPos.z;
 	float moveSpeed = 10.0f;
 
-	if(InputSystem::getInstance()->isKeyDown('W'))
-	{
-		z += deltaTime * moveSpeed;
-		this->setPosition(x, y, z);
-		this->updateViewMatrix();
+	if (defaultBool) {
+		this->defaultmode(deltaTime * moveSpeed, x, y, z);
 	}
-	else if (InputSystem::getInstance()->isKeyDown('S'))
-	{
-		z -= deltaTime * moveSpeed;
-		this->setPosition(x, y, z);
-		this->updateViewMatrix();
+	
+	if (this->getLocalRotation().y >= 0.05f) {
+		defaultBool = false;
+		this->RightViewMode(deltaTime * moveSpeed, x, y, z);
 	}
-	else if (InputSystem::getInstance()->isKeyDown('A'))
-	{
-		x -= deltaTime * moveSpeed;
-		this->setPosition(x, y, z);
-		this->updateViewMatrix();
+
+	else {
+		defaultBool = true;
 	}
-	else if (InputSystem::getInstance()->isKeyDown('D'))
-	{
-		x += deltaTime * moveSpeed;
-		this->setPosition(x, y, z);
-		this->updateViewMatrix();
+
+	if (this->getLocalRotation().x <= -0.05) {
+		defaultBool = false;
+		this->AerialMode(deltaTime * moveSpeed, x, y, z);
+	}
+
+	else {
+		defaultBool = true;
 	}
 }
 
@@ -74,8 +145,28 @@ Matrix4x4 Camera::getViewMatrix()
 	return this->LocalMatrix;
 }
 
+
+
 void Camera::onKeyDown(int key)
 {
+	if (key == 'U') {
+		std::cout << "default mode is set";
+		defaultBool = true;
+		AerialBool = false;
+		RightBool = false;
+	}
+	else if (key == 'I') {
+		std::cout << "Aerial mode is set";
+		defaultBool = false;
+		AerialBool = true;
+		RightBool = false;
+	}
+	else if (key == 'O') {
+		std::cout << "Right view mode is set";
+		defaultBool = false;
+		AerialBool = false;
+		RightBool = true;
+	}
 }
 
 void Camera::onKeyUp(int key)
@@ -94,10 +185,12 @@ void Camera::onMouseMove(const Point& deltaMousePos)
 		float speed = 0.005f;
 		x += deltaMousePos.y * speed;
 		y += deltaMousePos.x * speed;
-		std::cout << "X:" <<x<< "\n";
-		std::cout << "Y:" <<y<< "\n";
-
+		std::cout << "X:" << x<< "\n";
+		
+		
 		this->setRotation(x, y, z);
+
+
 		this->updateViewMatrix();
 	}
 	

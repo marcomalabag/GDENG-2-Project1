@@ -5,7 +5,8 @@ class Math
 {
 public:
 	Math();
-	float getRandom(float min, float max);
+	static float getRandom(float min, float max);
+	static float getRadians(float degree);
 	~Math();
 };
 

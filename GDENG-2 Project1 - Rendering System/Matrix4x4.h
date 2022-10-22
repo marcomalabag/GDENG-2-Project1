@@ -24,6 +24,7 @@ public:
 	Matrix4x4 getScalar(int constant);
 	Matrix4x4 mulMatrix(Matrix4x4 in);
 	void setOrthoLH(float width, float height, float near_plane, float far_plane);
+	static Matrix4x4 lookAt(Vector3D eye, Vector3D center, Vector3D up);
 	~Matrix4x4();
 
 public:

@@ -188,6 +188,40 @@ void Matrix4x4::setOrthoLH(float width, float height, float near_plane, float fa
 	Matrix[3][2] = -(near_plane / (far_plane - near_plane));
 }
 
+Matrix4x4 Matrix4x4::lookAt(Vector3D eye, Vector3D center, Vector3D up)
+{
+	Matrix4x4 view;
+	Vector3D X, Y, Z;
+
+	Z = eye - center;
+	Z = Vector3D::nomalize(Z);
+	Y = up;
+	X = Vector3D::cross(Y, Z);
+	Y = Vector3D::cross(Z, X);
+
+	X = Vector3D::nomalize(X);
+	Y = Vector3D::nomalize(Y);
+
+	view.Matrix[0][0] = X.x;
+	view.Matrix[1][0] = X.y;
+	view.Matrix[2][0] = X.z;
+	view.Matrix[3][0] = Vector3D::Dot(X * -1, eye);
+	view.Matrix[0][1] = Y.x;
+	view.Matrix[1][1] = Y.y;
+	view.Matrix[2][1]= Y.z;
+	view.Matrix[3][1] = Vector3D::Dot(Y * -1, eye);
+	view.Matrix[0][2] = Z.x;
+	view.Matrix[1][2] = Z.y;
+	view.Matrix[2][2] = Z.z;
+	view.Matrix[3][2] = Vector3D::Dot(Z * -1, eye);
+	view.Matrix[0][3] = 0.0f;
+	view.Matrix[1][3] = 0.0f;
+	view.Matrix[2][3] = 0.0f;
+	view.Matrix[3][3] = 1.0f;
+
+	return view;
+}
+
 Matrix4x4::~Matrix4x4()
 {
 }
