@@ -19,7 +19,9 @@ public:
 
 	void defaultmode(float rate, float x, float y, float z);
 	void AerialMode(float rate, float x, float y, float z);
+	void DownWardMode(float rate, float x, float y, float z);
 	void RightViewMode(float rate, float x, float y, float z);
+	void LeftViewMode(float rate, float x, float y, float z);
 
 	virtual void onKeyDown(int key) override;
 	virtual void onKeyUp(int key) override;

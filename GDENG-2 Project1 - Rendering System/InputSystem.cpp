@@ -52,6 +52,8 @@ void InputSystem::update()
 	POINT currentMousePosition = {};
 	::GetCursorPos(&currentMousePosition);
 
+	
+
 	if(this->firstTime)
 	{
 		this->firstTime = false;

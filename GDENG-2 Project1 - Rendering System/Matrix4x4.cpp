@@ -191,32 +191,33 @@ void Matrix4x4::setOrthoLH(float width, float height, float near_plane, float fa
 Matrix4x4 Matrix4x4::lookAt(Vector3D eye, Vector3D center, Vector3D up)
 {
 	Matrix4x4 view;
+	view.setIdentity();
 	Vector3D X, Y, Z;
 
-	Z = eye - center;
-	Z = Vector3D::nomalize(Z);
-	Y = up;
-	X = Vector3D::cross(Y, Z);
-	Y = Vector3D::cross(Z, X);
+	Vector3D forward = eye - center;
+	forward = Vector3D::nomalize(forward);
 
-	X = Vector3D::nomalize(X);
-	Y = Vector3D::nomalize(Y);
+	Vector3D left = Vector3D::cross(up, forward);
+	left = Vector3D::nomalize(left);
 
-	view.Matrix[0][0] = X.x;
-	view.Matrix[1][0] = X.y;
-	view.Matrix[2][0] = X.z;
-	view.Matrix[3][0] = Vector3D::Dot(X * -1, eye);
-	view.Matrix[0][1] = Y.x;
-	view.Matrix[1][1] = Y.y;
-	view.Matrix[2][1]= Y.z;
-	view.Matrix[3][1] = Vector3D::Dot(Y * -1, eye);
-	view.Matrix[0][2] = Z.x;
-	view.Matrix[1][2] = Z.y;
-	view.Matrix[2][2] = Z.z;
-	view.Matrix[3][2] = Vector3D::Dot(Z * -1, eye);
-	view.Matrix[0][3] = 0.0f;
-	view.Matrix[1][3] = 0.0f;
-	view.Matrix[2][3] = 0.0f;
+	Vector3D upDirection = Vector3D::cross(forward, left);
+
+
+	view.Matrix[0][0] = left.x;
+	view.Matrix[1][0] = upDirection.x;
+	view.Matrix[2][0] = forward.x;
+	view.Matrix[3][0] = 0.0f;
+	view.Matrix[0][1] = left.y;
+	view.Matrix[1][1] = upDirection.y;
+	view.Matrix[2][1] = forward.y;
+	view.Matrix[3][1] = 0.0f;
+	view.Matrix[0][2] = left.z;
+	view.Matrix[1][2] = upDirection.z;
+	view.Matrix[2][2] = forward.z;
+	view.Matrix[3][2] = 0.0f;
+	view.Matrix[0][3] = -left.x * eye.x - left.y * eye.y - left.z * eye.z;
+	view.Matrix[1][3] = -up.x * eye.x - up.y * eye.y - up.z * eye.z;
+	view.Matrix[2][3] = -forward.x * eye.x - forward.y * eye.y - forward.z * eye.z;
 	view.Matrix[3][3] = 1.0f;
 
 	return view;
