@@ -67,7 +67,7 @@ void AppWindow::initializeEngine()
 		float speed = math.getRandom(1.0f, 25.0f);
 		this->Cubes.push_back(new Cube("Cube", shader_byte_code, size_shader));
 		this->Cubes.at(i)->setScale(.5, .5, .5);
-		this->Cubes.at(i)->setPosition(0.0f, 1.0f, 1.0f);
+		this->Cubes.at(i)->setPosition(0.0f, 1.0f, 3.0f);
 		this->Cubes.at(i)->setAnimSpeed(speed);
 		
 	}
@@ -90,7 +90,7 @@ void AppWindow::initializeEngine()
 	{
 		this->Planes.push_back(new Plane("Plane", shader_byte_code, size_shader));
 		this->Planes.at(i)->setScale(5.0, 0.01, 5.1);
-		this->Planes.at(i)->setPosition(0.0f, 0.0f, 1.0f);
+		this->Planes.at(i)->setPosition(0.0f, 0.0f, 3.0f);
 		
 		this->Planes.at(i)->setAnimSpeed(0.0f);
 	}

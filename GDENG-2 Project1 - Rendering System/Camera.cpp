@@ -168,10 +168,11 @@ void Camera::update(float deltaTime)
 	float moveSpeed = 10.0f;
 
 	if (defaultBool) {
+
 		this->defaultmode(deltaTime * moveSpeed, x, y, z);
 	}
 	
-	if (this->getLocalRotation().y >= 0.03f) {
+	if (this->getLocalRotation().y >= 0.07f) {
 		defaultBool = false;
 		this->RightViewMode(deltaTime * moveSpeed, x, y, z);
 	}
@@ -182,6 +183,7 @@ void Camera::update(float deltaTime)
 	}
 
 	else {
+		
 		defaultBool = true;
 	}
 
