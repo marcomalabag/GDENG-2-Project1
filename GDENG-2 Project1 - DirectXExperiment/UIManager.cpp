@@ -14,6 +14,19 @@ UIManager::UIManager(HWND windowHandle)
 
 	ImGui_ImplWin32_Init(windowHandle);
 	ImGui_ImplDX11_Init(GraphicsEngine::getInstance()->getD3Ddevice(), GraphicsEngine::getInstance()->getImmediateDeviceContext()->getContext());
+
+	UINames uiNames;
+	ProfilerScreen* profilerScreen = new ProfilerScreen();
+	this->uiTable[uiNames.PROFILER_SCREEN] = profilerScreen;
+	this->uiList.push_back(profilerScreen);
+
+	MenuScreen* menuScreen = new MenuScreen();
+	this->uiTable[uiNames.MENU_SCREEN] = menuScreen;
+	this->uiList.push_back(menuScreen);
+
+	InspectorScreen* inspectorScreen = new InspectorScreen();
+	this->uiTable[uiNames.MENU_SCREEN] = menuScreen;
+	this->uiList.push_back(menuScreen);
 }
 
 void UIManager::initialize(HWND windowHandle)

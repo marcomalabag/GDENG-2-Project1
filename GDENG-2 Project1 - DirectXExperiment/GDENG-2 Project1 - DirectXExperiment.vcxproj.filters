@@ -76,6 +76,18 @@
     <Filter Include="UI\UIManager">
       <UniqueIdentifier>{c4985387-2f0b-40fb-9916-fa07a3478271}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\ProfilerScreen">
+      <UniqueIdentifier>{ba361341-86b1-4985-9b85-6a3e57f8ab52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\MenuScreen">
+      <UniqueIdentifier>{afa47d11-3093-4dd3-b634-14fc85196e1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\InspectorScreen">
+      <UniqueIdentifier>{0933a662-eb7f-4e63-8335-5c4d09f8e1ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\HierarchyScreen">
+      <UniqueIdentifier>{91a8ae06-e582-402b-ae13-25cde4634a34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -149,6 +161,18 @@
     </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <Filter>UI\UIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ProfilerScreen.cpp">
+      <Filter>UI\ProfilerScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuScreen.cpp">
+      <Filter>UI\MenuScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="InspectorScreen.cpp">
+      <Filter>UI\InspectorScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="HierarchyScreen.cpp">
+      <Filter>UI\HierarchyScreen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +253,18 @@
     </ClInclude>
     <ClInclude Include="UIManager.h">
       <Filter>UI\UIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ProfilerScreen.h">
+      <Filter>UI\ProfilerScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuScreen.h">
+      <Filter>UI\MenuScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="InspectorScreen.h">
+      <Filter>UI\InspectorScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="HierarchyScreen.h">
+      <Filter>UI\HierarchyScreen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
