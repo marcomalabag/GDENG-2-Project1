@@ -22,6 +22,7 @@ public:
 	void setViewportSize(D3D11_VIEWPORT viewport);
 	void drawTriangleList(UINT vertex_count, UINT startVertexIndex);
 	void drawTriangleStrip(UINT vertex_count, UINT startVertexIndex);
+	ID3D11DeviceContext* getContext();
 	~DeviceContext();
 
 public:

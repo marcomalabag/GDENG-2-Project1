@@ -6,6 +6,12 @@ DeviceContext::DeviceContext(ID3D11DeviceContext* device_context)
 	this->Devicecontext = device_context;
 }
 
+ID3D11DeviceContext* DeviceContext::getContext()
+{
+	return this->Devicecontext;
+}
+
+
 bool DeviceContext::release()
 {
 	this->Devicecontext->Release();

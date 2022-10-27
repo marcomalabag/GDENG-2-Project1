@@ -87,6 +87,11 @@ void DeviceContext::drawTriangleStrip(UINT vertex_count, UINT startVertexIndex)
 	this->Devicecontext->Draw(vertex_count, startVertexIndex);
 }
 
+ID3D11DeviceContext* DeviceContext::getContext()
+{
+	return this->Devicecontext;
+}
+
 DeviceContext::~DeviceContext()
 {
 }
