@@ -1,10 +1,10 @@
 #pragma once
-#include <iostream>
-#include "UIManager.h"
+#include <string>
+
+
 typedef std::string String;
 
-
-
+class UIManager;
 class AUIScreen
 {
 protected:

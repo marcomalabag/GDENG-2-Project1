@@ -148,6 +148,7 @@
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="AUIScreen.h" />
     <ClInclude Include="ConstantBuffer.h" />
+    <ClInclude Include="CreditsScreen.h" />
     <ClInclude Include="DeviceContext.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="GraphicsEngine.h" />
@@ -180,6 +181,7 @@
     <ClCompile Include="AppWindow.cpp" />
     <ClCompile Include="AUIScreen.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
+    <ClCompile Include="CreditsScreen.cpp" />
     <ClCompile Include="DeviceContext.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />

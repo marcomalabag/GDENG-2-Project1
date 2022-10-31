@@ -9,6 +9,7 @@ int main() {
 	AppWindow* runningApp = (AppWindow*)AppWindow::getInstance();
 	//GameWindow* runningGame = (GameWindow*)GameWindow::getInstance();
 	runningApp->initializeEngine();
+	runningApp->createInterface();
 	//runningGame->CreateGameWindow();
 	while(runningApp->isRun())
 	{

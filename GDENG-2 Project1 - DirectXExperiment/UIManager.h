@@ -6,6 +6,7 @@
 #include "MenuScreen.h"
 #include "InspectorScreen.h"
 #include "HierarchyScreen.h"
+#include "CreditsScreen.h"
 
 
 class UIManager
@@ -20,6 +21,8 @@ public:
 	static void destroy();
 
 	void drawAllUI();
+	void hideCreditsScreen();
+	void showCreditsScreen();
 
 	static const int WINDOW_WIDTH = 1440;
 	static const int WINDOW_HEIGHT = 900;
@@ -33,6 +36,7 @@ private:
 
 	UIList uiList;
 	UITable uiTable;
+	bool showCredits = false;
 
 };
 

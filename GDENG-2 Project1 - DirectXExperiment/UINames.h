@@ -9,6 +9,7 @@
 #include "Window.h"
 #include "AUIScreen.h"
 
+
 class UINames
 {
 public:
@@ -16,5 +17,6 @@ public:
 	const String MENU_SCREEN = "MENU_SCREEN";
 	const String INSPECTOR_SCREEN = "INSPECTOR_SCREEN";
 	const String HIERARCHY_SCREEN = "HIERARCHY_SCREEN";
+	const String CREDITS_SCREEN = "CREDITS_SCREEN";
 };
 

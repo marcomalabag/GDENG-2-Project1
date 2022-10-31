@@ -1,5 +1,11 @@
 #include "Window.h"
 #include <iostream>
+#include "IMGUI\imgui.h"
+#include "IMGUI\imgui_impl_dx11.h"
+#include "IMGUI\imgui_impl_win32.h"
+#include <exception>
+
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 //Window* window = nullptr;
 Window::Window()
@@ -10,6 +16,9 @@ Window::Window()
 
 LRESULT CALLBACK wndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
+	if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wparam, lparam))
+		return true;
+
 	switch (msg)
 	{
 		case WM_CREATE:
@@ -65,7 +74,7 @@ bool Window::initializeAppWindow()
 {
 
 	this->m_hwnd = ::CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, L"GDENG - 2 Project", L"DirectX Application", WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 1024, 768, NULL, NULL, NULL, this);
+		CW_USEDEFAULT, CW_USEDEFAULT, 1440, 900, NULL, NULL, NULL, this);
 
 	if (!this->m_hwnd)
 	{

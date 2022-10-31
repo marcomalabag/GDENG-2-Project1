@@ -88,6 +88,9 @@
     <Filter Include="UI\HierarchyScreen">
       <UniqueIdentifier>{91a8ae06-e582-402b-ae13-25cde4634a34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\CreditsScreen">
+      <UniqueIdentifier>{88daa9b0-81a3-449f-a47d-9e6bbaf239d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -173,6 +176,9 @@
     </ClCompile>
     <ClCompile Include="HierarchyScreen.cpp">
       <Filter>UI\HierarchyScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="CreditsScreen.cpp">
+      <Filter>UI\CreditsScreen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="HierarchyScreen.h">
       <Filter>UI\HierarchyScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="CreditsScreen.h">
+      <Filter>UI\CreditsScreen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

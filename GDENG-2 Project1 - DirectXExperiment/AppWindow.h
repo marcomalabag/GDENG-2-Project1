@@ -12,6 +12,7 @@
 #include "Vector3D.h"
 #include <vector>
 #include "Viewport.h"
+#include "UIManager.h"
 
 
 class AppWindow : public Window
@@ -23,6 +24,7 @@ public:
 	void onDestroy() override;
 
 	void initializeEngine();
+	void createInterface();
 
 public:
 	static void initialize();
