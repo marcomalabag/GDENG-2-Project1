@@ -29,7 +29,7 @@ void AppWindow::initializeEngine()
 	EngineTime::initialize();
 	SceneCameraHandler::initialize();
 
-	InputSystem::getInstance()->showCursor(false);
+	InputSystem::getInstance()->showCursor(true);
 
 	GraphicsEngine* graphEngine = GraphicsEngine::getInstance();
 
@@ -112,6 +112,7 @@ void AppWindow::initializeEngine()
 
 void AppWindow::createInterface()
 {
+	UIManager::initialize(this->m_hwnd);
 }
 
 void AppWindow::onUpdate()
@@ -149,6 +150,7 @@ void AppWindow::onUpdate()
 	
 
 	SceneCameraHandler::getInstance()->update();
+	UIManager::getInstance()->drawAllUI();
 	m_swap_chain->present(true);
 
 	
