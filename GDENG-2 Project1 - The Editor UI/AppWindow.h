@@ -22,6 +22,7 @@
 #include "InputSystem.h"
 #include "SceneCameraHandler.h"
 #include "UIManager.h"
+#include "GameObjectManager.h"
 
 
 

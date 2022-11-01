@@ -31,6 +31,7 @@ void AppWindow::initializeEngine()
 
 	InputSystem::getInstance()->showCursor(true);
 
+	GameObjectManager::initialize();
 	GraphicsEngine* graphEngine = GraphicsEngine::getInstance();
 
 
@@ -51,10 +52,10 @@ void AppWindow::initializeEngine()
 
 	this->vertexshader = graphEngine->createVertexShader(shader_byte_code, size_shader);
 
-	
+	GameObjectManager::getInstance()->createObject(GameObjectManager::CUBE, shader_byte_code, size_shader);
 	
 	//Cube Initialization
-	
+	/*
 	int max = 1.5f;
 	int min = -2.5f;
 	Math math;
@@ -95,7 +96,7 @@ void AppWindow::initializeEngine()
 		this->Planes.at(i)->setAnimSpeed(0.0f);
 	}
 
-	
+	*/
 
 	graphEngine->releaseCompiledShader();
 
@@ -124,11 +125,12 @@ void AppWindow::onUpdate()
 	RECT rc = this->getClientWindowRect();
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
+	SceneCameraHandler::getInstance()->update();
 	InputSystem::getInstance()->update();
-	
+	UIManager::getInstance()->drawAllUI();
 	//Cube drawing
 
-
+	/*
 	for (int i = 0; i < Cubes.size(); i++)
 	{
 		
@@ -145,12 +147,10 @@ void AppWindow::onUpdate()
 	{
 		Planes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	}
-
+	*/
 	
-	
+	GameObjectManager::getInstance()->renderAll(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 
-	SceneCameraHandler::getInstance()->update();
-	UIManager::getInstance()->drawAllUI();
 	m_swap_chain->present(true);
 
 	

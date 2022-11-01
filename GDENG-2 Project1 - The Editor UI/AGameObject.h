@@ -7,11 +7,12 @@
 #include <vector>
 
 using namespace std;
+typedef std::string String;
 
 class AGameObject
 {
 public:
-	
+	typedef std::string String;
 	struct vertex
 	{
 		Vector3D position;
@@ -28,7 +29,7 @@ public:
 		unsigned int time;
 	};
 
-	AGameObject(string name);
+	AGameObject(String name);
 	~AGameObject();
 
 	virtual void update(float deltaTime) = 0;
@@ -49,6 +50,8 @@ public:
 	void setRotationz(float z);
 	Vector3D getLocalRotation();
 
+	String getName();
+
 
 
 protected:
@@ -57,7 +60,7 @@ protected:
 	Vector3D Position;
 	Vector3D Scale;
 	Vector3D Rotation;
-	string name;
+	String name;
 };
 
 

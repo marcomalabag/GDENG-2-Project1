@@ -28,7 +28,7 @@ void CreditsScreen::drawUI()
 		ImGui::Text("Developer: Marco Malabag\n");
 		ImGui::Text("Acknowledgement: Most of the code is gotten from \npardcode and sir Neil Gallego.\nThe ImGui API is from 'https://github.com/ocornut/imgui'");
 		ImGui::Image((void*)my_texture, ImVec2(my_image_width, my_image_height));
-
+       
 		if (ImGui::Button("Close", ImVec2(70.0f, 0.0f)))
 		{
 

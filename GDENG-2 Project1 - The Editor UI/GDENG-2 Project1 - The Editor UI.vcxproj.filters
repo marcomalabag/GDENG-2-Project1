@@ -133,6 +133,9 @@
     <Filter Include="UI\ColorPickerScreen">
       <UniqueIdentifier>{e55d6019-53f4-43d2-a600-16efb1c2abcf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObjectManager">
+      <UniqueIdentifier>{f922ede5-4e2f-4b70-88f8-b01bc3900838}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -257,6 +260,9 @@
     </ClCompile>
     <ClCompile Include="ColorPickerScreen.cpp">
       <Filter>UI\ColorPickerScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>GameObjectManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -394,6 +400,9 @@
     </ClInclude>
     <ClInclude Include="ColorPickerScreen.h">
       <Filter>UI\ColorPickerScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>GameObjectManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

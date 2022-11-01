@@ -1,7 +1,7 @@
 #include "AGameObject.h"
 
 
-AGameObject::AGameObject(string name)
+AGameObject::AGameObject(String name)
 {
 	this->name = name;
 	this->Position = Vector3D::zeros();
@@ -67,6 +67,11 @@ void AGameObject::setRotationz(float z)
 Vector3D AGameObject::getLocalRotation()
 {
 	return this->Rotation;
+}
+
+String AGameObject::getName()
+{
+	return this->name;
 }
 
 AGameObject::~AGameObject()
