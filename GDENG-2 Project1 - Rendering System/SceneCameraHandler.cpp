@@ -1,5 +1,6 @@
 #include "SceneCameraHandler.h"
 
+
 SceneCameraHandler* SceneCameraHandler::sharedInstance = NULL;
 
 SceneCameraHandler::SceneCameraHandler()

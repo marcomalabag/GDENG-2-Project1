@@ -136,6 +136,9 @@
     <Filter Include="GameObjectManager">
       <UniqueIdentifier>{f922ede5-4e2f-4b70-88f8-b01bc3900838}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ShaderLibrary">
+      <UniqueIdentifier>{73a88c85-dc24-4a98-bebc-09c19d77b2de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -263,6 +266,9 @@
     </ClCompile>
     <ClCompile Include="GameObjectManager.cpp">
       <Filter>GameObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Shaderlibrary.cpp">
+      <Filter>ShaderLibrary</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -403,6 +409,9 @@
     </ClInclude>
     <ClInclude Include="GameObjectManager.h">
       <Filter>GameObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaderlibrary.h">
+      <Filter>ShaderLibrary</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

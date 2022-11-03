@@ -28,6 +28,7 @@ void AppWindow::initializeEngine()
 	GraphicsEngine::initialize();
 	EngineTime::initialize();
 	SceneCameraHandler::initialize();
+	Shaderlibrary::initialize();
 
 	InputSystem::getInstance()->showCursor(true);
 

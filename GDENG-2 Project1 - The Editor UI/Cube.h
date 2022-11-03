@@ -9,6 +9,7 @@
 #include "Matrix4x4.h"
 #include "SceneCameraHandler.h"
 #include "EngineTime.h"
+#include "Shaderlibrary.h"
 
 
 class Cube: public AGameObject
@@ -51,6 +52,7 @@ private:
 	float m_rightward = 0.0f;
 	Matrix4x4 m_world_cam;
 	int w, h;
-	
+
+	Shaderlibrary::ShaderData shaderdata;
 };
 

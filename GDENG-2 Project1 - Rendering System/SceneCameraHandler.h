@@ -2,6 +2,7 @@
 #include "Camera.h"
 #include "EngineTime.h"
 
+
 class SceneCameraHandler
 {
 public:
@@ -10,6 +11,7 @@ public:
 	static void destroy();
 
 	void update();
+	void addPerspectiveCameraListener();
 
 	Matrix4x4 getSceneCameraViewMatrix();
 

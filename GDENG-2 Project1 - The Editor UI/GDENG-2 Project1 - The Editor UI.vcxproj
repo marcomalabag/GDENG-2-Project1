@@ -180,6 +180,7 @@
     <ClInclude Include="ProfilerScreen.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="SceneCameraHandler.h" />
+    <ClInclude Include="Shaderlibrary.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="SwapChain.h" />
@@ -226,6 +227,7 @@
     <ClCompile Include="ProfilerScreen.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="SceneCameraHandler.cpp" />
+    <ClCompile Include="Shaderlibrary.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SwapChain.cpp" />
     <ClCompile Include="Triangle.cpp" />

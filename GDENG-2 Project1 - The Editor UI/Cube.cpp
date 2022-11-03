@@ -4,6 +4,8 @@
 Cube::Cube(string name, void* shaderByteCode, size_t sizeShader):AGameObject(name)
 {
 
+
+
 	vertex vertex_list[] =
 	{
 		//X - Y - Z
