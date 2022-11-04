@@ -4,12 +4,13 @@
 #include "ConstantBuffer.h"
 #include "IndexBuffer.h"
 #include "SceneCameraHandler.h"
+#include "Shaderlibrary.h"
 
 class Cylinder: public AGameObject
 {
 public:
-	Cylinder(string name, void* ShaderByteCode, size_t SizeShader);
-	void draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader) override;
+	Cylinder(string name);
+	void draw(int width, int height) override;
 	void update(float deltaTime) override;
 	~Cylinder();
 
@@ -43,5 +44,10 @@ private:
 	std::vector<Vector3D> CircleVertices;
 	int BaseCenterIndex;
 	int TopCenterIndex;
+
+	ShaderNames namesShader;
+	Shaderlibrary::ShaderData shaderdata;
+	VertexShader* cylinderVertexShader;
+	PixelShader* cylinderPixelShader;
 };
 

@@ -4,10 +4,10 @@
 class Plane : public Cube
 {
 public:
-	Plane(string name, void* shaderByteCode, size_t sizeShader);
+	Plane(string name);
 	~Plane();
 
-	void draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader) override;
+	void draw(int width, int height) override;
 	
 
 
@@ -34,5 +34,10 @@ private:
 	Matrix4x4 Rotation;
 
 	Matrix4x4 RotationTotal;
+
+	ShaderNames namesShader;
+	Shaderlibrary::ShaderData shaderdata;
+	VertexShader* planeVertexShader;
+	PixelShader* planePixelShader;
 };
 

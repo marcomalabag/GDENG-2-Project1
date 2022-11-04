@@ -1,7 +1,10 @@
 #include "Cylinder.h"
 
-Cylinder::Cylinder(string name, void* ShaderByteCode, size_t SizeShader): AGameObject(name)
+
+Cylinder::Cylinder(string name): AGameObject(name)
 {
+	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.BASE_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);
+
 	float radius = 1.5f;
 	int sectorCount = 12;
 	float height = 1.5f;
@@ -55,7 +58,7 @@ Cylinder::Cylinder(string name, void* ShaderByteCode, size_t SizeShader): AGameO
 	}
 
 	this->verterbuffer = GraphicsEngine::getInstance()->createVertexBuffer();
-	this->verterbuffer->load(&(this->Vertices[0]), sizeof(vertex), this->Vertices.size(), ShaderByteCode, SizeShader);
+	this->verterbuffer->load(&(this->Vertices[0]), sizeof(vertex), this->Vertices.size(), shaderdata.shaderByteCode, shaderdata.sizeShader);
 
 	int k1 = 0;
 	int k2 = sectorCount + 1;
@@ -119,9 +122,12 @@ Cylinder::Cylinder(string name, void* ShaderByteCode, size_t SizeShader): AGameO
 	cc.time = 0;
 	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
 	this->constantbuffer->load(&cc, sizeof(constant));
+
+	this->cylinderVertexShader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
+	this->cylinderPixelShader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
 }
 
-void Cylinder::draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader)
+void Cylinder::draw(int width, int height)
 {
 	constant cc;
 	Matrix4x4 temp;
@@ -165,18 +171,20 @@ void Cylinder::draw(int width, int height, VertexShader* vertexshader, PixelShad
 
 	cc.projection.setPerspectiveFovLH(aspectRatio, aspectRatio, 0.1f, 1000.0f);
 
-	this->constantbuffer->update(GraphicsEngine::getInstance()->getImmediateDeviceContext(), &cc);
+	DeviceContext* device = GraphicsEngine::getInstance()->getImmediateDeviceContext();
 
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(vertexshader, this->constantbuffer);
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(pixelshader, this->constantbuffer);
+	this->constantbuffer->update(device, &cc);
 
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexShader(vertexshader);
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setPixelShader(pixelshader);
+	device->setConstantBuffer(this->cylinderVertexShader, this->constantbuffer);
+	device->setConstantBuffer(this->cylinderPixelShader, this->constantbuffer);
 
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexBuffer(this->verterbuffer);
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setIndexBuffer(this->indexbuffer);
+	device->setVertexShader(this->cylinderVertexShader);
+	device->setPixelShader(this->cylinderPixelShader);
 
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
+	device->setVertexBuffer(this->verterbuffer);
+	device->setIndexBuffer(this->indexbuffer);
+
+	device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
 
 	this->oldDelta = this->newDelta;
 	this->newDelta += this->ticks;

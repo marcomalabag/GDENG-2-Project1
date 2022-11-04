@@ -61,6 +61,10 @@ PixelShader* Shaderlibrary::getPixelShader(String pixelShaderName)
 
 Shaderlibrary::~Shaderlibrary()
 {
+	ShaderNames names;
+	this->activeVertexShaders[names.BASE_VERTEX_SHADER_NAME]->release();
+	this->activePixelShaders[names.BASE_PIXEL_SHADER_NAME]->release();
+
 	this->activePixelShaders.clear();
 	this->activeVertexShaders.clear();
 }

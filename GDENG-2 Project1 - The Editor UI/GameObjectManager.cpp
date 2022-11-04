@@ -46,11 +46,11 @@ void GameObjectManager::updateAll()
 	}
 }
 
-void GameObjectManager::renderAll(int viewportWidth, int viewportHeight, VertexShader* vertexShader, PixelShader* pixelShader)
+void GameObjectManager::renderAll(int viewportWidth, int viewportHeight)
 {
 	for(int i = 0; i < this->GameObjectList.size(); i++)
 	{
-		this->GameObjectList[i]->draw(viewportWidth, viewportHeight, vertexShader, pixelShader);
+		this->GameObjectList[i]->draw(viewportWidth, viewportHeight);
 	}
 }
 
@@ -60,35 +60,79 @@ void GameObjectManager::addObject(AGameObject* gameObject)
 	this->GameObjectList.push_back(gameObject);
 }
 
-void GameObjectManager::createObject(PrimitiveType type, void* shaderByteCode, size_t sizeShader)
+void GameObjectManager::createObject(PrimitiveType type)
 {
 	if(type == PrimitiveType::CUBE)
 	{
-		Cube* cube = new Cube("Cube", shaderByteCode, sizeShader);
+		String cubename;
+		if(this->cubeCounter == 0)
+		{
+			cubename = "Cube";
+		}
+		else
+		{
+			String number = "(" + std::to_string(this->cubeCounter) + ")";
+			cubename = "Cube" + number;
+		}
+		Cube* cube = new Cube(cubename);
 		cube->setPosition(0.0f, 1.0f, 0.0f);
 		cube->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(cube);
+		this->cubeCounter++;
 	}
 	else if (type == PrimitiveType::PLANE)
 	{
-		Plane* plane = new Plane("Plane", shaderByteCode, sizeShader);
+		String planename;
+		if (this->planeCounter == 0)
+		{
+			planename = "Plane";
+		}
+		else
+		{
+			String number = "(" + std::to_string(this->planeCounter) + ")";
+			planename = "Plane" + number;
+		}
+		Plane* plane = new Plane(planename);
 		plane->setPosition(0.0f, 1.0f, 0.0f);
 		plane->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(plane);
+		this->planeCounter++;
 	}
 	else if (type == PrimitiveType::CYLINDER)
 	{
-		Cylinder* cylinder = new Cylinder("Cylinder", shaderByteCode, sizeShader);
+		String cylindername;
+		if (this->cylinderCounter == 0)
+		{
+			cylindername = "Cylinder";
+		}
+		else
+		{
+			String number = "(" + std::to_string(this->cylinderCounter) + ")";
+			cylindername = "Cylinder" + number;
+		}
+		Cylinder* cylinder = new Cylinder(cylindername);
 		cylinder->setPosition(0.0f, 1.0f, 0.0f);
 		cylinder->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(cylinder);
+		this->cylinderCounter++;
 	}
 	else if (type == PrimitiveType::SPHERE)
 	{
-		Sphere* sphere = new Sphere("Cube", shaderByteCode, sizeShader);
+		String spherename;
+		if (this->sphereCounter == 0)
+		{
+			spherename = "Sphere";
+		}
+		else
+		{
+			String number = "(" + std::to_string(this->sphereCounter) + ")";
+			spherename = "Sphere" + number;
+		}
+		Sphere* sphere = new Sphere(spherename);
 		sphere->setPosition(0.0f, 1.0f, 0.0f);
 		sphere->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(sphere);
+		this->sphereCounter++;
 	}
 
 }

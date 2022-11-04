@@ -15,11 +15,11 @@
 class Cube: public AGameObject
 {
 public:
-	Cube(string name, void* shaderByteCode, size_t sizeShader);
+	Cube(string name);
 	~Cube();
 
 	void update(float deltaTime) override;
-	void draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader) override;
+	void draw(int width, int height) override;
 	void setAnimSpeed(float speed);
 
 
@@ -53,6 +53,9 @@ private:
 	Matrix4x4 m_world_cam;
 	int w, h;
 
+	ShaderNames namesShader;
 	Shaderlibrary::ShaderData shaderdata;
+	VertexShader* cubeVertexShader;
+	PixelShader* cubePixelShader;
 };
 

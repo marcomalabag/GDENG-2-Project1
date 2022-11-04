@@ -1,7 +1,9 @@
 #include "Plane.h"
 
-Plane::Plane(string name, void* shaderByteCode, size_t sizeShader): Cube(name, shaderByteCode,  sizeShader)
+Plane::Plane(string name): Cube(name)
 {
+	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.BASE_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);
+
 	vertex vertex_list[] =
 	{
 		//X - Y - Z
@@ -18,7 +20,7 @@ Plane::Plane(string name, void* shaderByteCode, size_t sizeShader): Cube(name, s
 	};
 
 	this->verterbuffer = GraphicsEngine::getInstance()->createVertexBuffer();
-	this->verterbuffer->load(vertex_list, sizeof(vertex), ARRAYSIZE(vertex_list), shaderByteCode, sizeShader);
+	this->verterbuffer->load(vertex_list, sizeof(vertex), ARRAYSIZE(vertex_list), shaderdata.shaderByteCode, shaderdata.sizeShader);
 	
 	UINT size_list = ARRAYSIZE(vertex_list);
 
@@ -52,9 +54,12 @@ Plane::Plane(string name, void* shaderByteCode, size_t sizeShader): Cube(name, s
 	cc.time = 0;
 	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
 	this->constantbuffer->load(&cc, sizeof(constant));
+
+	this->planeVertexShader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
+	this->planePixelShader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
 }
 
-void Plane::draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader)
+void Plane::draw(int width, int height)
 {
 	constant cc;
 	Matrix4x4 temp;
@@ -98,18 +103,20 @@ void Plane::draw(int width, int height, VertexShader* vertexshader, PixelShader*
 
 	cc.projection.setPerspectiveFovLH(aspectRatio, aspectRatio, 0.1f, 1000.0f);
 
-	this->constantbuffer->update(GraphicsEngine::getInstance()->getImmediateDeviceContext(), &cc);
+	DeviceContext* device = GraphicsEngine::getInstance()->getImmediateDeviceContext();
+
+	this->constantbuffer->update(device, &cc);
 
 
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(vertexshader, this->constantbuffer);
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(pixelshader, this->constantbuffer);
+	device->setConstantBuffer(this->planeVertexShader, this->constantbuffer);
+	device->setConstantBuffer(this->planePixelShader, this->constantbuffer);
 
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexShader(vertexshader);
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setPixelShader(pixelshader);
+	device->setVertexShader(this->planeVertexShader);
+	device->setPixelShader(this->planePixelShader);
 
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexBuffer(this->verterbuffer);
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setIndexBuffer(this->indexbuffer);
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
+	device->setVertexBuffer(this->verterbuffer);
+	device->setIndexBuffer(this->indexbuffer);
+	device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
 	this->oldDelta = this->newDelta;
 	this->newDelta += this->ticks;
 

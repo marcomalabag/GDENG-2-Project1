@@ -10,6 +10,14 @@ class InspectorScreen: public AUIScreen
 public:
 	InspectorScreen();
 	void drawUI() override;
+	void generateEditor();
+	void TransformUpdate();
+	void TransformSelected(AGameObject* selected);
 	~InspectorScreen();
+
+private:
+	float SelectedObjectposition[3] = { 0.0f, 0.0f, 0.0f };
+	float SelectedObjectScale[3] = { 0.0f, 0.0f, 0.0f };
+	float SelectedObjectRotation[3] = { 0.0f, 0.0f, 0.0f };
 };
 

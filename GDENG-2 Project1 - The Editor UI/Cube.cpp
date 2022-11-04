@@ -1,10 +1,10 @@
 #include "Cube.h"
 
 
-Cube::Cube(string name, void* shaderByteCode, size_t sizeShader):AGameObject(name)
+Cube::Cube(string name):AGameObject(name)
 {
 
-
+	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.BASE_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);
 
 	vertex vertex_list[] =
 	{
@@ -24,7 +24,7 @@ Cube::Cube(string name, void* shaderByteCode, size_t sizeShader):AGameObject(nam
 	};
 
 	this->verterbuffer = GraphicsEngine::getInstance()->createVertexBuffer();
-	this->verterbuffer->load(vertex_list, sizeof(vertex), ARRAYSIZE(vertex_list), shaderByteCode, sizeShader);
+	this->verterbuffer->load(vertex_list, sizeof(vertex), ARRAYSIZE(vertex_list), shaderdata.shaderByteCode, shaderdata.sizeShader);
 
 	UINT size_list = ARRAYSIZE(vertex_list);
 
@@ -58,6 +58,9 @@ Cube::Cube(string name, void* shaderByteCode, size_t sizeShader):AGameObject(nam
 	cc.time = 0;
 	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
 	this->constantbuffer->load(&cc, sizeof(constant));
+
+	this->cubeVertexShader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
+	this->cubePixelShader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
 	
 }
 
@@ -68,7 +71,7 @@ void Cube::update(float deltaTime)
 }
 
 
-void Cube::draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader)
+void Cube::draw(int width, int height)
 {
 	constant cc;
 	Matrix4x4 temp;
@@ -112,18 +115,20 @@ void Cube::draw(int width, int height, VertexShader* vertexshader, PixelShader* 
 
 	cc.projection.setPerspectiveFovLH(aspectRatio, aspectRatio, 0.1f, 1000.0f);
 
-	this->constantbuffer->update(GraphicsEngine::getInstance()->getImmediateDeviceContext(), &cc);
+	DeviceContext* device = GraphicsEngine::getInstance()->getImmediateDeviceContext();
 
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(vertexshader, this->constantbuffer);
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(pixelshader, this->constantbuffer);
+	this->constantbuffer->update(device, &cc);
 
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexShader(vertexshader);
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setPixelShader(pixelshader);
+	device->setConstantBuffer(this->cubeVertexShader, this->constantbuffer);
+	device->setConstantBuffer(this->cubePixelShader, this->constantbuffer);
 
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexBuffer(this->verterbuffer);
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setIndexBuffer(this->indexbuffer);
+	device->setVertexShader(this->cubeVertexShader);
+	device->setPixelShader(this->cubePixelShader);
 
-	GraphicsEngine::getInstance()->getImmediateDeviceContext()->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
+	device->setVertexBuffer(this->verterbuffer);
+	device->setIndexBuffer(this->indexbuffer);
+
+	device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
 
 	this->oldDelta = this->newDelta;
 	this->newDelta += this->ticks;

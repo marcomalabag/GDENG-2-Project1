@@ -201,7 +201,7 @@ void Camera::update(float deltaTime)
 	
 }
 
-void Camera::draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader)
+void Camera::draw(int width, int height)
 {
 }
 

@@ -45,68 +45,8 @@ void AppWindow::initializeEngine()
 	m_swap_chain->init(this->m_hwnd, width, height);
 
 	
-	void* shader_byte_code = nullptr;
-	size_t size_shader = 0;
 	
-
-	graphEngine->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
-
-	this->vertexshader = graphEngine->createVertexShader(shader_byte_code, size_shader);
-
-	GameObjectManager::getInstance()->createObject(GameObjectManager::CUBE, shader_byte_code, size_shader);
 	
-	//Cube Initialization
-	/*
-	int max = 1.5f;
-	int min = -2.5f;
-	Math math;
-
-	for(int i = 0; i < 1; i++)
-	{
-		float x = math.getRandom(min, max);
-		float y = math.getRandom(-2.0, 1.0f);
-		
-		float speed = math.getRandom(1.0f, 25.0f);
-		this->Cubes.push_back(new Cube("Cube", shader_byte_code, size_shader));
-		this->Cubes.at(i)->setScale(.5, .5, .5);
-		this->Cubes.at(i)->setPosition(0.0f, 1.0f, 3.0f);
-		this->Cubes.at(i)->setAnimSpeed(speed);
-		
-	}
-	//Sphere initialization
-	
-	sphere = new Sphere("Sphere", shader_byte_code, size_shader);
-	sphere->setPosition(0, 0, 1.0f);
-	sphere->setScale(.25, .25, .25);
-
-	//Cylinder initialization
-	this->cylinder = new Cylinder("Cylinder", shader_byte_code, size_shader);
-	this->cylinder->setPosition(1.25, .25, 1.0f);
-	this->cylinder->setScale(.25, .25, .25);
-	this->cylinder->setRotation(45, 90, 45);
-	
-
-	//plane initialization
-	
-	for (int i = 0; i < 1; i++)
-	{
-		this->Planes.push_back(new Plane("Plane", shader_byte_code, size_shader));
-		this->Planes.at(i)->setScale(5.0, 0.01, 5.1);
-		this->Planes.at(i)->setPosition(0.0f, 0.0f, 3.0f);
-		
-		this->Planes.at(i)->setAnimSpeed(0.0f);
-	}
-
-	*/
-
-	graphEngine->releaseCompiledShader();
-
-
-	graphEngine->compilePixelShader(L"PixelShader.hlsl", "psmain", &shader_byte_code, &size_shader);
-	this->pixelshader = graphEngine->createPixelShader(shader_byte_code, size_shader);
-	
-
-	graphEngine->releaseCompiledShader();
 
 	
 
@@ -150,7 +90,7 @@ void AppWindow::onUpdate()
 	}
 	*/
 	
-	GameObjectManager::getInstance()->renderAll(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
+	GameObjectManager::getInstance()->renderAll(rc.right - rc.left, rc.bottom - rc.top);
 
 	m_swap_chain->present(true);
 

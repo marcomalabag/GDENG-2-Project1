@@ -18,11 +18,11 @@ void MenuScreen::drawUI()
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Game Object")) {
-			if (ImGui::MenuItem("Create Cube")) { /*Do something*/ }
+			if (ImGui::MenuItem("Create Cube")) { GameObjectManager::getInstance()->createObject(GameObjectManager::CUBE); }
 			if (ImGui::MenuItem("Create Textured Cube")) { /*Do something */ }
-			if (ImGui::MenuItem("Create Sphere")) { /* Do stuff */ }
-			if (ImGui::MenuItem("Create Plane")) {
-				if (ImGui::MenuItem("Create Cube")) { /*Do something*/ }}
+			if (ImGui::MenuItem("Create Sphere")) { GameObjectManager::getInstance()->createObject(GameObjectManager::SPHERE); }
+			if (ImGui::MenuItem("Create Plane")) { GameObjectManager::getInstance()->createObject(GameObjectManager::PLANE); }
+			if(ImGui::MenuItem("Create Cylinder")){ GameObjectManager::getInstance()->createObject(GameObjectManager::CYLINDER);}
 			if (ImGui::MenuItem("Create Bunny")) { /*Do something*/ }
 			if (ImGui::MenuItem("Create Statue")) { /*Do something*/ }
 			if (ImGui::MenuItem("Create Teapot")) { /*Do something*/ }

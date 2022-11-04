@@ -12,5 +12,8 @@ public:
 	HierarchyScreen();
 	void drawUI() override;
 	~HierarchyScreen();
+
+private:
+	void generateButtons();
 };
 

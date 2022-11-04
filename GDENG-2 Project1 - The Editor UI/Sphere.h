@@ -4,15 +4,16 @@
 #include "IndexBuffer.h"
 #include "ConstantBuffer.h"
 #include "SceneCameraHandler.h"
+#include "Shaderlibrary.h"
 
 
 class Sphere: public AGameObject
 {
 public:
-	Sphere(string name, void* shaderByteCode, size_t sizeShader);
+	Sphere(string name);
 	~Sphere();
 
-	void draw(int width, int height, VertexShader* vertexshader, PixelShader* pixelshader) override;
+	void draw(int width, int height) override;
 	void update(float deltaTime) override;
 
 private:
@@ -40,5 +41,10 @@ private:
 	Matrix4x4 RotationTotal;
 	std::vector<vertex> vertices;
 	std::vector<unsigned int> indices;
+
+	ShaderNames namesShader;
+	Shaderlibrary::ShaderData shaderdata;
+	VertexShader* SphereVertexShader;
+	PixelShader* SpherePixelShader;
 };
 

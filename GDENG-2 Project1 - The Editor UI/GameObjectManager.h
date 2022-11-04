@@ -35,9 +35,9 @@ public:
 	ObjectList getAllObjects();
 	int activeObjects();
 	void updateAll();
-	void renderAll(int viewportWidth, int viewportHeight, VertexShader* vertexShader, PixelShader* pixelShader);
+	void renderAll(int viewportWidth, int viewportHeight);
 	void addObject(AGameObject* gameObject);
-	void createObject(PrimitiveType type, void* shaderByteCode, size_t sizeShader);
+	void createObject(PrimitiveType type);
 	void deleteObject(AGameObject* gameObject);
 	void deleteObjectByName(string name);
 	void setSelectedObject(string name);
@@ -54,5 +54,10 @@ private:
 	AGameObject* SelectedObject;
 	ObjectList GameObjectList;
 	HashTable GameObjectTable;
+
+	int cubeCounter = 0;
+	int sphereCounter = 0;
+	int cylinderCounter = 0;
+	int planeCounter = 0;
 };
 
