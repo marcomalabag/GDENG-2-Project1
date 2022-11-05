@@ -74,8 +74,8 @@ Sphere::Sphere(string name):AGameObject(name)
 	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
 	this->constantbuffer->load(&cc, sizeof(constant));
 
-	this->SphereVertexShader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
-	this->SpherePixelShader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
+	this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
+	this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
 }
 
 void Sphere::draw(int width, int height)
@@ -126,11 +126,11 @@ void Sphere::draw(int width, int height)
 
 	this->constantbuffer->update(device, &cc);
 
-	device->setConstantBuffer(this->SphereVertexShader, this->constantbuffer);
-	device->setConstantBuffer(this->SpherePixelShader, this->constantbuffer);
+	device->setConstantBuffer(this->vertex_shader, this->constantbuffer);
+	device->setConstantBuffer(this->pixel_shader, this->constantbuffer);
 
-	device->setVertexShader(this->SphereVertexShader);
-	device->setPixelShader(this->SpherePixelShader);
+	device->setVertexShader(this->vertex_shader);
+	device->setPixelShader(this->pixel_shader);
 
 	device->setVertexBuffer(this->verterbuffer);
 	device->setIndexBuffer(this->indexbuffer);

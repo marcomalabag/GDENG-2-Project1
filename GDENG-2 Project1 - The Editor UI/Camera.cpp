@@ -250,8 +250,7 @@ void Camera::onMouseMove(const Point& deltaMousePos)
 		float speed = 0.005f;
 		x += deltaMousePos.y * speed;
 		y += deltaMousePos.x * speed;
-		std::cout << "X:" << x<< "\n";
-		std::cout << "Y:" << y << "\n";
+		
 		
 		
 		this->setRotation(x, y, z);
