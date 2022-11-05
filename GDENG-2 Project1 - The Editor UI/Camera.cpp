@@ -3,7 +3,7 @@
 
 Camera::Camera(string name):AGameObject(name)
 {
-	this->setPosition(0.0f, 0.0f, -2.0f);
+	this->setPosition(0.0f, 2.0f, -2.0f);
 	//this->cameraFront = Vector3D(0.0f, 0.0f, -1.0f);
 	//this->cameraUp = Vector3D(0.0f, 1.0f, 0.0f);
 	InputSystem::getInstance()->addListener(this);

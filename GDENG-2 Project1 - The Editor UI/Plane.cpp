@@ -55,8 +55,8 @@ Plane::Plane(string name): Cube(name)
 	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
 	this->constantbuffer->load(&cc, sizeof(constant));
 
-	this->planeVertexShader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
-	this->planePixelShader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
+	this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
+	this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
 }
 
 void Plane::draw(int width, int height)
@@ -108,11 +108,11 @@ void Plane::draw(int width, int height)
 	this->constantbuffer->update(device, &cc);
 
 
-	device->setConstantBuffer(this->planeVertexShader, this->constantbuffer);
-	device->setConstantBuffer(this->planePixelShader, this->constantbuffer);
+	device->setConstantBuffer(this->vertex_shader, this->constantbuffer);
+	device->setConstantBuffer(this->pixel_shader, this->constantbuffer);
 
-	device->setVertexShader(this->planeVertexShader);
-	device->setPixelShader(this->planePixelShader);
+	device->setVertexShader(this->vertex_shader);
+	device->setPixelShader(this->pixel_shader);
 
 	device->setVertexBuffer(this->verterbuffer);
 	device->setIndexBuffer(this->indexbuffer);

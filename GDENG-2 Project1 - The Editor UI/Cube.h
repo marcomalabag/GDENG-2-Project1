@@ -55,7 +55,5 @@ private:
 
 	ShaderNames namesShader;
 	Shaderlibrary::ShaderData shaderdata;
-	VertexShader* cubeVertexShader;
-	PixelShader* cubePixelShader;
 };
 

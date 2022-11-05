@@ -123,8 +123,8 @@ Cylinder::Cylinder(string name): AGameObject(name)
 	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
 	this->constantbuffer->load(&cc, sizeof(constant));
 
-	this->cylinderVertexShader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
-	this->cylinderPixelShader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
+	this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
+	this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
 }
 
 void Cylinder::draw(int width, int height)
@@ -175,11 +175,11 @@ void Cylinder::draw(int width, int height)
 
 	this->constantbuffer->update(device, &cc);
 
-	device->setConstantBuffer(this->cylinderVertexShader, this->constantbuffer);
-	device->setConstantBuffer(this->cylinderPixelShader, this->constantbuffer);
+	device->setConstantBuffer(this->vertex_shader, this->constantbuffer);
+	device->setConstantBuffer(this->pixel_shader, this->constantbuffer);
 
-	device->setVertexShader(this->cylinderVertexShader);
-	device->setPixelShader(this->cylinderPixelShader);
+	device->setVertexShader(this->vertex_shader);
+	device->setPixelShader(this->pixel_shader);
 
 	device->setVertexBuffer(this->verterbuffer);
 	device->setIndexBuffer(this->indexbuffer);

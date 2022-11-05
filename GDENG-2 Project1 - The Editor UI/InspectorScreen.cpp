@@ -37,6 +37,9 @@ void InspectorScreen::generateEditor()
 			GameObjectManager::getInstance()->setSelectedObject(NULL);
 		}
 	}
+	else {
+		ImGui::Text("No object selected");
+	}
 	
 }
 

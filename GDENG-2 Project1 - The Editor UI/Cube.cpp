@@ -59,8 +59,8 @@ Cube::Cube(string name):AGameObject(name)
 	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
 	this->constantbuffer->load(&cc, sizeof(constant));
 
-	this->cubeVertexShader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
-	this->cubePixelShader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
+	this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
+	this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
 	
 }
 
@@ -119,11 +119,11 @@ void Cube::draw(int width, int height)
 
 	this->constantbuffer->update(device, &cc);
 
-	device->setConstantBuffer(this->cubeVertexShader, this->constantbuffer);
-	device->setConstantBuffer(this->cubePixelShader, this->constantbuffer);
+	device->setConstantBuffer(this->vertex_shader, this->constantbuffer);
+	device->setConstantBuffer(this->pixel_shader, this->constantbuffer);
 
-	device->setVertexShader(this->cubeVertexShader);
-	device->setPixelShader(this->cubePixelShader);
+	device->setVertexShader(this->vertex_shader);
+	device->setPixelShader(this->pixel_shader);
 
 	device->setVertexBuffer(this->verterbuffer);
 	device->setIndexBuffer(this->indexbuffer);
