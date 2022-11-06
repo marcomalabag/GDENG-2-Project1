@@ -168,6 +168,8 @@ void Camera::update(float deltaTime)
 	float z = localPos.z;
 	float moveSpeed = 10.0f;
 
+	/*
+
 	if (defaultBool) {
 
 		this->defaultmode(deltaTime * moveSpeed, x, y, z);
@@ -197,7 +199,7 @@ void Camera::update(float deltaTime)
 		defaultBool = true;
 	}
 
-
+	*/
 	
 }
 

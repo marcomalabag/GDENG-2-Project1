@@ -8,6 +8,7 @@
 
 
 
+
 class Camera: public AGameObject, public InputListener
 {
 public:
