@@ -66,8 +66,16 @@ Cube::Cube(string name):AGameObject(name)
 
 void Cube::update(float deltaTime)
 {
-	
-	
+	/*
+	this->ticks += deltaTime;
+
+	deltaPos += (this->deltaTime / 10.0f) * this->speed;
+
+	if(this->ticks > 10.0f)
+	{
+		this->setScale(deltaPos, 0.1f, deltaPos);
+	}
+	*/
 }
 
 

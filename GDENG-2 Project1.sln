@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDENG-2 Project1 - Renderin
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDENG-2 Project1 - The Editor UI", "GDENG-2 Project1 - The Editor UI\GDENG-2 Project1 - The Editor UI.vcxproj", "{46A2F52D-4900-44C5-81E9-A743A8E3B380}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDENG-2 Project1 - 3D Rendering Support", "GDENG-2 Project1 - 3D Rendering Support\GDENG-2 Project1 - 3D Rendering Support.vcxproj", "{8DB9F510-EDF7-4BF3-9F47-BDEC60486637}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -81,6 +83,14 @@ Global
 		{46A2F52D-4900-44C5-81E9-A743A8E3B380}.Release|x64.Build.0 = Release|x64
 		{46A2F52D-4900-44C5-81E9-A743A8E3B380}.Release|x86.ActiveCfg = Release|Win32
 		{46A2F52D-4900-44C5-81E9-A743A8E3B380}.Release|x86.Build.0 = Release|Win32
+		{8DB9F510-EDF7-4BF3-9F47-BDEC60486637}.Debug|x64.ActiveCfg = Debug|x64
+		{8DB9F510-EDF7-4BF3-9F47-BDEC60486637}.Debug|x64.Build.0 = Debug|x64
+		{8DB9F510-EDF7-4BF3-9F47-BDEC60486637}.Debug|x86.ActiveCfg = Debug|Win32
+		{8DB9F510-EDF7-4BF3-9F47-BDEC60486637}.Debug|x86.Build.0 = Debug|Win32
+		{8DB9F510-EDF7-4BF3-9F47-BDEC60486637}.Release|x64.ActiveCfg = Release|x64
+		{8DB9F510-EDF7-4BF3-9F47-BDEC60486637}.Release|x64.Build.0 = Release|x64
+		{8DB9F510-EDF7-4BF3-9F47-BDEC60486637}.Release|x86.ActiveCfg = Release|Win32
+		{8DB9F510-EDF7-4BF3-9F47-BDEC60486637}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

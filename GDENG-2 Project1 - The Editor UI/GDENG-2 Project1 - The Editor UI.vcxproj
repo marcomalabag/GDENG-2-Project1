@@ -149,6 +149,7 @@
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="AUIScreen.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Card.h" />
     <ClInclude Include="ColorPickerScreen.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="CreditsScreen.h" />
@@ -198,6 +199,7 @@
     <ClCompile Include="AppWindow.cpp" />
     <ClCompile Include="AUIScreen.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Card.cpp" />
     <ClCompile Include="ColorPickerScreen.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="CreditsScreen.cpp" />

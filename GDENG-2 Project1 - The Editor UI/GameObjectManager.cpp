@@ -134,7 +134,98 @@ void GameObjectManager::createObject(PrimitiveType type)
 		this->addObject(sphere);
 		this->sphereCounter++;
 	}
+	else if(type == PrimitiveType::CARD)
+	{
+		Card* card = new Card("Card");
+		card->setPosition(0.0f, 0.9f, 0.0f);
+		card->setScale(1.0f, 1.0f, 1.0f);
+		card->setRotation(1.0f, 0.0f, 0.0f);
+		this->addObject(card);
 
+		Card* card2 = new Card("Card2");
+		card2->setPosition(0.0f, 0.9f, -0.2f);
+		card2->setScale(1.0f, 1.0f, 1.0f);
+		card2->setRotation(-1.0f, 0.0f, 0.0f);
+		this->addObject(card2);
+
+		Card* card3 = new Card("Card3");
+		card3->setPosition(0.0f, 0.7f, -0.1f);
+		card3->setScale(1.0f, 1.0f, 1.0f);
+		card3->setRotation(0.0f, 0.0f, 0.0f);
+		this->addObject(card3);
+
+		Card* card4 = new Card("Card4");
+		card4->setPosition(0.0f, 0.5f, 0.2f);
+		card4->setScale(1.0f, 1.0f, 1.0f);
+		card4->setRotation(1.0f, 0.0f, 0.0f);
+		this->addObject(card4);
+
+		Card* card5 = new Card("Card5");
+		card5->setPosition(0.0f, 0.5f, 0.0f);
+		card5->setScale(1.0f, 1.0f, 1.0f);
+		card5->setRotation(-1.0f, 0.0f, 0.0f);
+		this->addObject(card5);
+
+		Card* card6 = new Card("Card6");
+		card6->setPosition(0.0f, 0.3f, 0.1f);
+		card6->setScale(1.0f, 1.0f, 1.0f);
+		card6->setRotation(0.0f, 0.0f, 0.0f);
+		this->addObject(card6);
+
+		Card* card7 = new Card("Card7");
+		card7->setPosition(0.0f, 0.5f, -0.2f);
+		card7->setScale(1.0f, 1.0f, 1.0f);
+		card7->setRotation(1.0f, 0.0f, 0.0f);
+		this->addObject(card7);
+
+		Card* card8 = new Card("Card8");
+		card8->setPosition(0.0f, 0.5f, -0.41f);
+		card8->setScale(1.0f, 1.0f, 1.0f);
+		card8->setRotation(-1.0f, 0.0f, 0.0f);
+		this->addObject(card8);
+
+		Card* card9 = new Card("Card9");
+		card9->setPosition(0.0f, 0.3f, -0.31f);
+		card9->setScale(1.0f, 1.0f, 1.0f);
+		card9->setRotation(0.0f, 0.0f, 0.0f);
+		this->addObject(card9);
+
+		Card* card10 = new Card("Card10");
+		card10->setPosition(0.0f, 0.1f, 0.4f);
+		card10->setScale(1.0f, 1.0f, 1.0f);
+		card10->setRotation(1.0f, 0.0f, 0.0f);
+		this->addObject(card10);
+
+		Card* card11 = new Card("Card11");
+		card11->setPosition(0.0f, 0.1f, 0.2f);
+		card11->setScale(1.0f, 1.0f, 1.0f);
+		card11->setRotation(-1.0f, 0.0f, 0.0f);
+		this->addObject(card11);
+
+		Card* card12 = new Card("Card12");
+		card12->setPosition(0.0f, 0.1f, 0.0f);
+		card12->setScale(1.0f, 1.0f, 1.0f);
+		card12->setRotation(1.0f, 0.0f, 0.0f);
+		this->addObject(card12);
+
+		Card* card13 = new Card("Card13");
+		card13->setPosition(0.0f, 0.1f, -0.2f);
+		card13->setScale(1.0f, 1.0f, 1.0f);
+		card13->setRotation(-1.0f, 0.0f, 0.0f);
+		this->addObject(card13);
+
+		Card* card14 = new Card("Card14");
+		card14->setPosition(0.0f, 0.1f, -0.4f);
+		card14->setScale(1.0f, 1.0f, 1.0f);
+		card14->setRotation(1.0f, 0.0f, 0.0f);
+		this->addObject(card14);
+
+		Card* card15 = new Card("Card15");
+		card15->setPosition(0.0f, 0.1f, -0.6f);
+		card15->setScale(1.0f, 1.0f, 1.0f);
+		card15->setRotation(-1.0f, 0.0f, 0.0f);
+		this->addObject(card15);
+	}
 }
 
 void GameObjectManager::deleteObject(AGameObject* gameObject)
@@ -165,6 +256,61 @@ void GameObjectManager::setSelectedObject(string name)
 void GameObjectManager::setSelectedObject(AGameObject* gameObject)
 {
 	this->SelectedObject = gameObject;
+}
+
+void GameObjectManager::hundreadCubes()
+{
+	int max = 1.5f;
+	int min = -2.5f;
+	Math math;
+	for (int i = 0; i < 100; i++)
+	{
+		String cubename;
+		if (this->cubeCounter == 0)
+		{
+			cubename = "Cube";
+		}
+		else
+		{
+			String number = "(" + std::to_string(this->cubeCounter) + ")";
+			cubename = "Cube" + number;
+		}
+		Cube* cube = new Cube(cubename);
+		cube->setPosition(0.0f, 1.0f, 0.0f);
+		cube->setScale(1.0f, 1.0f, 1.0f);
+		this->addObject(cube);
+		this->cubeCounter++;
+	}
+	
+}
+
+void GameObjectManager::fiftyCubes()
+{
+	int max = 5.5f;
+	int min = -5.5f;
+	Math math;
+	for (int i = 0; i < 50; i++)
+	{
+		String cubename;
+		if (this->cubeCounter == 0)
+		{
+			cubename = "Cube";
+		}
+		else
+		{
+			String number = "(" + std::to_string(this->cubeCounter) + ")";
+			cubename = "Cube" + number;
+		}
+		float x = math.getRandom(min, max);
+		float y = math.getRandom(min, max);
+		float speed = math.getRandom(1.0f, 25.0f);
+		Cube* cube = new Cube(cubename);
+		cube->setPosition(x, y, 0.0f);
+		cube->setScale(1.0f, 1.0f, 1.0f);
+		cube->setAnimSpeed(speed);
+		this->addObject(cube);
+		this->cubeCounter++;
+	}
 }
 
 AGameObject* GameObjectManager::getSelectedObject()

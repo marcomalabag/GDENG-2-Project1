@@ -89,7 +89,7 @@ void AppWindow::onUpdate()
 		Planes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
 	}
 	*/
-	
+	GameObjectManager::getInstance()->updateAll();
 	GameObjectManager::getInstance()->renderAll(rc.right - rc.left, rc.bottom - rc.top);
 
 	m_swap_chain->present(true);

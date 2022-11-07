@@ -139,6 +139,9 @@
     <Filter Include="ShaderLibrary">
       <UniqueIdentifier>{73a88c85-dc24-4a98-bebc-09c19d77b2de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Primitives\3D\Card">
+      <UniqueIdentifier>{d01fbf6d-5527-4cf5-8234-f99c28642e7d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -269,6 +272,9 @@
     </ClCompile>
     <ClCompile Include="Shaderlibrary.cpp">
       <Filter>ShaderLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>Primitives\3D\Card</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -412,6 +418,9 @@
     </ClInclude>
     <ClInclude Include="Shaderlibrary.h">
       <Filter>ShaderLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="Card.h">
+      <Filter>Primitives\3D\Card</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
