@@ -134,6 +134,13 @@ void GameObjectManager::createObject(PrimitiveType type)
 		this->addObject(sphere);
 		this->sphereCounter++;
 	}
+	else if(type == PrimitiveType::TEXTURED_CUBE)
+	{
+		TexturedCube* Texcube = new TexturedCube("TexturedCube");
+		Texcube->setPosition(0.0f, 1.0f, 0.0f);
+		Texcube->setScale(1.0f, 1.0f, 1.0f);
+		this->addObject(Texcube);
+	}
 
 }
 

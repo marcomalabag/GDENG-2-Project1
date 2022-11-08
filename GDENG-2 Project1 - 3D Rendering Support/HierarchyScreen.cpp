@@ -21,15 +21,11 @@ HierarchyScreen::~HierarchyScreen()
 
 void HierarchyScreen::generateButtons()
 {
-	String test = "()";
-	String test2 = "Please";
 	GameObjectManager* manager = GameObjectManager::getInstance();
-
-	String rest = test + test2;
 
 	for(int i = 0; i < GameObjectManager::getInstance()->activeObjects(); i++)
 	{
-		if (ImGui::Button(manager->getAllObjects()[i]->getName().c_str(), ImVec2(70.0f, 0.0f)))
+		if (ImGui::Button(manager->getAllObjects()[i]->getName().c_str(), ImVec2(110.0f, 0.0f)))
 		{
 			AGameObject* selectedObject = manager->getAllObjects()[i];
 			manager->setSelectedObject(selectedObject->getName());

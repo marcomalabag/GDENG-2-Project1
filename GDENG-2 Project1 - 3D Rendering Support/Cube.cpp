@@ -134,6 +134,8 @@ void Cube::draw(int width, int height)
 	this->newDelta += this->ticks;
 
 	this->deltaTime = (oldDelta) ? ((newDelta - oldDelta) / 1000.0f) : 0;
+
+	
 }
 
 void Cube::setAnimSpeed(float speed)

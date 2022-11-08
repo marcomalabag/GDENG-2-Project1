@@ -151,6 +151,18 @@
     <Filter Include="GameEngine\GraphicsEngine\ResourceManager\TextureManager\Texture">
       <UniqueIdentifier>{ee20514b-c7fe-4f1f-973d-d4b73e78e2a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Primitives\3D\Cube\TexturedCube">
+      <UniqueIdentifier>{d4d87ec5-3674-4dc0-a7c5-5be1ba11e0c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Math\Vector2D">
+      <UniqueIdentifier>{bef12dd9-0a5c-40a3-bb2f-a35a881f27e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\GraphicsEngine\VertexBufferTextured">
+      <UniqueIdentifier>{0b9f9d8f-6f40-493a-b692-3c4b66c8a72c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextureLibrary">
+      <UniqueIdentifier>{3cce7281-a17e-47ca-b8e0-9e0f8349b582}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -293,6 +305,18 @@
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>GameEngine\GraphicsEngine\ResourceManager\TextureManager\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturedCube.cpp">
+      <Filter>Primitives\3D\Cube\TexturedCube</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2D.cpp">
+      <Filter>GameEngine\Math\Vector2D</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBufferTextured.cpp">
+      <Filter>GameEngine\GraphicsEngine\VertexBufferTextured</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureLibrary.cpp">
+      <Filter>TextureLibrary</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -449,6 +473,18 @@
     <ClInclude Include="Texture.h">
       <Filter>GameEngine\GraphicsEngine\ResourceManager\TextureManager\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="TexturedCube.h">
+      <Filter>Primitives\3D\Cube\TexturedCube</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>GameEngine\Math\Vector2D</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBufferTextured.h">
+      <Filter>GameEngine\GraphicsEngine\VertexBufferTextured</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureLibrary.h">
+      <Filter>TextureLibrary</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">
@@ -458,6 +494,12 @@
       <Filter>File Shaders</Filter>
     </FxCompile>
     <FxCompile Include="PixelShader.hlsl">
+      <Filter>File Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="TexturedVertexShader.hlsl">
+      <Filter>File Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="TexturedPixelShader.hlsl">
       <Filter>File Shaders</Filter>
     </FxCompile>
   </ItemGroup>

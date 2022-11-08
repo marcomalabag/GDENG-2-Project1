@@ -7,6 +7,7 @@
 #include "ConstantBuffer.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
+#include "VertexBufferTextured.h"
 
 
 class SwapChain;
@@ -14,6 +15,7 @@ class DeviceContext;
 class VertexBuffer;
 class ConstantBuffer;
 class IndexBuffer;
+class VertexBufferTextured;
 
 class GraphicsEngine
 {
@@ -31,6 +33,7 @@ public:
 	SwapChain* createSwapChain();
 	DeviceContext* getImmediateDeviceContext();
 	VertexBuffer* createVertexBuffer();
+	VertexBufferTextured* createTexturedVertexBuffer();
 	IndexBuffer* createIndexBuffer();
 	ConstantBuffer* createConstantBuffer();
 	VertexShader* createVertexShader(const void* shader_byte_code, size_t byte_code_size);

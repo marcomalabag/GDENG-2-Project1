@@ -74,6 +74,11 @@ String AGameObject::getName()
 	return this->name;
 }
 
+void AGameObject::setObjectTexture(Texture* texture)
+{
+	this->texture = texture;
+}
+
 AGameObject::~AGameObject()
 {
 	this->vertex_shader->release();

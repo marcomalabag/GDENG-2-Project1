@@ -12,6 +12,8 @@ public:
 	static void initialize();
 	static void destroy();
 
+	Texture* createTextureFromFile(const wchar_t* file_path);
+
 private:
 	static TextureManager* sharedInstance;
 	
@@ -19,7 +21,7 @@ private:
 	TextureManager();
 	~TextureManager();
 
-	Texture* createTextureFromFile(const wchar_t* file_path);
+	
 
 
 protected:

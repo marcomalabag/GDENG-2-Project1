@@ -12,6 +12,7 @@
 #include "Shaderlibrary.h"
 
 
+
 class Cube: public AGameObject
 {
 public:
@@ -23,8 +24,15 @@ public:
 	void setAnimSpeed(float speed);
 
 
-private:
+protected:
+	struct vertex
+	{
+		Vector3D position;
+		Vector3D color;
+		Vector3D color1;
+	};
 	VertexBuffer* verterbuffer;
+	
 	IndexBuffer* indexbuffer;
 	ConstantBuffer* constantbuffer;
 	float ticks = 0.0f;

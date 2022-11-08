@@ -13,6 +13,13 @@ Shaderlibrary::Shaderlibrary()
 
 	graphEngine->compilePixelShader(names.BASE_PIXEL_SHADER_NAME.c_str(), "psmain", &shaderdata.shaderByteCode, &shaderdata.sizeShader);
 	this->activePixelShaders[names.BASE_PIXEL_SHADER_NAME] = graphEngine->createPixelShader(shaderdata.shaderByteCode, shaderdata.sizeShader);
+
+	graphEngine->compileVertexShader(names.TEXTURED_VERTEX_SHADER_NAME.c_str(), "vsmain", &shaderdata.shaderByteCode, &shaderdata.sizeShader);
+	this->activeVertexShaders[names.TEXTURED_VERTEX_SHADER_NAME] = graphEngine->createVertexShader(shaderdata.shaderByteCode, shaderdata.sizeShader);
+
+	graphEngine->compilePixelShader(names.TEXTURED_PIXEL_SHADER_NAME.c_str(), "psmain", &shaderdata.shaderByteCode, &shaderdata.sizeShader);
+	this->activePixelShaders[names.TEXTURED_PIXEL_SHADER_NAME] = graphEngine->createPixelShader(shaderdata.shaderByteCode, shaderdata.sizeShader);
+	
 }
 
 Shaderlibrary* Shaderlibrary::getInstance()
@@ -42,7 +49,10 @@ void Shaderlibrary::requestVertexShaderData(String vertexShaderName, void** shad
 		
 	}
 
-	
+	else if(vertexShaderName == names.TEXTURED_VERTEX_SHADER_NAME)
+	{
+		graphEngine->compileVertexShader(names.TEXTURED_VERTEX_SHADER_NAME.c_str(), "vsmain", shaderByteCode, sizeShader);
+	}
 }
 
 void Shaderlibrary::requestPixelShaderData(String pixelShaderName, void** shaderByteCode, size_t* sizeShader)

@@ -38,6 +38,15 @@ void DeviceContext::setVertexBuffer(VertexBuffer* vertex_buffer)
 	this->Devicecontext->IASetInputLayout(vertex_buffer->Layout);
 }
 
+void DeviceContext::setVertexBufferTextured(VertexBufferTextured* textured_vertex_buffer)
+{
+	UINT stride = textured_vertex_buffer->getSizeVertexBuffer();
+	UINT offset = 0;
+
+	this->Devicecontext->IASetVertexBuffers(0, 1, &textured_vertex_buffer->Buffer, &stride, &offset);
+	this->Devicecontext->IASetInputLayout(textured_vertex_buffer->Layout);
+}
+
 void DeviceContext::setIndexBuffer(IndexBuffer* index_buffer)
 {
 	this->Devicecontext->IASetIndexBuffer(index_buffer->m_buffer, DXGI_FORMAT_R32_UINT, 0);
@@ -53,6 +62,11 @@ void DeviceContext::setConstantBuffer(VertexShader* vertex_shader, ConstantBuffe
 	this->Devicecontext->VSSetConstantBuffers(0, 1, &constant_buffer->Buffer);
 }
 
+void DeviceContext::setTexture(VertexShader* vertex_shader, Texture* texture)
+{
+	this->Devicecontext->VSSetShaderResources(0, 1, &texture->shaderResView);
+}
+
 void DeviceContext::setPixelShader(PixelShader* pixel_shader)
 {
 	this->Devicecontext->PSSetShader(pixel_shader->pixelshader, nullptr, 0);
@@ -61,6 +75,11 @@ void DeviceContext::setPixelShader(PixelShader* pixel_shader)
 void DeviceContext::setConstantBuffer(PixelShader* pixel_shader, ConstantBuffer* constant_buffer)
 {
 	this->Devicecontext->PSSetConstantBuffers(0, 1, &constant_buffer->Buffer);
+}
+
+void DeviceContext::setTexture(PixelShader* pixel_shader, Texture* texture)
+{
+	this->Devicecontext->PSSetShaderResources(0, 1, &texture->shaderResView);
 }
 
 

@@ -9,6 +9,7 @@
 #include "Cylinder.h"
 #include "Plane.h"
 #include "Sphere.h"
+#include "TexturedCube.h"
 
 typedef std::string String;
 typedef std::vector<AGameObject*> ObjectList;
@@ -24,7 +25,8 @@ public:
 		CUBE,
 		PLANE,
 		SPHERE,
-		CYLINDER
+		CYLINDER,
+		TEXTURED_CUBE
 	};
 
 	static GameObjectManager* getInstance();

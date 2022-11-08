@@ -29,6 +29,7 @@ void AppWindow::initializeEngine()
 	EngineTime::initialize();
 	SceneCameraHandler::initialize();
 	Shaderlibrary::initialize();
+	TextureManager::initialize();
 
 	InputSystem::getInstance()->showCursor(true);
 
@@ -103,7 +104,7 @@ void AppWindow::onDestroy()
 	InputSystem::destroy();
 	m_swap_chain->release();
 	GraphicsEngine::getInstance()->release();
-	
+	TextureManager::destroy();
 	
 }
 

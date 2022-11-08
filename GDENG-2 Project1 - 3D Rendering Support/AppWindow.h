@@ -24,6 +24,7 @@
 #include "UIManager.h"
 #include "GameObjectManager.h"
 #include "Shaderlibrary.h"
+#include "TextureManager.h"
 
 
 

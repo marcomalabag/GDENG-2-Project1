@@ -5,6 +5,7 @@
 #include "VertexShader.h"
 #include "PixelShader.h"
 #include <vector>
+#include "Texture.h"
 
 using namespace std;
 typedef std::string String;
@@ -52,6 +53,8 @@ public:
 
 	String getName();
 
+	void setObjectTexture(Texture* texture);
+
 
 
 protected:
@@ -61,6 +64,8 @@ protected:
 	Vector3D Scale;
 	Vector3D Rotation;
 	String name;
+	bool isTextured = false;
+	Texture* texture;
 };
 
 
