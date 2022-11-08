@@ -30,6 +30,7 @@ void AppWindow::initializeEngine()
 	SceneCameraHandler::initialize();
 	Shaderlibrary::initialize();
 	TextureManager::initialize();
+	TextureLibrary::initialize();
 
 	InputSystem::getInstance()->showCursor(true);
 

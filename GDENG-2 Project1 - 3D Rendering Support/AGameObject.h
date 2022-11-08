@@ -54,7 +54,9 @@ public:
 	String getName();
 
 	void setObjectTexture(Texture* texture);
-
+	Texture* getObjectTexture();
+	void setTextureFlag();
+	bool textureFlag();
 
 
 protected:

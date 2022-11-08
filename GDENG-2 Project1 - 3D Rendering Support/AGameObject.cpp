@@ -79,6 +79,21 @@ void AGameObject::setObjectTexture(Texture* texture)
 	this->texture = texture;
 }
 
+Texture* AGameObject::getObjectTexture()
+{
+	return this->texture;
+}
+
+void AGameObject::setTextureFlag()
+{
+	this->isTextured = true;
+}
+
+bool AGameObject::textureFlag()
+{
+	return this->isTextured;
+}
+
 AGameObject::~AGameObject()
 {
 	this->vertex_shader->release();

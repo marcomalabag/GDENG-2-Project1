@@ -17,6 +17,36 @@ void InspectorScreen::generateEditor()
 {
 	if(GameObjectManager::getInstance()->getSelectedObject() != NULL)
 	{
+		if(GameObjectManager::getInstance()->getSelectedObject()->textureFlag())
+		{
+			ImGui::Text("Textured Object");
+			static const char* textures[] = { "Select Texture", "Brick", "Wall", "Wood"};
+			static int currView = 0;
+
+			ImGui::Combo("Current texture", &currView, textures, IM_ARRAYSIZE(textures));
+			if(currView == 0)
+			{
+				GameObjectManager::getInstance()->getSelectedObject()->setObjectTexture(
+					GameObjectManager::getInstance()->getSelectedObject()->getObjectTexture());
+			}
+			else if (currView == 1)
+			{
+				GameObjectManager::getInstance()->getSelectedObject()->setObjectTexture(
+					TextureLibrary::getInstance()->getTexture(filenames.BRICK));
+			}
+			else if(currView == 2)
+			{
+				GameObjectManager::getInstance()->getSelectedObject()->setObjectTexture(
+					TextureLibrary::getInstance()->getTexture(filenames.WALL));
+			}
+			else if (currView == 3)
+			{
+				GameObjectManager::getInstance()->getSelectedObject()->setObjectTexture(
+					TextureLibrary::getInstance()->getTexture(filenames.WOOD));
+			}
+		}
+
+
 		ImGui::Text("Selected Object: %s", GameObjectManager::getInstance()->getSelectedObject()->getName().c_str());
 		this->TransformUpdate();
 		if(ImGui::InputFloat3("Position", this->SelectedObjectposition, 3))
