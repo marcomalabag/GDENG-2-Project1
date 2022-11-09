@@ -152,6 +152,13 @@ void GameObjectManager::createObject(PrimitiveType type)
 		this->addObject(Texcube);
 		this->TexturedCubecounter++;
 	}
+	else if(type == PrimitiveType::TEAPOT)
+	{
+		Teapot* teapot = new Teapot("Teapot");
+		teapot->setPosition(0.0f, 1.0f, 0.0f);
+		teapot->setScale(1.0f, 1.0f, 1.0f);
+		this->addObject(teapot);
+	}
 
 }
 
