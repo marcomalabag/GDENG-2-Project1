@@ -10,7 +10,9 @@
 #include "Plane.h"
 #include "Sphere.h"
 #include "TexturedCube.h"
-#include "Teapot.h"
+#include "OBJStructure.h"
+#include "TextureLibrary.h"
+#include "MeshManager.h"
 
 typedef std::string String;
 typedef std::vector<AGameObject*> ObjectList;
@@ -27,8 +29,15 @@ public:
 		PLANE,
 		SPHERE,
 		CYLINDER,
-		TEXTURED_CUBE,
-		TEAPOT
+		TEXTURED_CUBE
+	};
+
+	enum OBJMODEL
+	{	
+		TEAPOT,
+		ARMADILLO,
+		BUNNY,
+		STATUE
 	};
 
 	static GameObjectManager* getInstance();
@@ -42,6 +51,7 @@ public:
 	void renderAll(int viewportWidth, int viewportHeight);
 	void addObject(AGameObject* gameObject);
 	void createObject(PrimitiveType type);
+	void createOBJMODEL(OBJMODEL model);
 	void deleteObject(AGameObject* gameObject);
 	void deleteObjectByName(string name);
 	void setSelectedObject(string name);

@@ -152,14 +152,49 @@ void GameObjectManager::createObject(PrimitiveType type)
 		this->addObject(Texcube);
 		this->TexturedCubecounter++;
 	}
-	else if(type == PrimitiveType::TEAPOT)
+	
+
+}
+
+void GameObjectManager::createOBJMODEL(OBJMODEL model)
+{
+	TextureFileName filename;
+	if(model == OBJMODEL::TEAPOT)
 	{
-		Teapot* teapot = new Teapot("Teapot");
+		Texture* tex = TextureLibrary::getInstance()->getTexture(filename.BRICK);
+		Mesh* mesh = MeshManager::getInstance()->createMeshFromFile(L"Assets\\Meshes\\teapot.obj");
+		OBJStructure* teapot = new OBJStructure(mesh, tex, "Teapot");
 		teapot->setPosition(0.0f, 1.0f, 0.0f);
 		teapot->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(teapot);
 	}
-
+	else if(model == OBJMODEL::ARMADILLO)
+	{
+		Texture* tex = TextureLibrary::getInstance()->getTexture(filename.BRICK);
+		Mesh* mesh = MeshManager::getInstance()->createMeshFromFile(L"Assets\\Meshes\\armadillo.obj");
+		OBJStructure* armadillo = new OBJStructure(mesh, tex, "Armadillo");
+		armadillo->setPosition(0.0f, 1.0f, 0.0f);
+		armadillo->setScale(1.0f, 1.0f, 1.0f);
+		this->addObject(armadillo);
+	}
+	else if(model == OBJMODEL::BUNNY)
+	{
+		Texture* tex = TextureLibrary::getInstance()->getTexture(filename.BRICK);
+		Mesh* mesh = MeshManager::getInstance()->createMeshFromFile(L"Assets\\Meshes\\bunny.obj");
+		OBJStructure* bunny = new OBJStructure(mesh, tex, "Bunny");
+		bunny->setPosition(0.0f, 1.0f, 0.0f);
+		bunny->setScale(4.0f, 4.0f, 4.0f);
+		this->addObject(bunny);
+	}
+	else if (model == OBJMODEL::STATUE)
+	{
+		Texture* tex = TextureLibrary::getInstance()->getTexture(filename.BRICK);
+		Mesh* mesh = MeshManager::getInstance()->createMeshFromFile(L"Assets\\Meshes\\statue.obj");
+		OBJStructure* statue = new OBJStructure(mesh, tex, "Statue");
+		statue->setPosition(0.0f, 1.0f, 1.0f);
+		statue->setScale(3.0f, 3.0f, 3.0f);
+		this->addObject(statue);
+	}
 }
 
 void GameObjectManager::deleteObject(AGameObject* gameObject)
@@ -168,7 +203,7 @@ void GameObjectManager::deleteObject(AGameObject* gameObject)
 	int index = -1;
 	for(int i = 0; i < this->GameObjectList.size(); i++)
 	{
-		if(this->GameObjectList[i] == gameObject)
+		if(this->GameObjectList[i]->getName() == gameObject->getName())
 		{
 			index = i;
 			this->GameObjectList.erase(this->GameObjectList.begin() + index);

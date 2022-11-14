@@ -8,7 +8,7 @@ Teapot::Teapot(String name): AGameObject(name)
 
 
 
-	this->teapot = MeshManager::getInstance()->createMeshFromFile(L"Assets\\Meshes\\armadillo.obj");
+	this->teapot = MeshManager::getInstance()->createMeshFromFile(L"Assets\\Meshes\\bunny.obj");
 
 	constant cc;
 	cc.time = 0;

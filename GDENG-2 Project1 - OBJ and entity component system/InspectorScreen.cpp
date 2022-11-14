@@ -50,15 +50,15 @@ void InspectorScreen::generateEditor()
 
 		ImGui::Text("Selected Object: %s", GameObjectManager::getInstance()->getSelectedObject()->getName().c_str());
 		this->TransformUpdate();
-		if(ImGui::InputFloat3("Position", this->SelectedObjectposition, 3))
+		if (ImGui::DragFloat3("Position", this->SelectedObjectposition, 0.01f))
 		{
 			this->TransformSelected(GameObjectManager::getInstance()->getSelectedObject());
 		}
-		if (ImGui::InputFloat3("Rotation", this->SelectedObjectRotation, 3))
+		if (ImGui::DragFloat3("Rotation", this->SelectedObjectRotation, 3))
 		{
 			this->TransformSelected(GameObjectManager::getInstance()->getSelectedObject());
 		}
-		if (ImGui::InputFloat3("Scale", this->SelectedObjectScale, 3))
+		if (ImGui::DragFloat3("Scale", this->SelectedObjectScale, 3))
 		{
 			this->TransformSelected(GameObjectManager::getInstance()->getSelectedObject());
 		}

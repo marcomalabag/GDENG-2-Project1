@@ -20,7 +20,15 @@ void MenuScreen::drawUI()
 			if (ImGui::MenuItem("Create Sphere")) { GameObjectManager::getInstance()->createObject(GameObjectManager::SPHERE); }
 			if (ImGui::MenuItem("Create Plane")) { GameObjectManager::getInstance()->createObject(GameObjectManager::PLANE); }
 			if(ImGui::MenuItem("Create Cylinder")){ GameObjectManager::getInstance()->createObject(GameObjectManager::CYLINDER);}
-			if (ImGui::MenuItem("Create Teapot")) { GameObjectManager::getInstance()->createObject(GameObjectManager::TEAPOT); }
+			
+			ImGui::EndMenu();
+		}
+		if(ImGui::BeginMenu("OBJ Model"))
+		{
+			if (ImGui::MenuItem("Create Teapot")) { GameObjectManager::getInstance()->createOBJMODEL(GameObjectManager::TEAPOT);  }
+			if (ImGui::MenuItem("Create Statue")) { GameObjectManager::getInstance()->createOBJMODEL(GameObjectManager::STATUE); }
+			if (ImGui::MenuItem("Create Armadillo")) { GameObjectManager::getInstance()->createOBJMODEL(GameObjectManager::ARMADILLO); }
+			if (ImGui::MenuItem("Create Bunny")) { GameObjectManager::getInstance()->createOBJMODEL(GameObjectManager::BUNNY); }
 			ImGui::EndMenu();
 		}
 		if (ImGui::MenuItem("Color Picker")) { UIManager::getInstance()->showColorPickerScreen(); }

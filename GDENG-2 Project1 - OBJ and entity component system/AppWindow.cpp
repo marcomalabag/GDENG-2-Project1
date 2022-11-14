@@ -21,6 +21,7 @@ void AppWindow::onCreate()
 {
 	Window::onCreate();
 	InputSystem::initialize();
+	BaseSystem::initialize();
 }
 
 void AppWindow::initializeEngine()
@@ -107,7 +108,7 @@ void AppWindow::onDestroy()
 	m_swap_chain->release();
 	GraphicsEngine::getInstance()->release();
 	TextureManager::destroy();
-	
+	BaseSystem::destroy();
 }
 
 void AppWindow::onFocus()

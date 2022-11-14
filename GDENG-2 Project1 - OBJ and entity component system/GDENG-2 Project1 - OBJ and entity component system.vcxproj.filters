@@ -175,6 +175,15 @@
     <Filter Include="Primitives\OBJ">
       <UniqueIdentifier>{768e5d68-b299-4b85-98f0-6a3fa1430c4d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BaseSystem">
+      <UniqueIdentifier>{9f4c3939-b4ad-4417-9399-f713735227a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSystem\PhysicsSystem">
+      <UniqueIdentifier>{43348cc2-74ca-49f3-b266-4549076ecb8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{a1766f9b-2332-4487-bdd8-cd29e0239660}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -341,6 +350,18 @@
     </ClCompile>
     <ClCompile Include="Teapot.cpp">
       <Filter>Primitives\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="OBJStructure.cpp">
+      <Filter>Primitives\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseSystem.cpp">
+      <Filter>BaseSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSystem.cpp">
+      <Filter>BaseSystem\PhysicsSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="AComponent.cpp">
+      <Filter>Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -520,6 +541,18 @@
     </ClInclude>
     <ClInclude Include="Teapot.h">
       <Filter>Primitives\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJStructure.h">
+      <Filter>Primitives\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseSystem.h">
+      <Filter>BaseSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem.h">
+      <Filter>BaseSystem\PhysicsSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="AComponent.h">
+      <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
