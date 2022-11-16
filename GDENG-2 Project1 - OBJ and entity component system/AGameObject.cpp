@@ -142,6 +142,61 @@ void AGameObject::ComputeLocalMatrix()
 	this->LocalMatrix = this->Summation;
 }
 
+void AGameObject::attachComponent(AComponent* component)
+{
+	this->componentList.push_back(component);
+	component->attachOwner(this);
+}
+
+void AGameObject::detachComponent(AComponent* component)
+{
+	int index = -1;
+	for (int i = 0; i < this->componentList.size(); i++) {
+		if (this->componentList[i] == component) {
+			index = i;
+			this->componentList.erase(this->componentList.begin() + index);
+			break;
+		}
+	}
+}
+
+AComponent* AGameObject::findComponentByName(String name)
+{
+	AComponent* found = nullptr;
+	for(int i = 0; i < this->componentList.size(); i++)
+	{
+		if(this->componentList[i]->getName() == name)
+		{
+			found = this->componentList[i];
+		}
+	}
+	return found;
+}
+
+AComponent* AGameObject::findComponentbyType(AComponent::ComponentType type, String name)
+{
+	AComponent* found = nullptr;
+	for (int i = 0; i < this->componentList.size(); i++)
+	{
+		if (this->componentList[i]->getName() == name && this->componentList[i]->getType() == type)
+		{
+			found = this->componentList[i];
+		}
+	}
+	return found;
+}
+
+AGameObject::ComponentList AGameObject::getComponentsOfType(AComponent::ComponentType type)
+{
+	ComponentList foundList;
+	for (int i = 0; i < this->componentList.size(); i++)
+	{
+		foundList.push_back(this->componentList[i]);
+	}
+
+	return foundList;
+}
+
 void AGameObject::setObjectTexture(Texture* texture)
 {
 	this->texture = texture;

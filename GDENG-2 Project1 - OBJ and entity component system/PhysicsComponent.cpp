@@ -1,5 +1,7 @@
 #include "PhysicsComponent.h"
 #include "BaseSystem.h"
+#include "AGameObject.h"
+#include "Vector3D.h"
 
 PhysicsComponent::PhysicsComponent(String name, AGameObject* owner) : AComponent(name, ComponentType::Physics, owner)
 {

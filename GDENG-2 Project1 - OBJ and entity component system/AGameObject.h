@@ -61,6 +61,13 @@ public:
 	String getName();
 	void ComputeLocalMatrix();
 
+	void attachComponent(AComponent* component);
+	void detachComponent(AComponent* component);
+
+	AComponent* findComponentByName(String name);
+	AComponent* findComponentbyType(AComponent::ComponentType type, String name);
+	ComponentList getComponentsOfType(AComponent::ComponentType type);
+
 	void setObjectTexture(Texture* texture);
 	Texture* getObjectTexture();
 	void setTextureFlag();
