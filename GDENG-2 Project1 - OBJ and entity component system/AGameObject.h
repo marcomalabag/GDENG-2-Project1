@@ -1,14 +1,14 @@
 #pragma once
-#include <iostream>
 #include "Matrix4x4.h"
 #include "Vector3D.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
 #include <vector>
 #include "Texture.h"
+#include "AComponent.h"
+#include <string>
+#include "reactphysics3d/reactphysics3d.h"
 
-using namespace std;
-typedef std::string String;
 
 class AGameObject
 {

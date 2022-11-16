@@ -11,7 +11,7 @@
 class Camera: public AGameObject, public InputListener
 {
 public:
-	Camera(string name);
+	Camera(String name);
 	~Camera();
 
 	void update(float deltaTime) override;

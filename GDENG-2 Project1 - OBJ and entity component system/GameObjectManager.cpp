@@ -23,7 +23,7 @@ void GameObjectManager::destroy()
 	delete sharedInstance;
 }
 
-AGameObject* GameObjectManager::findObjectByName(string name)
+AGameObject* GameObjectManager::findObjectByName(String name)
 {
 	return this->GameObjectTable.at(name);
 }
@@ -212,12 +212,12 @@ void GameObjectManager::deleteObject(AGameObject* gameObject)
 	}
 }
 
-void GameObjectManager::deleteObjectByName(string name)
+void GameObjectManager::deleteObjectByName(String name)
 {
 	this->deleteObject(this->GameObjectTable.at(name));
 }
 
-void GameObjectManager::setSelectedObject(string name)
+void GameObjectManager::setSelectedObject(String name)
 {
 	this->setSelectedObject(this->GameObjectTable.at(name));
 }

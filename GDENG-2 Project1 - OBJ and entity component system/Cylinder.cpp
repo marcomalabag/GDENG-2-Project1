@@ -1,7 +1,7 @@
 #include "Cylinder.h"
 
 
-Cylinder::Cylinder(string name): AGameObject(name)
+Cylinder::Cylinder(String name): AGameObject(name)
 {
 	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.BASE_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);
 

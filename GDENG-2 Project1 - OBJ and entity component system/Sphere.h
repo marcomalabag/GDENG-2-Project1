@@ -10,7 +10,7 @@
 class Sphere: public AGameObject
 {
 public:
-	Sphere(string name);
+	Sphere(String name);
 	~Sphere();
 
 	void draw(int width, int height) override;

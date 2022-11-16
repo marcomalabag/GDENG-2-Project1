@@ -73,26 +73,6 @@ void AppWindow::onUpdate()
 	SceneCameraHandler::getInstance()->update();
 	InputSystem::getInstance()->update();
 	UIManager::getInstance()->drawAllUI();
-	//Cube drawing
-
-	/*
-	for (int i = 0; i < Cubes.size(); i++)
-	{
-		
-		Cubes[i]->update(ticks);
-		Cubes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
-	}
-	
-	sphere->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
-	cylinder->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
-	
-	//Cube and plane initialization
-	
-	for (int i = 0; i < Planes.size(); i++)
-	{
-		Planes.at(i)->draw(rc.right - rc.left, rc.bottom - rc.top, this->vertexshader, this->pixelshader);
-	}
-	*/
 	
 	GameObjectManager::getInstance()->renderAll(rc.right - rc.left, rc.bottom - rc.top);
 

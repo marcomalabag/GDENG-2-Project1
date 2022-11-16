@@ -9,7 +9,7 @@
 class Cylinder: public AGameObject
 {
 public:
-	Cylinder(string name);
+	Cylinder(String name);
 	void draw(int width, int height) override;
 	void update(float deltaTime) override;
 	~Cylinder();

@@ -1,7 +1,7 @@
 #include "Cube.h"
 
 
-Cube::Cube(string name):AGameObject(name)
+Cube::Cube(String name):AGameObject(name)
 {
 
 	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.BASE_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);

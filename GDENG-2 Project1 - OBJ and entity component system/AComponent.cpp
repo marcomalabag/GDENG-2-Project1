@@ -17,7 +17,7 @@ AComponent::ComponentType AComponent::getType()
 	return this->type;
 }
 
-String AComponent::getName()
+AComponent::String AComponent::getName()
 {
 	return this->name;
 }

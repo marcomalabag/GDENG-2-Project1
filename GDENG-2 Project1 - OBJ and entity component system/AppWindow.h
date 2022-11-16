@@ -71,32 +71,9 @@ private:
 
 private:
 	SwapChain* m_swap_chain;
-	VertexBuffer* vertexbuffer;
-	VertexShader* vertexshader;
-	PixelShader* pixelshader;
-	ConstantBuffer* constantbuffer;
-	IndexBuffer* indexbuffer;
-
-	long oldTime;
-	long newdeltaTime;
-	float deltaTime = 0;
-
-	float angle = 0;
 	float ticks = 0.0f;
 
-	float deltaPosition;
-	float deltaScale;
-	float deltaRotaion;
 
-	std::vector <class Triangle*> triangle;
-	std::vector<class Rectangle*> rectangle;
-	std::vector <Cube*> Cubes;
-	std::vector <Plane*> Planes;
 	
-	Sphere* sphere;
-	Cylinder* cylinder;
-
-	Vector3D positions[3];
-	Vector3D TrianglePositions[3];
 };
 

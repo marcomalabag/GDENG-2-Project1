@@ -4,7 +4,7 @@
 class Plane : public Cube
 {
 public:
-	Plane(string name);
+	Plane(String name);
 	~Plane();
 
 	void draw(int width, int height) override;

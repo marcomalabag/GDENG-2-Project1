@@ -44,7 +44,7 @@ public:
 	static void initialize();
 	static void destroy();
 
-	AGameObject* findObjectByName(string name);
+	AGameObject* findObjectByName(String name);
 	ObjectList getAllObjects();
 	int activeObjects();
 	void updateAll();
@@ -53,8 +53,8 @@ public:
 	void createObject(PrimitiveType type);
 	void createOBJMODEL(OBJMODEL model);
 	void deleteObject(AGameObject* gameObject);
-	void deleteObjectByName(string name);
-	void setSelectedObject(string name);
+	void deleteObjectByName(String name);
+	void setSelectedObject(String name);
 	void setSelectedObject(AGameObject* gameObject);
 	AGameObject* getSelectedObject();
 	

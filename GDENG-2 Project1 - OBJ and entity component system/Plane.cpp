@@ -1,6 +1,6 @@
 #include "Plane.h"
 
-Plane::Plane(string name): Cube(name)
+Plane::Plane(String name): Cube(name)
 {
 	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.BASE_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);
 

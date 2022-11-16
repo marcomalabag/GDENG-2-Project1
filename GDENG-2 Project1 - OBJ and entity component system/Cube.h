@@ -16,7 +16,7 @@
 class Cube: public AGameObject
 {
 public:
-	Cube(string name);
+	Cube(String name);
 	~Cube();
 
 	void update(float deltaTime) override;
