@@ -5,11 +5,14 @@
 #include <Windows.h>
 #include <unordered_set>
 
-typedef std::vector<InputListener*> List;
+
 
 class InputSystem
 {
 public:
+
+	typedef std::vector<InputListener*> List;
+
 	static InputSystem* getInstance();
 	static void initialize();
 	static void destroy();
