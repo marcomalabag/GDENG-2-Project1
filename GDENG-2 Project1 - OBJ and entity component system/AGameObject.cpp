@@ -162,6 +162,10 @@ bool AGameObject::textureFlag()
 	return this->isTextured;
 }
 
+void AGameObject::awake()
+{
+}
+
 AGameObject::~AGameObject()
 {
 	this->vertex_shader->release();

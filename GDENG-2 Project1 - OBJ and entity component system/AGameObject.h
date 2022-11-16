@@ -10,10 +10,11 @@
 #include "reactphysics3d/reactphysics3d.h"
 
 using namespace reactphysics3d;
+class AComponent;
 class AGameObject
 {
 public:
-	typedef std::string String;
+	
 	struct vertex
 	{
 		Vector3D position;
@@ -29,6 +30,9 @@ public:
 		Matrix4x4 projection;
 		unsigned int time;
 	};
+
+	typedef std::string String;
+	typedef std::vector<AComponent*> ComponentList;
 
 	AGameObject(String name);
 	~AGameObject();
@@ -86,6 +90,11 @@ protected:
 	Matrix4x4 RotationMatrix;
 
 	Matrix4x4 RotationTotal;
+
+	ComponentList componentList;
+	bool overrideMatrix = false;
+
+	virtual void awake();
 };
 
 
