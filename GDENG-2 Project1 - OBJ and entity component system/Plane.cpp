@@ -62,30 +62,8 @@ Plane::Plane(string name): Cube(name)
 void Plane::draw(int width, int height)
 {
 	constant cc;
-	Matrix4x4 temp;
-
-	this->Summation.setIdentity();
-	this->translate.setIdentity();
-	this->Scale.setIdentity();
-
-	translate.setTranslation(this->getLocalPosition());
-	Scale.setScale(this->getLocalScale());
-	rotation = Vector3D(this->getLocalRotation());
-
-	this->RotationZ.setIdentity();
-	this->RotationZ.setRotationZ(rotation.z);
-
-	this->RotationF.setIdentity();
-	this->RotationF.setRotationX(rotation.x);
-
-	this->RotationGl.setIdentity();
-	this->RotationGl.setRotationY(rotation.y);
-
-	this->RotationTotal.setIdentity();
-	this->RotationTotal = this->RotationTotal.mulMatrix(RotationF.mulMatrix(RotationGl.mulMatrix(RotationZ)));
-	this->Summation = this->Summation.mulMatrix(Scale.mulMatrix(this->RotationTotal));
-	this->Summation = this->Summation.mulMatrix(this->translate);
-	cc.world = this->Summation;
+	this->ComputeLocalMatrix();
+	cc.world = this->getLocalMatrix();
 
 	Matrix4x4 cameraMatrix = SceneCameraHandler::getInstance()->getSceneCameraViewMatrix();
 	cc.view = cameraMatrix;
@@ -117,10 +95,7 @@ void Plane::draw(int width, int height)
 	device->setVertexBuffer(this->verterbuffer);
 	device->setIndexBuffer(this->indexbuffer);
 	device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
-	this->oldDelta = this->newDelta;
-	this->newDelta += this->ticks;
-
-	this->deltaTime = (oldDelta) ? ((newDelta - oldDelta) / 1000.0f) : 0;
+	
 }
 
 Plane::~Plane()

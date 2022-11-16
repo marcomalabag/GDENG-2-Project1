@@ -121,6 +121,11 @@ void Matrix4x4::setMatrix(const Matrix4x4& matrix)
 	::memcpy(Matrix, matrix.Matrix, sizeof(float) * 16);
 }
 
+void Matrix4x4::setMatrix(float matrix[4][4])
+{
+	::memcpy(Matrix, matrix, sizeof(float) * 16);
+}
+
 
 Vector3D Matrix4x4::getXDirection()
 {

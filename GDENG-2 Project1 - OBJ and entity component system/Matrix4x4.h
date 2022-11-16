@@ -21,6 +21,7 @@ public:
 	void getInverse();
 	void operator*=(const Matrix4x4& matrix);
 	void setMatrix(const Matrix4x4& matrix);
+	void setMatrix(float matrix[4][4]);
 	Matrix4x4 getScalar(int constant);
 	Matrix4x4 mulMatrix(Matrix4x4 in);
 	void setOrthoLH(float width, float height, float near_plane, float far_plane);

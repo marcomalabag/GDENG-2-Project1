@@ -119,7 +119,6 @@ Cylinder::Cylinder(string name): AGameObject(name)
 	this->indexbuffer->load(&(this->Indices[0]), this->Indices.size());
 
 	constant cc;
-	cc.time = 0;
 	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
 	this->constantbuffer->load(&cc, sizeof(constant));
 
@@ -130,43 +129,12 @@ Cylinder::Cylinder(string name): AGameObject(name)
 void Cylinder::draw(int width, int height)
 {
 	constant cc;
-	Matrix4x4 temp;
-
-	this->Summation.setIdentity();
-	this->translate.setIdentity();
-	this->Scale.setIdentity();
-
-	translate.setTranslation(this->getLocalPosition());
-	Scale.setScale(this->getLocalScale());
-	rotation = Vector3D(this->getLocalRotation());
-
-	this->RotationZ.setIdentity();
-	this->RotationZ.setRotationZ(rotation.z);
-
-	this->RotationF.setIdentity();
-	this->RotationF.setRotationX(rotation.x);
-
-	this->RotationGl.setIdentity();
-	this->RotationGl.setRotationY(rotation.y);
-
-	this->RotationTotal.setIdentity();
-	this->RotationTotal = this->RotationTotal.mulMatrix(RotationF.mulMatrix(RotationGl.mulMatrix(RotationZ)));
-	this->Summation = this->Summation.mulMatrix(Scale.mulMatrix(this->RotationTotal));
-	this->Summation = this->Summation.mulMatrix(this->translate);
-	cc.world = this->Summation;
+	this->ComputeLocalMatrix();
+	cc.world = this->getLocalMatrix();
 
 	Matrix4x4 cameraMatrix = SceneCameraHandler::getInstance()->getSceneCameraViewMatrix();
 	cc.view = cameraMatrix;
 
-	/*
-	cc.projection.setOrthoLH
-	(
-		width / 300.0f,
-		height / 300.0f,
-		-4.0f,
-		4.0f
-	);
-	*/
 	float aspectRatio = (float)width / (float)height;
 
 	cc.projection.setPerspectiveFovLH(aspectRatio, aspectRatio, 0.1f, 1000.0f);
@@ -186,15 +154,11 @@ void Cylinder::draw(int width, int height)
 
 	device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
 
-	this->oldDelta = this->newDelta;
-	this->newDelta += this->ticks;
-
-	this->deltaTime = (oldDelta) ? ((newDelta - oldDelta) / 100.0f) : 0;
 }
 
 void Cylinder::update(float deltaTime)
 {
-	this->deltaTime = deltaTime;
+	
 }
 
 Cylinder::~Cylinder()

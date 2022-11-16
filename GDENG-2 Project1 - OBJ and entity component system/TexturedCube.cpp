@@ -114,35 +114,12 @@ TexturedCube::TexturedCube(String name): Cube(name)
 
 void TexturedCube::draw(int width, int height)
 {
-	ShaderNames shaderNames;
-	
 	DeviceContext* context = GraphicsEngine::getInstance()->getImmediateDeviceContext();
 
 	constant cc;
-	Matrix4x4 temp;
+	this->ComputeLocalMatrix();
 
-	this->Summation.setIdentity();
-	this->translate.setIdentity();
-	this->Scale.setIdentity();
-
-	translate.setTranslation(this->getLocalPosition());
-	Scale.setScale(this->getLocalScale());
-	rotation = Vector3D(this->getLocalRotation());
-
-	this->RotationZ.setIdentity();
-	this->RotationZ.setRotationZ(rotation.z);
-
-	this->RotationF.setIdentity();
-	this->RotationF.setRotationX(rotation.x);
-
-	this->RotationGl.setIdentity();
-	this->RotationGl.setRotationY(rotation.y);
-
-	this->RotationTotal.setIdentity();
-	this->RotationTotal = this->RotationTotal.mulMatrix(RotationF.mulMatrix(RotationGl.mulMatrix(RotationZ)));
-	this->Summation = this->Summation.mulMatrix(Scale.mulMatrix(this->RotationTotal));
-	this->Summation = this->Summation.mulMatrix(this->translate);
-	cc.world = this->Summation;
+	cc.world = this->getLocalMatrix();
 
 	Matrix4x4 cameraMatrix = SceneCameraHandler::getInstance()->getSceneCameraViewMatrix();
 	cc.view = cameraMatrix;
@@ -171,10 +148,6 @@ void TexturedCube::draw(int width, int height)
 
 	device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
 
-	this->oldDelta = this->newDelta;
-	this->newDelta += this->ticks;
-
-	this->deltaTime = (oldDelta) ? ((newDelta - oldDelta) / 1000.0f) : 0;
 }
 
 void TexturedCube::update(float deltaTime)

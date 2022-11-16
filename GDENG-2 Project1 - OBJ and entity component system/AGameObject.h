@@ -44,6 +44,9 @@ public:
 	void setScale(Vector3D scale);
 	Vector3D getLocalScale();
 
+	void setLocalMatrix(float matrix[16]);
+	Matrix4x4 getLocalMatrix();
+
 	void setRotation(float x, float y, float z);
 	void setRotation(Vector3D rot);
 	void setRotationX(float x);
@@ -52,6 +55,7 @@ public:
 	Vector3D getLocalRotation();
 
 	String getName();
+	void ComputeLocalMatrix();
 
 	void setObjectTexture(Texture* texture);
 	Texture* getObjectTexture();
@@ -68,6 +72,20 @@ protected:
 	String name;
 	bool isTextured = false;
 	Texture* texture;
+	Matrix4x4 LocalMatrix;
+
+	Vector3D rotation;
+
+	Matrix4x4 Summation;
+	Matrix4x4 translate;
+	Matrix4x4 ScaleMatrix;
+
+	Matrix4x4 RotationZ;
+	Matrix4x4 RotationF;
+	Matrix4x4 RotationGl;
+	Matrix4x4 RotationMatrix;
+
+	Matrix4x4 RotationTotal;
 };
 
 

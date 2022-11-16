@@ -39,6 +39,48 @@ Vector3D AGameObject::getLocalScale()
 	return this->Scale;
 }
 
+void AGameObject::setLocalMatrix(float matrix[16])
+{
+	float Matrix[4][4];
+
+	Matrix[0][0] = matrix[0];
+	Matrix[0][1] = matrix[1];
+	Matrix[0][2] = matrix[2];
+	Matrix[0][3] = matrix[3];
+
+	Matrix[1][0] = matrix[4];
+	Matrix[1][1] = matrix[5];
+	Matrix[1][2] = matrix[6];
+	Matrix[1][3] = matrix[7];
+
+	Matrix[2][0] = matrix[8];
+	Matrix[2][1] = matrix[9];
+	Matrix[2][2] = matrix[10];
+	Matrix[2][3] = matrix[11];
+
+	Matrix[3][0] = matrix[12];
+	Matrix[3][1] = matrix[13];
+	Matrix[3][2] = matrix[14];
+	Matrix[3][3] = matrix[15];
+
+	Matrix4x4 coordinate;
+	coordinate.setMatrix(Matrix);
+
+	Matrix4x4 scale;
+	scale.setScale(this->Scale);
+
+	Matrix4x4 translate;
+	translate.setTranslation(this->Position);
+
+	this->LocalMatrix = scale.mulMatrix(translate.mulMatrix(coordinate));
+	
+}
+
+Matrix4x4 AGameObject::getLocalMatrix()
+{
+	return this->LocalMatrix;
+}
+
 void AGameObject::setRotation(float x, float y, float z)
 {
 	this->Rotation = Vector3D(x, y, z);
@@ -72,6 +114,32 @@ Vector3D AGameObject::getLocalRotation()
 String AGameObject::getName()
 {
 	return this->name;
+}
+
+void AGameObject::ComputeLocalMatrix()
+{
+	this->Summation.setIdentity();
+	this->translate.setIdentity();
+	this->ScaleMatrix.setIdentity();
+
+	translate.setTranslation(this->getLocalPosition());
+	ScaleMatrix.setScale(this->getLocalScale());
+	rotation = Vector3D(this->getLocalRotation());
+
+	this->RotationZ.setIdentity();
+	this->RotationZ.setRotationZ(rotation.z);
+
+	this->RotationF.setIdentity();
+	this->RotationF.setRotationX(rotation.x);
+
+	this->RotationGl.setIdentity();
+	this->RotationGl.setRotationY(rotation.y);
+
+	this->RotationTotal.setIdentity();
+	this->RotationTotal = this->RotationTotal.mulMatrix(RotationF.mulMatrix(RotationGl.mulMatrix(RotationZ)));
+	this->Summation = this->Summation.mulMatrix(ScaleMatrix.mulMatrix(this->RotationTotal));
+	this->Summation = this->Summation.mulMatrix(this->translate);
+	this->LocalMatrix = this->Summation;
 }
 
 void AGameObject::setObjectTexture(Texture* texture)

@@ -20,24 +20,7 @@ private:
 	ConstantBuffer* constantbuffer;
 
 	float ticks = 0.0f;
-	float deltaPos = 0.0f;
-	float deltaTime = 0.0f;
-	float oldDelta = 0.0f;
-	float newDelta = 0.0f;
 	float speed = 10.0f;
-
-	Vector3D rotation;
-
-	Matrix4x4 Summation;
-	Matrix4x4 translate;
-	Matrix4x4 Scale;
-
-	Matrix4x4 RotationZ;
-	Matrix4x4 RotationF;
-	Matrix4x4 RotationGl;
-	Matrix4x4 Rotation;
-
-	Matrix4x4 RotationTotal;
 
 	std::vector<vertex> Vertices;
 	std::vector<unsigned int> Indices;
@@ -47,7 +30,5 @@ private:
 
 	ShaderNames namesShader;
 	Shaderlibrary::ShaderData shaderdata;
-	VertexShader* cylinderVertexShader;
-	PixelShader* cylinderPixelShader;
 };
 

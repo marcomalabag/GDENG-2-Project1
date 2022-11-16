@@ -184,6 +184,9 @@
     <Filter Include="Component">
       <UniqueIdentifier>{a1766f9b-2332-4487-bdd8-cd29e0239660}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\PhysicsComponent">
+      <UniqueIdentifier>{d43348cc-cdac-4ccd-9263-e72b44955b49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -348,9 +351,6 @@
     <ClCompile Include="VertexMesh.cpp">
       <Filter>GameEngine\Math\VertexMesh</Filter>
     </ClCompile>
-    <ClCompile Include="Teapot.cpp">
-      <Filter>Primitives\OBJ</Filter>
-    </ClCompile>
     <ClCompile Include="OBJStructure.cpp">
       <Filter>Primitives\OBJ</Filter>
     </ClCompile>
@@ -362,6 +362,9 @@
     </ClCompile>
     <ClCompile Include="AComponent.cpp">
       <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsComponent.cpp">
+      <Filter>Component\PhysicsComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -539,9 +542,6 @@
     <ClInclude Include="VertexMesh.h">
       <Filter>GameEngine\Math\VertexMesh</Filter>
     </ClInclude>
-    <ClInclude Include="Teapot.h">
-      <Filter>Primitives\OBJ</Filter>
-    </ClInclude>
     <ClInclude Include="OBJStructure.h">
       <Filter>Primitives\OBJ</Filter>
     </ClInclude>
@@ -553,6 +553,9 @@
     </ClInclude>
     <ClInclude Include="AComponent.h">
       <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsComponent.h">
+      <Filter>Component\PhysicsComponent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
