@@ -6,7 +6,7 @@ PhysicsSystem::PhysicsSystem()
 {
 	this->physicsCommon = new PhysicsCommon();
 	PhysicsWorld::WorldSettings worldSeting;
-	worldSeting.defaultVelocitySolverNbIterations = 54;
+	worldSeting.defaultVelocitySolverNbIterations = 50;
 	worldSeting.gravity = Vector3(0, -9.81, 0);
 	this->physicsWorld = this->physicsCommon->createPhysicsWorld(worldSeting);
 }
@@ -37,14 +37,23 @@ PhysicsComponent* PhysicsSystem::findComponentByName(String name)
 	return this->componentTable.at(name);
 }
 
+PhysicsSystem::ComponentList PhysicsSystem::getAllComponents()
+{
+	return this->componentList;
+}
+
 void PhysicsSystem::updateAllComponents()
 {
 	this->ticks = EngineTime::getDeltaTime() * 1.0f;
-	this->physicsWorld->update(this->ticks);
-	for(int i = 0; i < this->componentList.size(); i++)
+	if(EngineTime::getDeltaTime() > 0.0f)
 	{
-		this->componentList[i]->perform(this->ticks);
+		this->physicsWorld->update(this->ticks);
+		for (int i = 0; i < this->componentList.size(); i++)
+		{
+			this->componentList[i]->perform(this->ticks);
+		}
 	}
+	
 }
 
 PhysicsWorld* PhysicsSystem::getPhysicsWorld()

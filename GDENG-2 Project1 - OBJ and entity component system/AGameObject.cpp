@@ -7,16 +7,19 @@ AGameObject::AGameObject(String name)
 	this->Position = Vector3D::zeros();
 	this->Rotation = Vector3D::zeros();
 	this->Scale = Vector3D::ones();
+	this->LocalMatrix.setIdentity();
 }
 
 void AGameObject::setPosition(float x, float y, float z)
 {
 	this->Position = Vector3D(x, y, z);
+	this->overrideMatrix = false;
 }
 
 void AGameObject::setPosition(Vector3D pos)
 {
 	this->Position = pos;
+	this->overrideMatrix = false;
 }
 
 Vector3D AGameObject::getLocalPosition()
@@ -27,11 +30,13 @@ Vector3D AGameObject::getLocalPosition()
 void AGameObject::setScale(float x, float y, float z)
 {
 	this->Scale = Vector3D(x, y, z);
+	this->overrideMatrix = false;
 }
 
 void AGameObject::setScale(Vector3D scale)
 {
 	this->Scale = scale;
+	this->overrideMatrix = false;
 }
 
 Vector3D AGameObject::getLocalScale()
@@ -64,15 +69,19 @@ void AGameObject::setLocalMatrix(float matrix[16])
 	Matrix[3][3] = matrix[15];
 
 	Matrix4x4 coordinate;
+	coordinate.setIdentity();
 	coordinate.setMatrix(Matrix);
 
 	Matrix4x4 scale;
+	scale.setIdentity();
 	scale.setScale(this->Scale);
 
 	Matrix4x4 translate;
+	translate.setIdentity();
 	translate.setTranslation(this->Position);
 
 	this->LocalMatrix = scale.mulMatrix(translate.mulMatrix(coordinate));
+	this->overrideMatrix = true;
 	
 }
 
@@ -83,32 +92,48 @@ Matrix4x4 AGameObject::getLocalMatrix()
 
 void AGameObject::setRotation(float x, float y, float z)
 {
-	this->Rotation = Vector3D(x, y, z);
+	//this->Rotation = Vector3D(x, y, z);
+	this->orientation = {};
+	this->orientation.x = x;
+	this->orientation.y = y;
+	this->orientation.z = z;
+	this->overrideMatrix = false;
 }
 
 void AGameObject::setRotation(Vector3D rot)
 {
-	this->Rotation = rot;
+	//this->Rotation = rot;
+	this->orientation = {};
+	this->orientation.x = rot.x;
+	this->orientation.y = rot.y;
+	this->orientation.z = rot.z;
+	this->overrideMatrix = false;
 }
 
 void AGameObject::setRotationX(float x)
 {
-	this->Rotation.x = x;
+	this->orientation = {};
+	this->orientation.x = x;
+	this->overrideMatrix = false;
 }
 
 void AGameObject::setRotationY(float y)
 {
-	this->Rotation.y = y;
+	this->orientation = {};
+	this->orientation.y = y;
+	this->overrideMatrix = false;
 }
 
 void AGameObject::setRotationz(float z)
 {
-	this->Rotation.z = z;
+	this->orientation = {};
+	this->orientation.z = z;
+	this->overrideMatrix = false;
 }
 
 Vector3D AGameObject::getLocalRotation()
 {
-	return this->Rotation;
+	return Vector3D(this->orientation.x, this->orientation.y, this->orientation.z);
 }
 
 AGameObject::String AGameObject::getName()
@@ -140,6 +165,43 @@ void AGameObject::ComputeLocalMatrix()
 	this->Summation = this->Summation.mulMatrix(ScaleMatrix.mulMatrix(this->RotationTotal));
 	this->Summation = this->Summation.mulMatrix(this->translate);
 	this->LocalMatrix = this->Summation;
+}
+
+float* AGameObject::getPhysicsLocalMatrix()
+{
+	Matrix4x4 MatrixAll;
+	MatrixAll.setIdentity();
+
+	Matrix4x4 translationMatrix;
+	translationMatrix.setIdentity();
+	translationMatrix.setTranslation(this->Position);
+
+	Matrix4x4 scaleMatrix;
+	scaleMatrix.setIdentity();
+	scaleMatrix.setScale(Vector3D::ones());
+
+	Vector3D rotation = this->getLocalRotation();
+
+	Matrix4x4 xMatrix;
+	xMatrix.setIdentity();
+	xMatrix.setRotationX(rotation.x);
+
+	Matrix4x4 yMatrix;
+	yMatrix.setIdentity();
+	yMatrix.setRotationY(rotation.y);
+
+	Matrix4x4 zMatrix;
+	zMatrix.setIdentity();
+	zMatrix.setRotationY(rotation.z);
+
+	Matrix4x4 rotationMatrix;
+	rotationMatrix.setIdentity();
+	rotationMatrix.mulMatrix(xMatrix.mulMatrix(yMatrix.mulMatrix(zMatrix)));
+
+	MatrixAll = MatrixAll.mulMatrix(scaleMatrix.mulMatrix(rotationMatrix));
+	MatrixAll = MatrixAll.mulMatrix(translationMatrix);
+
+	return *MatrixAll.Matrix;
 }
 
 void AGameObject::attachComponent(AComponent* component)
@@ -191,7 +253,9 @@ AGameObject::ComponentList AGameObject::getComponentsOfType(AComponent::Componen
 	ComponentList foundList;
 	for (int i = 0; i < this->componentList.size(); i++)
 	{
-		foundList.push_back(this->componentList[i]);
+		if (this->componentList[i]->getType() == type) {
+			foundList.push_back(this->componentList[i]);
+		}
 	}
 
 	return foundList;

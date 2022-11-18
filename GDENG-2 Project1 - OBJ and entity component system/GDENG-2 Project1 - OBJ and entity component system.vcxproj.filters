@@ -187,6 +187,15 @@
     <Filter Include="Component\PhysicsComponent">
       <UniqueIdentifier>{d43348cc-cdac-4ccd-9263-e72b44955b49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Primitives\3D\Cube\PhysicsCube">
+      <UniqueIdentifier>{f34ad404-7c3b-4dff-980b-558a95d19436}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Primitives\3D\Plane\Normal Plane">
+      <UniqueIdentifier>{2a421d05-d7ac-4b85-b6ad-d57ca77c32c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Primitives\3D\Plane\PhysicsPlane">
+      <UniqueIdentifier>{c156b869-9954-4d0a-9fd1-4792929471ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -245,9 +254,6 @@
     </ClCompile>
     <ClCompile Include="Cube.cpp">
       <Filter>Primitives\3D\Cube\NormalCube</Filter>
-    </ClCompile>
-    <ClCompile Include="Plane.cpp">
-      <Filter>Primitives\3D\Plane</Filter>
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
       <Filter>Primitives\3D\Sphere</Filter>
@@ -366,6 +372,15 @@
     <ClCompile Include="PhysicsComponent.cpp">
       <Filter>Component\PhysicsComponent</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsCube.cpp">
+      <Filter>Primitives\3D\Cube\PhysicsCube</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>Primitives\3D\Plane\Normal Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsPlane.cpp">
+      <Filter>Primitives\3D\Plane\PhysicsPlane</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsEngine.h">
@@ -421,9 +436,6 @@
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Primitives\3D\Cube\NormalCube</Filter>
-    </ClInclude>
-    <ClInclude Include="Plane.h">
-      <Filter>Primitives\3D\Plane</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
       <Filter>Primitives\3D\Sphere</Filter>
@@ -556,6 +568,15 @@
     </ClInclude>
     <ClInclude Include="PhysicsComponent.h">
       <Filter>Component\PhysicsComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsCube.h">
+      <Filter>Primitives\3D\Cube\PhysicsCube</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Primitives\3D\Plane\Normal Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsPlane.h">
+      <Filter>Primitives\3D\Plane\PhysicsPlane</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

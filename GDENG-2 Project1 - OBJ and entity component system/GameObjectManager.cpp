@@ -40,10 +40,19 @@ int GameObjectManager::activeObjects()
 
 void GameObjectManager::updateAll()
 {
+	for(AGameObject* gameobject: this->GameObjectList)
+	{
+		for(AComponent* component: gameobject->getComponentsOfType(AComponent::Physics))
+		{
+			component->perform(EngineTime::getDeltaTime());
+		}
+	}
+	/*
 	for(int i = 0; i < this->GameObjectList.size(); i++)
 	{
 		this->GameObjectList[i]->update(EngineTime::getDeltaTime());
 	}
+	*/
 }
 
 void GameObjectManager::renderAll(int viewportWidth, int viewportHeight)
@@ -152,7 +161,13 @@ void GameObjectManager::createObject(PrimitiveType type)
 		this->addObject(Texcube);
 		this->TexturedCubecounter++;
 	}
-	
+	else if(type == PrimitiveType::PHYSICS_CUBE)
+	{
+		PhysicsCube* physicsCube = new PhysicsCube("PhysicsCube");
+		physicsCube->setPosition(0.0f, 5.0f, 0.0f);
+		physicsCube->setScale(0.5f, 0.5f, 0.5f);
+		this->addObject(physicsCube);
+	}
 
 }
 

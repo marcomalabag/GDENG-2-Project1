@@ -14,7 +14,14 @@ class AComponent;
 class AGameObject
 {
 public:
-	
+
+	struct AQuaternion {
+		float w = 0.0f;
+		float x = 0.0f;
+		float y = 0.0f;
+		float z = 0.0f;
+	};
+
 	struct vertex
 	{
 		Vector3D position;
@@ -60,6 +67,7 @@ public:
 
 	String getName();
 	void ComputeLocalMatrix();
+	float* getPhysicsLocalMatrix();
 
 	void attachComponent(AComponent* component);
 	void detachComponent(AComponent* component);
@@ -100,6 +108,7 @@ protected:
 
 	ComponentList componentList;
 	bool overrideMatrix = false;
+	AQuaternion orientation;
 
 	virtual void awake();
 };

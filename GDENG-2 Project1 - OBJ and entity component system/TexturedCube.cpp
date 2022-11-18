@@ -132,8 +132,6 @@ void TexturedCube::draw(int width, int height)
 
 	this->constantbuffer->update(device, &cc);
 
-	this->constantbuffer->update(device, &cc);
-
 	device->setConstantBuffer(this->vertex_shader, this->constantbuffer);
 	device->setConstantBuffer(this->pixel_shader, this->constantbuffer);
 

@@ -5,7 +5,7 @@
 #include "AGameObject.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
-#include "Cube.h"
+#include "PhysicsCube.h"
 #include "Cylinder.h"
 #include "Plane.h"
 #include "Sphere.h"
@@ -29,7 +29,8 @@ public:
 		PLANE,
 		SPHERE,
 		CYLINDER,
-		TEXTURED_CUBE
+		TEXTURED_CUBE,
+		PHYSICS_CUBE
 	};
 
 	enum OBJMODEL

@@ -21,6 +21,7 @@ public:
 	void registerComponent(PhysicsComponent* component);
 	void unregisterComponent(PhysicsComponent* component);
 	PhysicsComponent* findComponentByName(String name);
+	ComponentList getAllComponents();
 
 	void updateAllComponents();
 	PhysicsWorld* getPhysicsWorld();

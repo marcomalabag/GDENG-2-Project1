@@ -48,11 +48,6 @@ void AppWindow::initializeEngine()
 
 	m_swap_chain->init(this->m_hwnd, width, height);
 
-	
-	
-	
-
-	
 
 }
 
@@ -65,17 +60,19 @@ void AppWindow::onUpdate()
 {
 	Window::onUpdate();
 	this->ticks += EngineTime::getDeltaTime() * 1.0f;
+	InputSystem::getInstance()->update();
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->clearRenderTargetColor(this->m_swap_chain,
 		0, 0, 0.5, 0.5);
 	RECT rc = this->getClientWindowRect();
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
-	SceneCameraHandler::getInstance()->update();
-	InputSystem::getInstance()->update();
-	UIManager::getInstance()->drawAllUI();
-	
-	GameObjectManager::getInstance()->renderAll(rc.right - rc.left, rc.bottom - rc.top);
+	BaseSystem::getInstance()->getPhysicsSystem()->updateAllComponents();
+	GameObjectManager::getInstance()->updateAll();
 
+
+	SceneCameraHandler::getInstance()->update();
+	GameObjectManager::getInstance()->renderAll(rc.right - rc.left, rc.bottom - rc.top);
+	UIManager::getInstance()->drawAllUI();
 	m_swap_chain->present(true);
 
 	
