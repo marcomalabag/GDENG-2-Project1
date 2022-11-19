@@ -164,11 +164,34 @@ void GameObjectManager::createObject(PrimitiveType type)
 	else if(type == PrimitiveType::PHYSICS_CUBE)
 	{
 		PhysicsCube* physicsCube = new PhysicsCube("PhysicsCube");
-		physicsCube->setPosition(0.0f, 5.0f, 0.0f);
-		physicsCube->setScale(0.5f, 0.5f, 0.5f);
 		this->addObject(physicsCube);
 	}
+	else if(type == PrimitiveType::PHYSICS_PLANE)
+	{
+		PhysicsPlane* physicsplane = new PhysicsPlane("PhhysicsPlane");
+		this->addObject(physicsplane);
+	}
 
+}
+
+void GameObjectManager::generatePhysicsCube()
+{
+	for(int i = 0; i < 20; i++)
+	{
+		String PhysicsCubename;
+		if (this->PhysicsCubeCounter == 0)
+		{
+			PhysicsCubename = "Physics Cube";
+		}
+		else
+		{
+			String number = "(" + std::to_string(this->PhysicsCubeCounter) + ")";
+			PhysicsCubename = "Physics Cube" + number;
+		}
+		PhysicsCube* physicsCube = new PhysicsCube(PhysicsCubename);
+		this->addObject(physicsCube);
+		this->PhysicsCubeCounter++;
+	}
 }
 
 void GameObjectManager::createOBJMODEL(OBJMODEL model)

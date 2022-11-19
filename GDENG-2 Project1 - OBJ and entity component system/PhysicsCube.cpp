@@ -1,8 +1,12 @@
 #include "PhysicsCube.h"
 #include "PhysicsComponent.h"
+#include "Math.h"
 
 PhysicsCube::PhysicsCube(String name): Cube(name)
 {
+	
+	this->setPosition(Math::getRandom(0.1, 0.9), 6.0f, Math::getRandom(0.1, 0.9));
+	this->setScale(1.5f, 1.5f, 1.5f);
 	this->ComputeLocalMatrix();
 	this->attachComponent(new PhysicsComponent("Physics Component", this));
 }

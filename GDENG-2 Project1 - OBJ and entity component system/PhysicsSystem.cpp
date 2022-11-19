@@ -44,13 +44,13 @@ PhysicsSystem::ComponentList PhysicsSystem::getAllComponents()
 
 void PhysicsSystem::updateAllComponents()
 {
-	this->ticks = EngineTime::getDeltaTime() * 1.0f;
+
 	if(EngineTime::getDeltaTime() > 0.0f)
 	{
-		this->physicsWorld->update(this->ticks);
+		this->physicsWorld->update(EngineTime::getDeltaTime());
 		for (int i = 0; i < this->componentList.size(); i++)
 		{
-			this->componentList[i]->perform(this->ticks);
+			this->componentList[i]->perform(EngineTime::getDeltaTime());
 		}
 	}
 	

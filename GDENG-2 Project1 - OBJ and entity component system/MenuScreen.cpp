@@ -20,8 +20,9 @@ void MenuScreen::drawUI()
 			if (ImGui::MenuItem("Create Physics Cube")) { GameObjectManager::getInstance()->createObject(GameObjectManager::PrimitiveType::PHYSICS_CUBE); }
 			if (ImGui::MenuItem("Create Sphere")) { GameObjectManager::getInstance()->createObject(GameObjectManager::SPHERE); }
 			if (ImGui::MenuItem("Create Plane")) { GameObjectManager::getInstance()->createObject(GameObjectManager::PLANE); }
+			if (ImGui::MenuItem("Create Physics Plane")) { GameObjectManager::getInstance()->createObject(GameObjectManager::PrimitiveType::PHYSICS_PLANE); }
 			if(ImGui::MenuItem("Create Cylinder")){ GameObjectManager::getInstance()->createObject(GameObjectManager::CYLINDER);}
-			
+			if (ImGui::MenuItem("Generate 20 Physics Cubes")) { GameObjectManager::getInstance()->generatePhysicsCube(); }
 			ImGui::EndMenu();
 		}
 		if(ImGui::BeginMenu("OBJ Model"))

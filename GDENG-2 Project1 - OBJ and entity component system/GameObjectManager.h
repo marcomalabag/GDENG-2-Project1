@@ -9,6 +9,7 @@
 #include "Cylinder.h"
 #include "Plane.h"
 #include "Sphere.h"
+#include "PhysicsPlane.h"
 #include "TexturedCube.h"
 #include "OBJStructure.h"
 #include "TextureLibrary.h"
@@ -30,7 +31,8 @@ public:
 		SPHERE,
 		CYLINDER,
 		TEXTURED_CUBE,
-		PHYSICS_CUBE
+		PHYSICS_CUBE,
+		PHYSICS_PLANE
 	};
 
 	enum OBJMODEL
@@ -52,6 +54,7 @@ public:
 	void renderAll(int viewportWidth, int viewportHeight);
 	void addObject(AGameObject* gameObject);
 	void createObject(PrimitiveType type);
+	void generatePhysicsCube();
 	void createOBJMODEL(OBJMODEL model);
 	void deleteObject(AGameObject* gameObject);
 	void deleteObjectByName(String name);
@@ -75,5 +78,7 @@ private:
 	int cylinderCounter = 0;
 	int planeCounter = 0;
 	int TexturedCubecounter = 0;
+	int PhysicsPlaneCounter = 0;
+	int PhysicsCubeCounter = 0;
 };
 
