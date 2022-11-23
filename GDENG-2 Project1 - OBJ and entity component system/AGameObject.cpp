@@ -243,6 +243,7 @@ AComponent* AGameObject::findComponentbyType(AComponent::ComponentType type, Str
 		if (this->componentList[i]->getName() == name && this->componentList[i]->getType() == type)
 		{
 			found = this->componentList[i];
+			
 		}
 	}
 	return found;

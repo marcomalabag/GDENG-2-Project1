@@ -8,6 +8,8 @@
 #include "HierarchyScreen.h"
 #include "CreditsScreen.h"
 #include "ColorPickerScreen.h"
+#include "ScreenPlayBack.h"
+#include "ScreenActions.h"
 
 
 class UIManager

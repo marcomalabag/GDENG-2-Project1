@@ -40,6 +40,14 @@ UIManager::UIManager(HWND windowHandle)
 	ColorPickerScreen* colorPickerScreen = new ColorPickerScreen();
 	this->uiTable[uiNames.COLORPICKER_SCREEN] = colorPickerScreen;
 	this->uiList.push_back(colorPickerScreen);
+
+	ScreenPlayBack* playBackScreen = new ScreenPlayBack();
+	this->uiTable[uiNames.PLAYBACK_SCREEN] = playBackScreen;
+	this->uiList.push_back(playBackScreen);
+
+	ScreenActions* ActionsScreen = new ScreenActions();
+	this->uiTable[uiNames.ACTIONS_SCREEN] = ActionsScreen;
+	this->uiList.push_back(ActionsScreen);
 }
 
 void UIManager::initialize(HWND windowHandle)
