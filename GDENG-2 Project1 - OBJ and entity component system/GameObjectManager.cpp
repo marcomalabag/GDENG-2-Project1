@@ -270,6 +270,34 @@ AGameObject* GameObjectManager::getSelectedObject()
 	return this->SelectedObject;
 }
 
+void GameObjectManager::saveEditStates()
+{
+	for(int i = 0; i < this->GameObjectList.size(); i++)
+	{
+		this->GameObjectList[i]->saveEditState();
+	}
+}
+
+void GameObjectManager::restoreEditStates()
+{
+	for (int i = 0; i < this->GameObjectList.size(); i++)
+	{
+		this->GameObjectList[i]->restoreEditState();
+	}
+}
+
+void GameObjectManager::applyEditorAction(EditorAction* action)
+{
+	AGameObject* object = this->findObjectByName(action->getOwnerName());
+	if (object != NULL) {
+		
+		object->setLocalMatrix(*action->getStoredMatrix().Matrix);
+		object->setPosition(action->getStoredPosition());
+		object->setRotation(action->getStoredRotation().x, action->getStoredRotation().y, action->getStoredRotation().z);
+		object->setScale(action->getStoredScale());
+
+	}
+}
 
 
 GameObjectManager::~GameObjectManager()

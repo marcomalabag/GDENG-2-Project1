@@ -28,11 +28,13 @@ void AppWindow::initializeEngine()
 {
 	GraphicsEngine::initialize();
 	EngineTime::initialize();
+	EngineBackEnd::initialize();
 	SceneCameraHandler::initialize();
 	Shaderlibrary::initialize();
 	TextureManager::initialize();
 	TextureLibrary::initialize();
 	MeshManager::initialize();
+	ActionHistory::initialize();
 
 	InputSystem::getInstance()->showCursor(true);
 

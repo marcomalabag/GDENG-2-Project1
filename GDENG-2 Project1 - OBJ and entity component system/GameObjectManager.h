@@ -14,11 +14,13 @@
 #include "OBJStructure.h"
 #include "TextureLibrary.h"
 #include "MeshManager.h"
+#include "EditorAction.h"
 
 typedef std::string String;
 typedef std::vector<AGameObject*> ObjectList;
 typedef std::unordered_map<String, AGameObject*> HashTable;
 
+class EditorAction;
 class GameObjectManager
 {
 public:
@@ -61,6 +63,9 @@ public:
 	void setSelectedObject(String name);
 	void setSelectedObject(AGameObject* gameObject);
 	AGameObject* getSelectedObject();
+	void saveEditStates();
+	void restoreEditStates();
+	void applyEditorAction(EditorAction* action);
 	
 private:
 	static GameObjectManager* sharedInstance;

@@ -208,6 +208,12 @@
     <Filter Include="UI\ScreenActions">
       <UniqueIdentifier>{4e794dff-766e-43e8-8d78-cd1742e7080f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World Manager\EditorAction">
+      <UniqueIdentifier>{8bc7a4bb-c420-4f02-aaee-abc09838933b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Manager\ActionHistory">
+      <UniqueIdentifier>{ffc32121-4e8f-409f-9138-9dbbaa58c7d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -401,6 +407,12 @@
     </ClCompile>
     <ClCompile Include="ScreenActions.cpp">
       <Filter>UI\ScreenActions</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorAction.cpp">
+      <Filter>World Manager\EditorAction</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionHistory.cpp">
+      <Filter>World Manager\ActionHistory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -607,6 +619,12 @@
     </ClInclude>
     <ClInclude Include="ScreenActions.h">
       <Filter>UI\ScreenActions</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorAction.h">
+      <Filter>World Manager\EditorAction</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionHistory.h">
+      <Filter>World Manager\ActionHistory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

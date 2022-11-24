@@ -1,5 +1,5 @@
 #include "AGameObject.h"
-
+#include "EditorAction.h"
 
 AGameObject::AGameObject(String name)
 {
@@ -280,6 +280,25 @@ void AGameObject::setTextureFlag()
 bool AGameObject::textureFlag()
 {
 	return this->isTextured;
+}
+
+void AGameObject::saveEditState()
+{
+	if (this->lastEditState == NULL) {
+		this->lastEditState = new EditorAction(this);
+	}
+}
+
+void AGameObject::restoreEditState()
+{
+	if (this->lastEditState != NULL) {
+		this->Position = this->lastEditState->getStoredPosition();
+		this->Scale = this->lastEditState->getStoredScale();
+		this->Rotation = this->lastEditState->getStoredRotation();
+		this->LocalMatrix = this->lastEditState->getStoredMatrix();
+
+		this->lastEditState = NULL;
+	}
 }
 
 void AGameObject::awake()

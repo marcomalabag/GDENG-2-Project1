@@ -9,7 +9,9 @@
 #include <string>
 #include "reactphysics3d/reactphysics3d.h"
 
+
 using namespace reactphysics3d;
+class EditorAction;
 class AComponent;
 class AGameObject
 {
@@ -81,6 +83,9 @@ public:
 	void setTextureFlag();
 	bool textureFlag();
 
+	void saveEditState();
+	void restoreEditState();
+
 
 protected:
 	VertexShader* vertex_shader;
@@ -111,6 +116,9 @@ protected:
 	AQuaternion orientation;
 
 	virtual void awake();
+
+private:
+	EditorAction* lastEditState = NULL;
 };
 
 

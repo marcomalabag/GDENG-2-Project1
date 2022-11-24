@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AComponent.h" />
+    <ClInclude Include="ActionHistory.h" />
     <ClInclude Include="AGameObject.h" />
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="AUIScreen.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="DeviceContext.h" />
+    <ClInclude Include="EditorAction.h" />
     <ClInclude Include="EngineBackEnd.h" />
     <ClInclude Include="EngineTime.h" />
     <ClInclude Include="GameObjectManager.h" />
@@ -220,6 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AComponent.cpp" />
+    <ClCompile Include="ActionHistory.cpp" />
     <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="AppWindow.cpp" />
     <ClCompile Include="AUIScreen.cpp" />
@@ -231,6 +234,7 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="DeviceContext.cpp" />
+    <ClCompile Include="EditorAction.cpp" />
     <ClCompile Include="EngineBackEnd.cpp" />
     <ClCompile Include="EngineTime.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
