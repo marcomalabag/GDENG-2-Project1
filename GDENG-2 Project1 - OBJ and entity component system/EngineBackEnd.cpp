@@ -44,7 +44,7 @@ void EngineBackEnd::endFrameStep()
 
 bool EngineBackEnd::insideFrameStep()
 {
-	return false;
+	return this->frameStepping;
 }
 
 EngineBackEnd::EditorMode EngineBackEnd::getMode()
