@@ -28,6 +28,8 @@
 #include "TextureLibrary.h"
 #include "MeshManager.h"
 #include "BaseSystem.h"
+#include "EngineBackEnd.h"
+#include "ActionHistory.h"
 
 
 

@@ -94,6 +94,7 @@ void InspectorScreen::TransformUpdate()
 
 void InspectorScreen::TransformSelected(AGameObject* selected)
 {
+	ActionHistory::getInstance()->recordAction(selected);
 	selected->setPosition(this->SelectedObjectposition[0], this->SelectedObjectposition[1], this->SelectedObjectposition[2]);
 	selected->setRotation(this->SelectedObjectRotation[0], this->SelectedObjectRotation[1], this->SelectedObjectRotation[2]);
 	selected->setScale(this->SelectedObjectScale[0], this->SelectedObjectScale[1], this->SelectedObjectScale[2]);

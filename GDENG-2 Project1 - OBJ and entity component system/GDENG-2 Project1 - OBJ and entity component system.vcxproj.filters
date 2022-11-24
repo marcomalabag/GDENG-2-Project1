@@ -196,6 +196,24 @@
     <Filter Include="Primitives\3D\Plane\PhysicsPlane">
       <UniqueIdentifier>{c156b869-9954-4d0a-9fd1-4792929471ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World Manager">
+      <UniqueIdentifier>{291778bc-8caf-410a-bed5-ae1c2dfc8da4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Manager\EngineBackEnd">
+      <UniqueIdentifier>{18eb5de5-3304-41fe-91f2-80eba959b66b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\ScreenPlayBack">
+      <UniqueIdentifier>{b631ef48-bc75-41a9-a1ce-627879ab65d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\ScreenActions">
+      <UniqueIdentifier>{4e794dff-766e-43e8-8d78-cd1742e7080f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Manager\EditorAction">
+      <UniqueIdentifier>{8bc7a4bb-c420-4f02-aaee-abc09838933b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Manager\ActionHistory">
+      <UniqueIdentifier>{ffc32121-4e8f-409f-9138-9dbbaa58c7d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -380,6 +398,21 @@
     </ClCompile>
     <ClCompile Include="PhysicsPlane.cpp">
       <Filter>Primitives\3D\Plane\PhysicsPlane</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineBackEnd.cpp">
+      <Filter>World Manager\EngineBackEnd</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenPlayBack.cpp">
+      <Filter>UI\ScreenPlayBack</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenActions.cpp">
+      <Filter>UI\ScreenActions</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorAction.cpp">
+      <Filter>World Manager\EditorAction</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionHistory.cpp">
+      <Filter>World Manager\ActionHistory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -577,6 +610,21 @@
     </ClInclude>
     <ClInclude Include="PhysicsPlane.h">
       <Filter>Primitives\3D\Plane\PhysicsPlane</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineBackEnd.h">
+      <Filter>World Manager\EngineBackEnd</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenPlayBack.h">
+      <Filter>UI\ScreenPlayBack</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenActions.h">
+      <Filter>UI\ScreenActions</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorAction.h">
+      <Filter>World Manager\EditorAction</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionHistory.h">
+      <Filter>World Manager\ActionHistory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

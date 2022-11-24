@@ -28,11 +28,13 @@ void AppWindow::initializeEngine()
 {
 	GraphicsEngine::initialize();
 	EngineTime::initialize();
+	EngineBackEnd::initialize();
 	SceneCameraHandler::initialize();
 	Shaderlibrary::initialize();
 	TextureManager::initialize();
 	TextureLibrary::initialize();
 	MeshManager::initialize();
+	ActionHistory::initialize();
 
 	InputSystem::getInstance()->showCursor(true);
 
@@ -66,8 +68,22 @@ void AppWindow::onUpdate()
 	RECT rc = this->getClientWindowRect();
 	GraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(rc.right - rc.left, rc.bottom - rc.top);
 
-	BaseSystem::getInstance()->getPhysicsSystem()->updateAllComponents();
-	GameObjectManager::getInstance()->updateAll();
+	EngineBackEnd* backend = EngineBackEnd::getInstance();
+	if (backend->getMode() == EngineBackEnd::EditorMode::PLAY) {
+		BaseSystem::getInstance()->getPhysicsSystem()->updateAllComponents();
+		GameObjectManager::getInstance()->updateAll();
+	}
+	else if (backend->getMode() == EngineBackEnd::EditorMode::EDITOR) {
+		GameObjectManager::getInstance()->updateAll();
+
+	}
+	else if (backend->getMode() == EngineBackEnd::EditorMode::PAUSED) {
+		if (backend->insideFrameStep()) {
+			BaseSystem::getInstance()->getPhysicsSystem()->updateAllComponents();
+			GameObjectManager::getInstance()->updateAll();
+			backend->endFrameStep();
+		}
+	}
 
 
 	SceneCameraHandler::getInstance()->update();

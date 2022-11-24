@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AComponent.h" />
+    <ClInclude Include="ActionHistory.h" />
     <ClInclude Include="AGameObject.h" />
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="AUIScreen.h" />
@@ -161,6 +162,8 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="DeviceContext.h" />
+    <ClInclude Include="EditorAction.h" />
+    <ClInclude Include="EngineBackEnd.h" />
     <ClInclude Include="EngineTime.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GraphicsEngine.h" />
@@ -195,6 +198,8 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SceneCameraHandler.h" />
+    <ClInclude Include="ScreenActions.h" />
+    <ClInclude Include="ScreenPlayBack.h" />
     <ClInclude Include="Shaderlibrary.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="stb_image.h" />
@@ -217,6 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AComponent.cpp" />
+    <ClCompile Include="ActionHistory.cpp" />
     <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="AppWindow.cpp" />
     <ClCompile Include="AUIScreen.cpp" />
@@ -228,6 +234,8 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="DeviceContext.cpp" />
+    <ClCompile Include="EditorAction.cpp" />
+    <ClCompile Include="EngineBackEnd.cpp" />
     <ClCompile Include="EngineTime.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
@@ -260,6 +268,8 @@
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SceneCameraHandler.cpp" />
+    <ClCompile Include="ScreenActions.cpp" />
+    <ClCompile Include="ScreenPlayBack.cpp" />
     <ClCompile Include="Shaderlibrary.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SwapChain.cpp" />
