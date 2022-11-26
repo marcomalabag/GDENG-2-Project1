@@ -83,8 +83,8 @@ public:
 	void setTextureFlag();
 	bool textureFlag();
 
-	void saveEditState();
-	void restoreEditState();
+	virtual void saveEditState();
+	virtual void restoreEditState();
 
 
 protected:

@@ -36,6 +36,9 @@ public:
 	virtual void update(float deltaTime) = 0;
 	virtual void draw(int width, int height) = 0;
 
+	virtual void saveEditState();
+	virtual void restoreEditState();
+
 	void setPosition(float x, float y, float z);
 	void setPosition(Vector3D pos);
 	Vector3D getLocalPosition();
