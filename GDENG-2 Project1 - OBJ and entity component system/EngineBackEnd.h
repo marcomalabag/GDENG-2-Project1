@@ -1,4 +1,5 @@
 #pragma once
+
 class EngineBackEnd
 {
 public:
@@ -17,6 +18,8 @@ public:
 	void startFrameStep();
 	void endFrameStep();
 	bool insideFrameStep();
+	void Start();
+	void Stop();
 	EditorMode getMode();
 
 private:
@@ -29,5 +32,6 @@ private:
 
 	EditorMode editorMode = EditorMode::EDITOR;
 	bool frameStepping = false;
+	bool isStopped = false;
 };
 

@@ -163,9 +163,11 @@
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="DeviceContext.h" />
     <ClInclude Include="EditorAction.h" />
+    <ClInclude Include="EditorScreen.h" />
     <ClInclude Include="EngineBackEnd.h" />
     <ClInclude Include="EngineTime.h" />
     <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="GameViewScreen.h" />
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="HierarchyScreen.h" />
     <ClInclude Include="IMGUI\imconfig.h" />
@@ -235,9 +237,11 @@
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="DeviceContext.cpp" />
     <ClCompile Include="EditorAction.cpp" />
+    <ClCompile Include="EditorScreen.cpp" />
     <ClCompile Include="EngineBackEnd.cpp" />
     <ClCompile Include="EngineTime.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
+    <ClCompile Include="GameViewScreen.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="HierarchyScreen.cpp" />
     <ClCompile Include="IMGUI\imgui.cpp" />

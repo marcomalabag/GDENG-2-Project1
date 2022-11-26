@@ -214,6 +214,12 @@
     <Filter Include="World Manager\ActionHistory">
       <UniqueIdentifier>{ffc32121-4e8f-409f-9138-9dbbaa58c7d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\EditorScreen">
+      <UniqueIdentifier>{5fb45c40-f8e9-47ee-ae8e-231fab3b5f48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\GameViewScreen">
+      <UniqueIdentifier>{7717927e-19d7-48c4-86eb-2d24963a3073}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -413,6 +419,12 @@
     </ClCompile>
     <ClCompile Include="ActionHistory.cpp">
       <Filter>World Manager\ActionHistory</Filter>
+    </ClCompile>
+    <ClCompile Include="GameViewScreen.cpp">
+      <Filter>UI\GameViewScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorScreen.cpp">
+      <Filter>UI\EditorScreen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -625,6 +637,12 @@
     </ClInclude>
     <ClInclude Include="ActionHistory.h">
       <Filter>World Manager\ActionHistory</Filter>
+    </ClInclude>
+    <ClInclude Include="GameViewScreen.h">
+      <Filter>UI\GameViewScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorScreen.h">
+      <Filter>UI\EditorScreen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
