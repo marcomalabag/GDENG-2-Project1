@@ -16,15 +16,16 @@
 #include "MeshManager.h"
 #include "EditorAction.h"
 
-typedef std::string String;
-typedef std::vector<AGameObject*> ObjectList;
-typedef std::unordered_map<String, AGameObject*> HashTable;
+
 
 class EditorAction;
 class GameObjectManager
 {
 public:
-	
+
+	typedef std::string String;
+	typedef std::vector<AGameObject*> ObjectList;
+	typedef std::unordered_map<String, AGameObject*> HashTable;
 
 	enum PrimitiveType
 	{
@@ -35,14 +36,6 @@ public:
 		TEXTURED_CUBE,
 		PHYSICS_CUBE,
 		PHYSICS_PLANE
-	};
-
-	enum OBJMODEL
-	{	
-		TEAPOT,
-		ARMADILLO,
-		BUNNY,
-		STATUE
 	};
 
 	static GameObjectManager* getInstance();
@@ -57,7 +50,7 @@ public:
 	void addObject(AGameObject* gameObject);
 	void createObject(PrimitiveType type);
 	void generatePhysicsCube();
-	void createOBJMODEL(OBJMODEL model);
+	void createOBJMODEL(Mesh* mesh, String name);
 	void deleteObject(AGameObject* gameObject);
 	void deleteObjectByName(String name);
 	void setSelectedObject(String name);
@@ -66,6 +59,8 @@ public:
 	void saveEditStates();
 	void restoreEditStates();
 	void applyEditorAction(EditorAction* action);
+
+	void createObjectFromFile(String name, AGameObject::PrimitiveType type, Vector3D position, Vector3D rotation, Vector3D scale);
 	
 private:
 	static GameObjectManager* sharedInstance;

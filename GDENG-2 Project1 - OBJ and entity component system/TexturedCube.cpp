@@ -1,7 +1,7 @@
 #include "TexturedCube.h"
 
 
-TexturedCube::TexturedCube(String name): Cube(name)
+TexturedCube::TexturedCube(String name): Cube(name, TEXTURED_CUBE)
 {
 	
 	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.TEXTURED_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);

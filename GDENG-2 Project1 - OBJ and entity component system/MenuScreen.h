@@ -2,6 +2,7 @@
 #include "AUIScreen.h"
 #include "GameObjectManager.h"
 #include "IMGUI/imgui.h"
+#include "IMGUI/imfilebrowser.h"
 #include "IMGUI/imgui_impl_dx11.h"
 #include "IMGUI/imgui_impl_win32.h"
 #include <iostream>
@@ -12,7 +13,16 @@ public:
 	MenuScreen();
 	void drawUI() override;
 
-	void createCubeOnClick();
 	~MenuScreen();
+
+	bool isOpen = false;
+
+	bool openSceneSelected = false;
+
+	ImGui::FileBrowser* saveSceneDialog;
+	ImGui::FileBrowser* openSceneDialog;
+
+	ImGui::FileBrowser* objDialog;
+	ImGui::FileBrowser* textureDialogue;
 };
 

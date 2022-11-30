@@ -214,6 +214,15 @@
     <Filter Include="World Manager\ActionHistory">
       <UniqueIdentifier>{ffc32121-4e8f-409f-9138-9dbbaa58c7d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="File System">
+      <UniqueIdentifier>{84629a41-7958-45fe-b7d6-e188b1a32d08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File System\SceneWriter">
+      <UniqueIdentifier>{fc30ea53-1e56-4f44-b1b0-c9c610dac9ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File System\SceneReader">
+      <UniqueIdentifier>{393733e1-5a52-4235-b9a4-d4dd54c19b5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -413,6 +422,12 @@
     </ClCompile>
     <ClCompile Include="ActionHistory.cpp">
       <Filter>World Manager\ActionHistory</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneWriter.cpp">
+      <Filter>File System\SceneWriter</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneReader.cpp">
+      <Filter>File System\SceneReader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -625,6 +640,12 @@
     </ClInclude>
     <ClInclude Include="ActionHistory.h">
       <Filter>World Manager\ActionHistory</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneWriter.h">
+      <Filter>File System\SceneWriter</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneReader.h">
+      <Filter>File System\SceneReader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

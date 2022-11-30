@@ -3,7 +3,7 @@
 #include "BaseSystem.h"
 #include "PhysicsSystem.h"
 
-PhysicsPlane::PhysicsPlane(String name): Cube(name)
+PhysicsPlane::PhysicsPlane(String name): Cube(name, PHYSICS_PLANE)
 {
 	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.BASE_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);
 

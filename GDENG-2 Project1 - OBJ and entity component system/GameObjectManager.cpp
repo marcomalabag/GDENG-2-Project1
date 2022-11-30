@@ -28,7 +28,7 @@ AGameObject* GameObjectManager::findObjectByName(String name)
 	return this->GameObjectTable.at(name);
 }
 
-ObjectList GameObjectManager::getAllObjects()
+GameObjectManager::ObjectList GameObjectManager::getAllObjects()
 {
 	return this->GameObjectList;
 }
@@ -83,7 +83,7 @@ void GameObjectManager::createObject(PrimitiveType type)
 			String number = "(" + std::to_string(this->cubeCounter) + ")";
 			cubename = "Cube" + number;
 		}
-		Cube* cube = new Cube(cubename);
+		Cube* cube = new Cube(cubename, AGameObject::CUBE);
 		cube->setPosition(0.0f, 1.0f, 0.0f);
 		cube->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(cube);
@@ -194,45 +194,16 @@ void GameObjectManager::generatePhysicsCube()
 	}
 }
 
-void GameObjectManager::createOBJMODEL(OBJMODEL model)
+void GameObjectManager::createOBJMODEL(Mesh* mesh, String name)
 {
 	TextureFileName filename;
-	if(model == OBJMODEL::TEAPOT)
-	{
-		Texture* tex = TextureLibrary::getInstance()->getTexture(filename.BRICK);
-		Mesh* mesh = MeshManager::getInstance()->createMeshFromFile(L"Assets\\Meshes\\teapot.obj");
-		OBJStructure* teapot = new OBJStructure(mesh, tex, "Teapot");
-		teapot->setPosition(0.0f, 1.0f, 0.0f);
-		teapot->setScale(1.0f, 1.0f, 1.0f);
-		this->addObject(teapot);
-	}
-	else if(model == OBJMODEL::ARMADILLO)
-	{
-		Texture* tex = TextureLibrary::getInstance()->getTexture(filename.BRICK);
-		Mesh* mesh = MeshManager::getInstance()->createMeshFromFile(L"Assets\\Meshes\\armadillo.obj");
-		OBJStructure* armadillo = new OBJStructure(mesh, tex, "Armadillo");
-		armadillo->setPosition(0.0f, 1.0f, 0.0f);
-		armadillo->setScale(1.0f, 1.0f, 1.0f);
-		this->addObject(armadillo);
-	}
-	else if(model == OBJMODEL::BUNNY)
-	{
-		Texture* tex = TextureLibrary::getInstance()->getTexture(filename.BRICK);
-		Mesh* mesh = MeshManager::getInstance()->createMeshFromFile(L"Assets\\Meshes\\bunny.obj");
-		OBJStructure* bunny = new OBJStructure(mesh, tex, "Bunny");
-		bunny->setPosition(0.0f, 1.0f, 0.0f);
-		bunny->setScale(4.0f, 4.0f, 4.0f);
-		this->addObject(bunny);
-	}
-	else if (model == OBJMODEL::STATUE)
-	{
-		Texture* tex = TextureLibrary::getInstance()->getTexture(filename.BRICK);
-		Mesh* mesh = MeshManager::getInstance()->createMeshFromFile(L"Assets\\Meshes\\statue.obj");
-		OBJStructure* statue = new OBJStructure(mesh, tex, "Statue");
-		statue->setPosition(0.0f, 1.0f, 1.0f);
-		statue->setScale(3.0f, 3.0f, 3.0f);
-		this->addObject(statue);
-	}
+	Texture* tex = TextureLibrary::getInstance()->getTexture(filename.BRICK);
+	OBJStructure* obj = new OBJStructure(mesh, tex, name);
+
+	obj->setPosition(0.0f, 1.0f, 0.0f);
+	obj->setScale(2.0f, 2.0f, 2.0f);
+	this->addObject(obj);
+
 }
 
 void GameObjectManager::deleteObject(AGameObject* gameObject)
@@ -296,6 +267,67 @@ void GameObjectManager::applyEditorAction(EditorAction* action)
 		object->setRotation(action->getStoredRotation().x, action->getStoredRotation().y, action->getStoredRotation().z);
 		object->setScale(action->getStoredScale());
 
+	}
+}
+
+void GameObjectManager::createObjectFromFile(String name, AGameObject::PrimitiveType type, Vector3D position, Vector3D rotation, Vector3D scale)
+{
+	if (type == AGameObject::PrimitiveType::CUBE) {
+		Cube* cube = new Cube(name, AGameObject::CUBE);
+		cube->setPosition(position);
+		cube->setRotation(rotation);
+		cube->setScale(scale);
+		this->addObject(cube);
+	}
+
+	else if (type == AGameObject::PrimitiveType::PLANE) {
+		Plane* plane = new Plane(name);
+		plane->setPosition(position);
+		plane->setRotation(rotation);
+		plane->setScale(scale);
+		this->addObject(plane);
+	}
+
+	else if (type == AGameObject::PrimitiveType::TEXTURED_CUBE) {
+		TexturedCube* texturedcube = new TexturedCube(name);
+		texturedcube->setPosition(position);
+		texturedcube->setRotation(rotation);
+		texturedcube->setScale(scale);
+		this->addObject(texturedcube);
+	}
+
+	else if (type == AGameObject::PrimitiveType::PHYSICS_CUBE) {
+		PhysicsCube* physicscube = new PhysicsCube(name);
+		physicscube->setPosition(position);
+		physicscube->setRotation(rotation);
+		physicscube->setScale(scale);
+		this->addObject(physicscube);
+	}
+
+	else if (type == AGameObject::PrimitiveType::PHYSICS_PLANE) {
+		PhysicsPlane* plane = new PhysicsPlane(name);
+		plane->setPosition(position);
+		plane->setRotation(rotation);
+		plane->setScale(scale);
+		this->addObject(plane);
+	}
+
+	else if(type == AGameObject::PrimitiveType::CYLINDER)
+	{
+		Cylinder* cylinder = new Cylinder(name);
+		cylinder->setPosition(position);
+		cylinder->setRotation(rotation);
+		cylinder->setScale(scale);
+		this->addObject(cylinder);
+	}
+
+	else if(type == AGameObject::PrimitiveType::SPHERE)
+	{
+		Sphere* sphere = new Sphere(name);
+		sphere->setPosition(position);
+		sphere->setRotation(rotation);
+		sphere->setScale(scale);
+		this->addObject(sphere);
 	}
 }
 

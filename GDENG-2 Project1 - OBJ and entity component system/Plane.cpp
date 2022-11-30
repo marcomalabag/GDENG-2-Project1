@@ -1,6 +1,8 @@
 #include "Plane.h"
 
-Plane::Plane(String name): Cube(name)
+#include "AGameObject.h"
+
+Plane::Plane(String name): Cube(name, PrimitiveType::PLANE)
 {
 	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.BASE_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);
 

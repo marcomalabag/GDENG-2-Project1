@@ -1,7 +1,9 @@
 #include "Cube.h"
 
+#include "AGameObject.h"
 
-Cube::Cube(String name):AGameObject(name)
+
+Cube::Cube(String name, AGameObject::PrimitiveType type):AGameObject(name, type)
 {
 
 	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.BASE_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);

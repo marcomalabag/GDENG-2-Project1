@@ -1,6 +1,6 @@
 #include "OBJStructure.h"
 
-OBJStructure::OBJStructure(Mesh* mesh, Texture* texture, String name): AGameObject(name)
+OBJStructure::OBJStructure(Mesh* mesh, Texture* texture, String name): AGameObject(name, PrimitiveType::OBJ)
 {
 	this->meshModel = mesh;
 	this->setObjectTexture(texture);

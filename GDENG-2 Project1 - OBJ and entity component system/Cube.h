@@ -16,7 +16,7 @@
 class Cube: public AGameObject
 {
 public:
-	Cube(String name);
+	Cube(String name, AGameObject::PrimitiveType type);
 	~Cube();
 
 	void update(float deltaTime) override;

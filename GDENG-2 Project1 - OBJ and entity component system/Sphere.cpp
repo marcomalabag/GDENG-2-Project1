@@ -1,6 +1,6 @@
 #include "Sphere.h"
 
-Sphere::Sphere(String name):AGameObject(name)
+Sphere::Sphere(String name):AGameObject(name, PrimitiveType::SPHERE)
 {
 	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.BASE_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);
 

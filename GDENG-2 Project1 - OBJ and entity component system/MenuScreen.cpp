@@ -1,17 +1,36 @@
 #include "MenuScreen.h"
-
+#include "SceneReader.h"
+#include "SceneWriter.h"
 #include "UIManager.h"
 
 MenuScreen::MenuScreen():AUIScreen("Menu Screen")
 {
-	
+	this->openSceneDialog = new ImGui::FileBrowser();
+	this->openSceneDialog->SetTitle("Open Scene");
+	this->openSceneDialog->SetTypeFilters({ ".iet" });
+
+	this->saveSceneDialog = new ImGui::FileBrowser(ImGuiFileBrowserFlags_EnterNewFilename);
+	this->saveSceneDialog->SetTitle("Save Scene");
+	this->saveSceneDialog->SetTypeFilters({ ".iet" });
+
+	this->objDialog = new ImGui::FileBrowser();
+	this->objDialog->SetTitle("Select OBJ");
+	this->objDialog->SetTypeFilters({ ".obj" });
 }
 
 void MenuScreen::drawUI()
 {
 	if (ImGui::BeginMainMenuBar()) {
 		if (ImGui::BeginMenu("File")) {
-			
+			if (ImGui::MenuItem("Open..", "Ctrl+O")) {
+				this->openSceneDialog->Open();
+			}
+			if (ImGui::MenuItem("Save", "Ctrl+S")) {
+				this->saveSceneDialog->Open();
+			}
+			if (ImGui::MenuItem("Save As...", "Ctrl+Shift+S")) {
+				this->saveSceneDialog->Open();
+			}
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Game Object")) {
@@ -27,10 +46,7 @@ void MenuScreen::drawUI()
 		}
 		if(ImGui::BeginMenu("OBJ Model"))
 		{
-			if (ImGui::MenuItem("Create Teapot")) { GameObjectManager::getInstance()->createOBJMODEL(GameObjectManager::TEAPOT);  }
-			if (ImGui::MenuItem("Create Statue")) { GameObjectManager::getInstance()->createOBJMODEL(GameObjectManager::STATUE); }
-			if (ImGui::MenuItem("Create Armadillo")) { GameObjectManager::getInstance()->createOBJMODEL(GameObjectManager::ARMADILLO); }
-			if (ImGui::MenuItem("Create Bunny")) { GameObjectManager::getInstance()->createOBJMODEL(GameObjectManager::BUNNY); }
+			if (ImGui::MenuItem("Select OBJ Model")) { this->objDialog->Open(); }
 			ImGui::EndMenu();
 		}
 		if (ImGui::MenuItem("Color Picker")) { UIManager::getInstance()->showColorPickerScreen(); }
@@ -38,6 +54,48 @@ void MenuScreen::drawUI()
 			if (ImGui::MenuItem("Credits")) { UIManager::getInstance()->showCreditsScreen(); }
 			ImGui::EndMenu();
 		}
+
+		this->openSceneDialog->Display();
+		this->saveSceneDialog->Display();
+		this->objDialog->Display();
+
+		if (this->saveSceneDialog->HasSelected())
+		{
+			SceneWriter writer = SceneWriter(this->saveSceneDialog->GetSelected().string());
+			writer.writeToFile();
+
+			this->saveSceneDialog->ClearSelected();
+			this->saveSceneDialog->Close();
+		}
+
+		else if (this->openSceneDialog->HasSelected()) {
+			SceneReader reader = SceneReader(this->openSceneDialog->GetSelected().string());
+			reader.readFromFile();
+
+			this->openSceneDialog->ClearSelected();
+			this->openSceneDialog->Close();
+		}
+
+		else if(this->objDialog->HasSelected())
+		{
+			String OBJname;
+			Mesh* mesh = MeshManager::getInstance()->createMeshFromFile(this->objDialog->GetSelected().c_str());
+			
+			
+			OBJname = this->objDialog->GetSelected().string().substr(this->objDialog->GetSelected().string().find("Meshes\\"));
+			OBJname = OBJname.substr(OBJname.find("\\"));
+			OBJname.erase(OBJname.begin() + OBJname.find("\\"));
+			OBJname.erase(OBJname.find(".obj"));
+
+			this->objDialog->ClearSelected();
+			this->objDialog->Close();
+
+			
+
+			GameObjectManager::getInstance()->createOBJMODEL(mesh, OBJname);
+
+		}
+
 		ImGui::EndMainMenuBar();
 	}
 }
