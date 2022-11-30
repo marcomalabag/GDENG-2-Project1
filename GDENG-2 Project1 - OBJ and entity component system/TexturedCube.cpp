@@ -5,7 +5,8 @@ TexturedCube::TexturedCube(String name): Cube(name, TEXTURED_CUBE)
 {
 	
 	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.TEXTURED_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);
-	this->setObjectTexture(TextureLibrary::getInstance()->getTexture(filenames.WOOD));
+	Texture* tex = TextureManager::getInstance()->createTextureFromFile(L"Assets\\Textures\\wood.jpg");
+	this->setObjectTexture(tex);
 	this->setTextureFlag();
 
 	Vector3D position_list[] =

@@ -12,7 +12,6 @@
 #include "PhysicsPlane.h"
 #include "TexturedCube.h"
 #include "OBJStructure.h"
-#include "TextureLibrary.h"
 #include "MeshManager.h"
 #include "EditorAction.h"
 
@@ -50,7 +49,7 @@ public:
 	void addObject(AGameObject* gameObject);
 	void createObject(PrimitiveType type);
 	void generatePhysicsCube();
-	void createOBJMODEL(Mesh* mesh, String name);
+	void createOBJMODEL(Mesh* mesh, String name, Texture* text);
 	void deleteObject(AGameObject* gameObject);
 	void deleteObjectByName(String name);
 	void setSelectedObject(String name);

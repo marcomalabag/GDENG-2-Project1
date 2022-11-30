@@ -194,11 +194,9 @@ void GameObjectManager::generatePhysicsCube()
 	}
 }
 
-void GameObjectManager::createOBJMODEL(Mesh* mesh, String name)
+void GameObjectManager::createOBJMODEL(Mesh* mesh, String name, Texture* text)
 {
-	TextureFileName filename;
-	Texture* tex = TextureLibrary::getInstance()->getTexture(filename.BRICK);
-	OBJStructure* obj = new OBJStructure(mesh, tex, name);
+	OBJStructure* obj = new OBJStructure(mesh, text, name);
 
 	obj->setPosition(0.0f, 1.0f, 0.0f);
 	obj->setScale(2.0f, 2.0f, 2.0f);

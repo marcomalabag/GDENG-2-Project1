@@ -160,9 +160,6 @@
     <Filter Include="GameEngine\GraphicsEngine\VertexBufferTextured">
       <UniqueIdentifier>{0b9f9d8f-6f40-493a-b692-3c4b66c8a72c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TextureLibrary">
-      <UniqueIdentifier>{3cce7281-a17e-47ca-b8e0-9e0f8349b582}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine\GraphicsEngine\ResourceManager\MeshManager">
       <UniqueIdentifier>{30bded4c-5052-40b6-a376-94c7ae0fb20b}</UniqueIdentifier>
     </Filter>
@@ -371,9 +368,6 @@
     </ClCompile>
     <ClCompile Include="VertexBufferTextured.cpp">
       <Filter>GameEngine\GraphicsEngine\VertexBufferTextured</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureLibrary.cpp">
-      <Filter>TextureLibrary</Filter>
     </ClCompile>
     <ClCompile Include="MeshManager.cpp">
       <Filter>GameEngine\GraphicsEngine\ResourceManager\MeshManager</Filter>
@@ -589,9 +583,6 @@
     </ClInclude>
     <ClInclude Include="VertexBufferTextured.h">
       <Filter>GameEngine\GraphicsEngine\VertexBufferTextured</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureLibrary.h">
-      <Filter>TextureLibrary</Filter>
     </ClInclude>
     <ClInclude Include="MeshManager.h">
       <Filter>GameEngine\GraphicsEngine\ResourceManager\MeshManager</Filter>

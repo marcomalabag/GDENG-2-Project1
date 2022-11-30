@@ -24,5 +24,11 @@ public:
 
 	ImGui::FileBrowser* objDialog;
 	ImGui::FileBrowser* textureDialogue;
+
+private:
+	String OBJname;
+	Mesh* mesh;
+	Texture* text;
+
 };
 

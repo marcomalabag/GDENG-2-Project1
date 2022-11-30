@@ -16,6 +16,10 @@ MenuScreen::MenuScreen():AUIScreen("Menu Screen")
 	this->objDialog = new ImGui::FileBrowser();
 	this->objDialog->SetTitle("Select OBJ");
 	this->objDialog->SetTypeFilters({ ".obj" });
+
+	this->textureDialogue = new ImGui::FileBrowser();
+	this->textureDialogue->SetTitle("Select Texture");
+	this->textureDialogue->SetTypeFilters({ ".jpg", ".png" });
 }
 
 void MenuScreen::drawUI()
@@ -58,6 +62,7 @@ void MenuScreen::drawUI()
 		this->openSceneDialog->Display();
 		this->saveSceneDialog->Display();
 		this->objDialog->Display();
+		this->textureDialogue->Display();
 
 		if (this->saveSceneDialog->HasSelected())
 		{
@@ -78,22 +83,29 @@ void MenuScreen::drawUI()
 
 		else if(this->objDialog->HasSelected())
 		{
-			String OBJname;
-			Mesh* mesh = MeshManager::getInstance()->createMeshFromFile(this->objDialog->GetSelected().c_str());
 			
+			this->mesh = MeshManager::getInstance()->createMeshFromFile(this->objDialog->GetSelected().c_str());
 			
-			OBJname = this->objDialog->GetSelected().string().substr(this->objDialog->GetSelected().string().find("Meshes\\"));
-			OBJname = OBJname.substr(OBJname.find("\\"));
-			OBJname.erase(OBJname.begin() + OBJname.find("\\"));
-			OBJname.erase(OBJname.find(".obj"));
+			this->OBJname = this->objDialog->GetSelected().string().substr(this->objDialog->GetSelected().string().find("Meshes\\"));
+			this->OBJname = this->OBJname.substr(this->OBJname.find("\\"));
+			this->OBJname.erase(this->OBJname.begin() + this->OBJname.find("\\"));
+			this->OBJname.erase(this->OBJname.find(".obj"));
 
 			this->objDialog->ClearSelected();
 			this->objDialog->Close();
 
-			
+			this->textureDialogue->Open();
 
-			GameObjectManager::getInstance()->createOBJMODEL(mesh, OBJname);
 
+		}
+
+		else if (this->textureDialogue->HasSelected())
+		{
+			text = TextureManager::getInstance()->createTextureFromFile(this->textureDialogue->GetSelected().c_str());
+			this->textureDialogue->ClearSelected();
+			this->textureDialogue->Close();
+
+			GameObjectManager::getInstance()->createOBJMODEL(this->mesh, this->OBJname, this->text);
 		}
 
 		ImGui::EndMainMenuBar();
