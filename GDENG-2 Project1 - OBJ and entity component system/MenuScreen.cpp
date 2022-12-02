@@ -7,11 +7,11 @@ MenuScreen::MenuScreen():AUIScreen("Menu Screen")
 {
 	this->openSceneDialog = new ImGui::FileBrowser();
 	this->openSceneDialog->SetTitle("Open Scene");
-	this->openSceneDialog->SetTypeFilters({ ".iet" });
+	this->openSceneDialog->SetTypeFilters({ ".xml" });
 
 	this->saveSceneDialog = new ImGui::FileBrowser(ImGuiFileBrowserFlags_EnterNewFilename);
 	this->saveSceneDialog->SetTitle("Save Scene");
-	this->saveSceneDialog->SetTypeFilters({ ".iet" });
+	this->saveSceneDialog->SetTypeFilters({ ".xml" });
 
 	this->objDialog = new ImGui::FileBrowser();
 	this->objDialog->SetTitle("Select OBJ");

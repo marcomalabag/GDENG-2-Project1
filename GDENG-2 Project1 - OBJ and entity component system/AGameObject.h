@@ -80,6 +80,7 @@ public:
 	Vector3D getLocalRotation();
 
 	String getName();
+	void setName(String name);
 	PrimitiveType getType();
 	void ComputeLocalMatrix();
 	float* getPhysicsLocalMatrix();

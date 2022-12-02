@@ -2,6 +2,9 @@
 #include <iostream>
 #include <fstream>
 #include "GameObjectManager.h"
+#include "tinyxml/tinyxml.h"
+#include "pugixml-1.13/src/pugixml.hpp"
+#include "pugixml-1.13/src/pugiconfig.hpp"
 
 
 typedef std::fstream FileReader;
@@ -13,50 +16,56 @@ SceneReader::SceneReader(String directory)
 
 void SceneReader::readFromFile()
 {
-	String fileDir = this->directory + ".iet";
-	if (this->directory.find(".iet") != String::npos) {
-		fileDir = this->directory;
-	}
-
-	FileReader  sceneFile;
-	sceneFile.open(fileDir, std::ios::in);
-
-	int index = 0;
-	String readLine;
-
 	String objectName;
 	AGameObject::PrimitiveType objectType;
 	Vector3D position;
 	Vector3D rotation;
 	Vector3D scale;
-	while (std::getline(sceneFile, readLine)) {
-		if (index == 0) {
-			objectName = readLine;
-			index++;
-		}
-		else if (index == 1) {
-			
-			std::vector stringSplit = this->split(readLine, ' ');
-			objectType = (AGameObject::PrimitiveType)std::stoi(stringSplit[1]);
-			index++;
-		}
-		else if (index == 2) {
-			std::vector stringSplit = this->split(readLine, ' ');
-			position = Vector3D(std::stof(stringSplit[1]), std::stof(stringSplit[2]), std::stof(stringSplit[3]));
-			index++;
-		}
-		else if (index == 3) {
-			std::vector stringSplit = this->split(readLine, ' ');
-			scale = Vector3D(std::stof(stringSplit[1]), std::stof(stringSplit[2]), std::stof(stringSplit[3]));
-			index++;
-		}
-		else if (index == 4) {
-			std::vector stringSplit = this->split(readLine, ' ');
-			rotation = Vector3D(std::stof(stringSplit[1]), std::stof(stringSplit[2]), std::stof(stringSplit[3]));
-			index = 0;
 
-			GameObjectManager::getInstance()->createObjectFromFile(objectName, objectType, position, rotation, scale);
-		}
+	String fileDir = this->directory + ".xml";
+	if (this->directory.find(".xml") != String::npos) {
+		fileDir = this->directory;
+
+	}
+	
+	pugi::xml_document doc;
+	pugi::xml_parse_result result = doc.load_file(fileDir.c_str());
+	if (!result)
+	{
+		std::cout << "Parse error: " << result.description()
+			<< ", character pos= " << result.offset;
+	}
+	// A valid XML document must have a single root node
+	pugi::xml_node root = doc.first_child();
+	
+	for(;root; root = root.next_sibling())
+	{
+		
+		String objectName = root.child("Name").child_value();
+
+		objectType = (AGameObject::PrimitiveType)std::stoi(root.child("Type").child_value());
+
+		pugi::xml_node positionNode = root.child("Position");
+		float PositionX = std::stof(positionNode.child("x").child_value());
+		float PositionY = std::stof(positionNode.child("y").child_value());
+		float PositionZ = std::stof(positionNode.child("z").child_value());
+		position = Vector3D(PositionX, PositionY, PositionZ);
+		
+
+		pugi::xml_node ScaleNode = root.child("Scale");
+		float ScaleX = std::stof(ScaleNode.child("x").child_value());
+		float ScaleY = std::stof(ScaleNode.child("y").child_value());
+		float ScaleZ = std::stof(ScaleNode.child("z").child_value());
+		scale = Vector3D(ScaleX, ScaleY, ScaleZ);
+		
+
+		pugi::xml_node RotationNode = root.child("Rotation");
+		float RotationX = std::stof(RotationNode.child("x").child_value());
+		float RotationY = std::stof(RotationNode.child("y").child_value());
+		float RotationZ = std::stof(RotationNode.child("z").child_value());
+		rotation = Vector3D(RotationX, RotationY, RotationZ);
+
+		GameObjectManager::getInstance()->createObjectFromFile(objectName, objectType, position, rotation, scale);
 	}
 }
 

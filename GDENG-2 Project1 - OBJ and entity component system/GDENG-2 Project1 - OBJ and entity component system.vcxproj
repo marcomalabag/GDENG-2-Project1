@@ -194,6 +194,8 @@
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="ProfilerScreen.h" />
+    <ClInclude Include="pugixml-1.13\src\pugiconfig.hpp" />
+    <ClInclude Include="pugixml-1.13\src\pugixml.hpp" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -265,6 +267,7 @@
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="ProfilerScreen.cpp" />
+    <ClCompile Include="pugixml-1.13\src\pugixml.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />

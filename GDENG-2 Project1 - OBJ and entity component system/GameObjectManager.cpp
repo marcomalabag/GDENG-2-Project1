@@ -65,7 +65,20 @@ void GameObjectManager::renderAll(int viewportWidth, int viewportHeight)
 
 void GameObjectManager::addObject(AGameObject* gameObject)
 {
-	this->GameObjectTable[gameObject->getName()] = gameObject;
+	if (this->GameObjectTable[gameObject->getName()] != NULL) {
+		int count = 1;
+		String revisedString = gameObject->getName() + "(" + std::to_string(count) + ")";
+		while (this->GameObjectTable[revisedString] != NULL) {
+			count++;
+			revisedString = gameObject->getName() + "(" + std::to_string(count) + ")";
+		}
+		gameObject->setName(revisedString);
+		this->GameObjectTable[revisedString] = gameObject;
+	}
+	else {
+		this->GameObjectTable[gameObject->getName()] = gameObject;
+	}
+	
 	this->GameObjectList.push_back(gameObject);
 }
 
@@ -73,102 +86,52 @@ void GameObjectManager::createObject(PrimitiveType type)
 {
 	if(type == PrimitiveType::CUBE)
 	{
-		String cubename;
-		if(this->cubeCounter == 0)
-		{
-			cubename = "Cube";
-		}
-		else
-		{
-			String number = "(" + std::to_string(this->cubeCounter) + ")";
-			cubename = "Cube" + number;
-		}
-		Cube* cube = new Cube(cubename, AGameObject::CUBE);
+		
+		Cube* cube = new Cube("Cube", AGameObject::CUBE);
 		cube->setPosition(0.0f, 1.0f, 0.0f);
 		cube->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(cube);
-		this->cubeCounter++;
+		
 	}
 	else if (type == PrimitiveType::PLANE)
 	{
-		String planename;
-		if (this->planeCounter == 0)
-		{
-			planename = "Plane";
-		}
-		else
-		{
-			String number = "(" + std::to_string(this->planeCounter) + ")";
-			planename = "Plane" + number;
-		}
-		Plane* plane = new Plane(planename);
+		Plane* plane = new Plane("Plane");
 		plane->setPosition(0.0f, 1.0f, 0.0f);
 		plane->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(plane);
-		this->planeCounter++;
+		
 	}
 	else if (type == PrimitiveType::CYLINDER)
 	{
-		String cylindername;
-		if (this->cylinderCounter == 0)
-		{
-			cylindername = "Cylinder";
-		}
-		else
-		{
-			String number = "(" + std::to_string(this->cylinderCounter) + ")";
-			cylindername = "Cylinder" + number;
-		}
-		Cylinder* cylinder = new Cylinder(cylindername);
+		Cylinder* cylinder = new Cylinder("Cylinder");
 		cylinder->setPosition(0.0f, 1.0f, 0.0f);
 		cylinder->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(cylinder);
-		this->cylinderCounter++;
+		
 	}
 	else if (type == PrimitiveType::SPHERE)
 	{
-		String spherename;
-		if (this->sphereCounter == 0)
-		{
-			spherename = "Sphere";
-		}
-		else
-		{
-			String number = "(" + std::to_string(this->sphereCounter) + ")";
-			spherename = "Sphere" + number;
-		}
-		Sphere* sphere = new Sphere(spherename);
+		Sphere* sphere = new Sphere("Sphere");
 		sphere->setPosition(0.0f, 1.0f, 0.0f);
 		sphere->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(sphere);
-		this->sphereCounter++;
+	
 	}
 	else if(type == PrimitiveType::TEXTURED_CUBE)
 	{
-		String TexturedCubename;
-		if(this->TexturedCubecounter == 0)
-		{
-			TexturedCubename = "Textured Cube";
-		}
-		else
-		{
-			String number = "(" + std::to_string(this->TexturedCubecounter) + ")";
-			TexturedCubename = "Textured Cube" + number;
-		}
-		TexturedCube* Texcube = new TexturedCube(TexturedCubename);
+		TexturedCube* Texcube = new TexturedCube("Textured Cube");
 		Texcube->setPosition(0.0f, 1.0f, 0.0f);
 		Texcube->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(Texcube);
-		this->TexturedCubecounter++;
 	}
 	else if(type == PrimitiveType::PHYSICS_CUBE)
 	{
-		PhysicsCube* physicsCube = new PhysicsCube("PhysicsCube");
+		PhysicsCube* physicsCube = new PhysicsCube("Physics Cube");
 		this->addObject(physicsCube);
 	}
 	else if(type == PrimitiveType::PHYSICS_PLANE)
 	{
-		PhysicsPlane* physicsplane = new PhysicsPlane("PhhysicsPlane");
+		PhysicsPlane* physicsplane = new PhysicsPlane("Phhysics Plane");
 		this->addObject(physicsplane);
 	}
 
@@ -178,19 +141,8 @@ void GameObjectManager::generatePhysicsCube()
 {
 	for(int i = 0; i < 20; i++)
 	{
-		String PhysicsCubename;
-		if (this->PhysicsCubeCounter == 0)
-		{
-			PhysicsCubename = "Physics Cube";
-		}
-		else
-		{
-			String number = "(" + std::to_string(this->PhysicsCubeCounter) + ")";
-			PhysicsCubename = "Physics Cube" + number;
-		}
-		PhysicsCube* physicsCube = new PhysicsCube(PhysicsCubename);
+		PhysicsCube* physicsCube = new PhysicsCube("Physics Cube");
 		this->addObject(physicsCube);
-		this->PhysicsCubeCounter++;
 	}
 }
 

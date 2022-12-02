@@ -142,6 +142,11 @@ AGameObject::String AGameObject::getName()
 	return this->name;
 }
 
+void AGameObject::setName(String name)
+{
+	this->name = name;
+}
+
 AGameObject::PrimitiveType AGameObject::getType()
 {
 	return this->objectType;
