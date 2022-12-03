@@ -38,34 +38,38 @@ void SceneReader::readFromFile()
 	// A valid XML document must have a single root node
 	pugi::xml_node root = doc.first_child();
 	
-	for(;root; root = root.next_sibling())
+	for(; root; root = root.next_sibling())
 	{
+		pugi::xml_node GameObjectNode = root.child("GameObject");
+		for(; GameObjectNode; GameObjectNode = GameObjectNode.next_sibling())
+		{
+			String objectName = GameObjectNode.child("Name").child_value();
+
+			objectType = (AGameObject::PrimitiveType)std::stoi(GameObjectNode.child("Type").child_value());
+
+			pugi::xml_node positionNode = GameObjectNode.child("Position");
+			float PositionX = std::stof(positionNode.child("x").child_value());
+			float PositionY = std::stof(positionNode.child("y").child_value());
+			float PositionZ = std::stof(positionNode.child("z").child_value());
+			position = Vector3D(PositionX, PositionY, PositionZ);
+
+
+			pugi::xml_node ScaleNode = GameObjectNode.child("Scale");
+			float ScaleX = std::stof(ScaleNode.child("x").child_value());
+			float ScaleY = std::stof(ScaleNode.child("y").child_value());
+			float ScaleZ = std::stof(ScaleNode.child("z").child_value());
+			scale = Vector3D(ScaleX, ScaleY, ScaleZ);
+
+
+			pugi::xml_node RotationNode = GameObjectNode.child("Rotation");
+			float RotationX = std::stof(RotationNode.child("x").child_value());
+			float RotationY = std::stof(RotationNode.child("y").child_value());
+			float RotationZ = std::stof(RotationNode.child("z").child_value());
+			rotation = Vector3D(RotationX, RotationY, RotationZ);
+
+			GameObjectManager::getInstance()->createObjectFromFile(objectName, objectType, position, rotation, scale);
+		}
 		
-		String objectName = root.child("Name").child_value();
-
-		objectType = (AGameObject::PrimitiveType)std::stoi(root.child("Type").child_value());
-
-		pugi::xml_node positionNode = root.child("Position");
-		float PositionX = std::stof(positionNode.child("x").child_value());
-		float PositionY = std::stof(positionNode.child("y").child_value());
-		float PositionZ = std::stof(positionNode.child("z").child_value());
-		position = Vector3D(PositionX, PositionY, PositionZ);
-		
-
-		pugi::xml_node ScaleNode = root.child("Scale");
-		float ScaleX = std::stof(ScaleNode.child("x").child_value());
-		float ScaleY = std::stof(ScaleNode.child("y").child_value());
-		float ScaleZ = std::stof(ScaleNode.child("z").child_value());
-		scale = Vector3D(ScaleX, ScaleY, ScaleZ);
-		
-
-		pugi::xml_node RotationNode = root.child("Rotation");
-		float RotationX = std::stof(RotationNode.child("x").child_value());
-		float RotationY = std::stof(RotationNode.child("y").child_value());
-		float RotationZ = std::stof(RotationNode.child("z").child_value());
-		rotation = Vector3D(RotationX, RotationY, RotationZ);
-
-		GameObjectManager::getInstance()->createObjectFromFile(objectName, objectType, position, rotation, scale);
 	}
 }
 
