@@ -14,6 +14,7 @@
 #include "OBJStructure.h"
 #include "MeshManager.h"
 #include "EditorAction.h"
+#include "Capsule.h"
 
 
 
@@ -32,6 +33,7 @@ public:
 		PLANE,
 		SPHERE,
 		CYLINDER,
+		CAPSULE,
 		TEXTURED_CUBE,
 		PHYSICS_CUBE,
 		PHYSICS_PLANE
@@ -55,11 +57,12 @@ public:
 	void setSelectedObject(String name);
 	void setSelectedObject(AGameObject* gameObject);
 	AGameObject* getSelectedObject();
+	void hundreadCubes();
 	void saveEditStates();
 	void restoreEditStates();
 	void applyEditorAction(EditorAction* action);
 
-	void createObjectFromFile(String name, AGameObject::PrimitiveType type, Vector3D position, Vector3D rotation, Vector3D scale);
+	void createObjectFromFile(String name, AGameObject::PrimitiveType type, Vector3D position, Vector3D rotation, Vector3D scale, bool rigidBody);
 	
 private:
 	static GameObjectManager* sharedInstance;

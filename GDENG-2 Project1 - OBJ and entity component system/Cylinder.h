@@ -12,6 +12,8 @@ public:
 	Cylinder(String name);
 	void draw(int width, int height) override;
 	void update(float deltaTime) override;
+	void saveEditState() override;
+	void restoreEditState() override;
 	~Cylinder();
 
 private:

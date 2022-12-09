@@ -156,6 +156,7 @@
     <ClInclude Include="AUIScreen.h" />
     <ClInclude Include="BaseSystem.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Capsule.h" />
     <ClInclude Include="ColorPickerScreen.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="CreditsScreen.h" />
@@ -231,6 +232,7 @@
     <ClCompile Include="AUIScreen.cpp" />
     <ClCompile Include="BaseSystem.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Capsule.cpp" />
     <ClCompile Include="ColorPickerScreen.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="CreditsScreen.cpp" />

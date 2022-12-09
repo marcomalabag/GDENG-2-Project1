@@ -1,5 +1,7 @@
 #include "Sphere.h"
 
+#include "PhysicsComponent.h"
+
 Sphere::Sphere(String name):AGameObject(name, PrimitiveType::SPHERE)
 {
 	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.BASE_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);
@@ -80,8 +82,15 @@ Sphere::Sphere(String name):AGameObject(name, PrimitiveType::SPHERE)
 void Sphere::draw(int width, int height)
 {
 	constant cc;
-	this->ComputeLocalMatrix();
-	cc.world = this->getLocalMatrix();
+	if (this->overrideMatrix)
+	{
+		cc.world = this->getLocalMatrix();
+	}
+	else
+	{
+		this->ComputeLocalMatrix();
+		cc.world = this->getLocalMatrix();
+	}
 
 	Matrix4x4 cameraMatrix = SceneCameraHandler::getInstance()->getSceneCameraViewMatrix();
 	cc.view = cameraMatrix;
@@ -109,6 +118,28 @@ void Sphere::draw(int width, int height)
 
 void Sphere::update(float deltaTime)
 {
+	
+}
+
+void Sphere::saveEditState(){
+	PhysicsComponent* componentAttached = (PhysicsComponent*)this->findComponentbyType(AComponent::Physics, "Physics Component");
+	if (componentAttached != nullptr)
+	{
+		AGameObject::saveEditState();
+	}
+}
+
+void Sphere::restoreEditState()
+{
+	
+	PhysicsComponent* componentAttached = (PhysicsComponent*)this->findComponentbyType(AComponent::Physics, "Physics Component");
+	if (componentAttached != nullptr)
+	{
+		AGameObject::restoreEditState();
+		this->detachComponent(componentAttached);
+		componentAttached = new PhysicsComponent("Physics Component", this);
+		this->attachComponent(componentAttached);
+	}
 	
 }
 

@@ -1,10 +1,10 @@
 #include "SceneWriter.h"
 #include <iostream>
-#include <fstream>
+#include "AComponent.h"
 #include "GameObjectManager.h"
+#include "pugixml-1.13/src/pugixml.hpp"
+#include "pugixml-1.13/src/pugiconfig.hpp"
 
-
-typedef std::fstream FileWriter;
 
 SceneWriter::SceneWriter(String directory)
 {
@@ -22,13 +22,25 @@ void SceneWriter::writeToFile()
 	sceneFile.open(fileDir, std::ios::out);
 
 	GameObjectManager::ObjectList List = GameObjectManager::getInstance()->getAllObjects();
-
+	
+	sceneFile << "<GameObjects>" << std::endl;
 	for(AGameObject* gameObject: List)
 	{
 		
 		Vector3D position = gameObject->getLocalPosition();
 		Vector3D rotation = gameObject->getLocalRotation();
 		Vector3D scale = gameObject->getLocalScale();
+
+		bool hasRigidBody = gameObject->findComponentbyType(AComponent::Physics, "Physics Component");
+		if(!hasRigidBody)
+		{
+			hasRigidBody = false;
+		}
+		else
+		{
+			hasRigidBody = true;
+		}
+
 
 		sceneFile << "<GameObject>" << std::endl;
 		sceneFile << "<Name>" + gameObject->getName() + "</Name>" << std::endl;
@@ -48,9 +60,10 @@ void SceneWriter::writeToFile()
 		sceneFile << "<y>" + std::to_string(rotation.y) + "</y>" << std::endl;
 		sceneFile << "<z>" + std::to_string(rotation.z) + "</z>" << std::endl;
 		sceneFile << "</Rotation>" << std::endl;
+		sceneFile << "<RigidBody>" + std::to_string(hasRigidBody) + "</RigidBody>" << std::endl;
 		sceneFile << "</GameObject>" << std::endl;
 	}
-
+	sceneFile << "</GameObjects>" << std::endl;
 	sceneFile.close();
 	
 }

@@ -2,9 +2,6 @@
 #include <iostream>
 #include <fstream>
 #include "GameObjectManager.h"
-#include "tinyxml/tinyxml.h"
-#include "pugixml-1.13/src/pugixml.hpp"
-#include "pugixml-1.13/src/pugiconfig.hpp"
 
 
 typedef std::fstream FileReader;
@@ -18,6 +15,7 @@ void SceneReader::readFromFile()
 {
 	String objectName;
 	AGameObject::PrimitiveType objectType;
+	bool rigidBody;
 	Vector3D position;
 	Vector3D rotation;
 	Vector3D scale;
@@ -46,31 +44,27 @@ void SceneReader::readFromFile()
 			String objectName = GameObjectNode.child("Name").child_value();
 
 			objectType = (AGameObject::PrimitiveType)std::stoi(GameObjectNode.child("Type").child_value());
+			
+			position = GetTransformFromXML(GameObjectNode.child("Position"));
 
-			pugi::xml_node positionNode = GameObjectNode.child("Position");
-			float PositionX = std::stof(positionNode.child("x").child_value());
-			float PositionY = std::stof(positionNode.child("y").child_value());
-			float PositionZ = std::stof(positionNode.child("z").child_value());
-			position = Vector3D(PositionX, PositionY, PositionZ);
+			scale = GetTransformFromXML(GameObjectNode.child("Scale"));
+			
+			rotation = GetTransformFromXML(GameObjectNode.child("Rotation"));
 
+			rigidBody = GameObjectNode.child("RigidBody").child_value();
 
-			pugi::xml_node ScaleNode = GameObjectNode.child("Scale");
-			float ScaleX = std::stof(ScaleNode.child("x").child_value());
-			float ScaleY = std::stof(ScaleNode.child("y").child_value());
-			float ScaleZ = std::stof(ScaleNode.child("z").child_value());
-			scale = Vector3D(ScaleX, ScaleY, ScaleZ);
-
-
-			pugi::xml_node RotationNode = GameObjectNode.child("Rotation");
-			float RotationX = std::stof(RotationNode.child("x").child_value());
-			float RotationY = std::stof(RotationNode.child("y").child_value());
-			float RotationZ = std::stof(RotationNode.child("z").child_value());
-			rotation = Vector3D(RotationX, RotationY, RotationZ);
-
-			GameObjectManager::getInstance()->createObjectFromFile(objectName, objectType, position, rotation, scale);
+			GameObjectManager::getInstance()->createObjectFromFile(objectName, objectType, position, rotation, scale, rigidBody);
 		}
 		
 	}
+}
+
+Vector3D SceneReader::GetTransformFromXML(pugi::xml_node transform)
+{
+	float x = std::stof(transform.child("x").child_value());
+	float y = std::stof(transform.child("y").child_value());
+	float z = std::stof(transform.child("z").child_value());
+	return Vector3D(x, y, z);
 }
 
 std::vector<std::string> SceneReader::split(const std::string& s, char delim)

@@ -223,6 +223,9 @@
     <Filter Include="Pugixml">
       <UniqueIdentifier>{044a7c91-e60b-4d85-86d3-47b70b4ca81e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Primitives\3D\Capsule">
+      <UniqueIdentifier>{2d38a003-acdc-4ea5-be63-4df66e27907c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -428,6 +431,9 @@
     </ClCompile>
     <ClCompile Include="pugixml-1.13\src\pugixml.cpp">
       <Filter>Pugixml</Filter>
+    </ClCompile>
+    <ClCompile Include="Capsule.cpp">
+      <Filter>Primitives\3D\Capsule</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -649,6 +655,9 @@
     </ClInclude>
     <ClInclude Include="pugixml-1.13\src\pugixml.hpp">
       <Filter>Pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="Capsule.h">
+      <Filter>Primitives\3D\Capsule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

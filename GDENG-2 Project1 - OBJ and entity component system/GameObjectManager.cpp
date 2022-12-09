@@ -117,12 +117,26 @@ void GameObjectManager::createObject(PrimitiveType type)
 		this->addObject(sphere);
 	
 	}
+	else if(type == PrimitiveType::CAPSULE)
+	{
+		Capsule* capsule = new Capsule("Capsule");
+		capsule->setPosition(0.0f, 1.0f, 0.0f);
+		capsule->setScale(1.0f, 1.0f, 1.0f);
+		this->addObject(capsule);
+	}
 	else if(type == PrimitiveType::TEXTURED_CUBE)
 	{
 		TexturedCube* Texcube = new TexturedCube("Textured Cube");
 		Texcube->setPosition(0.0f, 1.0f, 0.0f);
 		Texcube->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(Texcube);
+	}
+	else if(type == PrimitiveType::CAPSULE)
+	{
+		Capsule* capsule = new Capsule("Capsule");
+		capsule->setPosition(0.0f, 1.0f, 0.0f);
+		capsule->setScale(0.25f, 0.25f, 0.25f);
+		this->addObject(capsule);
 	}
 	else if(type == PrimitiveType::PHYSICS_CUBE)
 	{
@@ -220,14 +234,51 @@ void GameObjectManager::applyEditorAction(EditorAction* action)
 	}
 }
 
-void GameObjectManager::createObjectFromFile(String name, AGameObject::PrimitiveType type, Vector3D position, Vector3D rotation, Vector3D scale)
+void GameObjectManager::hundreadCubes()
+{
+	int max = 1.5f;
+	int min = -2.5f;
+	Math math;
+	for (int i = 0; i < 100; i++)
+	{
+		float x = math.getRandom(min, max);
+		float y = math.getRandom(min, max);
+		Cube* cube = new Cube("Cube", AGameObject::CUBE);
+		cube->setPosition(x, y, 0.0f);
+		cube->setScale(1.0f, 1.0f, 1.0f);
+		this->addObject(cube);
+		
+	}
+
+}
+
+void GameObjectManager::createObjectFromFile(String name, AGameObject::PrimitiveType type, Vector3D position, Vector3D rotation, Vector3D scale, bool rigidBody)
 {
 	if (type == AGameObject::PrimitiveType::CUBE) {
 		Cube* cube = new Cube(name, AGameObject::CUBE);
 		cube->setPosition(position);
 		cube->setRotation(rotation);
 		cube->setScale(scale);
+		if(rigidBody)
+		{
+			cube->ComputeLocalMatrix();
+			cube->attachComponent(new PhysicsComponent("Physics Component", cube));
+			
+		}
 		this->addObject(cube);
+	}
+	else if(type == AGameObject::PrimitiveType::CAPSULE)
+	{
+		Capsule* capsule = new Capsule("Capsule");
+		capsule->setPosition(position);
+		capsule->setRotation(rotation);
+		capsule->setScale(scale);
+		if (rigidBody)
+		{
+			capsule->ComputeLocalMatrix();
+			capsule->attachComponent(new PhysicsComponent("Physics Component", capsule));
+		}
+		this->addObject(capsule);
 	}
 
 	else if (type == AGameObject::PrimitiveType::PLANE) {
@@ -235,6 +286,13 @@ void GameObjectManager::createObjectFromFile(String name, AGameObject::Primitive
 		plane->setPosition(position);
 		plane->setRotation(rotation);
 		plane->setScale(scale);
+		if (rigidBody)
+		{
+			plane->ComputeLocalMatrix();
+			plane->attachComponent(new PhysicsComponent("Physics Component", plane));
+			PhysicsComponent* component = (PhysicsComponent*)plane->findComponentbyType(AComponent::ComponentType::Physics, "Physics Component");
+			//component->getRigidBody()->setType(BodyType::KINEMATIC);
+		}
 		this->addObject(plane);
 	}
 
@@ -268,6 +326,11 @@ void GameObjectManager::createObjectFromFile(String name, AGameObject::Primitive
 		cylinder->setPosition(position);
 		cylinder->setRotation(rotation);
 		cylinder->setScale(scale);
+		if (rigidBody)
+		{
+			cylinder->ComputeLocalMatrix();
+			cylinder->attachComponent(new PhysicsComponent("Physics Component", cylinder));
+		}
 		this->addObject(cylinder);
 	}
 
@@ -277,6 +340,11 @@ void GameObjectManager::createObjectFromFile(String name, AGameObject::Primitive
 		sphere->setPosition(position);
 		sphere->setRotation(rotation);
 		sphere->setScale(scale);
+		if (rigidBody)
+		{
+			sphere->ComputeLocalMatrix();
+			sphere->attachComponent(new PhysicsComponent("Physics Component", sphere));
+		}
 		this->addObject(sphere);
 	}
 }

@@ -1,6 +1,7 @@
 #include "Cube.h"
 
 #include "AGameObject.h"
+#include "PhysicsComponent.h"
 
 
 Cube::Cube(String name, AGameObject::PrimitiveType type):AGameObject(name, type)
@@ -118,6 +119,27 @@ void Cube::setAnimSpeed(float speed)
 	this->speed = speed;
 }
 
+void Cube::saveEditState() {
+	PhysicsComponent* componentAttached = (PhysicsComponent*)this->findComponentbyType(AComponent::Physics, "Physics Component");
+	if (componentAttached != nullptr)
+	{
+		AGameObject::saveEditState();
+	}
+}
+
+void Cube::restoreEditState()
+{
+
+	PhysicsComponent* componentAttached = (PhysicsComponent*)this->findComponentbyType(AComponent::Physics, "Physics Component");
+	if (componentAttached != nullptr)
+	{
+		AGameObject::restoreEditState();
+		this->detachComponent(componentAttached);
+		componentAttached = new PhysicsComponent("Physics Component", this);
+		this->attachComponent(componentAttached);
+	}
+
+}
 Cube::~Cube()
 {
 	this->constantbuffer->release();

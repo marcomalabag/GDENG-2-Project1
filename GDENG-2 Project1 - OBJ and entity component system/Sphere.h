@@ -16,6 +16,9 @@ public:
 	void draw(int width, int height) override;
 	void update(float deltaTime) override;
 
+	void saveEditState() override;
+	void restoreEditState() override;
+
 private:
 	VertexBuffer* verterbuffer;
 	IndexBuffer* indexbuffer;

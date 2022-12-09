@@ -23,6 +23,7 @@ public:
 		CUBE,
 		PLANE,
 		SPHERE,
+		CAPSULE,
 		PHYSICS_CUBE,
 		PHYSICS_PLANE,
 		OBJ,

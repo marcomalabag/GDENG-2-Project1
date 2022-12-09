@@ -1,5 +1,7 @@
 #include "Cylinder.h"
 
+#include "PhysicsComponent.h"
+
 
 Cylinder::Cylinder(String name): AGameObject(name, PrimitiveType::CYLINDER)
 {
@@ -129,8 +131,15 @@ Cylinder::Cylinder(String name): AGameObject(name, PrimitiveType::CYLINDER)
 void Cylinder::draw(int width, int height)
 {
 	constant cc;
-	this->ComputeLocalMatrix();
-	cc.world = this->getLocalMatrix();
+	if (this->overrideMatrix)
+	{
+		cc.world = this->getLocalMatrix();
+	}
+	else
+	{
+		this->ComputeLocalMatrix();
+		cc.world = this->getLocalMatrix();
+	}
 
 	Matrix4x4 cameraMatrix = SceneCameraHandler::getInstance()->getSceneCameraViewMatrix();
 	cc.view = cameraMatrix;
@@ -159,6 +168,28 @@ void Cylinder::draw(int width, int height)
 void Cylinder::update(float deltaTime)
 {
 	
+}
+
+void Cylinder::saveEditState() {
+	PhysicsComponent* componentAttached = (PhysicsComponent*)this->findComponentbyType(AComponent::Physics, "Physics Component");
+	if (componentAttached != nullptr)
+	{
+		AGameObject::saveEditState();
+	}
+}
+
+void Cylinder::restoreEditState()
+{
+	
+	PhysicsComponent* componentAttached = (PhysicsComponent*)this->findComponentbyType(AComponent::Physics, "Physics Component");
+	if (componentAttached != nullptr)
+	{
+		AGameObject::restoreEditState();
+		this->detachComponent(componentAttached);
+		componentAttached = new PhysicsComponent("Physics Component", this);
+		this->attachComponent(componentAttached);
+	}
+
 }
 
 Cylinder::~Cylinder()
