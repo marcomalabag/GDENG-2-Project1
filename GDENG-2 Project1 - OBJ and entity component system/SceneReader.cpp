@@ -51,7 +51,15 @@ void SceneReader::readFromFile()
 			
 			rotation = GetTransformFromXML(GameObjectNode.child("Rotation"));
 
-			rigidBody = GameObjectNode.child("RigidBody").child_value();
+			if(std::atoi(GameObjectNode.child("RigidBody").child_value()) == 0)
+			{
+				rigidBody = false;
+			}
+			else if(std::atoi(GameObjectNode.child("RigidBody").child_value()) == 1)
+			{
+				rigidBody = true;
+			}
+			
 
 			GameObjectManager::getInstance()->createObjectFromFile(objectName, objectType, position, rotation, scale, rigidBody);
 		}

@@ -1,91 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <GameObjects>
   <GameObject>
-    <Name>Sphere</Name>
-    <Type>4</Type>
-    <Position>
-      <x>0</x>
-      <y>2.55</y>
-      <z>-11.72</z>
-    </Position>
-    <Scale>
-      <x>1</x>
-      <y>1</y>
-      <z>1</z>
-    </Scale>
-    <Rotation>
-      <x>0</x>
-      <y>0</y>
-      <z>0</z>
-    </Rotation>
-    <RigidBody>1</RigidBody>
-  </GameObject>
-  <GameObject>
-    <Name>Cube(5)</Name>
+    <Name>Cube</Name>
     <Type>2</Type>
     <Position>
-      <x>0.14</x>
-      <y>1.44</y>
-      <z>-4.05</z>
-    </Position>
-    <Scale>
-      <x>1</x>
+      <x>-2.68</x>
       <y>1</y>
-      <z>1</z>
-    </Scale>
-    <Rotation>
-      <x>0</x>
-      <y>0</y>
-      <z>0</z>
-    </Rotation>
-    <RigidBody>1</RigidBody>
-  </GameObject>
-  <GameObject>
-    <Name>Cube(4)</Name>
-    <Type>2</Type>
-    <Position>
-      <x>-0.87</x>
-      <y>1.51</y>
-      <z>-2.25</z>
-    </Position>
-    <Scale>
-      <x>1</x>
-      <y>1</y>
-      <z>1</z>
-    </Scale>
-    <Rotation>
-      <x>0</x>
-      <y>0</y>
-      <z>0</z>
-    </Rotation>
-    <RigidBody>1</RigidBody>
-  </GameObject>
-  <GameObject>
-    <Name>Cube(3)</Name>
-    <Type>2</Type>
-    <Position>
-      <x>1</x>
-      <y>1.44</y>
-      <z>-2.18</z>
-    </Position>
-    <Scale>
-      <x>1</x>
-      <y>1</y>
-      <z>1</z>
-    </Scale>
-    <Rotation>
-      <x>0</x>
-      <y>0</y>
-      <z>0</z>
-    </Rotation>
-    <RigidBody>1</RigidBody>
-  </GameObject>
-  <GameObject>
-    <Name>Cube(2)</Name>
-    <Type>2</Type>
-    <Position>
-      <x>1.92</x>
-      <y>1.43</y>
       <z>0</z>
     </Position>
     <Scale>
@@ -94,18 +14,18 @@
       <z>1</z>
     </Scale>
     <Rotation>
-      <x>0</x>
-      <y>0</y>
-      <z>0</z>
+      <x>59.79</x>
+      <y>225</y>
+      <z>180</z>
     </Rotation>
-    <RigidBody>1</RigidBody>
+    <RigidBody>0</RigidBody>
   </GameObject>
   <GameObject>
     <Name>Cube(1)</Name>
     <Type>2</Type>
     <Position>
-      <x>0.03</x>
-      <y>1.46</y>
+      <x>0</x>
+      <y>1</y>
       <z>0</z>
     </Position>
     <Scale>
@@ -114,18 +34,18 @@
       <z>1</z>
     </Scale>
     <Rotation>
-      <x>0</x>
-      <y>0</y>
+      <x>90</x>
+      <y>285</y>
       <z>0</z>
     </Rotation>
-    <RigidBody>1</RigidBody>
+    <RigidBody>0</RigidBody>
   </GameObject>
   <GameObject>
-    <Name>Cube</Name>
+    <Name>Cube(2)</Name>
     <Type>2</Type>
     <Position>
-      <x>-1.77</x>
-      <y>1.47</y>
+      <x>2.2</x>
+      <y>1</y>
       <z>0</z>
     </Position>
     <Scale>
@@ -134,78 +54,18 @@
       <z>1</z>
     </Scale>
     <Rotation>
-      <x>0</x>
-      <y>0</y>
+      <x>90</x>
+      <y>327</y>
       <z>0</z>
     </Rotation>
-    <RigidBody>1</RigidBody>
+    <RigidBody>0</RigidBody>
   </GameObject>
   <GameObject>
-    <Name>Plane</Name>
-    <Type>3</Type>
-    <Position>
-      <x>0</x>
-      <y>1</y>
-      <z>0</z>
-    </Position>
-    <Scale>
-      <x>7</x>
-      <y>1</y>
-      <z>28</z>
-    </Scale>
-    <Rotation>
-      <x>0</x>
-      <y>0</y>
-      <z>0</z>
-    </Rotation>
-    <RigidBody>1</RigidBody>
-  </GameObject>
-  <GameObject>
-    <Name>Cube(6)</Name>
+    <Name>Cube(3)</Name>
     <Type>2</Type>
     <Position>
-      <x>0.46</x>
-      <y>3.09</y>
-      <z>-4.41</z>
-    </Position>
-    <Scale>
-      <x>1</x>
-      <y>1</y>
-      <z>1</z>
-    </Scale>
-    <Rotation>
       <x>0</x>
-      <y>0</y>
-      <z>0</z>
-    </Rotation>
-    <RigidBody>1</RigidBody>
-  </GameObject>
-  <GameObject>
-    <Name>Capsule</Name>
-    <Type>5</Type>
-    <Position>
-      <x>-4.77</x>
-      <y>4.27</y>
-      <z>-10.04</z>
-    </Position>
-    <Scale>
-      <x>1</x>
-      <y>1</y>
-      <z>1</z>
-    </Scale>
-    <Rotation>
-      <x>0</x>
-      <y>0</y>
-      <z>0</z>
-    </Rotation>
-    <RigidBody>1</RigidBody>
-  </GameObject>
-  <GameObject>
-    <Name>Capsule(1)</Name>
-    <Type>5</Type>
-    <Position>
-      <x>0</x>
-      <y>7</y>
+      <y>3.13</y>
       <z>0</z>
     </Position>
     <Scale>
@@ -214,8 +74,8 @@
       <z>1</z>
     </Scale>
     <Rotation>
-      <x>0</x>
-      <y>0</y>
+      <x>90</x>
+      <y>32.9999962</y>
       <z>0</z>
     </Rotation>
     <RigidBody>0</RigidBody>

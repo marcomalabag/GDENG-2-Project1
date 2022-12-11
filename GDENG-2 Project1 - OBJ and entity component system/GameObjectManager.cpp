@@ -291,7 +291,7 @@ void GameObjectManager::createObjectFromFile(String name, AGameObject::Primitive
 			plane->ComputeLocalMatrix();
 			plane->attachComponent(new PhysicsComponent("Physics Component", plane));
 			PhysicsComponent* component = (PhysicsComponent*)plane->findComponentbyType(AComponent::ComponentType::Physics, "Physics Component");
-			//component->getRigidBody()->setType(BodyType::KINEMATIC);
+			component->getRigidBody()->setType(BodyType::KINEMATIC);
 		}
 		this->addObject(plane);
 	}

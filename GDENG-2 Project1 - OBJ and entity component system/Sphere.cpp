@@ -6,9 +6,9 @@ Sphere::Sphere(String name):AGameObject(name, PrimitiveType::SPHERE)
 {
 	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.BASE_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);
 
-	float radius = 1.5f;
-	int stackCount = 12;
-	int sectorCount = 12;
+	float radius = 1.0f;
+	int stackCount = 34;
+	int sectorCount = 34;
 
 	float x, y, z, xy;
 	float pi = 3.1415926;
@@ -28,7 +28,7 @@ Sphere::Sphere(String name):AGameObject(name, PrimitiveType::SPHERE)
 			z = xy * cosf(sectorAngle);
 			x = xy * sinf(sectorAngle);
 			
-			vertex vertexsector = { Vector3D(x, y, z), Vector3D(1,0,0),  Vector3D(0.2f,0,0) };
+			vertex vertexsector = { Vector3D(x, y, z), Vector3D(1,1,1),  Vector3D(1,1,1) };
 			this->vertices.push_back(vertexsector);
 		}
 	}

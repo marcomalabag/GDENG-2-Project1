@@ -31,14 +31,14 @@ void SceneWriter::writeToFile()
 		Vector3D rotation = gameObject->getLocalRotation();
 		Vector3D scale = gameObject->getLocalScale();
 
-		bool hasRigidBody = gameObject->findComponentbyType(AComponent::Physics, "Physics Component");
-		if(!hasRigidBody)
+		bool hasRigidBody = false;
+		if(gameObject->findComponentbyType(AComponent::Physics, "Physics Component") != nullptr)
 		{
-			hasRigidBody = false;
+			hasRigidBody = true;
 		}
 		else
 		{
-			hasRigidBody = true;
+			hasRigidBody = false;
 		}
 
 
