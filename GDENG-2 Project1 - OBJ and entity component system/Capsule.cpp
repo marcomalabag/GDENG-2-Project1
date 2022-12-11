@@ -176,7 +176,6 @@ void Capsule::restoreEditState()
 Vector3D Capsule::cylinder(float u, float v)
 {
 	float pi = 3.1415926f;
-	u = 2.0f * pi * u;
 	Vector3D x = Vector3D(1.0f, 0.0f, 0.0f);
 	Vector3D y = Vector3D(0.0f, 1.0f, 0.0f);
 	Vector3D z = Vector3D(0.0f, 0.0f, 1.0f);
@@ -184,41 +183,37 @@ Vector3D Capsule::cylinder(float u, float v)
 
 
 	return capsuleEnd
-		+ z * cosf(u) * this->radius
-		+ x * sinf(u) * this->radius
+		+ z * cosf(2.0f * pi * u) * this->radius
+		+ x * sinf(2.0f * pi * u) * this->radius
 		+ y * v * this->length;
 }
 
 Vector3D Capsule::sphereStart(float u, float v)
 {
 	float pi = 3.1415926f;
-	u = 2.0f * pi * u;
-	v = (pi / 2.0f) * v;
 	Vector3D x = Vector3D(1.0f, 0.0f, 0.0f);
 	Vector3D y = Vector3D(0.0f, 1.0f, 0.0f);
 	Vector3D z = Vector3D(0.0f, 0.0f, 1.0f);
 	Vector3D capsuleTop = Vector3D(0.0f, this->length, 0.0f);
 
 	return capsuleTop
-		+ z * cosf(u) * cosf(v) * this->radius
-		+ x * sinf(u) * cosf(v) * this->radius
-		+ y * sinf(v) * this->radius;
+		+ z * cosf(2.0f * pi * u) * cosf((pi / 2.0f) * v) * this->radius
+		+ x * sinf(2.0f * pi * u) * cosf((pi / 2.0f) * v) * this->radius
+		+ y * sinf((pi / 2.0f) * v) * this->radius;
 }
 
 Vector3D Capsule::sphereEnd(float u, float v)
 {
 	float pi = 3.1415926f;
-	u = 2.0f * pi * u;
-	v = (pi / 2.0f) * (v - 1);
 	Vector3D x = Vector3D(1.0f, 0.0f, 0.0f);
 	Vector3D y = Vector3D(0.0f, 1.0f, 0.0f);
 	Vector3D z = Vector3D(0.0f, 0.0f, 1.0f);
 	Vector3D capsuleEnd = Vector3D(0.0f, 0.0f, 0.0f);
 
 	return capsuleEnd
-		+ z * cosf(u) * cosf(v) * this->radius
-		+ x * sinf(u) * cosf(v) * this->radius
-		+ y * sinf(v) * this->radius;
+		+ z * cosf(2.0f * pi * u) * cosf((pi / 2.0f) * (v - 1)) * this->radius
+		+ x * sinf(2.0f * pi * u) * cosf((pi / 2.0f) * (v - 1)) * this->radius
+		+ y * sinf((pi / 2.0f) * (v - 1)) * this->radius;
 }
 
 Capsule::~Capsule()
