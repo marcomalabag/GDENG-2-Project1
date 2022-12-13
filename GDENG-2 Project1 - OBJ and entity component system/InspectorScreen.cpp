@@ -18,7 +18,7 @@ void InspectorScreen::drawUI()
 
 void InspectorScreen::generateEditor()
 {
-	if(GameObjectManager::getInstance()->getSelectedObject() != NULL)
+	if (GameObjectManager::getInstance()->getSelectedObject() != NULL)
 	{
 		if (ImGui::Button("Select Texture"))
 		{
@@ -46,6 +46,27 @@ void InspectorScreen::generateEditor()
 		{
 			this->TransformSelected(GameObjectManager::getInstance()->getSelectedObject());
 		}
+
+		if ((PhysicsComponent*)GameObjectManager::getInstance()->getSelectedObject()->findComponentbyType(AComponent::Physics, "Physics Component") == NULL)
+		{
+			if (ImGui::Button("Attach Rigidody"))
+			{
+				GameObjectManager::getInstance()->getSelectedObject()->ComputeLocalMatrix();
+				GameObjectManager::getInstance()->getSelectedObject()->attachComponent(new PhysicsComponent(("Physics Component"), GameObjectManager::getInstance()->getSelectedObject()));
+			}
+		}
+		/*else
+		{
+			if (ImGui::Button("Detach Rigidody"))
+			{
+				GameObjectManager::getInstance()->getSelectedObject()->ComputeLocalMatrix();
+				PhysicsComponent* componentAttached = (PhysicsComponent*)GameObjectManager::getInstance()->getSelectedObject()->findComponentbyType(AComponent::Physics, "Physics Component");
+				GameObjectManager::getInstance()->getSelectedObject()->detachComponent((PhysicsComponent*)GameObjectManager::getInstance()->getSelectedObject()->findComponentbyType(AComponent::Physics, "Physics Component"));
+				delete componentAttached;
+				delete (PhysicsComponent*)GameObjectManager::getInstance()->getSelectedObject()->findComponentbyType(AComponent::Physics, "Physics Component");
+			}
+		}*/
+		
 		if (ImGui::Button("Delete", ImVec2(70.0f, 0.0f)))
 		{
 			GameObjectManager::getInstance()->deleteObjectByName(GameObjectManager::getInstance()->getSelectedObject()->getName());
