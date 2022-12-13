@@ -18,7 +18,7 @@ void InspectorScreen::drawUI()
 
 void InspectorScreen::generateEditor()
 {
-	if(GameObjectManager::getInstance()->getSelectedObject() != NULL)
+	if (GameObjectManager::getInstance()->getSelectedObject() != NULL)
 	{
 		bool enabled = GameObjectManager::getInstance()->getSelectedObject()->getStatus();
 		if (ImGui::Checkbox("Enabled", &enabled))
@@ -27,6 +27,13 @@ void InspectorScreen::generateEditor()
 				GameObjectManager::getInstance()->getSelectedObject()->enable();
 			else
 				GameObjectManager::getInstance()->getSelectedObject()->disable();
+		}
+		if(ImGui::Button("Remove Texture"))
+		{
+			if(GameObjectManager::getInstance()->getSelectedObject()->getObjectTexture() != NULL)
+			{
+				GameObjectManager::getInstance()->getSelectedObject()->setObjectTexture(NULL);
+			}
 		}
 
 		if (enabled)
@@ -41,19 +48,40 @@ void InspectorScreen::generateEditor()
 			if (ImGui::DragFloat3("Position", this->SelectedObjectposition, 0.01f))
 			{
 				this->TransformSelected(GameObjectManager::getInstance()->getSelectedObject());
-			}
-			if (ImGui::DragFloat3("Rotation", this->SelectedObjectRotation, 3))
-			{
-				this->TransformSelected(GameObjectManager::getInstance()->getSelectedObject());
-			}
-			if (ImGui::DragFloat3("Scale", this->SelectedObjectScale, 3))
-			{
-				this->TransformSelected(GameObjectManager::getInstance()->getSelectedObject());
-			}
-			if (ImGui::Button("Delete", ImVec2(70.0f, 0.0f)))
-			{
-				GameObjectManager::getInstance()->deleteObjectByName(GameObjectManager::getInstance()->getSelectedObject()->getName());
-				GameObjectManager::getInstance()->setSelectedObject(NULL);
+		  }
+		  if (ImGui::DragFloat3("Rotation", this->SelectedObjectRotation, 3))
+		  {
+			  this->TransformSelected(GameObjectManager::getInstance()->getSelectedObject());
+		  }
+		  if (ImGui::DragFloat3("Scale", this->SelectedObjectScale, 3))
+		  {
+			  this->TransformSelected(GameObjectManager::getInstance()->getSelectedObject());
+		  }
+
+		  if ((PhysicsComponent*)GameObjectManager::getInstance()->getSelectedObject()->findComponentbyType(AComponent::Physics, "Physics Component") == NULL)
+		  {
+			  if (ImGui::Button("Attach Rigidody"))
+			  {
+				  GameObjectManager::getInstance()->getSelectedObject()->ComputeLocalMatrix();
+				  GameObjectManager::getInstance()->getSelectedObject()->attachComponent(new PhysicsComponent(("Physics Component"), GameObjectManager::getInstance()->getSelectedObject()));
+			  }
+		  }
+		  /*else
+		  {
+			  if (ImGui::Button("Detach Rigidody"))
+			  {
+				  GameObjectManager::getInstance()->getSelectedObject()->ComputeLocalMatrix();
+				  PhysicsComponent* componentAttached = (PhysicsComponent*)GameObjectManager::getInstance()->getSelectedObject()->findComponentbyType(AComponent::Physics, "Physics Component");
+				  GameObjectManager::getInstance()->getSelectedObject()->detachComponent((PhysicsComponent*)GameObjectManager::getInstance()->getSelectedObject()->findComponentbyType(AComponent::Physics, "Physics Component"));
+				  delete componentAttached;
+				  delete (PhysicsComponent*)GameObjectManager::getInstance()->getSelectedObject()->findComponentbyType(AComponent::Physics, "Physics Component");
+			  }
+		  }*/
+		
+		  if (ImGui::Button("Delete", ImVec2(70.0f, 0.0f)))
+		  {
+			  GameObjectManager::getInstance()->deleteObjectByName(GameObjectManager::getInstance()->getSelectedObject()->getName());
+			  GameObjectManager::getInstance()->setSelectedObject(NULL);
 			}
 		}
 
@@ -67,6 +95,7 @@ void InspectorScreen::generateEditor()
 	{
 		Texture* text = TextureManager::getInstance()->createTextureFromFile(this->textureDialogue->GetSelected().c_str());
 		GameObjectManager::getInstance()->getSelectedObject()->setObjectTexture(text);
+		
 
 		this->textureDialogue->ClearSelected();
 		this->textureDialogue->Close();
