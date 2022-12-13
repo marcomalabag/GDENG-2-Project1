@@ -59,7 +59,8 @@ void GameObjectManager::renderAll(int viewportWidth, int viewportHeight)
 {
 	for(int i = 0; i < this->GameObjectList.size(); i++)
 	{
-		this->GameObjectList[i]->draw(viewportWidth, viewportHeight);
+		if (this->GameObjectList[i]->getStatus() == true)
+			this->GameObjectList[i]->draw(viewportWidth, viewportHeight);
 	}
 }
 
