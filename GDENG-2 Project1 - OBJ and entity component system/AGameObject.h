@@ -80,6 +80,10 @@ public:
 	void setRotationz(float z);
 	Vector3D getLocalRotation();
 
+	void enable();
+	void disable();
+	bool getStatus();
+
 	String getName();
 	void setName(String name);
 	PrimitiveType getType();
@@ -108,6 +112,7 @@ protected:
 	Vector3D Position;
 	Vector3D Scale;
 	Vector3D Rotation;
+	bool enabled = true;
 	String name;
 	bool isTextured = false;
 	Texture* texture;

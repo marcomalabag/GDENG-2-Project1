@@ -20,30 +20,43 @@ void InspectorScreen::generateEditor()
 {
 	if(GameObjectManager::getInstance()->getSelectedObject() != NULL)
 	{
-		if (ImGui::Button("Select Texture"))
+		bool enabled = GameObjectManager::getInstance()->getSelectedObject()->getStatus();
+		if (ImGui::Checkbox("Enabled", &enabled))
 		{
-			this->textureDialogue->Open();
+			if (enabled)
+				GameObjectManager::getInstance()->getSelectedObject()->enable();
+			else
+				GameObjectManager::getInstance()->getSelectedObject()->disable();
 		}
 
-		ImGui::Text("Selected Object: %s", GameObjectManager::getInstance()->getSelectedObject()->getName().c_str());
-		this->TransformUpdate();
-		if (ImGui::DragFloat3("Position", this->SelectedObjectposition, 0.01f))
+		if (enabled)
 		{
-			this->TransformSelected(GameObjectManager::getInstance()->getSelectedObject());
+			if (ImGui::Button("Select Texture"))
+			{
+				this->textureDialogue->Open();
+			}
+
+			ImGui::Text("Selected Object: %s", GameObjectManager::getInstance()->getSelectedObject()->getName().c_str());
+			this->TransformUpdate();
+			if (ImGui::DragFloat3("Position", this->SelectedObjectposition, 0.01f))
+			{
+				this->TransformSelected(GameObjectManager::getInstance()->getSelectedObject());
+			}
+			if (ImGui::DragFloat3("Rotation", this->SelectedObjectRotation, 3))
+			{
+				this->TransformSelected(GameObjectManager::getInstance()->getSelectedObject());
+			}
+			if (ImGui::DragFloat3("Scale", this->SelectedObjectScale, 3))
+			{
+				this->TransformSelected(GameObjectManager::getInstance()->getSelectedObject());
+			}
+			if (ImGui::Button("Delete", ImVec2(70.0f, 0.0f)))
+			{
+				GameObjectManager::getInstance()->deleteObjectByName(GameObjectManager::getInstance()->getSelectedObject()->getName());
+				GameObjectManager::getInstance()->setSelectedObject(NULL);
+			}
 		}
-		if (ImGui::DragFloat3("Rotation", this->SelectedObjectRotation, 3))
-		{
-			this->TransformSelected(GameObjectManager::getInstance()->getSelectedObject());
-		}
-		if (ImGui::DragFloat3("Scale", this->SelectedObjectScale, 3))
-		{
-			this->TransformSelected(GameObjectManager::getInstance()->getSelectedObject());
-		}
-		if (ImGui::Button("Delete", ImVec2(70.0f, 0.0f)))
-		{
-			GameObjectManager::getInstance()->deleteObjectByName(GameObjectManager::getInstance()->getSelectedObject()->getName());
-			GameObjectManager::getInstance()->setSelectedObject(NULL);
-		}
+
 	}
 	else {
 		ImGui::Text("No object selected");

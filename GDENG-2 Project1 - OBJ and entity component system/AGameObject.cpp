@@ -137,6 +137,21 @@ Vector3D AGameObject::getLocalRotation()
 	return Vector3D(this->orientation.x, this->orientation.y, this->orientation.z);
 }
 
+void AGameObject::enable()
+{
+	this->enabled = true;
+}
+
+void AGameObject::disable()
+{
+	this->enabled = false;
+}
+
+bool AGameObject::getStatus()
+{
+	return this->enabled;
+}
+
 AGameObject::String AGameObject::getName()
 {
 	return this->name;
