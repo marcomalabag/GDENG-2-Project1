@@ -5,6 +5,7 @@
 Sphere::Sphere(String name):AGameObject(name, PrimitiveType::SPHERE)
 {
 	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.BASE_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);
+	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.TEXTURED_VERTEX_SHADER_NAME, &shaderdataTexture.shaderByteCode, &shaderdataTexture.sizeShader);
 
 	float radius = 1.0f;
 	int stackCount = 34;
@@ -15,6 +16,7 @@ Sphere::Sphere(String name):AGameObject(name, PrimitiveType::SPHERE)
 	float sectorStep = 2 * pi / (float)sectorCount;
 	float stackStep = pi / (float)stackCount;
 	float sectorAngle, stackAngle;
+	float s, t;
 
 	for(int i = 0; i <= stackCount; i++)
 	{
@@ -27,9 +29,14 @@ Sphere::Sphere(String name):AGameObject(name, PrimitiveType::SPHERE)
 			sectorAngle = j * sectorStep;
 			z = xy * cosf(sectorAngle);
 			x = xy * sinf(sectorAngle);
+
+			s = (float)j / sectorCount;
+			t = (float)i / stackCount;
 			
 			vertex vertexsector = { Vector3D(x, y, z), Vector3D(1,1,1),  Vector3D(1,1,1) };
+			Vertex vertexsectorTextured = { Vector3D(x, y, z), Vector2D(s, t) };
 			this->vertices.push_back(vertexsector);
+			this->verticesTextured.push_back(vertexsectorTextured);
 		}
 	}
 
@@ -38,7 +45,8 @@ Sphere::Sphere(String name):AGameObject(name, PrimitiveType::SPHERE)
 	this->verterbuffer = GraphicsEngine::getInstance()->createVertexBuffer();
 	this->verterbuffer->load(&(this->vertices[0]), sizeof(vertex), this->vertices.size(), shaderdata.shaderByteCode, shaderdata.sizeShader);
 
-	
+	this->verterBufferTextured = GraphicsEngine::getInstance()->createTexturedVertexBuffer();
+	this->verterBufferTextured->load(&(this->verticesTextured[0]), sizeof(Vertex), this->verticesTextured.size(), shaderdataTexture.shaderByteCode, shaderdataTexture.sizeShader);
 
 	int k1, k2;
 
@@ -75,13 +83,25 @@ Sphere::Sphere(String name):AGameObject(name, PrimitiveType::SPHERE)
 	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
 	this->constantbuffer->load(&cc, sizeof(constant));
 
-	this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
-	this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
+	
 }
 
 void Sphere::draw(int width, int height)
 {
 	constant cc;
+
+	if (this->getObjectTexture() == NULL)
+	{
+		this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
+		this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
+
+	}
+	else
+	{
+		this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.TEXTURED_VERTEX_SHADER_NAME);
+		this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.TEXTURED_PIXEL_SHADER_NAME);
+
+	}
 	if (this->overrideMatrix)
 	{
 		cc.world = this->getLocalMatrix();
@@ -99,6 +119,7 @@ void Sphere::draw(int width, int height)
 
 	cc.projection.setPerspectiveFovLH(aspectRatio, aspectRatio, 0.1f, 1000.0f);
 
+
 	DeviceContext* device = GraphicsEngine::getInstance()->getImmediateDeviceContext();
 
 	this->constantbuffer->update(device, &cc);
@@ -109,10 +130,23 @@ void Sphere::draw(int width, int height)
 	device->setVertexShader(this->vertex_shader);
 	device->setPixelShader(this->pixel_shader);
 
-	device->setVertexBuffer(this->verterbuffer);
-	device->setIndexBuffer(this->indexbuffer);
+	if (this->getObjectTexture() == NULL)
+	{
+		device->setVertexBuffer(this->verterbuffer);
+		device->setIndexBuffer(this->indexbuffer);
 
-	device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
+		device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
+	}
+	else
+	{
+		device->setTexture(this->vertex_shader, this->texture);
+		device->setTexture(this->pixel_shader, this->texture);
+
+		device->setVertexBufferTextured(this->verterBufferTextured);
+		device->setIndexBuffer(this->indexbuffer);
+
+		device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
+	}
 
 }
 

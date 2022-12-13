@@ -100,53 +100,60 @@ TexturedCube::TexturedCube(String name): Cube(name, TEXTURED_CUBE)
 	};
 
 	
-	this->indexbuffer = GraphicsEngine::getInstance()->createIndexBuffer();
-	this->indexbuffer->load(index_list, ARRAYSIZE(index_list));
+	this->index_Buffer = GraphicsEngine::getInstance()->createIndexBuffer();
+	this->index_Buffer->load(index_list, ARRAYSIZE(index_list));
 	
 	constant cc;
 	cc.time = 0;
-	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
-	this->constantbuffer->load(&cc, sizeof(constant));
-
-	this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.TEXTURED_VERTEX_SHADER_NAME);
-	this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.TEXTURED_PIXEL_SHADER_NAME);
+	this->constant_Buffer = GraphicsEngine::getInstance()->createConstantBuffer();
+	this->constant_Buffer->load(&cc, sizeof(constant));
 
 }
 
 void TexturedCube::draw(int width, int height)
 {
-	DeviceContext* context = GraphicsEngine::getInstance()->getImmediateDeviceContext();
+	if(this->getObjectTexture() != NULL)
+	{
+		this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.TEXTURED_VERTEX_SHADER_NAME);
+		this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.TEXTURED_PIXEL_SHADER_NAME);
 
-	constant cc;
-	this->ComputeLocalMatrix();
+		DeviceContext* context = GraphicsEngine::getInstance()->getImmediateDeviceContext();
 
-	cc.world = this->getLocalMatrix();
+		constant cc;
+		this->ComputeLocalMatrix();
 
-	Matrix4x4 cameraMatrix = SceneCameraHandler::getInstance()->getSceneCameraViewMatrix();
-	cc.view = cameraMatrix;
+		cc.world = this->getLocalMatrix();
 
-	float aspectRatio = (float)width / (float)height;
+		Matrix4x4 cameraMatrix = SceneCameraHandler::getInstance()->getSceneCameraViewMatrix();
+		cc.view = cameraMatrix;
 
-	cc.projection.setPerspectiveFovLH(aspectRatio, aspectRatio, 0.1f, 1000.0f);
+		float aspectRatio = (float)width / (float)height;
 
-	DeviceContext* device = GraphicsEngine::getInstance()->getImmediateDeviceContext();
+		cc.projection.setPerspectiveFovLH(aspectRatio, aspectRatio, 0.1f, 1000.0f);
 
-	this->constantbuffer->update(device, &cc);
+		DeviceContext* device = GraphicsEngine::getInstance()->getImmediateDeviceContext();
 
-	device->setConstantBuffer(this->vertex_shader, this->constantbuffer);
-	device->setConstantBuffer(this->pixel_shader, this->constantbuffer);
+		this->constant_Buffer->update(device, &cc);
 
-	device->setVertexShader(this->vertex_shader);
-	device->setPixelShader(this->pixel_shader);
+		device->setConstantBuffer(this->vertex_shader, this->constant_Buffer);
+		device->setConstantBuffer(this->pixel_shader, this->constant_Buffer);
 
-	device->setTexture(this->vertex_shader, this->texture);
-	device->setTexture(this->pixel_shader, this->texture);
+		device->setVertexShader(this->vertex_shader);
+		device->setPixelShader(this->pixel_shader);
 
-	device->setVertexBufferTextured(this->vertexBuffer);
-	device->setIndexBuffer(this->indexbuffer);
+		device->setTexture(this->vertex_shader, this->texture);
+		device->setTexture(this->pixel_shader, this->texture);
 
-	device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
+		device->setVertexBufferTextured(this->vertexBuffer);
+		device->setIndexBuffer(this->index_Buffer);
 
+		device->drawIndexedTriangleList(this->index_Buffer->getSizeIndexList(), 0, 0);
+	}
+	
+	else
+	{
+		Cube::draw(width, height);
+	}
 }
 
 void TexturedCube::update(float deltaTime)

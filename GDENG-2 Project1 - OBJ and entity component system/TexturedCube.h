@@ -19,10 +19,7 @@ public:
 
 private:
 	VertexBufferTextured* vertexBuffer;
-	struct Vertex
-	{
-		Vector3D position;
-		Vector2D texCoord;
-	};
+	IndexBuffer* index_Buffer;
+	ConstantBuffer* constant_Buffer;
 };
 
