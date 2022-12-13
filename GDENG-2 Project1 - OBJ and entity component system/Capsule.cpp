@@ -1,4 +1,6 @@
 #include "Capsule.h"
+
+#include "AGameObject.h"
 #include "Vector2D.h"
 #include "AGameObject.h"
 #include "PhysicsComponent.h"
@@ -6,6 +8,7 @@
 Capsule::Capsule(String name): AGameObject(name, PrimitiveType::CAPSULE)
 {
 	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.BASE_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);
+	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.TEXTURED_VERTEX_SHADER_NAME, &shaderdataTexture.shaderByteCode, &shaderdataTexture.sizeShader);
 
 	float Resolution = 5.5f;
 	this->length = 1.5f;
@@ -49,10 +52,21 @@ Capsule::Capsule(String name): AGameObject(name, PrimitiveType::CAPSULE)
 			vertex vertex2 = { this->cylinder(un, v), Vector3D((float)i + 1.0f / Resolution, (float)j / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
 			vertex vertex3 = { this->cylinder(un, vn), Vector3D((float)i + 1.0f / Resolution, (float)j + 1.0f / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
 
+			Vertex texVert0 = { this->cylinder(u, v), Vector2D((float)i / Resolution, (float)j / Resolution) };
+			Vertex texVert1 = { this->cylinder(u, vn), Vector2D((float)i / Resolution, (float)j + 1.0f / Resolution) };
+			Vertex texVert2 = { this->cylinder(un, v), Vector2D((float)i + 1.0f / Resolution, (float)j / Resolution) };
+			Vertex texVert3 = { this->cylinder(un, vn), Vector2D((float)i + 1.0f / Resolution, (float)j / Resolution) };
+
 			this->Vertices.push_back(vertex0);
 			this->Vertices.push_back(vertex1);
 			this->Vertices.push_back(vertex2);
 			this->Vertices.push_back(vertex3);
+
+			this->verticesTextured.push_back(texVert0);
+			this->verticesTextured.push_back(texVert1);
+			this->verticesTextured.push_back(texVert2);
+			this->verticesTextured.push_back(texVert3);
+
 			this->Indices.push_back(verticesStartIndex);
 			this->Indices.push_back(verticesStartIndex + 2);
 			this->Indices.push_back(verticesStartIndex + 1);
@@ -66,10 +80,21 @@ Capsule::Capsule(String name): AGameObject(name, PrimitiveType::CAPSULE)
 			vertex2 = { this->sphereStart(un, v), Vector3D((float)i + 1.0f / Resolution, (float)j / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
 			vertex3 = { this->sphereStart(un, vn), Vector3D((float)i + 1.0f / Resolution, (float)j + 1.0f / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
 
+			texVert0 = { this->sphereStart(u, v), Vector2D((float)i / Resolution, (float)j / Resolution) };
+			texVert1 = { this->sphereStart(u, vn), Vector2D((float)i / Resolution, (float)j + 1.0f / Resolution) };
+			texVert2 = { this->sphereStart(un, v), Vector2D((float)i + 1.0f / Resolution, (float)j / Resolution) };
+			texVert3 = { this->sphereStart(un, vn), Vector2D((float)i + 1.0f / Resolution, (float)j / Resolution) };
+
 			this->Vertices.push_back(vertex0);
 			this->Vertices.push_back(vertex1);
 			this->Vertices.push_back(vertex2);
 			this->Vertices.push_back(vertex3);
+
+			this->verticesTextured.push_back(texVert0);
+			this->verticesTextured.push_back(texVert1);
+			this->verticesTextured.push_back(texVert2);
+			this->verticesTextured.push_back(texVert3);
+
 			this->Indices.push_back(verticesStartIndex);
 			this->Indices.push_back(verticesStartIndex + 2);
 			this->Indices.push_back(verticesStartIndex + 1);
@@ -83,10 +108,21 @@ Capsule::Capsule(String name): AGameObject(name, PrimitiveType::CAPSULE)
 			vertex2 = { this->sphereEnd(un, v), Vector3D((float)i + 1.0f / Resolution, (float)j / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
 			vertex3 = { this->sphereEnd(un, vn), Vector3D((float)i + 1.0f / Resolution, (float)j + 1.0f / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
 
+			texVert0 = { this->sphereEnd(u, v), Vector2D((float)i / Resolution, (float)j / Resolution) };
+			texVert1 = { this->sphereEnd(u, vn), Vector2D((float)i / Resolution, (float)j + 1.0f / Resolution) };
+			texVert2 = { this->sphereEnd(un, v), Vector2D((float)i + 1.0f / Resolution, (float)j / Resolution) };
+			texVert3 = { this->sphereEnd(un, vn), Vector2D((float)i + 1.0f / Resolution, (float)j / Resolution) };
+
 			this->Vertices.push_back(vertex0);
 			this->Vertices.push_back(vertex1);
 			this->Vertices.push_back(vertex2);
 			this->Vertices.push_back(vertex3);
+
+			this->verticesTextured.push_back(texVert0);
+			this->verticesTextured.push_back(texVert1);
+			this->verticesTextured.push_back(texVert2);
+			this->verticesTextured.push_back(texVert3);
+
 			this->Indices.push_back(verticesStartIndex);
 			this->Indices.push_back(verticesStartIndex + 2);
 			this->Indices.push_back(verticesStartIndex + 1);
@@ -99,7 +135,8 @@ Capsule::Capsule(String name): AGameObject(name, PrimitiveType::CAPSULE)
 	this->verterbuffer = GraphicsEngine::getInstance()->createVertexBuffer();
 	this->verterbuffer->load(&(this->Vertices[0]), sizeof(vertex), this->Vertices.size(), shaderdata.shaderByteCode, shaderdata.sizeShader);
 
-	
+	this->verterBufferTextured = GraphicsEngine::getInstance()->createTexturedVertexBuffer();
+	this->verterBufferTextured->load(&(this->verticesTextured[0]), sizeof(Vertex), this->verticesTextured.size(), shaderdataTexture.shaderByteCode, shaderdataTexture.sizeShader);
 
 	this->indexbuffer = GraphicsEngine::getInstance()->createIndexBuffer();
 	this->indexbuffer->load(&(this->Indices[0]), this->Indices.size());
@@ -108,13 +145,25 @@ Capsule::Capsule(String name): AGameObject(name, PrimitiveType::CAPSULE)
 	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
 	this->constantbuffer->load(&cc, sizeof(constant));
 
-	this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
-	this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
+	
 }
 
 void Capsule::draw(int width, int height)
 {
 	constant cc;
+	if (this->getObjectTexture() == NULL)
+	{
+		this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
+		this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
+
+	}
+	else
+	{
+		this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.TEXTURED_VERTEX_SHADER_NAME);
+		this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.TEXTURED_PIXEL_SHADER_NAME);
+
+	}
+
 	if (this->overrideMatrix)
 	{
 		cc.world = this->getLocalMatrix();
@@ -142,10 +191,23 @@ void Capsule::draw(int width, int height)
 	device->setVertexShader(this->vertex_shader);
 	device->setPixelShader(this->pixel_shader);
 
-	device->setVertexBuffer(this->verterbuffer);
-	device->setIndexBuffer(this->indexbuffer);
+	if (this->getObjectTexture() == NULL)
+	{
+		device->setVertexBuffer(this->verterbuffer);
+		device->setIndexBuffer(this->indexbuffer);
 
-	device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
+		device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
+	}
+	else
+	{
+		device->setTexture(this->vertex_shader, this->texture);
+		device->setTexture(this->pixel_shader, this->texture);
+
+		device->setVertexBufferTextured(this->verterBufferTextured);
+		device->setIndexBuffer(this->indexbuffer);
+
+		device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
+	}
 }
 
 void Capsule::update(float deltaTime)
