@@ -6,6 +6,7 @@
 Cylinder::Cylinder(String name): AGameObject(name, PrimitiveType::CYLINDER)
 {
 	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.BASE_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);
+	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.TEXTURED_VERTEX_SHADER_NAME, &shaderdataTexture.shaderByteCode, &shaderdataTexture.sizeShader);
 
 	float radius = 1.5f;
 	int sectorCount = 12;
@@ -27,12 +28,16 @@ Cylinder::Cylinder(String name): AGameObject(name, PrimitiveType::CYLINDER)
 	{
 		float h = -height / 2.0f + i * height;
 		int k = 0;
+		float t = 1.0f - i;
+
 		for(int j = 0; j <= sectorCount; j++)
 		{
 			Vector3D UnitVertex = this->CircleVertices[k];
 
 			vertex Vertex = { Vector3D(UnitVertex.x * radius, h, UnitVertex.z * radius), Vector3D(1, 1, 1), Vector3D(1, 1, 1) };
+			struct Vertex TextureVertex = { Vector3D(UnitVertex.x * radius, h, UnitVertex.z * radius), Vector2D((float)j / sectorCount, t) };
 			this->Vertices.push_back(Vertex);
+			this->verticesTextured.push_back(TextureVertex);
 			k++;
 		}
 	}
@@ -54,13 +59,20 @@ Cylinder::Cylinder(String name): AGameObject(name, PrimitiveType::CYLINDER)
 			vertex Vertex = { Vector3D(unitVertex.x * radius, h, unitVertex.z * radius),
 			Vector3D(1, 1, 1), Vector3D(1, 1, 1) };
 
+			struct Vertex TextureVertex = { Vector3D(unitVertex.x * radius, h, unitVertex.z * radius),
+			Vector2D(-unitVertex.x * 0.5f + 0.5f, -unitVertex.y * 0.5f + 0.5f)};
+
 			this->Vertices.push_back(Vertex);
+			this->verticesTextured.push_back(TextureVertex);
 			k++;
 		}
 	}
 
 	this->verterbuffer = GraphicsEngine::getInstance()->createVertexBuffer();
 	this->verterbuffer->load(&(this->Vertices[0]), sizeof(vertex), this->Vertices.size(), shaderdata.shaderByteCode, shaderdata.sizeShader);
+
+	this->verterBufferTextured = GraphicsEngine::getInstance()->createTexturedVertexBuffer();
+	this->verterBufferTextured->load(&(this->verticesTextured[0]), sizeof(struct Vertex), this->verticesTextured.size(), shaderdataTexture.shaderByteCode, shaderdataTexture.sizeShader);
 
 	int k1 = 0;
 	int k2 = sectorCount + 1;
@@ -124,13 +136,26 @@ Cylinder::Cylinder(String name): AGameObject(name, PrimitiveType::CYLINDER)
 	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
 	this->constantbuffer->load(&cc, sizeof(constant));
 
-	this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
-	this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
 }
 
 void Cylinder::draw(int width, int height)
 {
 	constant cc;
+
+
+	if (this->getObjectTexture() == NULL)
+	{
+		this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
+		this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
+
+	}
+	else
+	{
+		this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.TEXTURED_VERTEX_SHADER_NAME);
+		this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.TEXTURED_PIXEL_SHADER_NAME);
+
+	}
+
 	if (this->overrideMatrix)
 	{
 		cc.world = this->getLocalMatrix();
@@ -158,10 +183,23 @@ void Cylinder::draw(int width, int height)
 	device->setVertexShader(this->vertex_shader);
 	device->setPixelShader(this->pixel_shader);
 
-	device->setVertexBuffer(this->verterbuffer);
-	device->setIndexBuffer(this->indexbuffer);
+	if (this->getObjectTexture() == NULL)
+	{
+		device->setVertexBuffer(this->verterbuffer);
+		device->setIndexBuffer(this->indexbuffer);
 
-	device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
+		device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
+	}
+	else
+	{
+		device->setTexture(this->vertex_shader, this->texture);
+		device->setTexture(this->pixel_shader, this->texture);
+
+		device->setVertexBufferTextured(this->verterBufferTextured);
+		device->setIndexBuffer(this->indexbuffer);
+
+		device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
+	}
 
 }
 
