@@ -44,10 +44,10 @@ Capsule::Capsule(String name): AGameObject(name, PrimitiveType::CAPSULE)
 			}
 
 			int verticesStartIndex = this->Vertices.size();
-			vertex vertex0 = { this->cylinder(u, v), Vector3D((float)i / Resolution, (float)j / Resolution, 0.0f), Vector3D(0.2f,0,0)};
-			vertex vertex1 = { this->cylinder(u, vn), Vector3D((float)i / Resolution, (float)j + 1.0f / Resolution, 0.0f), Vector3D(0.2f,0,0) };
-			vertex vertex2 = { this->cylinder(un, v), Vector3D((float)i + 1.0f / Resolution, (float)j / Resolution, 0.0f), Vector3D(0.2f,0,0) };
-			vertex vertex3 = { this->cylinder(un, vn), Vector3D((float)i + 1.0f / Resolution, (float)j + 1.0f / Resolution, 0.0f), Vector3D(0.2f,0,0) };
+			vertex vertex0 = { this->cylinder(u, v), Vector3D((float)i / Resolution, (float)j / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f)};
+			vertex vertex1 = { this->cylinder(u, vn), Vector3D((float)i / Resolution, (float)j + 1.0f / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
+			vertex vertex2 = { this->cylinder(un, v), Vector3D((float)i + 1.0f / Resolution, (float)j / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
+			vertex vertex3 = { this->cylinder(un, vn), Vector3D((float)i + 1.0f / Resolution, (float)j + 1.0f / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
 
 			this->Vertices.push_back(vertex0);
 			this->Vertices.push_back(vertex1);
@@ -61,10 +61,10 @@ Capsule::Capsule(String name): AGameObject(name, PrimitiveType::CAPSULE)
 			this->Indices.push_back(verticesStartIndex + 2);
 
 			verticesStartIndex = this->Vertices.size();
-			vertex0 = { this->sphereStart(u, v), Vector3D((float)i / Resolution, (float)j / Resolution, 0.0f), Vector3D(0.2f,0,0) };
-			vertex1 = { this->sphereStart(u, vn), Vector3D((float)i / Resolution, (float)j + 1.0f / Resolution, 0.0f), Vector3D(0.2f,0,0) };
-			vertex2 = { this->sphereStart(un, v), Vector3D((float)i + 1.0f / Resolution, (float)j / Resolution, 0.0f), Vector3D(0.2f,0,0) };
-			vertex3 = { this->sphereStart(un, vn), Vector3D((float)i + 1.0f / Resolution, (float)j + 1.0f / Resolution, 0.0f), Vector3D(0.2f,0,0) };
+			vertex0 = { this->sphereStart(u, v), Vector3D((float)i / Resolution, (float)j / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
+			vertex1 = { this->sphereStart(u, vn), Vector3D((float)i / Resolution, (float)j + 1.0f / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
+			vertex2 = { this->sphereStart(un, v), Vector3D((float)i + 1.0f / Resolution, (float)j / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
+			vertex3 = { this->sphereStart(un, vn), Vector3D((float)i + 1.0f / Resolution, (float)j + 1.0f / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
 
 			this->Vertices.push_back(vertex0);
 			this->Vertices.push_back(vertex1);
@@ -78,10 +78,10 @@ Capsule::Capsule(String name): AGameObject(name, PrimitiveType::CAPSULE)
 			this->Indices.push_back(verticesStartIndex + 2);
 
 			verticesStartIndex = this->Vertices.size();
-			vertex0 = { this->sphereEnd(u, v), Vector3D((float)i / Resolution, (float)j / Resolution, 0.0f), Vector3D(0.2f,0,0) };
-			vertex1 = { this->sphereEnd(u, vn), Vector3D((float)i / Resolution, (float)j + 1.0f / Resolution, 0.0f), Vector3D(0.2f,0,0) };
-			vertex2 = { this->sphereEnd(un, v), Vector3D((float)i + 1.0f / Resolution, (float)j / Resolution, 0.0f), Vector3D(0.2f,0,0) };
-			vertex3 = { this->sphereEnd(un, vn), Vector3D((float)i + 1.0f / Resolution, (float)j + 1.0f / Resolution, 0.0f), Vector3D(0.2f,0,0) };
+			vertex0 = { this->sphereEnd(u, v), Vector3D((float)i / Resolution, (float)j / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
+			vertex1 = { this->sphereEnd(u, vn), Vector3D((float)i / Resolution, (float)j + 1.0f / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
+			vertex2 = { this->sphereEnd(un, v), Vector3D((float)i + 1.0f / Resolution, (float)j / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
+			vertex3 = { this->sphereEnd(un, vn), Vector3D((float)i + 1.0f / Resolution, (float)j + 1.0f / Resolution, 1.0f), Vector3D(1.0f,1.0f,1.0f) };
 
 			this->Vertices.push_back(vertex0);
 			this->Vertices.push_back(vertex1);

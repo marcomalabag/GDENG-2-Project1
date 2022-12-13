@@ -10,6 +10,7 @@
 #include "SceneCameraHandler.h"
 #include "EngineTime.h"
 #include "Shaderlibrary.h"
+#include "Vector2D.h"
 
 
 
@@ -24,12 +25,15 @@ public:
 	void setAnimSpeed(float speed);
 	void saveEditState() override;
 	void restoreEditState() override;
+	void setTexturesVertexBuffer();
+	
 
 
 protected:
 	VertexBuffer* verterbuffer;
-	
+	VertexBufferTextured* textureVertexBuffer;
 	IndexBuffer* indexbuffer;
+	IndexBuffer* IndexBufferTexture;
 	ConstantBuffer* constantbuffer;
 	float ticks = 0.0f;
 	float deltaPos = 0.0f;
@@ -37,5 +41,11 @@ protected:
 
 	ShaderNames namesShader;
 	Shaderlibrary::ShaderData shaderdata;
+	Shaderlibrary::ShaderData shaderdataTexture;
+	struct Vertex
+	{
+		Vector3D position;
+		Vector2D texCoord;
+	};
 };
 

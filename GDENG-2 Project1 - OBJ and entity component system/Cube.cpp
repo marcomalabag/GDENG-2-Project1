@@ -6,9 +6,9 @@
 
 Cube::Cube(String name, AGameObject::PrimitiveType type):AGameObject(name, type)
 {
-
+	this->setTexturesVertexBuffer();
 	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.BASE_VERTEX_SHADER_NAME, &shaderdata.shaderByteCode, &shaderdata.sizeShader);
-
+	
 	vertex vertex_list[] =
 	{
 		//X - Y - Z
@@ -62,9 +62,111 @@ Cube::Cube(String name, AGameObject::PrimitiveType type):AGameObject(name, type)
 	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
 	this->constantbuffer->load(&cc, sizeof(constant));
 
-	this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
-	this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
 	
+	
+}
+
+void Cube::setTexturesVertexBuffer()
+{
+	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.TEXTURED_VERTEX_SHADER_NAME, &shaderdataTexture.shaderByteCode, &shaderdataTexture.sizeShader);
+	Vector3D position_list[] =
+	{
+		{ Vector3D(-0.5f,-0.5f,-0.5f)},
+		{ Vector3D(-0.5f,0.5f,-0.5f) },
+		{ Vector3D(0.5f,0.5f,-0.5f) },
+		{ Vector3D(0.5f,-0.5f,-0.5f)},
+
+		//BACK FACE
+		{ Vector3D(0.5f,-0.5f,0.5f) },
+		{ Vector3D(0.5f,0.5f,0.5f) },
+		{ Vector3D(-0.5f,0.5f,0.5f)},
+		{ Vector3D(-0.5f,-0.5f,0.5f) }
+	};
+
+
+	Vector2D texcoord_list[] =
+	{
+		{ Vector2D(0.0f,0.0f) },
+		{ Vector2D(0.0f,1.0f) },
+		{ Vector2D(1.0f,0.0f) },
+		{ Vector2D(1.0f,1.0f) }
+	};
+
+
+
+	Vertex vertex_list[] =
+	{
+		//X - Y - Z
+		//FRONT FACE
+		{ position_list[0],texcoord_list[1] },
+		{ position_list[1],texcoord_list[0] },
+		{ position_list[2],texcoord_list[2] },
+		{ position_list[3],texcoord_list[3] },
+
+
+		{ position_list[4],texcoord_list[1] },
+		{ position_list[5],texcoord_list[0] },
+		{ position_list[6],texcoord_list[2] },
+		{ position_list[7],texcoord_list[3] },
+
+
+		{ position_list[1],texcoord_list[1] },
+		{ position_list[6],texcoord_list[0] },
+		{ position_list[5],texcoord_list[2] },
+		{ position_list[2],texcoord_list[3] },
+
+		{ position_list[7],texcoord_list[1] },
+		{ position_list[0],texcoord_list[0] },
+		{ position_list[3],texcoord_list[2] },
+		{ position_list[4],texcoord_list[3] },
+
+		{ position_list[3],texcoord_list[1] },
+		{ position_list[2],texcoord_list[0] },
+		{ position_list[5],texcoord_list[2] },
+		{ position_list[4],texcoord_list[3] },
+
+		{ position_list[7],texcoord_list[1] },
+		{ position_list[6],texcoord_list[0] },
+		{ position_list[1],texcoord_list[2] },
+		{ position_list[0],texcoord_list[3] }
+
+
+	};
+
+
+	this->textureVertexBuffer = GraphicsEngine::getInstance()->createTexturedVertexBuffer();
+	this->textureVertexBuffer->load(vertex_list, sizeof(Vertex), ARRAYSIZE(vertex_list), shaderdataTexture.shaderByteCode, shaderdataTexture.sizeShader);
+
+	unsigned int index_list[] =
+	{
+		//FRONT SIDE
+		0,1,2,  //FIRST TRIANGLE
+		2,3,0,  //SECOND TRIANGLE
+		//BACK SIDE
+		4,5,6,
+		6,7,4,
+		//TOP SIDE
+		8,9,10,
+		10,11,8,
+		//BOTTOM SIDE
+		12,13,14,
+		14,15,12,
+		//RIGHT SIDE
+		16,17,18,
+		18,19,16,
+		//LEFT SIDE
+		20,21,22,
+		22,23,20
+	};
+
+
+	this->IndexBufferTexture = GraphicsEngine::getInstance()->createIndexBuffer();
+	this->IndexBufferTexture->load(index_list, ARRAYSIZE(index_list));
+
+	constant cc;
+	cc.time = 0;
+	this->constantbuffer = GraphicsEngine::getInstance()->createConstantBuffer();
+	this->constantbuffer->load(&cc, sizeof(constant));
 }
 
 void Cube::update(float deltaTime)
@@ -78,6 +180,19 @@ void Cube::draw(int width, int height)
 {
 	constant cc;
 
+	if(this->getObjectTexture() == NULL)
+	{
+		this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.BASE_VERTEX_SHADER_NAME);
+		this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.BASE_PIXEL_SHADER_NAME);
+
+	}
+	else
+	{
+		this->vertex_shader = Shaderlibrary::getInstance()->getVertexShader(namesShader.TEXTURED_VERTEX_SHADER_NAME);
+		this->pixel_shader = Shaderlibrary::getInstance()->getPixelShader(namesShader.TEXTURED_PIXEL_SHADER_NAME);
+
+	}
+	
 	if(this->overrideMatrix)
 	{
 		cc.world = this->getLocalMatrix();
@@ -106,11 +221,20 @@ void Cube::draw(int width, int height)
 	device->setVertexShader(this->vertex_shader);
 	device->setPixelShader(this->pixel_shader);
 
-	device->setVertexBuffer(this->verterbuffer);
-	device->setIndexBuffer(this->indexbuffer);
+	if (this->getObjectTexture() == NULL)
+	{
+		device->setVertexBuffer(this->verterbuffer);
+		device->setIndexBuffer(this->indexbuffer);
 
-	device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
+		device->drawIndexedTriangleList(this->indexbuffer->getSizeIndexList(), 0, 0);
+	}
+	else
+	{
+		device->setVertexBufferTextured(this->textureVertexBuffer);
+		device->setIndexBuffer(this->IndexBufferTexture);
 
+		device->drawIndexedTriangleList(this->IndexBufferTexture->getSizeIndexList(), 0, 0);
+	}
 
 }
 
@@ -140,6 +264,7 @@ void Cube::restoreEditState()
 	}
 
 }
+
 Cube::~Cube()
 {
 	this->constantbuffer->release();

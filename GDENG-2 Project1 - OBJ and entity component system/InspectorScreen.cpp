@@ -20,12 +20,9 @@ void InspectorScreen::generateEditor()
 {
 	if(GameObjectManager::getInstance()->getSelectedObject() != NULL)
 	{
-		if (GameObjectManager::getInstance()->getSelectedObject()->textureFlag())
+		if (ImGui::Button("Select Texture"))
 		{
-			if(ImGui::Button("Select Texture"))
-			{
-				this->textureDialogue->Open();
-			}
+			this->textureDialogue->Open();
 		}
 
 		ImGui::Text("Selected Object: %s", GameObjectManager::getInstance()->getSelectedObject()->getName().c_str());

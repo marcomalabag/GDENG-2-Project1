@@ -66,11 +66,19 @@ void GameObjectManager::renderAll(int viewportWidth, int viewportHeight)
 void GameObjectManager::addObject(AGameObject* gameObject)
 {
 	if (this->GameObjectTable[gameObject->getName()] != NULL) {
-		int count = 1;
-		String revisedString = gameObject->getName() + "(" + std::to_string(count) + ")";
-		while (this->GameObjectTable[revisedString] != NULL) {
-			count++;
-			revisedString = gameObject->getName() + "(" + std::to_string(count) + ")";
+		int gameObjectcount = 1;
+		String revisedString = gameObject->getName() + "(" + std::to_string(gameObjectcount) + ")";
+		for(int i = 0; i < this->GameObjectList.size(); i++)
+		{
+			if(this->GameObjectTable[revisedString] != NULL)
+			{
+				gameObjectcount++;
+				revisedString = gameObject->getName() + "(" + std::to_string(gameObjectcount) + ")";
+			}
+			else
+			{
+				break;
+			}
 		}
 		gameObject->setName(revisedString);
 		this->GameObjectTable[revisedString] = gameObject;
@@ -145,7 +153,7 @@ void GameObjectManager::createObject(PrimitiveType type)
 	}
 	else if(type == PrimitiveType::PHYSICS_PLANE)
 	{
-		PhysicsPlane* physicsplane = new PhysicsPlane("Phhysics Plane");
+		PhysicsPlane* physicsplane = new PhysicsPlane("Physics Plane");
 		this->addObject(physicsplane);
 	}
 
@@ -183,6 +191,7 @@ void GameObjectManager::deleteObject(AGameObject* gameObject)
 			break;
 		}
 	}
+	
 }
 
 void GameObjectManager::deleteObjectByName(String name)
@@ -254,6 +263,11 @@ void GameObjectManager::hundreadCubes()
 
 void GameObjectManager::createObjectFromFile(String name, AGameObject::PrimitiveType type, Vector3D position, Vector3D rotation, Vector3D scale, bool rigidBody)
 {
+	if(rotation.y == 90.0f)
+	{
+		rotation.y = 99.0f;
+	}
+
 	if (type == AGameObject::PrimitiveType::CUBE) {
 		Cube* cube = new Cube(name, AGameObject::CUBE);
 		cube->setPosition(position);
@@ -344,6 +358,8 @@ void GameObjectManager::createObjectFromFile(String name, AGameObject::Primitive
 		{
 			sphere->ComputeLocalMatrix();
 			sphere->attachComponent(new PhysicsComponent("Physics Component", sphere));
+			PhysicsComponent* component = (PhysicsComponent*)sphere->findComponentbyType(AComponent::ComponentType::Physics, "Physics Component");
+
 		}
 		this->addObject(sphere);
 	}

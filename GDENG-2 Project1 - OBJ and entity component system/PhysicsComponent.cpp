@@ -13,8 +13,28 @@ PhysicsComponent::PhysicsComponent(String name, AGameObject* owner) : AComponent
 	Transform transform;
 	transform.setFromOpenGL(this->getOwner()->getPhysicsLocalMatrix());
 	BoxShape* boxShape = physicsCommon->createBoxShape(Vector3(scale.x / 2, scale.y / 2, scale.z / 2));
+	SphereShape* shpereShape = physicsCommon->createSphereShape(1);
+	CapsuleShape* capsuleShape = physicsCommon->createCapsuleShape(1, 1);
 	this->rigidBody = physicsWorld->createRigidBody(transform);
-	this->rigidBody->addCollider(boxShape, transform);
+
+	if(owner->getType() == AGameObject::CUBE)
+	{
+		this->rigidBody->addCollider(boxShape, transform);
+	}
+	else if(owner->getType() == AGameObject::SPHERE)
+	{
+		this->rigidBody->addCollider(shpereShape, transform);
+	}
+	else if (owner->getType() == AGameObject::CAPSULE)
+	{
+		this->rigidBody->addCollider(capsuleShape, transform);
+	}
+	else
+	{
+		this->rigidBody->addCollider(boxShape, transform);
+	}
+	
+
 	this->rigidBody->updateMassPropertiesFromColliders();
 	this->rigidBody->setMass(this->mass);
 	this->rigidBody->setType(BodyType::DYNAMIC);
