@@ -32,7 +32,6 @@ void AppWindow::initializeEngine()
 	SceneCameraHandler::initialize();
 	Shaderlibrary::initialize();
 	TextureManager::initialize();
-	TextureLibrary::initialize();
 	MeshManager::initialize();
 	ActionHistory::initialize();
 

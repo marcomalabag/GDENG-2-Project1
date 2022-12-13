@@ -2,6 +2,9 @@
 
 InspectorScreen::InspectorScreen():AUIScreen("Inspector Screen")
 {
+	this->textureDialogue = new ImGui::FileBrowser();
+	this->textureDialogue->SetTitle("Select Texture");
+	this->textureDialogue->SetTypeFilters({ ".jpg", ".png" });
 }
 
 void InspectorScreen::drawUI()
@@ -17,36 +20,10 @@ void InspectorScreen::generateEditor()
 {
 	if(GameObjectManager::getInstance()->getSelectedObject() != NULL)
 	{
-		int currView = 0;
-		if(GameObjectManager::getInstance()->getSelectedObject()->textureFlag())
+		if (ImGui::Button("Select Texture"))
 		{
-			ImGui::Text("Textured Object");
-			const char* textures[] = { "Select Texture", "Brick", "Wall", "Wood"};
-			
-
-			ImGui::Combo("Current texture", &currView, textures, IM_ARRAYSIZE(textures));
-			if(currView == 0)
-			{
-				GameObjectManager::getInstance()->getSelectedObject()->setObjectTexture(
-					GameObjectManager::getInstance()->getSelectedObject()->getObjectTexture());
-			}
-			else if (currView == 1)
-			{
-				GameObjectManager::getInstance()->getSelectedObject()->setObjectTexture(
-					TextureLibrary::getInstance()->getTexture(filenames.BRICK));
-			}
-			else if(currView == 2)
-			{
-				GameObjectManager::getInstance()->getSelectedObject()->setObjectTexture(
-					TextureLibrary::getInstance()->getTexture(filenames.WALL));
-			}
-			else if (currView == 3)
-			{
-				GameObjectManager::getInstance()->getSelectedObject()->setObjectTexture(
-					TextureLibrary::getInstance()->getTexture(filenames.WOOD));
-			}
+			this->textureDialogue->Open();
 		}
-
 
 		ImGui::Text("Selected Object: %s", GameObjectManager::getInstance()->getSelectedObject()->getName().c_str());
 		this->TransformUpdate();
@@ -70,6 +47,16 @@ void InspectorScreen::generateEditor()
 	}
 	else {
 		ImGui::Text("No object selected");
+	}
+	this->textureDialogue->Display();
+
+	if(this->textureDialogue->HasSelected())
+	{
+		Texture* text = TextureManager::getInstance()->createTextureFromFile(this->textureDialogue->GetSelected().c_str());
+		GameObjectManager::getInstance()->getSelectedObject()->setObjectTexture(text);
+
+		this->textureDialogue->ClearSelected();
+		this->textureDialogue->Close();
 	}
 	
 }

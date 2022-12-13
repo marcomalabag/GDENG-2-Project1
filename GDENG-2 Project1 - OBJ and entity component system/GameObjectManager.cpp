@@ -28,7 +28,7 @@ AGameObject* GameObjectManager::findObjectByName(String name)
 	return this->GameObjectTable.at(name);
 }
 
-ObjectList GameObjectManager::getAllObjects()
+GameObjectManager::ObjectList GameObjectManager::getAllObjects()
 {
 	return this->GameObjectList;
 }
@@ -65,7 +65,28 @@ void GameObjectManager::renderAll(int viewportWidth, int viewportHeight)
 
 void GameObjectManager::addObject(AGameObject* gameObject)
 {
-	this->GameObjectTable[gameObject->getName()] = gameObject;
+	if (this->GameObjectTable[gameObject->getName()] != NULL) {
+		int gameObjectcount = 1;
+		String revisedString = gameObject->getName() + "(" + std::to_string(gameObjectcount) + ")";
+		for(int i = 0; i < this->GameObjectList.size(); i++)
+		{
+			if(this->GameObjectTable[revisedString] != NULL)
+			{
+				gameObjectcount++;
+				revisedString = gameObject->getName() + "(" + std::to_string(gameObjectcount) + ")";
+			}
+			else
+			{
+				break;
+			}
+		}
+		gameObject->setName(revisedString);
+		this->GameObjectTable[revisedString] = gameObject;
+	}
+	else {
+		this->GameObjectTable[gameObject->getName()] = gameObject;
+	}
+	
 	this->GameObjectList.push_back(gameObject);
 }
 
@@ -73,102 +94,66 @@ void GameObjectManager::createObject(PrimitiveType type)
 {
 	if(type == PrimitiveType::CUBE)
 	{
-		String cubename;
-		if(this->cubeCounter == 0)
-		{
-			cubename = "Cube";
-		}
-		else
-		{
-			String number = "(" + std::to_string(this->cubeCounter) + ")";
-			cubename = "Cube" + number;
-		}
-		Cube* cube = new Cube(cubename);
+		
+		Cube* cube = new Cube("Cube", AGameObject::CUBE);
 		cube->setPosition(0.0f, 1.0f, 0.0f);
 		cube->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(cube);
-		this->cubeCounter++;
+		
 	}
 	else if (type == PrimitiveType::PLANE)
 	{
-		String planename;
-		if (this->planeCounter == 0)
-		{
-			planename = "Plane";
-		}
-		else
-		{
-			String number = "(" + std::to_string(this->planeCounter) + ")";
-			planename = "Plane" + number;
-		}
-		Plane* plane = new Plane(planename);
+		Plane* plane = new Plane("Plane");
 		plane->setPosition(0.0f, 1.0f, 0.0f);
 		plane->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(plane);
-		this->planeCounter++;
+		
 	}
 	else if (type == PrimitiveType::CYLINDER)
 	{
-		String cylindername;
-		if (this->cylinderCounter == 0)
-		{
-			cylindername = "Cylinder";
-		}
-		else
-		{
-			String number = "(" + std::to_string(this->cylinderCounter) + ")";
-			cylindername = "Cylinder" + number;
-		}
-		Cylinder* cylinder = new Cylinder(cylindername);
+		Cylinder* cylinder = new Cylinder("Cylinder");
 		cylinder->setPosition(0.0f, 1.0f, 0.0f);
 		cylinder->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(cylinder);
-		this->cylinderCounter++;
+		
 	}
 	else if (type == PrimitiveType::SPHERE)
 	{
-		String spherename;
-		if (this->sphereCounter == 0)
-		{
-			spherename = "Sphere";
-		}
-		else
-		{
-			String number = "(" + std::to_string(this->sphereCounter) + ")";
-			spherename = "Sphere" + number;
-		}
-		Sphere* sphere = new Sphere(spherename);
+		Sphere* sphere = new Sphere("Sphere");
 		sphere->setPosition(0.0f, 1.0f, 0.0f);
 		sphere->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(sphere);
-		this->sphereCounter++;
+	
+	}
+	else if(type == PrimitiveType::CAPSULE)
+	{
+		Capsule* capsule = new Capsule("Capsule");
+		capsule->setPosition(0.0f, 1.0f, 0.0f);
+		capsule->setScale(1.0f, 1.0f, 1.0f);
+		this->addObject(capsule);
 	}
 	else if(type == PrimitiveType::TEXTURED_CUBE)
 	{
-		String TexturedCubename;
-		if(this->TexturedCubecounter == 0)
-		{
-			TexturedCubename = "Textured Cube";
-		}
-		else
-		{
-			String number = "(" + std::to_string(this->TexturedCubecounter) + ")";
-			TexturedCubename = "Textured Cube" + number;
-		}
-		TexturedCube* Texcube = new TexturedCube(TexturedCubename);
+		TexturedCube* Texcube = new TexturedCube("Textured Cube");
 		Texcube->setPosition(0.0f, 1.0f, 0.0f);
 		Texcube->setScale(1.0f, 1.0f, 1.0f);
 		this->addObject(Texcube);
-		this->TexturedCubecounter++;
+	}
+	else if(type == PrimitiveType::CAPSULE)
+	{
+		Capsule* capsule = new Capsule("Capsule");
+		capsule->setPosition(0.0f, 1.0f, 0.0f);
+		capsule->setScale(0.25f, 0.25f, 0.25f);
+		this->addObject(capsule);
 	}
 	else if(type == PrimitiveType::PHYSICS_CUBE)
 	{
-		PhysicsCube* physicsCube = new PhysicsCube("PhysicsCube");
+		PhysicsCube* physicsCube = new PhysicsCube("Physics Cube");
 		this->addObject(physicsCube);
 	}
 	else if(type == PrimitiveType::PHYSICS_PLANE)
 	{
-		PhysicsPlane* physicsplane = new PhysicsPlane("PhhysicsPlane");
+		PhysicsPlane* physicsplane = new PhysicsPlane("Physics Plane");
 		this->addObject(physicsplane);
 	}
 
@@ -178,61 +163,19 @@ void GameObjectManager::generatePhysicsCube()
 {
 	for(int i = 0; i < 20; i++)
 	{
-		String PhysicsCubename;
-		if (this->PhysicsCubeCounter == 0)
-		{
-			PhysicsCubename = "Physics Cube";
-		}
-		else
-		{
-			String number = "(" + std::to_string(this->PhysicsCubeCounter) + ")";
-			PhysicsCubename = "Physics Cube" + number;
-		}
-		PhysicsCube* physicsCube = new PhysicsCube(PhysicsCubename);
+		PhysicsCube* physicsCube = new PhysicsCube("Physics Cube");
 		this->addObject(physicsCube);
-		this->PhysicsCubeCounter++;
 	}
 }
 
-void GameObjectManager::createOBJMODEL(OBJMODEL model)
+void GameObjectManager::createOBJMODEL(Mesh* mesh, String name, Texture* text)
 {
-	TextureFileName filename;
-	if(model == OBJMODEL::TEAPOT)
-	{
-		Texture* tex = TextureLibrary::getInstance()->getTexture(filename.BRICK);
-		Mesh* mesh = MeshManager::getInstance()->createMeshFromFile(L"Assets\\Meshes\\teapot.obj");
-		OBJStructure* teapot = new OBJStructure(mesh, tex, "Teapot");
-		teapot->setPosition(0.0f, 1.0f, 0.0f);
-		teapot->setScale(1.0f, 1.0f, 1.0f);
-		this->addObject(teapot);
-	}
-	else if(model == OBJMODEL::ARMADILLO)
-	{
-		Texture* tex = TextureLibrary::getInstance()->getTexture(filename.BRICK);
-		Mesh* mesh = MeshManager::getInstance()->createMeshFromFile(L"Assets\\Meshes\\armadillo.obj");
-		OBJStructure* armadillo = new OBJStructure(mesh, tex, "Armadillo");
-		armadillo->setPosition(0.0f, 1.0f, 0.0f);
-		armadillo->setScale(1.0f, 1.0f, 1.0f);
-		this->addObject(armadillo);
-	}
-	else if(model == OBJMODEL::BUNNY)
-	{
-		Texture* tex = TextureLibrary::getInstance()->getTexture(filename.BRICK);
-		Mesh* mesh = MeshManager::getInstance()->createMeshFromFile(L"Assets\\Meshes\\bunny.obj");
-		OBJStructure* bunny = new OBJStructure(mesh, tex, "Bunny");
-		bunny->setPosition(0.0f, 1.0f, 0.0f);
-		bunny->setScale(4.0f, 4.0f, 4.0f);
-		this->addObject(bunny);
-	}
-	else if (model == OBJMODEL::STATUE)
-	{
-		Texture* tex = TextureLibrary::getInstance()->getTexture(filename.BRICK);
-		Mesh* mesh = MeshManager::getInstance()->createMeshFromFile(L"Assets\\Meshes\\statue.obj");
-		OBJStructure* statue = new OBJStructure(mesh, tex, "Statue");
-		statue->setPosition(0.0f, 1.0f, 1.0f);
-		statue->setScale(3.0f, 3.0f, 3.0f);
-		this->addObject(statue);
-	}
+	OBJStructure* obj = new OBJStructure(mesh, text, name);
+
+	obj->setPosition(0.0f, 1.0f, 0.0f);
+	obj->setScale(2.0f, 2.0f, 2.0f);
+	this->addObject(obj);
+
 }
 
 void GameObjectManager::deleteObject(AGameObject* gameObject)
@@ -248,6 +191,7 @@ void GameObjectManager::deleteObject(AGameObject* gameObject)
 			break;
 		}
 	}
+	
 }
 
 void GameObjectManager::deleteObjectByName(String name)
@@ -296,6 +240,128 @@ void GameObjectManager::applyEditorAction(EditorAction* action)
 		object->setRotation(action->getStoredRotation().x, action->getStoredRotation().y, action->getStoredRotation().z);
 		object->setScale(action->getStoredScale());
 
+	}
+}
+
+void GameObjectManager::hundreadCubes()
+{
+	int max = 1.5f;
+	int min = -2.5f;
+	Math math;
+	for (int i = 0; i < 100; i++)
+	{
+		float x = math.getRandom(min, max);
+		float y = math.getRandom(min, max);
+		Cube* cube = new Cube("Cube", AGameObject::CUBE);
+		cube->setPosition(x, y, 0.0f);
+		cube->setScale(1.0f, 1.0f, 1.0f);
+		this->addObject(cube);
+		
+	}
+
+}
+
+void GameObjectManager::createObjectFromFile(String name, AGameObject::PrimitiveType type, Vector3D position, Vector3D rotation, Vector3D scale, bool rigidBody)
+{
+	if(rotation.y == 90.0f)
+	{
+		rotation.y = 99.0f;
+	}
+
+	if (type == AGameObject::PrimitiveType::CUBE) {
+		Cube* cube = new Cube(name, AGameObject::CUBE);
+		cube->setPosition(position);
+		cube->setRotation(rotation);
+		cube->setScale(scale);
+		if(rigidBody)
+		{
+			cube->ComputeLocalMatrix();
+			cube->attachComponent(new PhysicsComponent("Physics Component", cube));
+			
+		}
+		this->addObject(cube);
+	}
+	else if(type == AGameObject::PrimitiveType::CAPSULE)
+	{
+		Capsule* capsule = new Capsule("Capsule");
+		capsule->setPosition(position);
+		capsule->setRotation(rotation);
+		capsule->setScale(scale);
+		if (rigidBody)
+		{
+			capsule->ComputeLocalMatrix();
+			capsule->attachComponent(new PhysicsComponent("Physics Component", capsule));
+		}
+		this->addObject(capsule);
+	}
+
+	else if (type == AGameObject::PrimitiveType::PLANE) {
+		Plane* plane = new Plane(name);
+		plane->setPosition(position);
+		plane->setRotation(rotation);
+		plane->setScale(scale);
+		if (rigidBody)
+		{
+			plane->ComputeLocalMatrix();
+			plane->attachComponent(new PhysicsComponent("Physics Component", plane));
+			PhysicsComponent* component = (PhysicsComponent*)plane->findComponentbyType(AComponent::ComponentType::Physics, "Physics Component");
+			component->getRigidBody()->setType(BodyType::KINEMATIC);
+		}
+		this->addObject(plane);
+	}
+
+	else if (type == AGameObject::PrimitiveType::TEXTURED_CUBE) {
+		TexturedCube* texturedcube = new TexturedCube(name);
+		texturedcube->setPosition(position);
+		texturedcube->setRotation(rotation);
+		texturedcube->setScale(scale);
+		this->addObject(texturedcube);
+	}
+
+	else if (type == AGameObject::PrimitiveType::PHYSICS_CUBE) {
+		PhysicsCube* physicscube = new PhysicsCube(name);
+		physicscube->setPosition(position);
+		physicscube->setRotation(rotation);
+		physicscube->setScale(scale);
+		this->addObject(physicscube);
+	}
+
+	else if (type == AGameObject::PrimitiveType::PHYSICS_PLANE) {
+		PhysicsPlane* plane = new PhysicsPlane(name);
+		plane->setPosition(position);
+		plane->setRotation(rotation);
+		plane->setScale(scale);
+		this->addObject(plane);
+	}
+
+	else if(type == AGameObject::PrimitiveType::CYLINDER)
+	{
+		Cylinder* cylinder = new Cylinder(name);
+		cylinder->setPosition(position);
+		cylinder->setRotation(rotation);
+		cylinder->setScale(scale);
+		if (rigidBody)
+		{
+			cylinder->ComputeLocalMatrix();
+			cylinder->attachComponent(new PhysicsComponent("Physics Component", cylinder));
+		}
+		this->addObject(cylinder);
+	}
+
+	else if(type == AGameObject::PrimitiveType::SPHERE)
+	{
+		Sphere* sphere = new Sphere(name);
+		sphere->setPosition(position);
+		sphere->setRotation(rotation);
+		sphere->setScale(scale);
+		if (rigidBody)
+		{
+			sphere->ComputeLocalMatrix();
+			sphere->attachComponent(new PhysicsComponent("Physics Component", sphere));
+			PhysicsComponent* component = (PhysicsComponent*)sphere->findComponentbyType(AComponent::ComponentType::Physics, "Physics Component");
+
+		}
+		this->addObject(sphere);
 	}
 }
 

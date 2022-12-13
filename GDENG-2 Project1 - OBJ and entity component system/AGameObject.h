@@ -17,6 +17,19 @@ class AGameObject
 {
 public:
 
+	enum PrimitiveType {
+		CAMERA,
+		TEXTURED_CUBE,
+		CUBE,
+		PLANE,
+		SPHERE,
+		CAPSULE,
+		PHYSICS_CUBE,
+		PHYSICS_PLANE,
+		OBJ,
+		CYLINDER
+	};
+
 	struct AQuaternion {
 		float w = 0.0f;
 		float x = 0.0f;
@@ -43,7 +56,7 @@ public:
 	typedef std::string String;
 	typedef std::vector<AComponent*> ComponentList;
 
-	AGameObject(String name);
+	AGameObject(String name, PrimitiveType type);
 	~AGameObject();
 
 	virtual void update(float deltaTime) = 0;
@@ -68,6 +81,8 @@ public:
 	Vector3D getLocalRotation();
 
 	String getName();
+	void setName(String name);
+	PrimitiveType getType();
 	void ComputeLocalMatrix();
 	float* getPhysicsLocalMatrix();
 
@@ -114,6 +129,8 @@ protected:
 	ComponentList componentList;
 	bool overrideMatrix = false;
 	AQuaternion orientation;
+
+	PrimitiveType objectType;
 
 	virtual void awake();
 

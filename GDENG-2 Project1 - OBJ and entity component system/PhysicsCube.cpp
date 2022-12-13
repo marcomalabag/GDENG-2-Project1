@@ -1,7 +1,7 @@
 #include "PhysicsCube.h"
 #include "Math.h"
 
-PhysicsCube::PhysicsCube(String name): Cube(name)
+PhysicsCube::PhysicsCube(String name): Cube(name, AGameObject::PHYSICS_CUBE)
 {
 	
 	this->setPosition(Math::getRandom(0.1, 0.9), 6.0f, Math::getRandom(0.1, 0.9));

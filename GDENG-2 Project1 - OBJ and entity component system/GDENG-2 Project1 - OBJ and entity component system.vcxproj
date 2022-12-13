@@ -156,6 +156,7 @@
     <ClInclude Include="AUIScreen.h" />
     <ClInclude Include="BaseSystem.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Capsule.h" />
     <ClInclude Include="ColorPickerScreen.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="CreditsScreen.h" />
@@ -194,10 +195,14 @@
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="ProfilerScreen.h" />
+    <ClInclude Include="pugixml-1.13\src\pugiconfig.hpp" />
+    <ClInclude Include="pugixml-1.13\src\pugixml.hpp" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SceneCameraHandler.h" />
+    <ClInclude Include="SceneReader.h" />
+    <ClInclude Include="SceneWriter.h" />
     <ClInclude Include="ScreenActions.h" />
     <ClInclude Include="ScreenPlayBack.h" />
     <ClInclude Include="Shaderlibrary.h" />
@@ -206,7 +211,6 @@
     <ClInclude Include="SwapChain.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TexturedCube.h" />
-    <ClInclude Include="TextureLibrary.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="UIManager.h" />
@@ -228,6 +232,7 @@
     <ClCompile Include="AUIScreen.cpp" />
     <ClCompile Include="BaseSystem.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Capsule.cpp" />
     <ClCompile Include="ColorPickerScreen.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="CreditsScreen.cpp" />
@@ -264,10 +269,13 @@
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="ProfilerScreen.cpp" />
+    <ClCompile Include="pugixml-1.13\src\pugixml.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SceneCameraHandler.cpp" />
+    <ClCompile Include="SceneReader.cpp" />
+    <ClCompile Include="SceneWriter.cpp" />
     <ClCompile Include="ScreenActions.cpp" />
     <ClCompile Include="ScreenPlayBack.cpp" />
     <ClCompile Include="Shaderlibrary.cpp" />
@@ -275,7 +283,6 @@
     <ClCompile Include="SwapChain.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturedCube.cpp" />
-    <ClCompile Include="TextureLibrary.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="UIManager.cpp" />

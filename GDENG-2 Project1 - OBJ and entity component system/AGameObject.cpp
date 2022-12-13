@@ -1,8 +1,9 @@
 #include "AGameObject.h"
 #include "EditorAction.h"
 
-AGameObject::AGameObject(String name)
+AGameObject::AGameObject(String name, PrimitiveType type)
 {
+	this->objectType = type;
 	this->name = name;
 	this->Position = Vector3D::zeros();
 	this->Rotation = Vector3D::zeros();
@@ -139,6 +140,16 @@ Vector3D AGameObject::getLocalRotation()
 AGameObject::String AGameObject::getName()
 {
 	return this->name;
+}
+
+void AGameObject::setName(String name)
+{
+	this->name = name;
+}
+
+AGameObject::PrimitiveType AGameObject::getType()
+{
+	return this->objectType;
 }
 
 void AGameObject::ComputeLocalMatrix()

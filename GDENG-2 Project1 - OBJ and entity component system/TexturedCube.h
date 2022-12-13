@@ -5,7 +5,6 @@
 #include "TextureManager.h"
 #include "VertexBufferTextured.h"
 #include "Texture.h"
-#include "TextureLibrary.h"
 
 class TexturedCube: public Cube
 {
@@ -20,7 +19,6 @@ public:
 
 private:
 	VertexBufferTextured* vertexBuffer;
-	TextureFileName filenames;
 	struct Vertex
 	{
 		Vector3D position;

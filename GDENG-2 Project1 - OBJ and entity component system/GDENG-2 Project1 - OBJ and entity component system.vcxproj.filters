@@ -160,9 +160,6 @@
     <Filter Include="GameEngine\GraphicsEngine\VertexBufferTextured">
       <UniqueIdentifier>{0b9f9d8f-6f40-493a-b692-3c4b66c8a72c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TextureLibrary">
-      <UniqueIdentifier>{3cce7281-a17e-47ca-b8e0-9e0f8349b582}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine\GraphicsEngine\ResourceManager\MeshManager">
       <UniqueIdentifier>{30bded4c-5052-40b6-a376-94c7ae0fb20b}</UniqueIdentifier>
     </Filter>
@@ -213,6 +210,21 @@
     </Filter>
     <Filter Include="World Manager\ActionHistory">
       <UniqueIdentifier>{ffc32121-4e8f-409f-9138-9dbbaa58c7d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File System">
+      <UniqueIdentifier>{84629a41-7958-45fe-b7d6-e188b1a32d08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File System\SceneWriter">
+      <UniqueIdentifier>{fc30ea53-1e56-4f44-b1b0-c9c610dac9ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File System\SceneReader">
+      <UniqueIdentifier>{393733e1-5a52-4235-b9a4-d4dd54c19b5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pugixml">
+      <UniqueIdentifier>{044a7c91-e60b-4d85-86d3-47b70b4ca81e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Primitives\3D\Capsule">
+      <UniqueIdentifier>{2d38a003-acdc-4ea5-be63-4df66e27907c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -363,9 +375,6 @@
     <ClCompile Include="VertexBufferTextured.cpp">
       <Filter>GameEngine\GraphicsEngine\VertexBufferTextured</Filter>
     </ClCompile>
-    <ClCompile Include="TextureLibrary.cpp">
-      <Filter>TextureLibrary</Filter>
-    </ClCompile>
     <ClCompile Include="MeshManager.cpp">
       <Filter>GameEngine\GraphicsEngine\ResourceManager\MeshManager</Filter>
     </ClCompile>
@@ -413,6 +422,18 @@
     </ClCompile>
     <ClCompile Include="ActionHistory.cpp">
       <Filter>World Manager\ActionHistory</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneWriter.cpp">
+      <Filter>File System\SceneWriter</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneReader.cpp">
+      <Filter>File System\SceneReader</Filter>
+    </ClCompile>
+    <ClCompile Include="pugixml-1.13\src\pugixml.cpp">
+      <Filter>Pugixml</Filter>
+    </ClCompile>
+    <ClCompile Include="Capsule.cpp">
+      <Filter>Primitives\3D\Capsule</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -575,9 +596,6 @@
     <ClInclude Include="VertexBufferTextured.h">
       <Filter>GameEngine\GraphicsEngine\VertexBufferTextured</Filter>
     </ClInclude>
-    <ClInclude Include="TextureLibrary.h">
-      <Filter>TextureLibrary</Filter>
-    </ClInclude>
     <ClInclude Include="MeshManager.h">
       <Filter>GameEngine\GraphicsEngine\ResourceManager\MeshManager</Filter>
     </ClInclude>
@@ -625,6 +643,21 @@
     </ClInclude>
     <ClInclude Include="ActionHistory.h">
       <Filter>World Manager\ActionHistory</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneWriter.h">
+      <Filter>File System\SceneWriter</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneReader.h">
+      <Filter>File System\SceneReader</Filter>
+    </ClInclude>
+    <ClInclude Include="pugixml-1.13\src\pugiconfig.hpp">
+      <Filter>Pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="pugixml-1.13\src\pugixml.hpp">
+      <Filter>Pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="Capsule.h">
+      <Filter>Primitives\3D\Capsule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

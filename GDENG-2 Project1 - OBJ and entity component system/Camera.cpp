@@ -1,7 +1,7 @@
 #include "Camera.h"
 #include <iostream>
 
-Camera::Camera(String name):AGameObject(name)
+Camera::Camera(String name):AGameObject(name, AGameObject::CAMERA)
 {
 	this->setPosition(0.0f, 2.0f, -2.0f);
 	//this->cameraFront = Vector3D(0.0f, 0.0f, -1.0f);
@@ -214,24 +214,7 @@ Matrix4x4 Camera::getViewMatrix()
 
 void Camera::onKeyDown(int key)
 {
-	if (key == 'U') {
-		std::cout << "default mode is set";
-		defaultBool = true;
-		AerialBool = false;
-		RightBool = false;
-	}
-	else if (key == 'I') {
-		std::cout << "Aerial mode is set";
-		defaultBool = false;
-		AerialBool = true;
-		RightBool = false;
-	}
-	else if (key == 'O') {
-		std::cout << "Right view mode is set";
-		defaultBool = false;
-		AerialBool = false;
-		RightBool = true;
-	}
+	
 }
 
 void Camera::onKeyUp(int key)
