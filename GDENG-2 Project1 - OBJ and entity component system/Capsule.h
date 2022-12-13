@@ -21,6 +21,7 @@ public:
 
 private:
 	VertexBuffer* verterbuffer;
+	VertexBufferTextured* verterBufferTextured;
 	IndexBuffer* indexbuffer;
 	ConstantBuffer* constantbuffer;
 	float ticks = 0.0f;
@@ -28,6 +29,7 @@ private:
 	float speed = 10.0f;
 
 	std::vector<vertex> Vertices;
+	std::vector<Vertex> verticesTextured;
 	std::vector<unsigned int> Indices;
 	std::vector<Vector3D> CircleVertices;
 	int BaseCenterIndex;
@@ -37,5 +39,6 @@ private:
 
 	ShaderNames namesShader;
 	Shaderlibrary::ShaderData shaderdata;
+	Shaderlibrary::ShaderData shaderdataTexture;
 };
 
