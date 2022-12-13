@@ -24,6 +24,13 @@ void InspectorScreen::generateEditor()
 		{
 			this->textureDialogue->Open();
 		}
+		if(ImGui::Button("Remove Texture"))
+		{
+			if(GameObjectManager::getInstance()->getSelectedObject()->getObjectTexture() != NULL)
+			{
+				GameObjectManager::getInstance()->getSelectedObject()->setObjectTexture(NULL);
+			}
+		}
 
 		ImGui::Text("Selected Object: %s", GameObjectManager::getInstance()->getSelectedObject()->getName().c_str());
 		this->TransformUpdate();
@@ -54,6 +61,7 @@ void InspectorScreen::generateEditor()
 	{
 		Texture* text = TextureManager::getInstance()->createTextureFromFile(this->textureDialogue->GetSelected().c_str());
 		GameObjectManager::getInstance()->getSelectedObject()->setObjectTexture(text);
+		
 
 		this->textureDialogue->ClearSelected();
 		this->textureDialogue->Close();

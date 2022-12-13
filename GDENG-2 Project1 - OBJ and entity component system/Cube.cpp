@@ -69,6 +69,7 @@ Cube::Cube(String name, AGameObject::PrimitiveType type):AGameObject(name, type)
 void Cube::setTexturesVertexBuffer()
 {
 	Shaderlibrary::getInstance()->requestVertexShaderData(namesShader.TEXTURED_VERTEX_SHADER_NAME, &shaderdataTexture.shaderByteCode, &shaderdataTexture.sizeShader);
+	
 	Vector3D position_list[] =
 	{
 		{ Vector3D(-0.5f,-0.5f,-0.5f)},
@@ -230,6 +231,9 @@ void Cube::draw(int width, int height)
 	}
 	else
 	{
+		device->setTexture(this->vertex_shader, this->texture);
+		device->setTexture(this->pixel_shader, this->texture);
+
 		device->setVertexBufferTextured(this->textureVertexBuffer);
 		device->setIndexBuffer(this->IndexBufferTexture);
 
