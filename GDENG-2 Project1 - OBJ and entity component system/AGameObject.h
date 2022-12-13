@@ -1,6 +1,7 @@
 #pragma once
 #include "Matrix4x4.h"
 #include "Vector3D.h"
+#include "Vector2D.h"
 #include "VertexShader.h"
 #include "PixelShader.h"
 #include <vector>
@@ -42,6 +43,12 @@ public:
 		Vector3D position;
 		Vector3D color;
 		Vector3D color1;
+	};
+
+	struct Vertex
+	{
+		Vector3D position;
+		Vector2D texCoord;
 	};
 
 	_declspec(align(16))

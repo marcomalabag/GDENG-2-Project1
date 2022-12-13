@@ -42,10 +42,6 @@ protected:
 	ShaderNames namesShader;
 	Shaderlibrary::ShaderData shaderdata;
 	Shaderlibrary::ShaderData shaderdataTexture;
-	struct Vertex
-	{
-		Vector3D position;
-		Vector2D texCoord;
-	};
+	
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "AGameObject.h"
 #include "VertexBuffer.h"
+#include "VertexBufferTextured.h"
 #include "IndexBuffer.h"
 #include "ConstantBuffer.h"
 #include "SceneCameraHandler.h"
@@ -21,6 +22,7 @@ public:
 
 private:
 	VertexBuffer* verterbuffer;
+	VertexBufferTextured* verterBufferTextured;
 	IndexBuffer* indexbuffer;
 	ConstantBuffer* constantbuffer;
 	float ticks = 0.0f;
@@ -28,10 +30,11 @@ private:
 	float speed = 10.0f;
 
 	std::vector<vertex> vertices;
+	std::vector<Vertex> verticesTextured;
 	std::vector<unsigned int> indices;
 
 	ShaderNames namesShader;
 	Shaderlibrary::ShaderData shaderdata;
-	
+	Shaderlibrary::ShaderData shaderdataTexture;
 };
 
