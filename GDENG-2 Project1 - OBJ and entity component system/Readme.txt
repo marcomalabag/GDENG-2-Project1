@@ -1,8 +1,10 @@
-Marco Malabag
-Instructions on how to run:
-What I'm sending is the project for the rendering system and not the whole solution because 
-that solution is tied to other versions of the rendering system. Therefore either create a new 
-solution in visual studio 2022 or 2019 then add the project to that solution. Alternatively, you 
-could use an existing solution and add the project there.  In the solution, ensure that GDENG-2 Project1 - OBJ and entity component system 
-is set as the startup project. Then press Run/Debug and the project should be able to run. 
+# GDENG-2-Project1
+Game Engine coded in C++
+By: Marco Malabag,
+Lanz Santiago,
+Gab Plaza
+
+Ensure that C++20 standard library is installed since std::format is used for the debug console window. 
+
+Starting class is in main.cpp in the App filter. Just download the project and use either visual studio 2019 or 2022 to open the project. After opening the project just press run/debug.
  
