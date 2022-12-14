@@ -10,7 +10,7 @@
 #include "ColorPickerScreen.h"
 #include "ScreenPlayBack.h"
 #include "ScreenActions.h"
-
+#include "DebugConsoleScreen.h"
 
 class UIManager
 {

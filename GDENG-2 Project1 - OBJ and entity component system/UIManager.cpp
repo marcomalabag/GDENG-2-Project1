@@ -48,6 +48,10 @@ UIManager::UIManager(HWND windowHandle)
 	ScreenActions* ActionsScreen = new ScreenActions();
 	this->uiTable[uiNames.ACTIONS_SCREEN] = ActionsScreen;
 	this->uiList.push_back(ActionsScreen);
+
+	DebugConsoleScreen* debugConsoleScreen = new DebugConsoleScreen();
+	this->uiTable[uiNames.DEBUG_CONSOLE_SCREEN] = debugConsoleScreen;
+	this->uiList.push_back(debugConsoleScreen);
 }
 
 void UIManager::initialize(HWND windowHandle)

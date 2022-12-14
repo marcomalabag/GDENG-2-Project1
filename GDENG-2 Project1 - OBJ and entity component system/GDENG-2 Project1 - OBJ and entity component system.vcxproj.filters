@@ -226,6 +226,12 @@
     <Filter Include="Primitives\3D\Capsule">
       <UniqueIdentifier>{2d38a003-acdc-4ea5-be63-4df66e27907c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{78260460-2416-45ad-94a6-248838d42247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\DebugConsole">
+      <UniqueIdentifier>{9145c44f-d84a-4f8c-9cf2-378cd50782b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsEngine.cpp">
@@ -434,6 +440,12 @@
     </ClCompile>
     <ClCompile Include="Capsule.cpp">
       <Filter>Primitives\3D\Capsule</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugConsoleScreen.cpp">
+      <Filter>UI\DebugConsole</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -658,6 +670,12 @@
     </ClInclude>
     <ClInclude Include="Capsule.h">
       <Filter>Primitives\3D\Capsule</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugConsoleScreen.h">
+      <Filter>UI\DebugConsole</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

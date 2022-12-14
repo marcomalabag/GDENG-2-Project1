@@ -1,5 +1,5 @@
 #include "AppWindow.h"
-
+#include "Debug.h"
 
 
 AppWindow* AppWindow::sharedInstance = NULL;
@@ -49,7 +49,7 @@ void AppWindow::initializeEngine()
 
 	m_swap_chain->init(this->m_hwnd, width, height);
 
-
+	Debug::Log("Initialize");
 }
 
 void AppWindow::createInterface()
